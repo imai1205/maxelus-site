@@ -1,46 +1,76 @@
 "use client";
 
-import { useEffect, useRef, useState, ReactNode, createContext, useContext } from "react";
+import { useEffect, useRef, useState, ReactNode, createContext, useContext, memo, useCallback } from "react";
 
-// Intersection Observer Hook for scroll animations
-export function useScrollAnimation(threshold = 0.1) {
+// Intersection Observer Hook for scroll animations - Optimized with single observer
+const observerCallbacks = new Map<Element, (isVisible: boolean) => void>();
+let globalObserver: IntersectionObserver | null = null;
+
+function getGlobalObserver() {
+  if (!globalObserver && typeof window !== "undefined") {
+    globalObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const callback = observerCallbacks.get(entry.target);
+          if (callback) {
+            callback(entry.isIntersecting);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+  }
+  return globalObserver;
+}
+
+export function useScrollAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold, rootMargin: "0px 0px -50px 0px" }
-    );
-
+    const observer = getGlobalObserver();
     const currentRef = ref.current;
-    if (currentRef) {
+    
+    if (currentRef && observer) {
+      observerCallbacks.set(currentRef, (visible) => {
+        if (visible) {
+          setIsVisible(true);
+          // Cleanup after becoming visible (once)
+          observer.unobserve(currentRef);
+          observerCallbacks.delete(currentRef);
+        }
+      });
       observer.observe(currentRef);
     }
 
     return () => {
-      if (currentRef) {
+      if (currentRef && observer) {
         observer.unobserve(currentRef);
+        observerCallbacks.delete(currentRef);
       }
     };
-  }, [threshold]);
+  }, []);
 
   return { ref, isVisible };
 }
 
-// Parallax scroll context
+// Parallax scroll context - Optimized with RAF throttling
 const ParallaxContext = createContext<{ scrollY: number }>({ scrollY: 0 });
 
 export function ParallaxProvider({ children }: { children: ReactNode }) {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -58,65 +88,67 @@ export function useParallax() {
   return useContext(ParallaxContext);
 }
 
-// Animated Section Component
+// Animated Section Component - Memoized
 interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
   animation?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "zoom-in" | "zoom-out" | "flip" | "rotate";
   delay?: number;
   duration?: number;
-  once?: boolean;
 }
 
-export function AnimatedSection({ 
+export const AnimatedSection = memo(function AnimatedSection({ 
   children, 
   className = "", 
   animation = "fade-up",
   delay = 0,
-  duration = 700,
+  duration = 600,
 }: AnimatedSectionProps) {
   const { ref, isVisible } = useScrollAnimation();
 
-  const getAnimationClass = () => {
+  const getTransform = useCallback(() => {
     if (!isVisible) {
       switch (animation) {
-        case "fade-up": return "opacity-0 translate-y-16";
-        case "fade-down": return "opacity-0 -translate-y-16";
-        case "fade-left": return "opacity-0 translate-x-16";
-        case "fade-right": return "opacity-0 -translate-x-16";
-        case "zoom-in": return "opacity-0 scale-75";
-        case "zoom-out": return "opacity-0 scale-125";
-        case "flip": return "opacity-0 rotateY-90";
-        case "rotate": return "opacity-0 rotate-12";
-        default: return "opacity-0";
+        case "fade-up": return "translateY(24px)";
+        case "fade-down": return "translateY(-24px)";
+        case "fade-left": return "translateX(24px)";
+        case "fade-right": return "translateX(-24px)";
+        case "zoom-in": return "scale(0.9)";
+        case "zoom-out": return "scale(1.1)";
+        case "rotate": return "rotate(6deg)";
+        default: return "none";
       }
     }
-    return "opacity-100 translate-y-0 translate-x-0 scale-100 rotate-0";
-  };
+    return "none";
+  }, [animation, isVisible]);
 
   return (
     <div
       ref={ref}
-      className={`transition-all ${className} ${getAnimationClass()}`}
+      className={`gpu-accelerate ${className}`}
       style={{ 
-        transitionDuration: `${duration}ms`,
-        transitionDelay: `${delay}ms`,
-        transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
+        opacity: isVisible ? 1 : 0,
+        transform: getTransform(),
+        transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
       }}
     >
       {children}
     </div>
   );
-}
+});
 
-// Staggered Animation Container
+// Staggered Animation Container - Optimized
 interface StaggeredContainerProps {
   children: ReactNode;
   className?: string;
   staggerDelay?: number;
 }
 
-export function StaggeredContainer({ children, className = "", staggerDelay = 100 }: StaggeredContainerProps) {
+export const StaggeredContainer = memo(function StaggeredContainer({ 
+  children, 
+  className = "", 
+  staggerDelay = 80 
+}: StaggeredContainerProps) {
   const { ref, isVisible } = useScrollAnimation();
   const childrenArray = Array.isArray(children) ? children : [children];
 
@@ -125,13 +157,11 @@ export function StaggeredContainer({ children, className = "", staggerDelay = 10
       {childrenArray.map((child, index) => (
         <div
           key={index}
-          className="transition-all"
+          className="gpu-accelerate"
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? "translateY(0)" : "translateY(30px)",
-            transitionDuration: "600ms",
-            transitionDelay: isVisible ? `${index * staggerDelay}ms` : "0ms",
-            transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
+            transform: isVisible ? "translateY(0)" : "translateY(20px)",
+            transition: `opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) ${isVisible ? index * staggerDelay : 0}ms, transform 500ms cubic-bezier(0.22, 1, 0.36, 1) ${isVisible ? index * staggerDelay : 0}ms`,
           }}
         >
           {child}
@@ -139,9 +169,9 @@ export function StaggeredContainer({ children, className = "", staggerDelay = 10
       ))}
     </div>
   );
-}
+});
 
-// Text Reveal Animation
+// Text Reveal Animation - Simplified
 interface TextRevealProps {
   text: string;
   className?: string;
@@ -149,7 +179,12 @@ interface TextRevealProps {
   wordMode?: boolean;
 }
 
-export function TextReveal({ text, className = "", charDelay = 30, wordMode = false }: TextRevealProps) {
+export const TextReveal = memo(function TextReveal({ 
+  text, 
+  className = "", 
+  charDelay = 20, 
+  wordMode = true 
+}: TextRevealProps) {
   const { ref, isVisible } = useScrollAnimation();
   const elements = wordMode ? text.split(" ") : text.split("");
 
@@ -158,13 +193,11 @@ export function TextReveal({ text, className = "", charDelay = 30, wordMode = fa
       {elements.map((char, index) => (
         <span
           key={index}
-          className="inline-block transition-all"
+          className="inline-block gpu-accelerate"
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? "translateY(0)" : "translateY(20px)",
-            transitionDuration: "400ms",
-            transitionDelay: isVisible ? `${index * charDelay}ms` : "0ms",
-            transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)"
+            transform: isVisible ? "translateY(0)" : "translateY(12px)",
+            transition: `opacity 300ms cubic-bezier(0.22, 1, 0.36, 1) ${isVisible ? index * charDelay : 0}ms, transform 300ms cubic-bezier(0.22, 1, 0.36, 1) ${isVisible ? index * charDelay : 0}ms`,
           }}
         >
           {char === " " ? "\u00A0" : char}
@@ -173,9 +206,9 @@ export function TextReveal({ text, className = "", charDelay = 30, wordMode = fa
       ))}
     </span>
   );
-}
+});
 
-// Counter Animation
+// Counter Animation - Optimized
 interface AnimatedCounterProps {
   end: number;
   duration?: number;
@@ -184,7 +217,13 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-export function AnimatedCounter({ end, duration = 2000, suffix = "", prefix = "", className = "" }: AnimatedCounterProps) {
+export const AnimatedCounter = memo(function AnimatedCounter({ 
+  end, 
+  duration = 1500, 
+  suffix = "", 
+  prefix = "", 
+  className = "" 
+}: AnimatedCounterProps) {
   const { ref, isVisible } = useScrollAnimation();
   const [count, setCount] = useState(0);
 
@@ -192,20 +231,21 @@ export function AnimatedCounter({ end, duration = 2000, suffix = "", prefix = ""
     if (!isVisible) return;
 
     let startTime: number | null = null;
+    let animationFrame: number;
+    
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
-      
-      // Easing function
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
       setCount(Math.floor(easeOutQuart * end));
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationFrame = requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
   }, [isVisible, end, duration]);
 
   return (
@@ -213,9 +253,9 @@ export function AnimatedCounter({ end, duration = 2000, suffix = "", prefix = ""
       {prefix}{count}{suffix}
     </span>
   );
-}
+});
 
-// Floating Animation Component
+// Floating Animation Component - CSS only
 interface FloatingElementProps {
   children: ReactNode;
   className?: string;
@@ -224,54 +264,56 @@ interface FloatingElementProps {
   delay?: number;
 }
 
-export function FloatingElement({ 
+export const FloatingElement = memo(function FloatingElement({ 
   children, 
   className = "", 
-  amplitude = 10, 
   duration = 3,
   delay = 0 
 }: FloatingElementProps) {
   return (
     <div
-      className={className}
+      className={`animate-float ${className}`}
       style={{
-        animation: `float ${duration}s ease-in-out infinite`,
+        animationDuration: `${duration}s`,
         animationDelay: `${delay}s`,
-        ["--float-amplitude" as string]: `${amplitude}px`
       }}
     >
       {children}
     </div>
   );
-}
+});
 
-// Magnetic Hover Effect
+// Magnetic Hover Effect - Simplified
 interface MagneticProps {
   children: ReactNode;
   className?: string;
   strength?: number;
 }
 
-export function Magnetic({ children, className = "", strength = 0.3 }: MagneticProps) {
+export const Magnetic = memo(function Magnetic({ 
+  children, 
+  className = "", 
+  strength = 0.2 
+}: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const x = (e.clientX - rect.left - rect.width / 2) * strength;
     const y = (e.clientY - rect.top - rect.height / 2) * strength;
     setPosition({ x, y });
-  };
+  }, [strength]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setPosition({ x: 0, y: 0 });
-  };
+  }, []);
 
   return (
     <div
       ref={ref}
-      className={`transition-transform duration-300 ease-out ${className}`}
+      className={`transition-transform duration-200 ease-out ${className}`}
       style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -279,37 +321,41 @@ export function Magnetic({ children, className = "", strength = 0.3 }: MagneticP
       {children}
     </div>
   );
-}
+});
 
-// 3D Tilt Card
+// 3D Tilt Card - Simplified
 interface TiltCardProps {
   children: ReactNode;
   className?: string;
   maxTilt?: number;
 }
 
-export function TiltCard({ children, className = "", maxTilt = 10 }: TiltCardProps) {
+export const TiltCard = memo(function TiltCard({ 
+  children, 
+  className = "", 
+  maxTilt = 8 
+}: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState("");
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
     const tiltX = (y - 0.5) * maxTilt * -1;
     const tiltY = (x - 0.5) * maxTilt;
-    setTransform(`perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`);
-  };
+    setTransform(`perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.01, 1.01, 1.01)`);
+  }, [maxTilt]);
 
-  const handleMouseLeave = () => {
-    setTransform("perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)");
-  };
+  const handleMouseLeave = useCallback(() => {
+    setTransform("");
+  }, []);
 
   return (
     <div
       ref={ref}
-      className={`transition-transform duration-300 ease-out ${className}`}
+      className={`transition-transform duration-200 ease-out gpu-accelerate ${className}`}
       style={{ transform, transformStyle: "preserve-3d" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -317,184 +363,34 @@ export function TiltCard({ children, className = "", maxTilt = 10 }: TiltCardPro
       {children}
     </div>
   );
-}
+});
 
-// Gradient Orb Background
-export function GradientOrbs() {
+// Lightweight Gradient Orbs - CSS only
+export const GradientOrbs = memo(function GradientOrbs() {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
       <div 
-        className="absolute w-[800px] h-[800px] rounded-full opacity-20 blur-[120px]"
+        className="absolute w-[600px] h-[600px] rounded-full opacity-[0.15] blur-[100px] bg-gradient-radial from-[#fff100] to-transparent"
         style={{
-          background: "radial-gradient(circle, #fff100 0%, transparent 70%)",
-          top: "-20%",
-          left: "-10%",
-          animation: "orb-float-1 20s ease-in-out infinite"
+          top: "-15%",
+          left: "-5%",
+          animation: "orb-float 20s ease-in-out infinite"
         }}
       />
       <div 
-        className="absolute w-[600px] h-[600px] rounded-full opacity-15 blur-[100px]"
+        className="absolute w-[400px] h-[400px] rounded-full opacity-[0.1] blur-[80px] bg-gradient-radial from-[#fdc700] to-transparent"
         style={{
-          background: "radial-gradient(circle, #fdc700 0%, transparent 70%)",
           bottom: "10%",
-          right: "-5%",
-          animation: "orb-float-2 25s ease-in-out infinite"
-        }}
-      />
-      <div 
-        className="absolute w-[400px] h-[400px] rounded-full opacity-10 blur-[80px]"
-        style={{
-          background: "radial-gradient(circle, #00c950 0%, transparent 70%)",
-          top: "40%",
-          left: "30%",
-          animation: "orb-float-3 18s ease-in-out infinite"
+          right: "-3%",
+          animation: "orb-float 25s ease-in-out infinite reverse"
         }}
       />
     </div>
   );
-}
+});
 
-// Particle Background
-export function ParticleBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const particles: { x: number; y: number; vx: number; vy: number; size: number; opacity: number }[] = [];
-    const particleCount = 50;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    // Create particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2
-      });
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 241, 0, ${p.opacity})`;
-        ctx.fill();
-      });
-
-      // Draw connections
-      particles.forEach((p1, i) => {
-        particles.slice(i + 1).forEach((p2) => {
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(255, 241, 0, ${0.1 * (1 - dist / 150)})`;
-            ctx.stroke();
-          }
-        });
-      });
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-60"
-    />
-  );
-}
-
-// Cursor Follower
-export function CursorFollower() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-    };
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === "A" || target.tagName === "BUTTON" || target.closest("a") || target.closest("button")) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseover", handleMouseOver);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseover", handleMouseOver);
-    };
-  }, []);
-
-  return (
-    <>
-      <div
-        className="fixed pointer-events-none z-[9999] mix-blend-difference hidden md:block"
-        style={{
-          left: position.x,
-          top: position.y,
-          transform: "translate(-50%, -50%)",
-          transition: "width 0.3s, height 0.3s, opacity 0.3s",
-          width: isHovering ? "60px" : "20px",
-          height: isHovering ? "60px" : "20px",
-          borderRadius: "50%",
-          backgroundColor: "#fff100",
-          opacity: 0.8
-        }}
-      />
-      <div
-        className="fixed pointer-events-none z-[9998] hidden md:block"
-        style={{
-          left: position.x,
-          top: position.y,
-          transform: "translate(-50%, -50%)",
-          transition: "all 0.15s ease-out",
-          width: "40px",
-          height: "40px",
-          borderRadius: "50%",
-          border: "1px solid rgba(255, 241, 0, 0.5)"
-        }}
-      />
-    </>
-  );
-}
+// Simplified Cursor - CSS only, no JS tracking
+export const CursorFollower = memo(function CursorFollower() {
+  // Disabled for performance - use CSS hover effects instead
+  return null;
+});

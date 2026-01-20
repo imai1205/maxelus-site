@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import InteractiveDemo from "./components/InteractiveDemo";
-import StorySlider from "./components/StorySlider";
+import { useState, memo } from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { 
   AnimatedSection, 
   StaggeredContainer, 
@@ -12,9 +14,19 @@ import {
   Magnetic,
   TiltCard,
   ParallaxProvider,
-  CursorFollower,
-  ParticleBackground
+  GradientOrbs
 } from "./components/AnimationProvider";
+
+// Dynamic imports for heavy components - improves initial page load
+const InteractiveDemo = dynamic(() => import("./components/InteractiveDemo"), {
+  loading: () => <div className="h-[600px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/50">読み込み中...</div></div>,
+  ssr: true
+});
+
+const StorySlider = dynamic(() => import("./components/StorySlider"), {
+  loading: () => <div className="h-[500px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/50">読み込み中...</div></div>,
+  ssr: true
+});
 
 // Image URLs from Figma
 const imgHeroDemo = "https://www.figma.com/api/mcp/asset/7e73c5ad-1bad-40df-8921-ce35139c9ade";
@@ -31,80 +43,7 @@ const imgWorks1 = "https://www.figma.com/api/mcp/asset/a4f37e6a-2130-4808-9dc3-9
 const imgWorks2 = "https://www.figma.com/api/mcp/asset/a97c9aa5-1dca-404b-97f1-f2c77a69af4b";
 const imgWorks3 = "https://www.figma.com/api/mcp/asset/9039d5eb-93bd-427d-9fdf-937454afea3d";
 const imgArrowRight = "https://www.figma.com/api/mcp/asset/dff0d741-b040-4a48-9c0c-9c756232f4c2";
-const imgLogo = "https://www.figma.com/api/mcp/asset/bab5858e-9bd6-4cc7-9783-62ba4339b159";
 
-// Header Component
-function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  return (
-    <header className="bg-white/80 backdrop-blur-md border-b border-[#e5e7eb] sticky top-0 z-50">
-      <div className="flex items-center justify-between h-14 md:h-16 px-4 md:px-8 max-w-[1200px] mx-auto">
-        <Magnetic>
-          <a href="/" className="flex items-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={imgLogo} alt="マクセラス" className="h-8 md:h-10 w-auto" />
-          </a>
-        </Magnetic>
-        
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="/" className="text-sm text-[#0b1220] nav-link font-medium relative group">
-            ホーム
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#fff100] transition-all duration-300 group-hover:w-full" />
-          </a>
-          <a href="/works" className="text-sm text-[#666] nav-link relative group">
-            実績
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#fff100] transition-all duration-300 group-hover:w-full" />
-          </a>
-          <a href="/contact" className="text-sm text-[#666] nav-link relative group">
-            お問い合わせ
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#fff100] transition-all duration-300 group-hover:w-full" />
-          </a>
-          <Magnetic strength={0.2}>
-            <a href="/contact" className="btn-primary px-6 py-2 text-base font-normal animate-pulse-glow">
-              無料相談する
-            </a>
-          </Magnetic>
-        </nav>
-        
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-      </div>
-      
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-[#e5e7eb] animate-fade-in">
-          <nav className="flex flex-col p-4 gap-4">
-            <a href="/" className="text-base text-[#0b1220] font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
-              ホーム
-            </a>
-            <a href="/works" className="text-base text-[#666] py-2" onClick={() => setMobileMenuOpen(false)}>
-              実績
-            </a>
-            <a href="/contact" className="text-base text-[#666] py-2" onClick={() => setMobileMenuOpen(false)}>
-              お問い合わせ
-            </a>
-            <a href="/contact" className="btn-primary px-6 py-3 text-base font-normal text-center" onClick={() => setMobileMenuOpen(false)}>
-              無料相談する
-            </a>
-          </nav>
-        </div>
-      )}
-    </header>
-  );
-}
 
 // Hero Section Component
 function HeroSection() {
@@ -146,15 +85,15 @@ function HeroSection() {
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={500} duration={800}>
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4 justify-center lg:justify-start">
-                <a href="/contact" className="btn-primary flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg group relative overflow-hidden">
+                <Link href="/contact" prefetch={true} className="btn-primary flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg group relative overflow-hidden">
                   <span className="relative z-10">無料相談する</span>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={imgArrowIcon} alt="" className="w-5 md:w-6 h-5 md:h-6 relative z-10 transition-transform group-hover:translate-x-1" />
                   <div className="absolute inset-0 bg-[#fdc700] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
-                </a>
-                <a href="/works" className="btn-outline flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:bg-[#1a1a1a] hover:text-white transition-all duration-300">
+                </Link>
+                <Link href="/works" prefetch={true} className="btn-outline flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:bg-[#1a1a1a] hover:text-white transition-all duration-300">
                   実績を見る
-                </a>
+                </Link>
               </div>
             </AnimatedSection>
           </div>
@@ -590,21 +529,23 @@ function CTASection() {
           </AnimatedSection>
           <AnimatedSection animation="fade-up" delay={700}>
             <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 px-4">
-              <a 
+              <Link 
                 href="/contact" 
+                prefetch={true}
                 className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 md:px-10 py-3 md:py-5 rounded-xl text-base md:text-lg transition-all hover:scale-105 shadow-lg animate-pulse-glow group"
               >
                 無料相談する
                 <svg className="w-4 md:w-5 h-4 md:h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/works" 
+                prefetch={true}
                 className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-medium px-6 md:px-10 py-3 md:py-5 rounded-xl text-base md:text-lg border border-white/30 transition-all hover:scale-105 backdrop-blur-sm"
               >
                 実績を見る
-              </a>
+              </Link>
             </div>
           </AnimatedSection>
         </AnimatedSection>
@@ -613,68 +554,13 @@ function CTASection() {
   );
 }
 
-// Footer Component
-function Footer() {
-  return (
-    <footer className="bg-[#f6f8fb] border-t border-black pt-8 md:pt-12 px-4 md:px-8 relative overflow-hidden">
-      {/* Subtle gradient */}
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#fff100]/5 to-transparent pointer-events-none" />
-      
-      <div className="max-w-[1200px] mx-auto relative">
-        <AnimatedSection animation="fade-up">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
-            {/* Company info */}
-            <div className="text-center sm:text-left">
-              <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-3 md:mb-4">株式会社マクセラス</h3>
-              <p className="text-xs md:text-sm text-[#666] leading-6">
-                ホームページ制作からWebアプリ開発、業務DX支援まで、お客様の課題を解決します。
-              </p>
-            </div>
-            
-            {/* Sitemap */}
-            <div className="text-center sm:text-left">
-              <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-3 md:mb-4">サイトマップ</h3>
-              <ul className="space-y-2">
-                <li><a href="/" className="footer-link text-xs md:text-sm hover:text-[#fdc700] transition-colors">ホーム</a></li>
-                <li><a href="/works" className="footer-link text-xs md:text-sm hover:text-[#fdc700] transition-colors">実績</a></li>
-                <li><a href="/contact" className="footer-link text-xs md:text-sm hover:text-[#fdc700] transition-colors">お問い合わせ</a></li>
-              </ul>
-            </div>
-            
-            {/* Contact */}
-            <div className="text-center sm:text-left sm:col-span-2 md:col-span-1">
-              <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-3 md:mb-4">お問い合わせ</h3>
-              <p className="text-xs md:text-sm text-[#666]">
-                お気軽にご相談ください。<br />
-                初回相談は無料です。
-              </p>
-            </div>
-          </div>
-        </AnimatedSection>
-        
-        {/* Copyright */}
-        <div className="border-t border-[#e5e7eb] py-6 md:py-8 text-center">
-          <p className="text-xs md:text-sm text-[#666]">
-            © 2026 株式会社マクセラス All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 // Main Page Component
 export default function Home() {
   return (
     <ParallaxProvider>
       <div className="min-h-screen bg-white font-sans relative overflow-x-hidden">
-        {/* Particle Background - hidden on mobile for performance */}
-        <div className="hidden md:block">
-          <ParticleBackground />
-        </div>
-        
-        {/* Custom Cursor - only on desktop */}
-        <CursorFollower />
+        {/* Lightweight Gradient Orbs - CSS only, no JS */}
+        <GradientOrbs />
         
         <Header />
         <main>
