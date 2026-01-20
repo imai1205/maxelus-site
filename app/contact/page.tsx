@@ -1,0 +1,503 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+
+const imgLogo = "https://www.figma.com/api/mcp/asset/bab5858e-9bd6-4cc7-9783-62ba4339b159";
+
+// Header Component
+function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  return (
+    <header className="bg-white/80 backdrop-blur-md border-b border-[#e5e7eb] sticky top-0 z-50">
+      <div className="flex items-center justify-between h-14 md:h-16 px-4 md:px-8 max-w-[1200px] mx-auto">
+        <Link href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={imgLogo} alt="マクセラス" className="h-8 md:h-10 w-auto" />
+        </Link>
+        
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          <Link href="/" className="text-sm text-[#666] hover:text-[#0b1220] transition-colors">
+            ホーム
+          </Link>
+          <Link href="/works" className="text-sm text-[#666] hover:text-[#0b1220] transition-colors">
+            実績
+          </Link>
+          <Link href="/contact" className="text-sm text-[#0b1220] font-medium">
+            お問い合わせ
+          </Link>
+          <Link href="/contact" className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] px-6 py-2 rounded-lg text-base font-medium transition-colors">
+            無料相談する
+          </Link>
+        </nav>
+        
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {mobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+      </div>
+      
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-[#e5e7eb] animate-fade-in">
+          <nav className="flex flex-col p-4 gap-4">
+            <Link href="/" className="text-base text-[#666] py-2" onClick={() => setMobileMenuOpen(false)}>
+              ホーム
+            </Link>
+            <Link href="/works" className="text-base text-[#666] py-2" onClick={() => setMobileMenuOpen(false)}>
+              実績
+            </Link>
+            <Link href="/contact" className="text-base text-[#0b1220] font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
+              お問い合わせ
+            </Link>
+            <Link href="/contact" className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] px-6 py-3 rounded-lg text-base font-medium text-center transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              無料相談する
+            </Link>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}
+
+// Footer Component
+function Footer() {
+  return (
+    <footer className="bg-[#f6f8fb] border-t border-[#e5e7eb] pt-8 md:pt-12 px-4 md:px-8">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-8">
+          <div className="text-center sm:text-left">
+            <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-3">株式会社マクセラス</h3>
+            <p className="text-xs md:text-sm text-[#666] leading-6">
+              ホームページ制作からWebアプリ開発、業務DX支援まで、お客様の課題を解決します。
+            </p>
+          </div>
+          <div className="text-center sm:text-left">
+            <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-3">サイトマップ</h3>
+            <ul className="space-y-2">
+              <li><Link href="/" className="text-xs md:text-sm text-[#666] hover:text-[#fdc700] transition-colors">ホーム</Link></li>
+              <li><Link href="/works" className="text-xs md:text-sm text-[#666] hover:text-[#fdc700] transition-colors">実績</Link></li>
+              <li><Link href="/contact" className="text-xs md:text-sm text-[#666] hover:text-[#fdc700] transition-colors">お問い合わせ</Link></li>
+            </ul>
+          </div>
+          <div className="text-center sm:text-left sm:col-span-2 md:col-span-1">
+            <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-3">お問い合わせ</h3>
+            <p className="text-xs md:text-sm text-[#666]">
+              お気軽にご相談ください。<br />
+              初回相談は無料です。
+            </p>
+          </div>
+        </div>
+        <div className="border-t border-[#e5e7eb] py-6 text-center">
+          <p className="text-xs md:text-sm text-[#666]">
+            © 2026 株式会社マクセラス All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// Contact Form Component
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    inquiryType: "",
+    budget: "",
+    timeline: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
+
+  if (isSubmitted) {
+    return (
+      <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center animate-fade-in">
+        <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+          お問い合わせありがとうございます
+        </h2>
+        <p className="text-[#6b7280] mb-8">
+          担当者より2営業日以内にご連絡いたします。<br />
+          しばらくお待ちください。
+        </p>
+        <Link 
+          href="/"
+          className="inline-flex items-center gap-2 text-[#fdc700] hover:text-[#e5b400] font-medium transition-colors"
+        >
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          トップページに戻る
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-6 md:p-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+            お名前 <span className="text-[#dc2626]">*</span>
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            placeholder="山田 太郎"
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all"
+          />
+        </div>
+
+        {/* Company */}
+        <div>
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+            会社名
+          </label>
+          <input
+            type="text"
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            placeholder="株式会社〇〇"
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all"
+          />
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+            メールアドレス <span className="text-[#dc2626]">*</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder="example@company.com"
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all"
+          />
+        </div>
+
+        {/* Phone */}
+        <div>
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+            電話番号
+          </label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="090-1234-5678"
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all"
+          />
+        </div>
+
+        {/* Inquiry Type */}
+        <div>
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+            ご相談内容 <span className="text-[#dc2626]">*</span>
+          </label>
+          <select
+            name="inquiryType"
+            value={formData.inquiryType}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white"
+          >
+            <option value="">選択してください</option>
+            <option value="hp">ホームページ制作</option>
+            <option value="webapp">社内Webアプリ開発</option>
+            <option value="dx">業務DX・自動化</option>
+            <option value="cloud">クラウド連携</option>
+            <option value="ios">iOSアプリ開発</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+
+        {/* Budget */}
+        <div>
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+            ご予算
+          </label>
+          <select
+            name="budget"
+            value={formData.budget}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white"
+          >
+            <option value="">選択してください</option>
+            <option value="~30">〜30万円</option>
+            <option value="30-50">30〜50万円</option>
+            <option value="50-100">50〜100万円</option>
+            <option value="100-300">100〜300万円</option>
+            <option value="300~">300万円以上</option>
+            <option value="undecided">未定・要相談</option>
+          </select>
+        </div>
+
+        {/* Timeline */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+            希望納期
+          </label>
+          <select
+            name="timeline"
+            value={formData.timeline}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white"
+          >
+            <option value="">選択してください</option>
+            <option value="asap">できるだけ早く</option>
+            <option value="1month">1ヶ月以内</option>
+            <option value="3months">3ヶ月以内</option>
+            <option value="6months">6ヶ月以内</option>
+            <option value="flexible">柔軟に対応可能</option>
+          </select>
+        </div>
+
+        {/* Message */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+            ご相談内容の詳細 <span className="text-[#dc2626]">*</span>
+          </label>
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            rows={6}
+            placeholder="現在の課題や、実現したいことをできるだけ詳しくお聞かせください。&#10;&#10;例：&#10;・現在Excelで管理している顧客情報をWebアプリ化したい&#10;・予約システムを導入して電話対応を減らしたい&#10;・既存システムの改善を検討している"
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all resize-none"
+          />
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <div className="mt-8">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-[#fff100] hover:bg-[#fdc700] disabled:bg-[#e5e7eb] disabled:cursor-not-allowed text-[#1a1a1a] font-medium py-4 rounded-xl text-lg transition-all hover:scale-[1.02] disabled:hover:scale-100 flex items-center justify-center gap-3"
+        >
+          {isSubmitting ? (
+            <>
+              <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              </svg>
+              送信中...
+            </>
+          ) : (
+            <>
+              無料相談を申し込む
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* Privacy Note */}
+      <p className="text-xs text-[#6b7280] text-center mt-4">
+        ご入力いただいた情報は、お問い合わせへの回答にのみ使用いたします。
+      </p>
+    </form>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <div className="min-h-screen bg-[#fafafa] font-sans">
+      <Header />
+      
+      <main>
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-b from-[#1a1a1a] to-[#2d2d2d] py-16 md:py-24 px-4 md:px-8 overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-10 w-64 h-64 bg-[#fff100] rounded-full blur-[100px]" />
+            <div className="absolute bottom-10 right-10 w-80 h-80 bg-[#fdc700] rounded-full blur-[120px]" />
+          </div>
+          
+          <div className="max-w-[1200px] mx-auto relative">
+            <div className="text-center">
+              <span className="text-[50px] md:text-[100px] font-bold text-white/5 absolute left-1/2 -translate-x-1/2 -top-2 md:-top-6 pointer-events-none select-none whitespace-nowrap">
+                CONTACT
+              </span>
+              <h1 className="relative text-3xl md:text-5xl font-bold text-white mb-4">
+                無料相談・お問い合わせ
+              </h1>
+              <p className="relative text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+                あなたの課題をお聞かせください。<br className="hidden md:block" />
+                最適なソリューションをご提案します。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Form Section */}
+        <section className="py-12 md:py-20 px-4 md:px-8">
+          <div className="max-w-[900px] mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+              {/* Benefits */}
+              <div className="lg:col-span-1 order-2 lg:order-1">
+                <div className="sticky top-24 space-y-6">
+                  <h2 className="text-xl font-bold text-[#1a1a1a] mb-6">無料相談のメリット</h2>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <span className="text-lg">💬</span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-[#1a1a1a] mb-1">課題の整理</h3>
+                      <p className="text-sm text-[#6b7280]">漠然とした課題でもOK。一緒に整理します。</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <span className="text-lg">🎯</span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-[#1a1a1a] mb-1">デモ提示</h3>
+                      <p className="text-sm text-[#6b7280]">打合せ後、実際に触れるデモをお見せします。</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <span className="text-lg">📋</span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-[#1a1a1a] mb-1">明確な見積り</h3>
+                      <p className="text-sm text-[#6b7280]">概算費用とスケジュールを提示します。</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <span className="text-lg">🤝</span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-[#1a1a1a] mb-1">相談だけでもOK</h3>
+                      <p className="text-sm text-[#6b7280]">契約の強要は一切ありません。</p>
+                    </div>
+                  </div>
+
+                  {/* Contact Info */}
+                  <div className="border-t border-[#e5e7eb] pt-6 mt-8">
+                    <h3 className="font-medium text-[#1a1a1a] mb-4">その他のお問い合わせ方法</h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 text-sm text-[#6b7280]">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        info@maxelus.co.jp
+                      </div>
+                      <div className="flex items-center gap-3 text-sm text-[#6b7280]">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        平日 10:00 - 18:00
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Form */}
+              <div className="lg:col-span-2 order-1 lg:order-2">
+                <ContactForm />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="bg-white py-12 md:py-20 px-4 md:px-8">
+          <div className="max-w-[800px] mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] text-center mb-8 md:mb-12">
+              よくあるご質問
+            </h2>
+            <div className="space-y-4">
+              {[
+                {
+                  q: "相談は本当に無料ですか？",
+                  a: "はい、初回相談は完全無料です。課題のヒアリングから、概算のお見積り提示まで、費用は一切かかりません。"
+                },
+                {
+                  q: "相談後、必ず契約しなければなりませんか？",
+                  a: "いいえ、そのようなことはありません。相談の結果、「今は見送る」という判断をされても全く問題ありません。"
+                },
+                {
+                  q: "どのような準備が必要ですか？",
+                  a: "特別な準備は不要です。現在お困りのことや実現したいことを、ざっくばらんにお話しいただければ大丈夫です。"
+                },
+                {
+                  q: "オンラインでの相談は可能ですか？",
+                  a: "はい、Zoom等を使ったオンライン相談が可能です。全国どこからでもご相談いただけます。"
+                }
+              ].map((faq, i) => (
+                <div key={i} className="bg-[#fafafa] rounded-xl p-5 md:p-6">
+                  <h3 className="font-medium text-[#1a1a1a] mb-2 flex items-start gap-3">
+                    <span className="w-6 h-6 bg-[#fff100] rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">
+                      Q
+                    </span>
+                    {faq.q}
+                  </h3>
+                  <p className="text-sm text-[#6b7280] pl-9">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
