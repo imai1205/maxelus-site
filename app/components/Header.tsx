@@ -21,7 +21,7 @@ export default function Header() {
         </Link>
         
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           <Link 
             href="/" 
             prefetch={true}
@@ -32,6 +32,30 @@ export default function Header() {
             ホーム
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
               isActive("/") ? "w-full" : "w-0 group-hover:w-full"
+            }`} />
+          </Link>
+          <Link 
+            href="/services" 
+            prefetch={true}
+            className={`text-sm nav-link relative group transition-all duration-200 ${
+              pathname.startsWith("/services") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
+            }`}
+          >
+            サービス
+            <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
+              pathname.startsWith("/services") ? "w-full" : "w-0 group-hover:w-full"
+            }`} />
+          </Link>
+          <Link 
+            href="/strengths" 
+            prefetch={true}
+            className={`text-sm nav-link relative group transition-all duration-200 ${
+              isActive("/strengths") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
+            }`}
+          >
+            強み
+            <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
+              isActive("/strengths") ? "w-full" : "w-0 group-hover:w-full"
             }`} />
           </Link>
           <Link 
@@ -61,7 +85,7 @@ export default function Header() {
           <Link 
             href="/contact" 
             prefetch={true}
-            className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] px-6 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:scale-105 active:scale-95"
+            className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] px-5 lg:px-6 py-2 rounded-lg text-sm lg:text-base font-medium transition-all duration-200 hover:scale-105 active:scale-95"
           >
             無料相談する
           </Link>
@@ -86,10 +110,10 @@ export default function Header() {
       {/* Mobile Menu */}
       <div 
         className={`md:hidden bg-white border-t border-[#e5e7eb] overflow-hidden transition-all duration-300 ${
-          mobileMenuOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
+          mobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="flex flex-col p-4 gap-4">
+        <nav className="flex flex-col p-4 gap-3">
           <Link 
             href="/" 
             prefetch={true}
@@ -97,6 +121,22 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(false)}
           >
             ホーム
+          </Link>
+          <Link 
+            href="/services" 
+            prefetch={true}
+            className={`text-base py-2 transition-colors ${pathname.startsWith("/services") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            サービス
+          </Link>
+          <Link 
+            href="/strengths" 
+            prefetch={true}
+            className={`text-base py-2 transition-colors ${isActive("/strengths") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            強み
           </Link>
           <Link 
             href="/works" 
@@ -117,7 +157,7 @@ export default function Header() {
           <Link 
             href="/contact" 
             prefetch={true}
-            className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] px-6 py-3 rounded-lg text-base font-medium text-center transition-colors"
+            className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] px-6 py-3 rounded-lg text-base font-medium text-center transition-colors mt-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             無料相談する
