@@ -25,7 +25,7 @@ export default function Header() {
           <Link 
             href="/" 
             prefetch={true}
-            className={`text-sm nav-link relative group transition-colors ${
+            className={`text-sm nav-link relative group transition-all duration-200 ${
               isActive("/") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
@@ -37,7 +37,7 @@ export default function Header() {
           <Link 
             href="/works" 
             prefetch={true}
-            className={`text-sm nav-link relative group transition-colors ${
+            className={`text-sm nav-link relative group transition-all duration-200 ${
               isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
@@ -49,7 +49,7 @@ export default function Header() {
           <Link 
             href="/contact" 
             prefetch={true}
-            className={`text-sm nav-link relative group transition-colors ${
+            className={`text-sm nav-link relative group transition-all duration-200 ${
               isActive("/contact") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
@@ -61,7 +61,7 @@ export default function Header() {
           <Link 
             href="/contact" 
             prefetch={true}
-            className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] px-6 py-2 rounded-lg text-base font-medium transition-all hover:scale-105"
+            className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] px-6 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:scale-105 active:scale-95"
           >
             無料相談する
           </Link>

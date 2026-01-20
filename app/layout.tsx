@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-import { PageLoader } from "./components/PageTransition";
+import { PageLoader, PageTransition } from "./components/PageTransition";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -35,7 +35,7 @@ export default function RootLayout({
       </head>
       <body className={`${notoSansJP.variable} font-sans antialiased`}>
         <PageLoader />
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );
