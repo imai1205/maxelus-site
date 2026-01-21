@@ -40,6 +40,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Fixed Header - 確実にスクロールについてくる */
+header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+}
+
 /* Responsive Typography */
 @media (max-width: 768px) {
   html {

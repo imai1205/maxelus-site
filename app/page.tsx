@@ -48,21 +48,32 @@ const imgArrowRight = "https://www.figma.com/api/mcp/asset/dff0d741-b040-4a48-9c
 // Hero Section Component
 function HeroSection() {
   return (
-    <section className="relative bg-hero-gradient overflow-hidden">
+    <section className="relative min-h-[90vh] md:min-h-screen overflow-hidden">
+      {/* Parallax Background Image - 固定背景 */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80')`,
+          transform: 'scale(1.1)',
+        }}
+      />
+      {/* Overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95" />
+      
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-[0.02] grid-pattern" />
-      <div className="absolute top-20 left-10 w-48 md:w-72 h-48 md:h-72 bg-[#fff100]/10 rounded-full blur-[80px] md:blur-[100px] animate-morph" />
-      <div className="absolute bottom-10 right-10 w-64 md:w-96 h-64 md:h-96 bg-[#fdc700]/10 rounded-full blur-[100px] md:blur-[120px] animate-morph" style={{ animationDelay: "-4s" }} />
+      <div className="absolute top-20 left-10 w-48 md:w-72 h-48 md:h-72 bg-[#fff100]/20 rounded-full blur-[80px] md:blur-[100px] animate-morph" />
+      <div className="absolute bottom-10 right-10 w-64 md:w-96 h-64 md:h-96 bg-[#fdc700]/20 rounded-full blur-[100px] md:blur-[120px] animate-morph" style={{ animationDelay: "-4s" }} />
       
       {/* Floating decorative elements - hidden on mobile */}
-      <FloatingElement className="absolute top-32 right-20 opacity-20 hidden md:block" amplitude={15} duration={4}>
-        <div className="w-4 h-4 bg-[#fff100] rounded-full" />
+      <FloatingElement className="absolute top-32 right-20 opacity-30 hidden md:block" amplitude={15} duration={4}>
+        <div className="w-4 h-4 bg-[#fff100] rounded-full shadow-lg" />
       </FloatingElement>
-      <FloatingElement className="absolute top-48 left-32 opacity-20 hidden md:block" amplitude={12} duration={3.5} delay={0.5}>
-        <div className="w-3 h-3 bg-[#fdc700] rounded-full" />
+      <FloatingElement className="absolute top-48 left-32 opacity-30 hidden md:block" amplitude={12} duration={3.5} delay={0.5}>
+        <div className="w-3 h-3 bg-[#fdc700] rounded-full shadow-lg" />
       </FloatingElement>
-      <FloatingElement className="absolute bottom-40 left-20 opacity-15 hidden md:block" amplitude={18} duration={4.5} delay={1}>
-        <div className="w-5 h-5 bg-[#fff100] rotate-45" />
+      <FloatingElement className="absolute bottom-40 left-20 opacity-25 hidden md:block" amplitude={18} duration={4.5} delay={1}>
+        <div className="w-5 h-5 bg-[#fff100] rotate-45 shadow-lg" />
       </FloatingElement>
       
       <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-28">
@@ -127,14 +138,26 @@ function ChallengeSection() {
   ];
 
   return (
-    <section className="bg-[#fafafa] py-12 md:py-24 px-4 md:px-12 overflow-hidden">
-      <div className="max-w-[1100px] mx-auto">
+    <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden">
+      {/* Parallax Background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed opacity-5"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80')`,
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-[#f5f5f5] to-[#fafafa]" />
+      <div className="relative max-w-[1100px] mx-auto">
         {/* Section heading */}
-        <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-12">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">CHALLENGE</span>
-          <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
+        <AnimatedSection animation="fade-up" className="relative text-center mb-10 md:mb-16">
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">CHALLENGE</span>
+          <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest mb-2">PROBLEM</p>
+          <h2 className="relative text-[26px] md:text-[36px] lg:text-[42px] font-bold text-[#1a1a1a] tracking-tight">
             課題は&quot;ズレ&quot;から起きる
           </h2>
+          <p className="text-sm md:text-base text-[#6b7280] mt-3 max-w-xl mx-auto">
+            開発の失敗の多くは、認識のズレから生まれます。
+          </p>
         </AnimatedSection>
         
         {/* Before/After comparison */}
@@ -187,15 +210,26 @@ function ChallengeSection() {
 // Solution Section Component
 function SolutionSection() {
   return (
-    <section className="bg-white py-12 md:py-24 px-4 md:px-12 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-bl from-[#fff100]/5 to-transparent rounded-full blur-3xl" />
+    <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden">
+      {/* Parallax Background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed opacity-5"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80')`,
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#fffef8] to-white" />
       
-      <div className="max-w-[1100px] mx-auto">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-bl from-[#fff100]/10 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-48 md:w-80 h-48 md:h-80 bg-gradient-to-tr from-[#fdc700]/10 to-transparent rounded-full blur-3xl" />
+      
+      <div className="relative max-w-[1100px] mx-auto">
         <AnimatedSection animation="zoom-in" className="relative text-center">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">SOLUTION</span>
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">SOLUTION</span>
           <div className="relative space-y-4 md:space-y-6">
-            <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-bold text-[#1a1a1a] leading-[34px] sm:leading-[42px] md:leading-[52px] tracking-tight px-2">
+            <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
+            <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
               その業務、システム化して
               <br />
               <span className="animate-text-gradient">&quot;人を増やさず&quot;</span>
@@ -563,7 +597,7 @@ export default function Home() {
         <GradientOrbs />
         
         <Header />
-        <main>
+        <main className="pt-14 md:pt-16">
           <HeroSection />
           <ChallengeSection />
           <SolutionSection />

@@ -235,7 +235,7 @@ export default function WorksPage() {
     <div className="min-h-screen bg-white font-sans">
       <Header />
       
-      <main>
+      <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#fafafa] to-white py-16 md:py-24 px-4 md:px-8 overflow-hidden">
           <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #1a1a1a 1px, transparent 0)", backgroundSize: "40px 40px" }} />

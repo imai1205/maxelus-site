@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -8,12 +8,44 @@ const imgLogo = "https://www.figma.com/api/mcp/asset/bab5858e-9bd6-4cc7-9783-62b
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
 
+  // #region agent log
+  useEffect(() => {
+    const header = document.querySelector('header');
+    if (header) {
+      const computedStyle = window.getComputedStyle(header);
+      const parentStyle = header.parentElement ? window.getComputedStyle(header.parentElement) : null;
+      fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Header.tsx:mount',message:'Header computed styles',data:{position:computedStyle.position,top:computedStyle.top,zIndex:computedStyle.zIndex,transform:computedStyle.transform,parentTransform:parentStyle?.transform,parentPosition:parentStyle?.position,parentClass:header.parentElement?.className},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A,B,C'})}).catch(()=>{});
+    }
+  }, []);
+  // #endregion
+
+  // スクロール検知でヘッダーのスタイルを変更
+  useEffect(() => {
+    const handleScroll = () => {
+      // #region agent log
+      fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Header.tsx:handleScroll',message:'Scroll event fired',data:{scrollY:window.scrollY,isScrolled:window.scrollY>10},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+      // #endregion
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // 初期状態をチェック
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Header.tsx:useEffect',message:'Scroll listener attached',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+    // #endregion
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="bg-white/80 backdrop-blur-md border-b border-[#e5e7eb] sticky top-0 z-50">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? "bg-white/95 backdrop-blur-lg shadow-lg shadow-black/5 border-b border-[#e5e7eb]" 
+        : "bg-white/80 backdrop-blur-md border-b border-transparent"
+    }`}>
       <div className="flex items-center justify-between h-14 md:h-16 px-4 md:px-8 max-w-[1200px] mx-auto">
         <Link href="/" className="flex items-center" prefetch={true}>
           {/* eslint-disable-next-line @next/next/no-img-element */}

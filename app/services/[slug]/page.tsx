@@ -83,7 +83,7 @@ export default function ServiceDetailPage() {
     <div className="min-h-screen bg-white font-sans">
       <Header />
       
-      <main>
+      <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
           {/* Background Image */}
