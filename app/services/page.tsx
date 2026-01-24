@@ -61,17 +61,14 @@ function ServiceCard({
 }) {
   const isSpecial = service.special;
 
-  return (
-    <div className="w-full">
-      <AnimatedSection animation="fade-up" delay={index * 100}>
-        <TiltCard maxTilt={5} className="h-full">
-          <div
-            className={`service-card bg-white rounded-2xl shadow-lg p-6 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 ${
-              isSpecial
-                ? "border-[#fff100] bg-gradient-to-br from-[#fffef0] to-white"
-                : "border-[#e5e7eb]/50"
-            }`}
-          >
+  const cardClassName = `service-card bg-white rounded-2xl shadow-lg p-6 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 ${
+    isSpecial
+      ? "border-[#fff100] bg-gradient-to-br from-[#fffef0] to-white"
+      : "border-[#e5e7eb]/50"
+  } ${service.ctaType === "lp" && service.lpHref ? "hover:border-[#fff100] cursor-pointer" : ""}`;
+
+  const cardContent = (
+    <>
             {/* 特別枠バッジ */}
             {isSpecial && (
               <div className="absolute top-4 right-4 bg-[#fff100] text-[#1a1a1a] text-xs font-bold px-3 py-1 rounded-full">
@@ -151,30 +148,73 @@ function ServiceCard({
                   />
                 </svg>
               </Link>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onToggle();
-                }}
-                className="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
-              >
-                {isOpen ? "閉じる" : service.ctaType === "lp" ? "LPを見る" : "詳細を開く"}
-                <svg
-                  className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              {service.ctaType === "lp" && service.lpHref ? (
+                <div
+                  className="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all hover:scale-105 pointer-events-none"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
+                  LPを見る
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </div>
+              ) : (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggle();
+                  }}
+                  className="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
+                >
+                  {isOpen ? "閉じる" : "詳細を開く"}
+                  <svg
+                    className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+              )}
             </div>
-          </div>
+    </>
+  );
+
+  return (
+    <div className="w-full">
+      <AnimatedSection animation="fade-up" delay={index * 100}>
+        <TiltCard maxTilt={5} className="h-full">
+          {service.ctaType === "lp" && service.lpHref ? (
+            <Link
+              href={service.lpHref}
+              className={cardClassName}
+              onClick={(e: React.MouseEvent) => {
+                // 内部のボタンクリック時はカードのクリックを無効化
+                if ((e.target as HTMLElement).closest("a, button")) {
+                  e.stopPropagation();
+                }
+              }}
+            >
+              {cardContent}
+            </Link>
+          ) : (
+            <div className={cardClassName}>{cardContent}</div>
+          )}
         </TiltCard>
       </AnimatedSection>
 
@@ -274,11 +314,12 @@ export default function ServicesPage() {
           />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
-            <AnimatedSection animation="fade-up">
-              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider">
+            <AnimatedSection animation="fade-up" className="relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">SERVICES</span>
+              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                 SERVICES
               </p>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
                 アプリ開発とWeb制作で、
                 <br />
                 ビジネスを最短で形にします。

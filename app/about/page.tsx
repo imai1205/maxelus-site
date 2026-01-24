@@ -29,14 +29,15 @@ export default function AboutPage() {
           />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
-            <AnimatedSection animation="fade-up">
-              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider">
+            <AnimatedSection animation="fade-up" className="relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">ABOUT</span>
+              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                 ABOUT US
               </p>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
                 会社情報
               </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
                 AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです
               </p>
             </AnimatedSection>
@@ -46,8 +47,9 @@ export default function AboutPage() {
         {/* 会社概要 */}
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-8 text-center">
+            <AnimatedSection animation="fade-up" className="mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">OVERVIEW</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-8 text-center relative">
                 会社概要
               </h2>
             </AnimatedSection>
@@ -102,11 +104,12 @@ export default function AboutPage() {
         {/* 事業内容 */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">BUSINESS</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 事業内容
               </h2>
-              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -160,8 +163,9 @@ export default function AboutPage() {
         {/* 私たちについて */}
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-6">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">ABOUT</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-6 relative">
                 私たちについて
               </h2>
             </AnimatedSection>
@@ -185,11 +189,12 @@ export default function AboutPage() {
         {/* できること（提供価値） */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">VALUE</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 できること（提供価値）
               </h2>
-              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
             <div className="space-y-8">
@@ -387,11 +392,12 @@ export default function AboutPage() {
         {/* 代表挨拶 */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">MESSAGE</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 代表挨拶
               </h2>
-              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={200}>

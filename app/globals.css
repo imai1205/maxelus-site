@@ -67,7 +67,7 @@ html {
   font-size: 128px;
   font-weight: bold;
   color: #f3f4f6;
-  opacity: 0.4;
+  opacity: 0.1;
   letter-spacing: 2.56px;
   line-height: 192px;
   position: absolute;
@@ -884,4 +884,30 @@ a[href]:not([disabled]):active {
 .story-background {
   will-change: transform, filter;
   transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1), filter 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
 }

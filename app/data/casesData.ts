@@ -56,6 +56,12 @@ export const industries: Industry[] = [
     heroImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
   },
   {
+    id: 'beauty',
+    label: '美容・サービス',
+    description: 'サロン、エステ、美容院など',
+    heroImage: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a94f4ed?auto=format&fit=crop&w=800&q=80',
+  },
+  {
     id: 'other',
     label: 'その他',
     description: 'その他の業種・用途',
@@ -255,6 +261,21 @@ export const cases: Case[] = [
     solution: 'API連携により、複数のSaaS間でデータを自動同期。ワークフローも自動化。',
     impact: '二重入力ゼロ、作業時間70%削減',
     technologies: ['Next.js', 'Supabase', 'Zapier API', 'Webhook'],
+  },
+
+  // 美容・サービス
+  {
+    id: 'case-beauty-1',
+    industryId: 'beauty',
+    title: 'まつげサロン向けホームページ',
+    summary: 'ピンク系の優しいデザインで、お客様に「まいにちがきらきらなあなたへ」を届けるホームページを制作。メニュー紹介、施術の流れ、FAQ、サロン検索機能などを実装。',
+    tags: ['ホームページ制作', 'レスポンシブ', '予約システム', 'UI/UX'],
+    image: 'https://www.figma.com/api/mcp/asset/5a2485c4-a1e9-48b0-983a-1111d3da2430',
+    problem: '既存のホームページが古く、お客様に魅力が伝わらない。予約機能やメニュー情報が見つけにくい。',
+    solution: 'ピンク系の優しいデザインで、お客様に親しみやすさを演出。メニュー紹介、施術の流れ、FAQ、サロン検索機能を分かりやすく配置。レスポンシブ対応でスマホからも快適に閲覧可能。',
+    impact: '問い合わせ数30%増加、予約率向上、ブランドイメージ向上を実現',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'レスポンシブデザイン'],
+    lpHref: '/lp/eyelash-salon',
   },
 
   // その他

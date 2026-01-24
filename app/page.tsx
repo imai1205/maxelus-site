@@ -15,16 +15,23 @@ import {
   ParallaxProvider,
   GradientOrbs
 } from "./components/AnimationProvider";
+import { homeCasesData, type HomeCase } from "./data/homeCasesData";
 
 // Dynamic imports for heavy components - improves initial page load
-const InteractiveDemo = dynamic(() => import("./components/InteractiveDemo"), {
-  loading: () => <div className="h-[600px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/50">読み込み中...</div></div>,
-  ssr: true
+// const InteractiveDemo = dynamic(() => import("./components/InteractiveDemo"), {
+//   loading: () => <div className="h-[600px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/50">読み込み中...</div></div>,
+//   ssr: false // クライアントサイドのみでレンダリング（初期表示を高速化）
+// });
+
+// サロン予約アプリのデモ
+const SalonReservationAppMockup = dynamic(() => import("./components/SalonReservationAppMockup"), {
+  loading: () => <div className="h-[600px] flex items-center justify-center bg-white"><div className="animate-pulse text-[#6a7282]">読み込み中...</div></div>,
+  ssr: false
 });
 
 const StorySlider = dynamic(() => import("./components/StorySlider"), {
   loading: () => <div className="h-[500px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/50">読み込み中...</div></div>,
-  ssr: true
+  ssr: false // クライアントサイドのみでレンダリング（初期表示を高速化）
 });
 
 // Image URLs from Figma
@@ -44,103 +51,239 @@ const imgWorks3 = "https://www.figma.com/api/mcp/asset/9039d5eb-93bd-427d-9fdf-9
 const imgArrowRight = "https://www.figma.com/api/mcp/asset/dff0d741-b040-4a48-9c0c-9c756232f4c2";
 
 
-// Hero Section Component
+// Hero Section Component - 新しい内容
 function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_primary_href?: string; cta_secondary_text?: string; cta_secondary_href?: string } | null }) {
   const primaryHref = settings?.cta_primary_href || '/contact';
-  const secondaryHref = settings?.cta_secondary_href || '/works';
+  const secondaryHref = settings?.cta_secondary_href || '/cases';
   const primaryText = settings?.cta_primary_text || '無料相談する';
-  const secondaryText = settings?.cta_secondary_text || '実績を見る';
+  const secondaryText = settings?.cta_secondary_text || '事例を見る';
 
   return (
-    <section className="relative min-h-[90vh] md:min-h-screen overflow-hidden">
-      {/* Parallax Background Image - 固定背景 */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-fixed"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80')`,
-          transform: 'scale(1.1)',
-        }}
+    <section className="relative min-h-[90vh] md:min-h-screen overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220]">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+      </div>
+
+      {/* Gradient Orbs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" />
+      <div
+        className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse"
+        style={{ animationDelay: "1s" }}
       />
-      {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95" />
-      
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 opacity-[0.02] grid-pattern" />
-      <div className="absolute top-20 left-10 w-48 md:w-72 h-48 md:h-72 bg-[#fff100]/20 rounded-full blur-[80px] md:blur-[100px] animate-morph" />
-      <div className="absolute bottom-10 right-10 w-64 md:w-96 h-64 md:h-96 bg-[#fdc700]/20 rounded-full blur-[100px] md:blur-[120px] animate-morph" style={{ animationDelay: "-4s" }} />
-      
-      {/* Floating decorative elements - hidden on mobile */}
-      <FloatingElement className="absolute top-32 right-20 opacity-30 hidden md:block" amplitude={15} duration={4}>
-        <div className="w-4 h-4 bg-[#fff100] rounded-full shadow-lg" />
-      </FloatingElement>
-      <FloatingElement className="absolute top-48 left-32 opacity-30 hidden md:block" amplitude={12} duration={3.5} delay={0.5}>
-        <div className="w-3 h-3 bg-[#fdc700] rounded-full shadow-lg" />
-      </FloatingElement>
-      <FloatingElement className="absolute bottom-40 left-20 opacity-25 hidden md:block" amplitude={18} duration={4.5} delay={1}>
-        <div className="w-5 h-5 bg-[#fff100] rotate-45 shadow-lg" />
-      </FloatingElement>
-      
-      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-28">
-        <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
+
+      {/* Background App Screens - 薄く表示 */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-[60%] h-full flex items-center justify-center">
+          {/* App screens in background - 複数のアプリ画面を薄く配置 */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* Shopping App - 左後ろ */}
+            <div 
+              className="absolute left-[5%] top-[20%] w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-1000"
+              style={{ transform: 'rotate(-15deg) translateZ(0)' }}
+            >
+              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
+                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
+                  <div className="absolute inset-0 bg-white">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="https://www.figma.com/api/mcp/asset/cbc55d0e-8194-451e-9e89-6510110e7f9f"
+                      alt="Shopping App"
+                      className="w-full h-full object-contain grayscale"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Music App - 中央後ろ */}
+            <div 
+              className="absolute left-[15%] top-[30%] w-[220px] md:w-[300px] opacity-[0.06] md:opacity-[0.1] transition-all duration-1000"
+              style={{ transform: 'rotate(10deg) translateZ(0)', zIndex: 1 }}
+            >
+              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
+                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
+                  <div className="absolute inset-0 bg-white">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="https://www.figma.com/api/mcp/asset/42b0d8ed-a3ed-442f-bf6d-16f75529eca4"
+                      alt="Music App"
+                      className="w-full h-full object-contain grayscale"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Social App - 右後ろ */}
+            <div 
+              className="absolute right-[10%] top-[25%] w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-1000"
+              style={{ transform: 'rotate(15deg) translateZ(0)' }}
+            >
+              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
+                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
+                  <div className="absolute inset-0 bg-white">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="https://www.figma.com/api/mcp/asset/c9b8e7c1-234e-451f-b798-674ec6617358"
+                      alt="Social App"
+                      className="w-full h-full object-contain grayscale"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Travel App - 右下 */}
+            <div 
+              className="absolute right-[5%] bottom-[15%] w-[180px] md:w-[250px] opacity-[0.06] md:opacity-[0.1] transition-all duration-1000"
+              style={{ transform: 'rotate(-10deg) translateZ(0)' }}
+            >
+              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
+                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
+                  <div className="absolute inset-0 bg-white">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="https://www.figma.com/api/mcp/asset/df6b1f7c-dac9-4959-ba0d-b209abff45c9"
+                      alt="Travel App"
+                      className="w-full h-full object-contain grayscale"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Fitness App - 中央前 */}
+            <div 
+              className="absolute left-[25%] bottom-[20%] w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-1000"
+              style={{ transform: 'rotate(5deg) translateZ(0)', zIndex: 2 }}
+            >
+              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
+                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
+                  <div className="absolute inset-0 bg-white">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="https://www.figma.com/api/mcp/asset/2e720383-e3d1-4f66-8a2d-329b107a21c8"
+                      alt="Fitness App"
+                      className="w-full h-full object-contain grayscale"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Golf App - 中央前（メイン） */}
+            <div 
+              className="absolute left-[35%] top-[35%] w-[240px] md:w-[320px] opacity-[0.1] md:opacity-[0.15] transition-all duration-1000"
+              style={{ transform: 'rotate(-5deg) translateZ(0)', zIndex: 3 }}
+            >
+              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
+                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
+                  <div className="absolute inset-0 bg-white">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="https://www.figma.com/api/mcp/asset/42b0d8ed-a3ed-442f-bf6d-16f75529eca4"
+                      alt="Golf App"
+                      className="w-full h-full object-contain grayscale"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Left content */}
-          <div className="flex-1 max-w-full lg:max-w-[450px] space-y-4 md:space-y-6 text-center lg:text-left">
+          <div className="flex-1 max-w-full lg:max-w-[600px] space-y-6 md:space-y-8 text-center lg:text-left">
             <AnimatedSection animation="fade-up" duration={800}>
-              <h1 
-                data-cms-key="site.hero_title"
-                className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-bold leading-[36px] sm:leading-[46px] md:leading-[54px] lg:leading-[62px] tracking-tight text-[#1a1a1a]"
-              >
-                そのソフト、現場に合わせて
+              <span className="section-bg-text left-0 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">HOME</span>
+              <div className="mb-4">
+                <span className="bg-[#fff100]/20 text-[#fff100] px-3 py-1 rounded-full text-sm font-medium">
+                  AI × 最新手法で最短実現
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                完全オーダーメイドで
                 <br />
-                <span className="animate-text-gradient">&quot;我慢して&quot;</span>
-                使っていませんか？
+                課題を解決する
+                <br />
+                WEB・アプリ制作
               </h1>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={300} duration={800}>
-              <p 
-                data-cms-key="site.hero_subtitle"
-                className="text-base md:text-lg text-[#6b7280] leading-[26px] md:leading-[29px]"
-              >
-                業務にソフトを合わせる時代は終わり。<br className="hidden sm:block" />
-                まずは&quot;触れるデモ&quot;で、最短ルートを見える化します。
+              <p className="text-lg md:text-xl text-white/90 mb-2">
+                ユーザーに使われる、成果につながるプロダクトを
+              </p>
+              <p className="text-base md:text-lg text-white/80">
+                企画から運用まで伴走してお届けします
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={500} duration={800}>
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
                 <Link 
                   href={primaryHref} 
                   prefetch={true} 
-                  data-cms-key="site.cta_primary_text"
-                  className="btn-primary flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg group relative overflow-hidden"
+                  className="inline-flex items-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg transition-all hover:scale-105 shadow-lg"
                 >
-                  <span className="relative z-10" data-cms-key="site.cta_primary_text">{primaryText}</span>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={imgArrowIcon} alt="" className="w-5 md:w-6 h-5 md:h-6 relative z-10 transition-transform group-hover:translate-x-1" />
-                  <div className="absolute inset-0 bg-[#fdc700] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  {primaryText}
                 </Link>
                 <Link 
                   href={secondaryHref} 
                   prefetch={true} 
-                  data-cms-key="site.cta_secondary_text"
-                  className="btn-outline flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:bg-[#1a1a1a] hover:text-white transition-all duration-300"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg transition-all hover:scale-105 backdrop-blur-sm"
                 >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
                   {secondaryText}
                 </Link>
               </div>
             </AnimatedSection>
           </div>
-          {/* Right content - Demo image */}
+          {/* Right content - Stats */}
           <AnimatedSection animation="fade-up" delay={200} duration={1000} className="flex-1 relative w-full max-w-[500px] lg:max-w-none">
-            <div className="absolute inset-0 blur-[64px] bg-gradient-to-br from-[rgba(255,241,0,0.2)] via-[rgba(255,215,0,0.1)] to-transparent animate-morph" />
-            <TiltCard maxTilt={8} className="relative bg-white border border-[#e5e7eb] rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={imgHeroDemo} 
-                alt="アプリ開発デモ画面" 
-                data-cms-key="site.hero_image"
-                className="w-full h-auto" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
-            </TiltCard>
+            <div className="grid grid-cols-3 gap-6 text-white">
+              <div className="text-center">
+                <p className="text-3xl md:text-4xl font-bold">4.7</p>
+                <p className="text-xs md:text-sm">評価</p>
+                <p className="text-xs text-white/60">2,107人</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl md:text-4xl font-bold">1位</p>
+                <p className="text-xs md:text-sm">導入</p>
+                <p className="text-xs text-white/60">実績順位</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl md:text-4xl font-bold">8倍</p>
+                <p className="text-xs md:text-sm">以上</p>
+                <p className="text-xs text-white/60">CV向上率</p>
+              </div>
+            </div>
           </AnimatedSection>
         </div>
       </div>
@@ -246,108 +389,113 @@ function ChallengeSection() {
   );
 }
 
-// Solution Section Component
+// Solution Section Component - 新しい内容
 function SolutionSection() {
   return (
-    <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden">
-      {/* Parallax Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-fixed opacity-5"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80')`,
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#fffef8] to-white" />
-      
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-bl from-[#fff100]/10 to-transparent rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-48 md:w-80 h-48 md:h-80 bg-gradient-to-tr from-[#fdc700]/10 to-transparent rounded-full blur-3xl" />
-      
+    <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden bg-white">
       <div className="relative max-w-[1100px] mx-auto">
-        <AnimatedSection animation="zoom-in" className="relative text-center">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">SOLUTION</span>
+        <AnimatedSection animation="zoom-in" className="relative text-center mb-12">
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">APPROACH</span>
           <div className="relative space-y-4 md:space-y-6">
             <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
-            <h2 
-              data-cms-key="site.solution_title"
-              className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2"
-            >
-              その業務、システム化して
+            <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
+              Maxerasは
               <br />
-              <span className="animate-text-gradient">&quot;人を増やさず&quot;</span>
-              回すのはどうですか？
+              <span className="animate-text-gradient">オーダーメイド × 伴走</span>
+              <br />
+              で成果から逆算します
             </h2>
-            <AnimatedSection animation="fade-up" delay={500}>
-              <p 
-                data-cms-key="site.solution_subtitle"
-                className="text-base md:text-lg text-[#6b7280]"
-              >
-                日々のムダを減らして、現場の処理速度を上げる。
-              </p>
-            </AnimatedSection>
           </div>
         </AnimatedSection>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              icon: (
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              ),
+              title: "完全オーダーメイド",
+              description: "テンプレートではなく、お客様のビジネス課題に合わせた完全カスタム設計",
+            },
+            {
+              icon: (
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              ),
+              title: "企画から運用まで伴走",
+              description: "リリースして終わりではなく、運用・改善まで継続的にサポート",
+            },
+            {
+              icon: (
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              ),
+              title: "成果から逆算",
+              description: "KPIを明確にし、ビジネス成果につながる機能を優先して開発",
+            },
+          ].map((item, i) => (
+            <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-full flex items-center justify-center text-[#1a1a1a] mx-auto mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{item.title}</h3>
+                <p className="text-[#6b7280]">{item.description}</p>
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-// Services Section Component
+// Services Section Component - 新しい内容
 function ServicesSection() {
   const services = [
     {
-      icon: imgWebIcon,
-      title: "HP制作",
-      description: "普通のHPも、3D/アニメーションみたいな『尖った表現』も対応。",
-      tags: ["3D", "アニメ", "CMS"]
+      title: "完全オーダーメイドアプリ開発",
+      description: "AI × 最新手法で最短実現。企画から運用まで伴走",
+      link: "/lp/full-order-app-development"
     },
     {
-      icon: imgAppIcon,
-      title: "Webアプリ開発",
-      description: "新規事業のSaaSも、社内ツールも。まずはMVPから最短で形に。",
-      tags: ["MVP", "DB", "認証"]
+      title: "業務DX設計・開発",
+      description: "業務の「型」を見つけて、システム化の道筋を",
+      link: "/lp/business-dx-design"
     },
     {
-      icon: imgDxIcon,
-      title: "業務DXアプリ",
-      description: "散らばった業務を一元管理。集計・分析まで『すぐ見える化』。",
-      tags: ["一元管理", "分析", "ワークフロー"]
+      title: "PoC/MVP開発",
+      description: "最小機能でスタート。使いながら改善する",
+      link: "/services"
     },
     {
-      icon: imgCloudIcon,
-      title: "クラウド連携",
-      description: "SaaS同士をAPIで接続して、二重入力をゼロに。",
-      tags: ["API", "自動同期", "運用設計"]
+      title: "AI機能組込み・自動化",
+      description: "要約/分類/検索/生成/動画分析。AIで業務を自動化",
+      link: "/services"
     },
     {
-      icon: imgMobileIcon,
-      title: "iOS/Androidアプリ",
-      description: "あなたのアイデアをアプリ化。Web連携・DB連携もまとめて対応。",
-      tags: ["Swift", "Flutter", "ストア申請"]
+      title: "ホームページ制作",
+      description: "普通のHPも、3D/アニメーションみたいな『尖った表現』も対応",
+      link: "/services"
     },
     {
-      icon: "✨",
-      title: "AI活用・自動化",
-      description: "資料・図面・問い合わせ対応をAIで自動化。検索も爆速に。",
-      tags: ["OCR", "AI検索", "自動化"],
-      isEmoji: true
+      title: "プロダクト開発",
+      description: "図面コネクト、インタラクティブWeb3Dなど",
+      link: "/services"
     }
   ];
 
   return (
-    <section className="bg-white py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
-      {/* Animated background blobs */}
-      <div className="absolute -top-40 -left-40 w-60 md:w-80 h-60 md:h-80 bg-[#fff100]/5 rounded-full blur-3xl animate-morph" />
-      <div className="absolute -bottom-40 -right-40 w-72 md:w-96 h-72 md:h-96 bg-[#fdc700]/5 rounded-full blur-3xl animate-morph" style={{ animationDelay: "-3s" }} />
-      
+    <section className="bg-[#fafafa] py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
       <div className="max-w-[1100px] mx-auto relative">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">SERVICES</span>
-          <h2 
-            data-cms-key="site.services_title"
-            className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight"
-          >
+          <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
             対応できる内容
           </h2>
         </AnimatedSection>
@@ -356,28 +504,23 @@ function ServicesSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {services.map((service, i) => (
             <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-              <TiltCard maxTilt={6} className="h-full">
-                <div className="service-card bg-white rounded-[12px] md:rounded-[14px] shadow-md p-5 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
-                  
-                  <div className="bg-[#fffef0] rounded-lg w-10 md:w-12 h-10 md:h-12 flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    {"isEmoji" in service && service.isEmoji ? (
-                      <span className="text-xl md:text-2xl">{service.icon}</span>
-                    ) : (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img src={service.icon as string} alt="" className="w-5 md:w-6 h-5 md:h-6" />
-                    )}
+              <Link href={service.link}>
+                <TiltCard maxTilt={6} className="h-full">
+                  <div className="service-card bg-white rounded-[12px] md:rounded-[14px] shadow-md p-5 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 border-[#e5e7eb] hover:border-[#fff100]">
+                    {/* Shimmer effect */}
+                    <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
+                    
+                    <h3 className="text-lg md:text-xl text-[#1a1a1a] mb-2 md:mb-3 group-hover:text-[#fdc700] transition-colors font-bold">{service.title}</h3>
+                    <p className="text-xs md:text-sm text-[#6b7280] mb-4">{service.description}</p>
+                    <div className="flex items-center text-[#fff100] text-xs md:text-sm group-hover:translate-x-2 transition-transform">
+                      詳しく見る
+                      <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
                   </div>
-                  <h3 className="text-lg md:text-xl text-[#1a1a1a] mb-1 md:mb-2 group-hover:text-[#fdc700] transition-colors font-bold">{service.title}</h3>
-                  <p className="text-xs md:text-sm text-[#6b7280] mb-3 md:mb-4 line-clamp-2">{service.description}</p>
-                  <div className="flex gap-1.5 md:gap-2 flex-wrap">
-                    {service.tags.map((tag, j) => (
-                      <span key={j} className="tag text-xs md:text-sm px-2 md:px-3 py-0.5 md:py-1 group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300" style={{ transitionDelay: `${j * 50}ms` }}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              </TiltCard>
+                </TiltCard>
+              </Link>
             </AnimatedSection>
           ))}
         </div>
@@ -388,26 +531,7 @@ function ServicesSection() {
 
 // Works Section Component
 function WorksSection() {
-  const works = [
-    {
-      image: imgWorks1,
-      category: "製造業",
-      title: "製造業向け図面・案件管理DXシステム",
-      description: "Excelでの図面管理や案件情報の手作業転記により、情報の検索に時間がかかり、更新漏れやバージョン違いが頻発していました。"
-    },
-    {
-      image: imgWorks2,
-      category: "医療・ヘルスケア",
-      title: "医療機関向け予約・問診システム",
-      description: "電話予約の対応に多くの時間を取られ、受付業務が圧迫。問診票の記入漏れも課題でした。"
-    },
-    {
-      image: imgWorks3,
-      category: "建設・不動産",
-      title: "建設業向け顧客・進捗管理システム",
-      description: "複数の現場案件を紙とExcelで管理しており、進捗状況の共有が遅れ、顧客への報告が手間でした。"
-    }
-  ];
+  const works = homeCasesData;
 
   return (
     <section id="works" className="bg-[#fafafa] py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
@@ -471,28 +595,73 @@ function WorksSection() {
         {/* Works grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
           {works.map((work, i) => (
-            <AnimatedSection key={i} animation="fade-up" delay={i * 150}>
+            <AnimatedSection key={work.id} animation="fade-up" delay={i * 150}>
               <TiltCard maxTilt={5} className="h-full">
-                <a href="#" className="works-card bg-white border border-[#e5e7eb] rounded-lg md:rounded-xl overflow-hidden block h-full group">
-                  <div className="aspect-video overflow-hidden relative">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                      <span className="text-white text-sm">詳細を見る →</span>
-                    </div>
-                  </div>
-                  <div className="p-4 md:p-6">
-                    <p className="text-xs md:text-sm text-[#fff100] mb-1 md:mb-2 font-medium">{work.category}</p>
-                    <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-1 md:mb-2 group-hover:text-[#fdc700] transition-colors line-clamp-2">{work.title}</h3>
-                    <p className="text-xs md:text-sm text-[#666] mb-3 md:mb-4 line-clamp-2">{work.description}</p>
-                    <div className="flex items-center text-[#fff100] text-xs md:text-sm group-hover:translate-x-2 transition-transform">
-                      詳細を見る
+                {work.hasLP && work.lpHref ? (
+                  <Link 
+                    href={work.lpHref} 
+                    className="works-card bg-white border border-[#e5e7eb] rounded-lg md:rounded-xl overflow-hidden block h-full group cursor-pointer"
+                  >
+                    <div className="aspect-video overflow-hidden relative">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={imgArrowRight} alt="" className="w-3 md:w-4 h-3 md:h-4 ml-1" />
+                      <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                        <span className="text-white text-sm">LPを見る →</span>
+                      </div>
+                    </div>
+                    <div className="p-4 md:p-6">
+                      <p className="text-xs md:text-sm text-[#fff100] mb-1 md:mb-2 font-medium">{work.category}</p>
+                      <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-1 md:mb-2 group-hover:text-[#fdc700] transition-colors line-clamp-2">{work.title}</h3>
+                      <p className="text-xs md:text-sm text-[#666] mb-2 line-clamp-2">{work.description}</p>
+                      {work.outcome && (
+                        <p className="text-xs text-[#fff100] mb-3 font-medium line-clamp-1">{work.outcome}</p>
+                      )}
+                      {work.serviceTags && work.serviceTags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {work.serviceTags.slice(0, 3).map((tag, j) => (
+                            <span key={j} className="text-xs px-2 py-0.5 bg-[#fafafa] text-[#6b7280] rounded-full">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <div className="flex items-center text-[#fff100] text-xs md:text-sm group-hover:translate-x-2 transition-transform">
+                        LPを見る
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={imgArrowRight} alt="" className="w-3 md:w-4 h-3 md:h-4 ml-1" />
+                      </div>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="works-card bg-white border border-[#e5e7eb] rounded-lg md:rounded-xl overflow-hidden block h-full group">
+                    <div className="aspect-video overflow-hidden relative">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                    <div className="p-4 md:p-6">
+                      <p className="text-xs md:text-sm text-[#fff100] mb-1 md:mb-2 font-medium">{work.category}</p>
+                      <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-1 md:mb-2 group-hover:text-[#fdc700] transition-colors line-clamp-2">{work.title}</h3>
+                      <p className="text-xs md:text-sm text-[#666] mb-2 line-clamp-2">{work.description}</p>
+                      {work.outcome && (
+                        <p className="text-xs text-[#fff100] mb-3 font-medium line-clamp-1">{work.outcome}</p>
+                      )}
+                      {work.serviceTags && work.serviceTags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {work.serviceTags.slice(0, 3).map((tag, j) => (
+                            <span key={j} className="text-xs px-2 py-0.5 bg-[#fafafa] text-[#6b7280] rounded-full">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <div className="flex items-center text-[#6b7280] text-xs md:text-sm">
+                        準備中
+                      </div>
                     </div>
                   </div>
-                </a>
+                )}
               </TiltCard>
             </AnimatedSection>
           ))}
@@ -589,14 +758,14 @@ function FAQSection() {
   );
 }
 
-// CTA Section Component
+// CTA Section Component - 新しい内容
 function CTASection({ settings }: { settings: { cta_section_title?: string; cta_section_subtitle?: string; cta_primary_text?: string; cta_primary_href?: string; cta_secondary_text?: string; cta_secondary_href?: string } | null }) {
   const primaryHref = settings?.cta_primary_href || '/contact';
-  const secondaryHref = settings?.cta_secondary_href || '/works';
+  const secondaryHref = settings?.cta_secondary_href || '/cases';
   const primaryText = settings?.cta_primary_text || '無料相談する';
-  const secondaryText = settings?.cta_secondary_text || '実績を見る';
-  const sectionTitle = settings?.cta_section_title || '既製品に合わせるのをやめて、\n"自社に最適化"しませんか？';
-  const sectionSubtitle = settings?.cta_section_subtitle || 'まずは無料相談で、課題整理→触れるデモ提示まで一緒に進めます。';
+  const secondaryText = settings?.cta_secondary_text || '事例を見る';
+  const sectionTitle = settings?.cta_section_title || '今、動かないことが\n最大の機会損失です';
+  const sectionSubtitle = settings?.cta_section_subtitle || 'デジタル市場は日々変化し、競合は着実に前進しています。「いつか作ろう」と先延ばしにしている間に、ユーザーは他社のサービスに流れていきます。\n\n今すぐ始めれば、3ヶ月後には成果が見え始めます。\n\nまずは無料相談で、あなたのビジネス課題を聞かせてください。\n具体的な解決策と概算お見積りをご提案します。';
 
   return (
     <section className="relative min-h-[400px] md:min-h-[600px] overflow-hidden">
@@ -745,10 +914,31 @@ export default function Home() {
         
         <main className="pt-14 md:pt-16">
           <HeroSection settings={settings} />
-          <ChallengeSection />
           <SolutionSection />
           <ServicesSection />
-          <InteractiveDemo />
+          <ChallengeSection />
+          {/* <InteractiveDemo /> */}
+          {/* サロン予約アプリのデモ */}
+          <section className="bg-white py-12 md:py-32 px-4 md:px-8 relative overflow-hidden">
+            <div className="max-w-[1200px] mx-auto relative">
+              <div className="text-center mb-8 md:mb-12">
+                <h2 className="text-2xl md:text-4xl font-bold text-[#0a0a0a] mb-4">
+                  触れるデモで合意
+                </h2>
+                <p className="text-sm md:text-base text-[#6a7282] max-w-2xl mx-auto">
+                  実際に動くデモアプリで、完成イメージを共有します。<br className="hidden sm:block" />
+                  デザインと機能の両方を体験いただけます。
+                </p>
+              </div>
+              <div className="relative bg-gradient-to-b from-[#fafafa] via-white to-[#fffef0] rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 shadow-xl md:shadow-2xl hover:shadow-3xl transition-shadow duration-500">
+                <SalonReservationAppMockup />
+                <p className="text-center text-xs md:text-sm text-[#6a7282] mt-6 md:mt-8 px-2">
+                  ※上記はインタラクティブなデモUIです。タップ/クリックして動作をお試しください。<br className="hidden sm:block" />
+                  実案件では要件に合わせて最適化します
+                </p>
+              </div>
+            </div>
+          </section>
           <WorksSection />
           <StorySlider />
           <FAQSection />

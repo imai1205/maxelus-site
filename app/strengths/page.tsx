@@ -132,8 +132,18 @@ const stats = [
 ];
 
 export default function StrengthsPage() {
-  const [loading, setLoading] = useState(true);
-  const [strengths, setStrengths] = useState<Strength[]>([]);
+  // フォールバックデータを即座に表示（初期状態）
+  const [loading, setLoading] = useState(false);
+  const [strengths, setStrengths] = useState<Strength[]>(
+    fallbackStrengths.map((s, i) => ({
+      id: s.id,
+      title: s.title,
+      description: s.description,
+      features: s.features,
+      icon: typeof s.icon === 'string' ? s.icon : 'sparkles',
+      order_number: i + 1,
+    }))
+  );
   const [pageSettings, setPageSettings] = useState<{ 
     title: string; 
     subtitle: string;
@@ -141,21 +151,34 @@ export default function StrengthsPage() {
     cta_primary_href?: string;
     cta_secondary_text?: string;
     cta_secondary_href?: string;
-  } | null>(null);
-  const [stats, setStats] = useState<Array<{ label: string; value: number; suffix: string }>>([]);
+  } | null>({
+    title: 'マクセラスが選ばれる理由',
+    subtitle: '"作るだけ"では終わらない。現場で使える・更新できる・拡張できるシステムを、最短で形にします。',
+    cta_primary_text: '無料相談する',
+    cta_primary_href: '/contact',
+    cta_secondary_text: 'サービス一覧を見る',
+    cta_secondary_href: '/services',
+  });
+  const [stats, setStats] = useState<Array<{ label: string; value: number; suffix: string }>>([
+    { label: "導入実績", value: 50, suffix: "社以上" },
+    { label: "継続率", value: 95, suffix: "%" },
+    { label: "平均開発期間", value: 2, suffix: "ヶ月〜" },
+    { label: "業界経験", value: 10, suffix: "年以上" }
+  ]);
 
+  // データ取得を非同期で実行（バックグラウンドで更新）
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [strengthsRes, siteRes] = await Promise.all([
-          fetch('/api/cms/strengths'),
-          fetch('/api/cms/site')
+          fetch('/api/cms/strengths', { cache: 'no-store' }),
+          fetch('/api/cms/site', { cache: 'no-store' })
         ]);
 
         const strengthsData = await strengthsRes.json();
         const siteSettings = await siteRes.json();
 
-        if (strengthsData.ok) {
+        if (strengthsData.ok && strengthsData.data && strengthsData.data.length > 0) {
           setStrengths(strengthsData.data as Strength[]);
         }
         if (siteSettings.ok) {
@@ -171,29 +194,20 @@ export default function StrengthsPage() {
             const parsedStats = typeof siteSettings.data.strengths_stats === 'string' 
               ? JSON.parse(siteSettings.data.strengths_stats)
               : siteSettings.data.strengths_stats;
-            setStats(parsedStats);
-          } else {
-            setStats([]);
+            if (parsedStats && parsedStats.length > 0) {
+              setStats(parsedStats);
+            }
           }
         }
       } catch (error) {
         console.error('Failed to fetch data:', error);
-        setStats([]);
-      } finally {
-        setLoading(false);
+        // エラー時もフォールバックデータを維持
       }
     };
 
+    // 非同期でデータ取得（ページ表示をブロックしない）
     fetchData();
   }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white font-sans flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-[#fff100] border-t-transparent rounded-full" />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -213,14 +227,15 @@ export default function StrengthsPage() {
           <div className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
           
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
-            <AnimatedSection animation="fade-up">
-              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider">
+            <AnimatedSection animation="fade-up" className="relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">STRENGTHS</span>
+              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                 STRENGTHS
               </p>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight px-2 relative">
                 {pageSettings?.title || 'マクセラスが選ばれる理由'}
               </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-2 relative">
                 {pageSettings?.subtitle || '"作るだけ"では終わらない。現場で使える・更新できる・拡張できるシステムを、最短で形にします。'}
               </p>
             </AnimatedSection>
@@ -230,25 +245,19 @@ export default function StrengthsPage() {
         {/* Stats Section */}
         <section className="py-12 md:py-16 bg-[#fafafa] border-b border-[#e5e7eb]">
           <div className="max-w-6xl mx-auto px-4 md:px-8">
-            {loading ? (
-              <div className="text-center py-8">
-                <div className="animate-spin w-8 h-8 border-4 border-[#fff100] border-t-transparent rounded-full mx-auto" />
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-                {stats.map((stat, index) => (
-                  <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
-                    <div className="text-center">
-                      <div className="text-3xl md:text-5xl font-bold text-[#1a1a1a] mb-2">
-                        <AnimatedCounter end={stat.value} duration={2000} />
-                        <span className="text-lg md:text-2xl text-[#fdc700]">{stat.suffix}</span>
-                      </div>
-                      <p className="text-sm md:text-base text-[#6b7280]">{stat.label}</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+              {stats.map((stat, index) => (
+                <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+                  <div className="text-center">
+                    <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-1 md:mb-2">
+                      <AnimatedCounter end={stat.value} duration={2000} />
+                      <span className="text-sm sm:text-lg md:text-xl lg:text-2xl text-[#fdc700]">{stat.suffix}</span>
                     </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            )}
+                    <p className="text-xs sm:text-sm md:text-base text-[#6b7280] break-words">{stat.label}</p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -256,78 +265,65 @@ export default function StrengthsPage() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] text-center mb-4">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] text-center mb-3 md:mb-4 px-2">
                 5つの強み
               </h2>
-              <p className="text-[#6b7280] text-center mb-12 md:mb-16 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-[#6b7280] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2">
                 抽象的な「強み」ではなく、具体的な特徴でお伝えします。
               </p>
             </AnimatedSection>
 
-            {loading ? (
-              <div className="text-center py-16">
-                <div className="animate-spin w-10 h-10 border-4 border-[#fff100] border-t-transparent rounded-full mx-auto" />
-                <p className="text-gray-500 mt-4">読み込み中...</p>
-              </div>
-            ) : strengths.length === 0 ? (
-              <div className="text-center py-16 text-gray-500">
-                <p>強みがありません</p>
-              </div>
-            ) : (
-              <div className="space-y-8 md:space-y-12">
-                {strengths.map((strength, index) => (
-                  <AnimatedSection key={strength.id} animation="fade-up" delay={index * 100}>
-                    <TiltCard maxTilt={3} className="w-full">
-                      <div className={`bg-white rounded-2xl md:rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[#e5e7eb]/50 ${
-                        index % 2 === 0 ? '' : 'md:flex-row-reverse'
-                      }`}>
-                        <div className="p-6 md:p-10">
-                          <div className="flex items-start gap-4 md:gap-6">
-                            {/* Icon */}
-                            <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-2xl flex items-center justify-center text-[#1a1a1a] flex-shrink-0 shadow-lg">
-                              {iconMap[strength.icon] || iconMap.sparkles}
-                            </div>
+            <div className="space-y-6 md:space-y-12">
+              {strengths.map((strength, index) => (
+                <AnimatedSection key={strength.id} animation="fade-up" delay={Math.min(index * 50, 300)}>
+                  <TiltCard maxTilt={3} className="w-full">
+                    <div className="bg-white rounded-2xl md:rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[#e5e7eb]/50">
+                      <div className="p-6 md:p-10">
+                        <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6">
+                          {/* Icon */}
+                          <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-xl md:rounded-2xl flex items-center justify-center text-[#1a1a1a] flex-shrink-0 shadow-lg">
+                            {iconMap[strength.icon] || iconMap.sparkles}
+                          </div>
 
-                            <div className="flex-1">
-                              {/* Number */}
-                              <span className="text-xs md:text-sm text-[#fdc700] font-bold tracking-wider mb-2 block">
-                                0{index + 1}
-                              </span>
-                              
-                              {/* Title */}
-                              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#1a1a1a] mb-4">
-                                {strength.title}
-                              </h3>
-                              
-                              {/* Description */}
-                              <p className="text-base md:text-lg text-[#6b7280] mb-6 leading-relaxed">
-                                {strength.description}
-                              </p>
-                              
-                              {/* Features */}
-                              {strength.features && strength.features.length > 0 && (
-                                <ul className="space-y-3">
-                                  {strength.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-3">
-                                      <div className="w-5 h-5 bg-[#fff100] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                        <svg className="w-3 h-3 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                      </div>
-                                      <span className="text-sm md:text-base text-[#1a1a1a]">{feature}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              )}
-                            </div>
+                          <div className="flex-1 min-w-0">
+                            {/* Number */}
+                            <span className="text-xs md:text-sm text-[#fdc700] font-bold tracking-wider mb-2 block">
+                              0{index + 1}
+                            </span>
+                            
+                            {/* Title */}
+                            <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#1a1a1a] mb-3 md:mb-4 leading-tight">
+                              {strength.title}
+                            </h3>
+                            
+                            {/* Description */}
+                            <p className="text-sm sm:text-base md:text-lg text-[#6b7280] mb-4 md:mb-6 leading-relaxed">
+                              {strength.description}
+                            </p>
+                            
+                            {/* Features */}
+                            {strength.features && strength.features.length > 0 && (
+                              <ul className="space-y-2 md:space-y-3">
+                                {strength.features.map((feature, i) => (
+                                  <li key={i} className="flex items-start gap-2 md:gap-3">
+                                    <div className="w-4 h-4 md:w-5 md:h-5 bg-[#fff100] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 md:mt-1">
+                                      <svg className="w-2.5 h-2.5 md:w-3 md:h-3 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                      </svg>
+                                    </div>
+                                    <span className="text-xs sm:text-sm md:text-base text-[#1a1a1a] leading-relaxed break-words">{feature}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
                         </div>
                       </div>
-                    </TiltCard>
-                  </AnimatedSection>
-                ))}
-              </div>
-            )}
+                    </div>
+                  </TiltCard>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -335,15 +331,15 @@ export default function StrengthsPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] text-center mb-4">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] text-center mb-3 md:mb-4 px-2">
                 実際の画面イメージ
               </h2>
-              <p className="text-[#6b7280] text-center mb-12 md:mb-16 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-[#6b7280] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2">
                 文章だけでは伝わらない「体験」を、スクリーンショットでご覧ください。
               </p>
             </AnimatedSection>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {[
                 { 
                   title: "iPhoneデモ", 
@@ -364,7 +360,7 @@ export default function StrengthsPage() {
                   href: "/cases"
                 }
               ].map((item, index) => (
-                <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+                <AnimatedSection key={index} animation="fade-up" delay={Math.min(index * 50, 200)}>
                   <TiltCard maxTilt={5} className="h-full">
                     <Link href={item.href} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full block group">
                       <div className="aspect-video bg-[#e5e7eb] overflow-hidden">
@@ -373,11 +369,13 @@ export default function StrengthsPage() {
                           src={item.image} 
                           alt={item.title}
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
-                      <div className="p-6">
-                        <h3 className="text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">{item.title}</h3>
-                        <p className="text-sm text-[#6b7280]">{item.description}</p>
+                      <div className="p-4 sm:p-6">
+                        <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">{item.title}</h3>
+                        <p className="text-xs sm:text-sm text-[#6b7280]">{item.description}</p>
                         <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1">
                           詳細を見る
                           <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -402,11 +400,11 @@ export default function StrengthsPage() {
           
           <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up">
-              <h2 className="text-2xl md:text-4xl font-bold text-white mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 px-2">
                 まずは無料相談から
               </h2>
-              <p className="text-base md:text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-                「こんなこと実現できる？」という段階からOK。<br />
+              <p className="text-sm sm:text-base md:text-lg text-white/70 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
+                「こんなこと実現できる？」という段階からOK。<br className="hidden sm:block" />
                 課題を整理するところから、一緒にスタートしましょう。
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">

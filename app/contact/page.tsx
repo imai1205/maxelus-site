@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import { AnimatedSection } from "../components/AnimationProvider";
 
 // Contact Form Component
 function ContactForm() {
@@ -249,26 +250,39 @@ export default function ContactPage() {
     <div className="min-h-screen bg-[#fafafa] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-[#1a1a1a] to-[#2d2d2d] py-16 md:py-24 px-4 md:px-8 overflow-hidden">
-          {/* Background Elements */}
+        <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
+          {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-64 h-64 bg-[#fff100] rounded-full blur-[100px]" />
-            <div className="absolute bottom-10 right-10 w-80 h-80 bg-[#fdc700] rounded-full blur-[120px]" />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                backgroundSize: "40px 40px",
+              }}
+            />
           </div>
-          
-          <div className="max-w-[1200px] mx-auto relative">
-            <div className="text-center">
-              <span className="text-[50px] md:text-[100px] font-bold text-white/5 absolute left-1/2 -translate-x-1/2 -top-2 md:-top-6 pointer-events-none select-none whitespace-nowrap">
+
+          {/* Gradient Orbs */}
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" />
+          <div
+            className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse"
+            style={{ animationDelay: "1s" }}
+          />
+
+          <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
+            <AnimatedSection animation="fade-up" className="relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">CONTACT</span>
+              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                 CONTACT
-              </span>
-              <h1 className="relative text-3xl md:text-5xl font-bold text-white mb-4">
+              </p>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
                 無料相談・お問い合わせ
               </h1>
-              <p className="relative text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
                 あなたの課題をお聞かせください。<br className="hidden md:block" />
                 最適なソリューションをご提案します。
               </p>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 

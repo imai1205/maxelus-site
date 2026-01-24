@@ -182,14 +182,6 @@ export default function Header() {
             会社情報
           </Link>
           <Link 
-            href="/about" 
-            prefetch={true}
-            className={`text-base py-2 transition-colors ${isActive("/about") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            会社情報
-          </Link>
-          <Link 
             href="/contact" 
             prefetch={true}
             className={`text-base py-2 transition-colors ${isActive("/contact") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}

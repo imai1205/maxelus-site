@@ -234,6 +234,86 @@ export const servicesData: Service[] = [
 
   // ========== アプリ開発・DX支援 ==========
   {
+    id: 'full-order-app-development',
+    category: 'app-dx',
+    title: '完全オーダーメイドアプリ開発',
+    catch: 'AI × 最新手法で最短実現。完全オーダーメイドで課題を解決するWEB・アプリ制作',
+    tags: ['完全オーダー', 'アプリ開発', 'Web開発', 'UI/UX', '伴走型'],
+    metric: {
+      label: '開発期間',
+      value: '30〜50%',
+      suffix: '短縮',
+    },
+    shortDesc: 'ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。完全オーダーメイドで、お客様のビジネス課題に合わせた最適なソリューションを提供します。',
+    details: {
+      capabilities: [
+        '完全オーダーメイドのアプリ・Web開発',
+        'UXリサーチに基づく設計',
+        'AI活用による開発スピード向上',
+        'セキュリティ・パフォーマンス最適化',
+        '運用・改善まで見据えた設計',
+        '透明性の高いコミュニケーション',
+      ],
+      targetAudience: [
+        'アイデアはあるが要件が固まらない',
+        '今のアプリが評価が低すぎる',
+        '開発コストが高く本当に頼んでいいか不安',
+        '完全オーダーメイドのアプリ・Webサービスを作りたい',
+        '企画から運用まで一貫してサポートしてほしい',
+      ],
+      process: [
+        {
+          step: 1,
+          title: 'ヒアリング',
+          description: 'ビジネス課題・目標をじっくりお伺いし、最適な解決策を提案します。',
+        },
+        {
+          step: 2,
+          title: 'ユーザー調査',
+          description: 'ターゲットユーザーのニーズを分析し、ペルソナ・カスタマージャーニーを設計',
+        },
+        {
+          step: 3,
+          title: '要件定義・設計',
+          description: '機能要件・画面設計を明確化し、技術スタック・アーキテクチャを決定',
+        },
+        {
+          step: 4,
+          title: 'UI/UXデザイン',
+          description: 'ワイヤーフレーム→デザインモックアップ→プロトタイプで検証',
+        },
+        {
+          step: 5,
+          title: '開発・テスト',
+          description: 'アジャイル開発で週次デモ。自動テスト・セキュリティ診断を実施',
+        },
+        {
+          step: 6,
+          title: 'リリース・運用改善',
+          description: 'リリース後もデータ分析し、継続的な改善提案とサポートを実施',
+        },
+      ],
+      pricing: 'プロジェクト規模により異なりますが、一般的なスマホアプリで2〜4ヶ月、Webサービスで1.5〜3ヶ月（AI活用により従来より30〜50%の期間短縮を実現）',
+      faq: [
+        {
+          question: '完全オーダーメイドとは具体的にどういうことですか？',
+          answer: 'テンプレートではなく、お客様のビジネス課題に合わせた完全カスタム設計を行います。企画から運用まで一貫してサポートし、成果から逆算した開発を実施します。',
+        },
+        {
+          question: '開発期間はどの程度かかりますか？',
+          answer: 'プロジェクト規模により異なりますが、一般的なスマホアプリで2〜4ヶ月、Webサービスで1.5〜3ヶ月です。AI活用により従来より30〜50%の期間短縮を実現しています。',
+        },
+        {
+          question: '既存システムとの連携は可能ですか？',
+          answer: 'はい、可能です。既存のSaaSやシステムとのAPI連携も対応しています。',
+        },
+      ],
+    },
+    ctaType: 'lp',
+    lpHref: '/lp/full-order-app-development',
+    priority: 0,
+  },
+  {
     id: 'business-dx-design',
     category: 'app-dx',
     title: '業務DX設計',
@@ -283,7 +363,8 @@ export const servicesData: Service[] = [
         },
       ],
     },
-    ctaType: 'inline',
+    ctaType: 'lp',
+    lpHref: '/lp/business-dx-design',
     priority: 1,
   },
   {
@@ -503,6 +584,65 @@ export const servicesData: Service[] = [
     },
     ctaType: 'inline',
     priority: 5,
+  },
+  {
+    id: 'ai-coding-education',
+    category: 'app-dx',
+    title: 'AIコーディング教育',
+    catch: '知識0から始める。かんたんすぎる！プログラミング×AI',
+    tags: ['AI', 'プログラミング', '教育', 'GAS', 'Python'],
+    metric: {
+      label: '学習時間',
+      value: '大幅',
+      suffix: '短縮',
+    },
+    shortDesc: 'AIとの対話のみで、欲しいツールをサクサク作れる時代へ。プログラミング未経験でも、AIを活用した開発スキルを習得できます。',
+    details: {
+      capabilities: [
+        'AIコーディング基礎（プロンプトエンジニアリング）',
+        '実践的AI開発ワークフロー',
+        '業務効率化ツールの自作',
+        'GAS/Pythonでの実践演習',
+        '最新AIツールの活用方法',
+      ],
+      targetAudience: [
+        'プログラミング未経験だが業務効率化したい',
+        'AIを活用した開発スキルを身につけたい',
+        '繰り返しの無駄な業務に時間を奪われている',
+        'もっと仕事を効率化してクリエイティブな業務に時間を使いたい',
+      ],
+      process: [
+        {
+          step: 1,
+          title: '無料相談・カウンセリング',
+          description: 'あなたの学習目標や現在のスキルレベルをヒアリングし、最適な学習プランを提案します。',
+        },
+        {
+          step: 2,
+          title: 'カリキュラム開始',
+          description: '個別指導と実践演習を通じて、AIコーディングスキルを段階的に習得します。',
+        },
+        {
+          step: 3,
+          title: 'プロジェクト実践',
+          description: '実際の開発プロジェクトを想定した演習で、実践力を養います。',
+        },
+      ],
+      pricing: '無料講座あり（LINE友だち追加で視聴可能）',
+      faq: [
+        {
+          question: 'プログラミング未経験でも受講できますか？',
+          answer: 'はい、可能です。知識0から始められるカリキュラムとなっており、基礎から丁寧に指導しますのでご安心ください。',
+        },
+        {
+          question: 'どのようなAIツールを使用しますか？',
+          answer: '主にChatGPTやGitHub Copilotなどの最新AIツールを使用します。AIとの対話のみでツールを作成できる方法を学びます。',
+        },
+      ],
+    },
+    ctaType: 'lp',
+    lpHref: '/lp/ai-coding-education',
+    priority: 1,
   },
   {
     id: 'cloud-operation',

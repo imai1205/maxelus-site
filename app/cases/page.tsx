@@ -36,6 +36,8 @@ function IndustryCard({
         src={industry.heroImage}
         alt={industry.label}
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        loading="lazy"
+        decoding="async"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
       <div className="absolute inset-0 flex flex-col justify-end p-6">
@@ -336,15 +338,18 @@ export default function CasesPage() {
           />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
-            <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider">
-              CASES
-            </p>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              事例紹介
-            </h1>
-            <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-              製造業、医療、建設など、幅広い業種で実績があります
-            </p>
+            <AnimatedSection animation="fade-up" className="relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">CASES</span>
+              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
+                CASES
+              </p>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
+                事例紹介
+              </h1>
+              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
+                製造業、医療、建設など、幅広い業種で実績があります
+              </p>
+            </AnimatedSection>
           </div>
         </section>
 
