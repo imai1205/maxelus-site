@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 // iPhone Demo Component
-function IPhoneDemo() {
+export function IPhoneDemo() {
   const [activeTab, setActiveTab] = useState<"home" | "projects" | "chat" | "settings">("home");
   const [notifications, setNotifications] = useState({
     messages: 3,

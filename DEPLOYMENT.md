@@ -88,6 +88,9 @@ rm -rf .next
 npm run dev
 ```
 
+npm run dev -- -p 3001
+
+
 ### 本番ビルドのキャッシュクリア
 
 ```bash

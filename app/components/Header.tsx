@@ -13,30 +13,13 @@ export default function Header() {
 
   const isActive = (path: string) => pathname === path;
 
-  // #region agent log
-  useEffect(() => {
-    const header = document.querySelector('header');
-    if (header) {
-      const computedStyle = window.getComputedStyle(header);
-      const parentStyle = header.parentElement ? window.getComputedStyle(header.parentElement) : null;
-      fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Header.tsx:mount',message:'Header computed styles',data:{position:computedStyle.position,top:computedStyle.top,zIndex:computedStyle.zIndex,transform:computedStyle.transform,parentTransform:parentStyle?.transform,parentPosition:parentStyle?.position,parentClass:header.parentElement?.className},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A,B,C'})}).catch(()=>{});
-    }
-  }, []);
-  // #endregion
-
   // スクロール検知でヘッダーのスタイルを変更
   useEffect(() => {
     const handleScroll = () => {
-      // #region agent log
-      fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Header.tsx:handleScroll',message:'Scroll event fired',data:{scrollY:window.scrollY,isScrolled:window.scrollY>10},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
-      // #endregion
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // 初期状態をチェック
-    // #region agent log
-    fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Header.tsx:useEffect',message:'Scroll listener attached',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
-    // #endregion
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -91,15 +74,27 @@ export default function Header() {
             }`} />
           </Link>
           <Link 
-            href="/works" 
+            href="/cases" 
             prefetch={true}
             className={`text-sm nav-link relative group transition-all duration-200 ${
-              isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
+              isActive("/cases") || isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
-            実績
+            事例
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
-              isActive("/works") ? "w-full" : "w-0 group-hover:w-full"
+              isActive("/cases") || isActive("/works") ? "w-full" : "w-0 group-hover:w-full"
+            }`} />
+          </Link>
+          <Link 
+            href="/about" 
+            prefetch={true}
+            className={`text-sm nav-link relative group transition-all duration-200 ${
+              isActive("/about") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
+            }`}
+          >
+            会社情報
+            <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
+              isActive("/about") ? "w-full" : "w-0 group-hover:w-full"
             }`} />
           </Link>
           <Link 
@@ -171,12 +166,28 @@ export default function Header() {
             強み
           </Link>
           <Link 
-            href="/works" 
+            href="/cases" 
             prefetch={true}
-            className={`text-base py-2 transition-colors ${isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
+            className={`text-base py-2 transition-colors ${isActive("/cases") || isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
-            実績
+            事例
+          </Link>
+          <Link 
+            href="/about" 
+            prefetch={true}
+            className={`text-base py-2 transition-colors ${isActive("/about") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            会社情報
+          </Link>
+          <Link 
+            href="/about" 
+            prefetch={true}
+            className={`text-base py-2 transition-colors ${isActive("/about") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            会社情報
           </Link>
           <Link 
             href="/contact" 

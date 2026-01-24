@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 // Contact Form Component
@@ -248,8 +247,6 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[#fafafa] font-sans">
-      <Header />
-      
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#1a1a1a] to-[#2d2d2d] py-16 md:py-24 px-4 md:px-8 overflow-hidden">

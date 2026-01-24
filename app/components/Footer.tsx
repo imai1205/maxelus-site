@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
           <nav className="flex flex-wrap gap-6 text-sm text-gray-400">
             <Link href="/" prefetch={true} className="hover:text-white transition-colors">ホーム</Link>
-            <Link href="/works" prefetch={true} className="hover:text-white transition-colors">実績</Link>
+            <Link href="/cases" prefetch={true} className="hover:text-white transition-colors">事例</Link>
             <Link href="/contact" prefetch={true} className="hover:text-white transition-colors">お問い合わせ</Link>
             <Link href="/contact" prefetch={true} className="hover:text-white transition-colors">無料相談</Link>
           </nav>

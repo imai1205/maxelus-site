@@ -31,16 +31,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     }
   }, [pathname, children]);
 
-  // #region agent log
-  useEffect(() => {
-    const wrapper = document.querySelector('.page-transition-wrapper');
-    if (wrapper) {
-      const cs = window.getComputedStyle(wrapper);
-      fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'PageTransition.tsx:wrapper',message:'Wrapper computed styles',data:{transform:cs.transform,willChange:cs.willChange,position:cs.position},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
-    }
-  }, [isTransitioning]);
-  // #endregion
-
   return (
     <div
       className={`page-transition-wrapper gpu-accelerate ${

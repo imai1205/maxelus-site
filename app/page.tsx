@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, memo } from "react";
+import { useState, memo, useEffect } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { 
   AnimatedSection, 
@@ -46,7 +45,12 @@ const imgArrowRight = "https://www.figma.com/api/mcp/asset/dff0d741-b040-4a48-9c
 
 
 // Hero Section Component
-function HeroSection() {
+function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_primary_href?: string; cta_secondary_text?: string; cta_secondary_href?: string } | null }) {
+  const primaryHref = settings?.cta_primary_href || '/contact';
+  const secondaryHref = settings?.cta_secondary_href || '/works';
+  const primaryText = settings?.cta_primary_text || '無料相談する';
+  const secondaryText = settings?.cta_secondary_text || '実績を見る';
+
   return (
     <section className="relative min-h-[90vh] md:min-h-screen overflow-hidden">
       {/* Parallax Background Image - 固定背景 */}
@@ -81,7 +85,10 @@ function HeroSection() {
           {/* Left content */}
           <div className="flex-1 max-w-full lg:max-w-[450px] space-y-4 md:space-y-6 text-center lg:text-left">
             <AnimatedSection animation="fade-up" duration={800}>
-              <h1 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-bold leading-[36px] sm:leading-[46px] md:leading-[54px] lg:leading-[62px] tracking-tight text-[#1a1a1a]">
+              <h1 
+                data-cms-key="site.hero_title"
+                className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-bold leading-[36px] sm:leading-[46px] md:leading-[54px] lg:leading-[62px] tracking-tight text-[#1a1a1a]"
+              >
                 そのソフト、現場に合わせて
                 <br />
                 <span className="animate-text-gradient">&quot;我慢して&quot;</span>
@@ -89,21 +96,34 @@ function HeroSection() {
               </h1>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={300} duration={800}>
-              <p className="text-base md:text-lg text-[#6b7280] leading-[26px] md:leading-[29px]">
+              <p 
+                data-cms-key="site.hero_subtitle"
+                className="text-base md:text-lg text-[#6b7280] leading-[26px] md:leading-[29px]"
+              >
                 業務にソフトを合わせる時代は終わり。<br className="hidden sm:block" />
                 まずは&quot;触れるデモ&quot;で、最短ルートを見える化します。
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={500} duration={800}>
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4 justify-center lg:justify-start">
-                <Link href="/contact" prefetch={true} className="btn-primary flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg group relative overflow-hidden">
-                  <span className="relative z-10">無料相談する</span>
+                <Link 
+                  href={primaryHref} 
+                  prefetch={true} 
+                  data-cms-key="site.cta_primary_text"
+                  className="btn-primary flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg group relative overflow-hidden"
+                >
+                  <span className="relative z-10" data-cms-key="site.cta_primary_text">{primaryText}</span>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={imgArrowIcon} alt="" className="w-5 md:w-6 h-5 md:h-6 relative z-10 transition-transform group-hover:translate-x-1" />
                   <div className="absolute inset-0 bg-[#fdc700] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
-                <Link href="/works" prefetch={true} className="btn-outline flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:bg-[#1a1a1a] hover:text-white transition-all duration-300">
-                  実績を見る
+                <Link 
+                  href={secondaryHref} 
+                  prefetch={true} 
+                  data-cms-key="site.cta_secondary_text"
+                  className="btn-outline flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:bg-[#1a1a1a] hover:text-white transition-all duration-300"
+                >
+                  {secondaryText}
                 </Link>
               </div>
             </AnimatedSection>
@@ -113,7 +133,12 @@ function HeroSection() {
             <div className="absolute inset-0 blur-[64px] bg-gradient-to-br from-[rgba(255,241,0,0.2)] via-[rgba(255,215,0,0.1)] to-transparent animate-morph" />
             <TiltCard maxTilt={8} className="relative bg-white border border-[#e5e7eb] rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imgHeroDemo} alt="アプリ開発デモ画面" className="w-full h-auto" />
+              <img 
+                src={imgHeroDemo} 
+                alt="アプリ開発デモ画面" 
+                data-cms-key="site.hero_image"
+                className="w-full h-auto" 
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
             </TiltCard>
           </AnimatedSection>
@@ -152,10 +177,16 @@ function ChallengeSection() {
         <AnimatedSection animation="fade-up" className="relative text-center mb-10 md:mb-16">
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">CHALLENGE</span>
           <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest mb-2">PROBLEM</p>
-          <h2 className="relative text-[26px] md:text-[36px] lg:text-[42px] font-bold text-[#1a1a1a] tracking-tight">
+          <h2 
+            data-cms-key="site.challenge_title"
+            className="relative text-[26px] md:text-[36px] lg:text-[42px] font-bold text-[#1a1a1a] tracking-tight"
+          >
             課題は&quot;ズレ&quot;から起きる
           </h2>
-          <p className="text-sm md:text-base text-[#6b7280] mt-3 max-w-xl mx-auto">
+          <p 
+            data-cms-key="site.challenge_subtitle"
+            className="text-sm md:text-base text-[#6b7280] mt-3 max-w-xl mx-auto"
+          >
             開発の失敗の多くは、認識のズレから生まれます。
           </p>
         </AnimatedSection>
@@ -167,7 +198,11 @@ function ChallengeSection() {
             <p className="text-sm font-bold text-[#6b7280] uppercase tracking-wide mb-3 md:mb-4 text-center md:text-left">Before</p>
             <StaggeredContainer className="space-y-3 md:space-y-4" staggerDelay={150}>
               {beforeItems.map((item, i) => (
-                <div key={i} className="before-card bg-white border border-[#ffe2e2] rounded-[12px] md:rounded-[14px] flex items-center gap-3 md:gap-4 px-3 md:px-4 py-3 md:py-4 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:border-red-300">
+                <div 
+                  key={i} 
+                  data-cms-key={`site.challenge_before_${i}`}
+                  className="before-card bg-white border border-[#ffe2e2] rounded-[12px] md:rounded-[14px] flex items-center gap-3 md:gap-4 px-3 md:px-4 py-3 md:py-4 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:border-red-300"
+                >
                   <div className="before-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center animate-scale-pulse flex-shrink-0">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imgXIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
@@ -191,7 +226,11 @@ function ChallengeSection() {
             <p className="text-sm font-bold text-[#6b7280] uppercase tracking-wide mb-3 md:mb-4 text-center md:text-left">After</p>
             <StaggeredContainer className="space-y-3 md:space-y-4" staggerDelay={150}>
               {afterItems.map((item, i) => (
-                <div key={i} className="after-card bg-white border border-[#dcfce7] rounded-[12px] md:rounded-[14px] flex items-center gap-3 md:gap-4 px-3 md:px-4 py-3 md:py-4 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:border-green-400">
+                <div 
+                  key={i} 
+                  data-cms-key={`site.challenge_after_${i}`}
+                  className="after-card bg-white border border-[#dcfce7] rounded-[12px] md:rounded-[14px] flex items-center gap-3 md:gap-4 px-3 md:px-4 py-3 md:py-4 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:border-green-400"
+                >
                   <div className="after-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center animate-scale-pulse flex-shrink-0" style={{ animationDelay: `${i * 200}ms` }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imgCheckIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
@@ -229,14 +268,20 @@ function SolutionSection() {
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">SOLUTION</span>
           <div className="relative space-y-4 md:space-y-6">
             <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
-            <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
+            <h2 
+              data-cms-key="site.solution_title"
+              className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2"
+            >
               その業務、システム化して
               <br />
               <span className="animate-text-gradient">&quot;人を増やさず&quot;</span>
               回すのはどうですか？
             </h2>
             <AnimatedSection animation="fade-up" delay={500}>
-              <p className="text-base md:text-lg text-[#6b7280]">
+              <p 
+                data-cms-key="site.solution_subtitle"
+                className="text-base md:text-lg text-[#6b7280]"
+              >
                 日々のムダを減らして、現場の処理速度を上げる。
               </p>
             </AnimatedSection>
@@ -299,7 +344,10 @@ function ServicesSection() {
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">SERVICES</span>
-          <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
+          <h2 
+            data-cms-key="site.services_title"
+            className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight"
+          >
             対応できる内容
           </h2>
         </AnimatedSection>
@@ -366,13 +414,19 @@ function WorksSection() {
       <div className="max-w-[1100px] mx-auto">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">WORKS</span>
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">CASES</span>
           <div className="relative space-y-2 md:space-y-4">
-            <h2 className="text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
-              実績
+            <h2 
+              data-cms-key="site.works_title"
+              className="text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight"
+            >
+              事例
             </h2>
-            <p className="text-sm md:text-lg text-[#6b7280] px-4">
-              製造業、医療、建設など、幅広い業界で実績があります
+            <p 
+              data-cms-key="site.works_subtitle"
+              className="text-sm md:text-lg text-[#6b7280] px-4"
+            >
+              製造業、医療、建設など、幅広い業種で実績があります
             </p>
           </div>
         </AnimatedSection>
@@ -383,19 +437,34 @@ function WorksSection() {
             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a]">
               <AnimatedCounter end={50} suffix="+" className="animate-text-gradient" />
             </div>
-            <p className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2">プロジェクト実績</p>
+            <p 
+              data-cms-key="site.works_stat_1_label"
+              className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2"
+            >
+              プロジェクト実績
+            </p>
           </div>
           <div className="text-center">
             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a]">
               <AnimatedCounter end={98} suffix="%" className="animate-text-gradient" />
             </div>
-            <p className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2">顧客満足度</p>
+            <p 
+              data-cms-key="site.works_stat_2_label"
+              className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2"
+            >
+              顧客満足度
+            </p>
           </div>
           <div className="text-center">
             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a]">
               <AnimatedCounter end={15} suffix="+" className="animate-text-gradient" />
             </div>
-            <p className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2">業界対応</p>
+            <p 
+              data-cms-key="site.works_stat_3_label"
+              className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2"
+            >
+              業界対応
+            </p>
           </div>
         </AnimatedSection>
         
@@ -431,10 +500,10 @@ function WorksSection() {
         
         {/* View all button */}
         <AnimatedSection animation="fade-up" delay={500} className="text-center">
-          <a href="#" className="btn-outline inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg group relative overflow-hidden">
-            <span className="relative z-10 group-hover:text-white transition-colors">実績一覧へ</span>
+          <Link href="/cases" className="btn-outline inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg group relative overflow-hidden">
+            <span className="relative z-10 group-hover:text-white transition-colors">事例一覧へ</span>
             <div className="absolute inset-0 bg-[#1a1a1a] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </a>
+          </Link>
         </AnimatedSection>
       </div>
     </section>
@@ -480,7 +549,10 @@ function FAQSection() {
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">FAQ</span>
-          <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
+          <h2 
+            data-cms-key="site.faq_title"
+            className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight"
+          >
             よくある質問
           </h2>
         </AnimatedSection>
@@ -488,14 +560,27 @@ function FAQSection() {
         {/* FAQ list */}
         <StaggeredContainer className="space-y-3 md:space-y-4" staggerDelay={100}>
           {faqs.map((faq, i) => (
-            <div key={i} className="faq-card p-4 md:p-6 group hover:shadow-lg transition-all duration-300 hover:border-[#fff100] cursor-pointer">
+            <div 
+              key={i} 
+              className="faq-card p-4 md:p-6 group hover:shadow-lg transition-all duration-300 hover:border-[#fff100] cursor-pointer"
+            >
               <h3 className="text-base md:text-xl text-[#1a1a1a] mb-2 md:mb-3 flex items-start md:items-center gap-2 md:gap-3">
                 <span className="w-6 md:w-8 h-6 md:h-8 bg-[#fff100] rounded-full flex items-center justify-center text-xs md:text-sm font-bold text-[#1a1a1a] group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5 md:mt-0">
                   Q
                 </span>
-                <span className="group-hover:text-[#fdc700] transition-colors">{faq.question}</span>
+                <span 
+                  data-cms-key={`site.faq_${i}_q`}
+                  className="group-hover:text-[#fdc700] transition-colors"
+                >
+                  {faq.question}
+                </span>
               </h3>
-              <p className="text-sm md:text-base text-[#6b7280] leading-6 pl-8 md:pl-11">{faq.answer}</p>
+              <p 
+                data-cms-key={`site.faq_${i}_a`}
+                className="text-sm md:text-base text-[#6b7280] leading-6 pl-8 md:pl-11"
+              >
+                {faq.answer}
+              </p>
             </div>
           ))}
         </StaggeredContainer>
@@ -505,7 +590,14 @@ function FAQSection() {
 }
 
 // CTA Section Component
-function CTASection() {
+function CTASection({ settings }: { settings: { cta_section_title?: string; cta_section_subtitle?: string; cta_primary_text?: string; cta_primary_href?: string; cta_secondary_text?: string; cta_secondary_href?: string } | null }) {
+  const primaryHref = settings?.cta_primary_href || '/contact';
+  const secondaryHref = settings?.cta_secondary_href || '/works';
+  const primaryText = settings?.cta_primary_text || '無料相談する';
+  const secondaryText = settings?.cta_secondary_text || '実績を見る';
+  const sectionTitle = settings?.cta_section_title || '既製品に合わせるのをやめて、\n"自社に最適化"しませんか？';
+  const sectionSubtitle = settings?.cta_section_subtitle || 'まずは無料相談で、課題整理→触れるデモ提示まで一緒に進めます。';
+
   return (
     <section className="relative min-h-[400px] md:min-h-[600px] overflow-hidden">
       {/* Background Image */}
@@ -550,35 +642,49 @@ function CTASection() {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px] px-4 md:px-8 py-12 md:py-20">
         <AnimatedSection animation="zoom-in" className="max-w-[800px] mx-auto text-center">
-          <h2 className="text-[24px] sm:text-[32px] md:text-[44px] font-bold text-white leading-tight mb-4 md:mb-6 px-2">
-            既製品に合わせるのをやめて、
-            <br />
-            <span className="animate-text-gradient">&quot;自社に最適化&quot;</span>
-            しませんか？
+          <h2 
+            data-cms-key="site.cta_section_title"
+            className="text-[24px] sm:text-[32px] md:text-[44px] font-bold text-white leading-tight mb-4 md:mb-6 px-2"
+          >
+            {sectionTitle.split('\n').map((line, i) => (
+              <span key={i}>
+                {line.includes('"自社に最適化"') ? (
+                  <>
+                    {line.split('"自社に最適化"')[0]}
+                    <span className="animate-text-gradient">&quot;自社に最適化&quot;</span>
+                    {line.split('"自社に最適化"')[1]}
+                  </>
+                ) : line}
+                {i < sectionTitle.split('\n').length - 1 && <br />}
+              </span>
+            ))}
           </h2>
           <AnimatedSection animation="fade-up" delay={500}>
-            <p className="text-base md:text-xl text-white/70 mb-6 md:mb-10 px-4">
-              まずは無料相談で、課題整理→触れるデモ提示まで一緒に進めます。
+            <p 
+              data-cms-key="site.cta_section_subtitle"
+              className="text-base md:text-xl text-white/70 mb-6 md:mb-10 px-4"
+            >
+              {sectionSubtitle}
             </p>
           </AnimatedSection>
           <AnimatedSection animation="fade-up" delay={700}>
             <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 px-4">
               <Link 
-                href="/contact" 
+                href={primaryHref} 
                 prefetch={true}
                 className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 md:px-10 py-3 md:py-5 rounded-xl text-base md:text-lg transition-all hover:scale-105 shadow-lg animate-pulse-glow group"
               >
-                無料相談する
+                {primaryText}
                 <svg className="w-4 md:w-5 h-4 md:h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
               <Link 
-                href="/works" 
+                href={secondaryHref} 
                 prefetch={true}
                 className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-medium px-6 md:px-10 py-3 md:py-5 rounded-xl text-base md:text-lg border border-white/30 transition-all hover:scale-105 backdrop-blur-sm"
               >
-                実績を見る
+                {secondaryText}
               </Link>
             </div>
           </AnimatedSection>
@@ -590,15 +696,55 @@ function CTASection() {
 
 // Main Page Component
 export default function Home() {
+  // CMS機能をコメントアウト（将来の復旧用）
+  // データベースから取得する代わりに、デフォルト値を直接使用
+  const [settings] = useState<{ 
+    cta_primary_text?: string; 
+    cta_primary_href?: string; 
+    cta_secondary_text?: string; 
+    cta_secondary_href?: string;
+    cta_section_title?: string;
+    cta_section_subtitle?: string;
+  } | null>({
+    cta_primary_text: '無料相談する',
+    cta_primary_href: '/contact',
+    cta_secondary_text: '事例を見る',
+    cta_secondary_href: '/cases',
+    cta_section_title: '既製品に合わせるのをやめて、\n"自社に最適化"しませんか？',
+    cta_section_subtitle: 'まずは無料相談で、課題整理→触れるデモ提示まで一緒に進めます。',
+  });
+
+  // CMS機能をコメントアウト（将来の復旧用）
+  // useEffect(() => {
+  //   const fetchSettings = async () => {
+  //     try {
+  //       const res = await fetch('/api/cms/site');
+  //       const result = await res.json();
+  //       if (result.ok && result.data) {
+  //         setSettings({
+  //           cta_primary_text: result.data.cta_primary_text,
+  //           cta_primary_href: result.data.cta_primary_href,
+  //           cta_secondary_text: result.data.cta_secondary_text,
+  //           cta_secondary_href: result.data.cta_secondary_href,
+  //           cta_section_title: result.data.cta_section_title,
+  //           cta_section_subtitle: result.data.cta_section_subtitle,
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error('Failed to fetch site settings:', error);
+  //     }
+  //   };
+  //   fetchSettings();
+  // }, []);
+
   return (
     <ParallaxProvider>
       <div className="min-h-screen bg-white font-sans relative overflow-x-hidden">
         {/* Lightweight Gradient Orbs - CSS only, no JS */}
         <GradientOrbs />
         
-        <Header />
         <main className="pt-14 md:pt-16">
-          <HeroSection />
+          <HeroSection settings={settings} />
           <ChallengeSection />
           <SolutionSection />
           <ServicesSection />
@@ -606,7 +752,7 @@ export default function Home() {
           <WorksSection />
           <StorySlider />
           <FAQSection />
-          <CTASection />
+          <CTASection settings={settings} />
         </main>
         <Footer />
       </div>

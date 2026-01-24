@@ -1,214 +1,452 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { getSortedServices, getAllTags, type Service } from "../data/services";
 import { AnimatedSection, TiltCard } from "../components/AnimationProvider";
+import ServiceDetailPanel from "../components/ServiceDetailPanel";
+import {
+  servicesData,
+  getServicesByCategory,
+  categoryNames,
+  type Service,
+  type ServiceCategory,
+} from "../data/servicesData";
 
-// アイコンコンポーネント
-function ServiceIcon({ icon }: { icon?: string }) {
-  const iconMap: Record<string, React.ReactNode> = {
-    document: (
-      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-      </svg>
-    ),
-    chart: (
-      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-      </svg>
-    ),
-    code: (
-      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
-      </svg>
-    ),
-    globe: (
-      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-      </svg>
-    ),
-    mobile: (
-      <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-      </svg>
-    )
-  };
+// カテゴリナビゲーション（Sticky + タブ方式）
+function CategoryNav({
+  activeCategory,
+  onCategoryClick,
+}: {
+  activeCategory: ServiceCategory | null;
+  onCategoryClick: (category: ServiceCategory) => void;
+}) {
+  // カテゴリ順番：アプリ開発 → ホームページ → プロダクト
+  const categories: ServiceCategory[] = ["app-dx", "website", "product"];
 
   return (
-    <div className="w-10 h-10 md:w-12 md:h-12 text-[#fdc700]">
-      {iconMap[icon || "code"] || iconMap.code}
+    <div className="sticky top-14 md:top-16 z-40 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb] shadow-sm">
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
+        <div className="flex items-center gap-2 md:gap-4 overflow-x-auto py-4 scrollbar-hide">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => onCategoryClick(category)}
+              className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium whitespace-nowrap transition-all ${
+                activeCategory === category
+                  ? "bg-[#fff100] text-[#1a1a1a] shadow-md"
+                  : "bg-[#f3f4f6] text-[#6b7280] hover:bg-[#e5e7eb]"
+              }`}
+            >
+              {categoryNames[category]}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
 
 // サービスカードコンポーネント
-function ServiceCard({ service, index }: { service: Service; index: number }) {
-  const href = service.externalUrl || `/services/${service.slug}`;
-  const isExternal = !!service.externalUrl;
+function ServiceCard({
+  service,
+  index,
+  isOpen,
+  onToggle,
+}: {
+  service: Service;
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const isSpecial = service.special;
 
   return (
-    <AnimatedSection animation="fade-up" delay={index * 100}>
-      <TiltCard maxTilt={5} className="h-full">
-        <div className="service-card bg-white rounded-2xl shadow-lg p-6 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border border-[#e5e7eb]/50">
-          {/* Shimmer effect */}
-          <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
-          
-          {/* Icon */}
-          <div className="bg-[#fffef0] rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-            <ServiceIcon icon={service.icon} />
-          </div>
-          
-          {/* Title */}
-          <h3 className="text-xl md:text-2xl font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
-            {service.title}
-          </h3>
-          
-          {/* Catch */}
-          <p className="text-base md:text-lg text-[#1a1a1a] font-medium mb-3">
-            {service.catch}
-          </p>
-          
-          {/* Summary */}
-          <p className="text-sm md:text-base text-[#6b7280] mb-5 leading-relaxed">
-            {service.summary}
-          </p>
-          
-          {/* Tags */}
-          <div className="flex gap-2 flex-wrap mb-6">
-            {service.tags.slice(0, 4).map((tag, j) => (
-              <span 
-                key={j} 
-                className="text-xs md:text-sm px-3 py-1 bg-[#f3f4f6] text-[#6b7280] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
-                style={{ transitionDelay: `${j * 50}ms` }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          
-          {/* CTA Button */}
-          <Link
-            href={href}
-            target={isExternal ? "_blank" : undefined}
-            rel={isExternal ? "noopener noreferrer" : undefined}
-            className="inline-flex items-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 py-3 rounded-full transition-all hover:scale-105 group/btn"
+    <div className="w-full">
+      <AnimatedSection animation="fade-up" delay={index * 100}>
+        <TiltCard maxTilt={5} className="h-full">
+          <div
+            className={`service-card bg-white rounded-2xl shadow-lg p-6 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 ${
+              isSpecial
+                ? "border-[#fff100] bg-gradient-to-br from-[#fffef0] to-white"
+                : "border-[#e5e7eb]/50"
+            }`}
           >
-            {service.primaryCtaLabel}
-            {isExternal ? (
-              <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            ) : (
-              <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+            {/* 特別枠バッジ */}
+            {isSpecial && (
+              <div className="absolute top-4 right-4 bg-[#fff100] text-[#1a1a1a] text-xs font-bold px-3 py-1 rounded-full">
+                スペシャル
+              </div>
             )}
-          </Link>
-        </div>
-      </TiltCard>
-    </AnimatedSection>
+
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            {/* Metric（成果イメージ） */}
+            {service.metric && (
+              <div className="mb-4 p-3 bg-[#fafafa] rounded-lg">
+                <div className="text-xs text-[#6b7280] mb-1">
+                  {service.metric.label}
+                </div>
+                <div className="text-2xl font-bold text-[#1a1a1a]">
+                  {service.metric.value}
+                  {service.metric.suffix && (
+                    <span className="text-lg text-[#6b7280]">
+                      {service.metric.suffix}
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Title */}
+            <h3 className="text-xl md:text-2xl font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
+              {service.title}
+            </h3>
+
+            {/* Catch */}
+            <p className="text-base md:text-lg text-[#1a1a1a] font-medium mb-3">
+              {service.catch}
+            </p>
+
+            {/* Short Description */}
+            <p className="text-sm md:text-base text-[#6b7280] mb-5 leading-relaxed">
+              {service.shortDesc}
+            </p>
+
+            {/* Tags */}
+            <div className="flex gap-2 flex-wrap mb-6">
+              {service.tags.slice(0, 4).map((tag, j) => (
+                <span
+                  key={j}
+                  className="text-xs md:text-sm px-3 py-1 bg-[#f3f4f6] text-[#6b7280] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
+                  style={{ transitionDelay: `${j * 50}ms` }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                href="/contact"
+                className="flex-1 inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 py-3 rounded-full transition-all hover:scale-105 group/btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                無料相談
+                <svg
+                  className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </Link>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggle();
+                }}
+                className="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
+              >
+                {isOpen ? "閉じる" : service.ctaType === "lp" ? "LPを見る" : "詳細を開く"}
+                <svg
+                  className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </TiltCard>
+      </AnimatedSection>
+
+      {/* Detail Panel（Accordion方式：同時に1つだけ開く） */}
+      {isOpen && (
+        <ServiceDetailPanel service={service} isOpen={isOpen} onClose={onToggle} />
+      )}
+    </div>
+  );
+}
+
+// カテゴリセクション（タブ/パネル方式用）
+function CategorySection({
+  category,
+  services,
+  openServiceId,
+  onServiceToggle,
+  isActive,
+}: {
+  category: ServiceCategory;
+  services: Service[];
+  openServiceId: string | null;
+  onServiceToggle: (id: string) => void;
+  isActive: boolean;
+}) {
+  if (!isActive) return null;
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      {/* Section Heading */}
+      <AnimatedSection animation="fade-up" className="mb-12">
+        <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+          {categoryNames[category]}
+        </h2>
+        <div className="w-20 h-1 bg-[#fff100] rounded-full" />
+      </AnimatedSection>
+
+      {/* Services Grid */}
+      <div className="space-y-6">
+        {services.map((service, index) => (
+          <ServiceCard
+            key={service.id}
+            service={service}
+            index={index}
+            isOpen={openServiceId === service.id}
+            onToggle={() => onServiceToggle(service.id)}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
 export default function ServicesPage() {
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const allServices = getSortedServices();
-  const allTags = getAllTags();
-  
-  const filteredServices = selectedTag 
-    ? allServices.filter(s => s.tags.includes(selectedTag))
-    : allServices;
+  // タブ方式：最初はアプリ開発を選択
+  const [activeCategory, setActiveCategory] = useState<ServiceCategory | null>("app-dx");
+  const [openServiceId, setOpenServiceId] = useState<string | null>(null);
+
+  // カテゴリごとのサービスを取得（順番：アプリ開発 → ホームページ → プロダクト）
+  const appDxServices = getServicesByCategory("app-dx");
+  const websiteServices = getServicesByCategory("website");
+  const productServices = getServicesByCategory("product");
+
+  // カテゴリクリック時の処理（タブ切替）
+  const handleCategoryClick = (category: ServiceCategory) => {
+    setActiveCategory(category);
+    // モバイルではアコーディオン方式のため、スクロールは不要
+    // Desktopではタブ切替のみ
+  };
+
+  // サービス詳細の開閉（Accordion方式：同時に1つだけ）
+  const handleServiceToggle = (id: string) => {
+    setOpenServiceId(openServiceId === id ? null : id);
+  };
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      <Header />
-      
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-              backgroundSize: '40px 40px'
-            }} />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                backgroundSize: "40px 40px",
+              }}
+            />
           </div>
-          
+
           {/* Gradient Orbs */}
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" />
-          <div className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
-          
+          <div
+            className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse"
+            style={{ animationDelay: "1s" }}
+          />
+
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up">
               <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider">
                 SERVICES
               </p>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                製造業の&quot;現場で使える&quot;DXを、<br className="hidden md:block" />
-                最短で形にします。
+                アプリ開発とWeb制作で、
+                <br />
+                ビジネスを最短で形にします。
               </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-                図面管理／受発注・販売管理／Webアプリ／iPhoneデモ搭載LPまで一気通貫。
+              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8">
+                アイデアを&quot;動くプロダクト&quot;に。アプリもWebも一気通貫で対応します。
               </p>
+
+              {/* 3カテゴリチップ */}
+              <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+                {(["app-dx", "website", "product"] as ServiceCategory[]).map(
+                  (category) => (
+                    <button
+                      key={category}
+                      onClick={() => handleCategoryClick(category)}
+                      className="px-4 md:px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm md:text-base font-medium transition-all hover:scale-105 backdrop-blur-sm border border-white/20"
+                    >
+                      {categoryNames[category]}
+                    </button>
+                  )
+                )}
+              </div>
             </AnimatedSection>
           </div>
         </section>
 
-        {/* Tag Filter */}
-        <section className="bg-[#fafafa] py-8 border-b border-[#e5e7eb] sticky top-14 md:top-16 z-40">
-          <div className="max-w-6xl mx-auto px-4 md:px-8">
-            <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide">
-              <span className="text-sm text-[#6b7280] whitespace-nowrap font-medium">絞り込み:</span>
-              <button
-                onClick={() => setSelectedTag(null)}
-                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                  selectedTag === null 
-                    ? 'bg-[#fff100] text-[#1a1a1a]' 
-                    : 'bg-white text-[#6b7280] hover:bg-[#f3f4f6] border border-[#e5e7eb]'
-                }`}
-              >
-                すべて
-              </button>
-              {allTags.map(tag => (
-                <button
-                  key={tag}
-                  onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedTag === tag 
-                      ? 'bg-[#fff100] text-[#1a1a1a]' 
-                      : 'bg-white text-[#6b7280] hover:bg-[#f3f4f6] border border-[#e5e7eb]'
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
+        {/* Sticky Category Nav */}
+        <CategoryNav
+          activeCategory={activeCategory}
+          onCategoryClick={handleCategoryClick}
+        />
+
+        {/* 3カテゴリセクション（タブ/パネル方式） */}
+        <section className="py-16 md:py-24 px-4 md:px-8">
+          {/* Desktop: タブ方式 */}
+          <div className="hidden md:block max-w-6xl mx-auto">
+            <CategorySection
+              category="app-dx"
+              services={appDxServices}
+              openServiceId={openServiceId}
+              onServiceToggle={handleServiceToggle}
+              isActive={activeCategory === "app-dx"}
+            />
+            <CategorySection
+              category="website"
+              services={websiteServices}
+              openServiceId={openServiceId}
+              onServiceToggle={handleServiceToggle}
+              isActive={activeCategory === "website"}
+            />
+            <CategorySection
+              category="product"
+              services={productServices}
+              openServiceId={openServiceId}
+              onServiceToggle={handleServiceToggle}
+              isActive={activeCategory === "product"}
+            />
+          </div>
+
+          {/* Mobile: アコーディオン方式 */}
+          <div className="md:hidden max-w-6xl mx-auto space-y-6">
+            {(["app-dx", "website", "product"] as ServiceCategory[]).map(
+              (category) => {
+                const services =
+                  category === "app-dx"
+                    ? appDxServices
+                    : category === "website"
+                    ? websiteServices
+                    : productServices;
+                const isOpen = activeCategory === category;
+
+                return (
+                  <div
+                    key={category}
+                    className="bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden"
+                  >
+                    <button
+                      onClick={() =>
+                        setActiveCategory(isOpen ? null : category)
+                      }
+                      className="w-full px-6 py-4 flex items-center justify-between text-left"
+                    >
+                      <h3 className="text-lg font-bold text-[#1a1a1a]">
+                        {categoryNames[category]}
+                      </h3>
+                      <svg
+                        className={`w-5 h-5 text-[#6b7280] transition-transform ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    {isOpen && (
+                      <div className="px-6 pb-6 space-y-6">
+                        {services.map((service, index) => (
+                          <ServiceCard
+                            key={service.id}
+                            service={service}
+                            index={index}
+                            isOpen={openServiceId === service.id}
+                            onToggle={() => handleServiceToggle(service.id)}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+            )}
           </div>
         </section>
 
-        {/* Services Grid */}
-        <section className="py-16 md:py-24 px-4 md:px-8">
-          <div className="max-w-6xl mx-auto">
-            {filteredServices.length === 0 ? (
-              <div className="text-center py-16">
-                <p className="text-[#6b7280] text-lg">該当するサービスがありません</p>
-                <button
-                  onClick={() => setSelectedTag(null)}
-                  className="mt-4 text-[#fdc700] hover:underline"
+        {/* FAQ Section */}
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+          <div className="max-w-4xl mx-auto">
+            <AnimatedSection animation="fade-up" className="text-center mb-12">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+                よくある質問
+              </h2>
+              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
+            </AnimatedSection>
+
+            <div className="space-y-4">
+              {[
+                {
+                  question: "開発期間はどの程度かかりますか？",
+                  answer:
+                    "プロジェクト規模により異なりますが、シンプルなLPなら2週間〜、Webアプリなら1〜3ヶ月が目安です。デモ提示後に正確なスケジュールをご提示します。",
+                },
+                {
+                  question: "料金はどれくらいかかりますか？",
+                  answer:
+                    "30万円〜対応可能です。内容や規模により異なりますので、まずは無料相談でご要望をお聞かせください。お見積りを提示いたします。",
+                },
+                {
+                  question: "途中で仕様変更できますか？",
+                  answer:
+                    "デモ提示の段階で認識を合わせるため、大きな手戻りは発生しにくい仕組みです。軽微な修正は柔軟に対応しますが、大幅な変更は追加費用が発生する場合があります。",
+                },
+                {
+                  question: "運用・保守もお願いできますか？",
+                  answer:
+                    "はい、運用・保守も対応可能です。月額での保守契約や、都度対応など、ご要望に合わせてプランをご提案します。",
+                },
+              ].map((faq, i) => (
+                <AnimatedSection
+                  key={i}
+                  animation="fade-up"
+                  delay={i * 100}
                 >
-                  フィルターをクリア
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {filteredServices.map((service, index) => (
-                  <ServiceCard key={service.slug} service={service} index={index} />
-                ))}
-              </div>
-            )}
+                  <div className="bg-white rounded-xl p-6 shadow-sm">
+                    <h3 className="font-bold text-[#1a1a1a] mb-2">
+                      Q. {faq.question}
+                    </h3>
+                    <p className="text-[#6b7280]">{faq.answer}</p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -218,27 +456,38 @@ export default function ServicesPage() {
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#fff100] rounded-full blur-[100px]" />
             <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#fdc700] rounded-full blur-[120px]" />
           </div>
-          
+
           <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up">
               <h2 className="text-2xl md:text-4xl font-bold text-white mb-6">
                 まずは無料相談から
               </h2>
               <p className="text-base md:text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-                「こんなこと実現できる？」という段階からOK。<br />
+                「こんなこと実現できる？」という段階からOK。
+                <br />
                 課題を整理するところから、一緒にスタートしましょう。
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link 
+                <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-4 rounded-full transition-all hover:scale-105"
                 >
                   無料相談する
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </Link>
-                <Link 
+                <Link
                   href="/strengths"
                   className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-8 py-4 rounded-full border border-white/30 transition-all hover:scale-105"
                 >

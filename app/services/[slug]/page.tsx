@@ -2,7 +2,6 @@
 
 import { useParams, notFound } from "next/navigation";
 import Link from "next/link";
-import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { getServiceBySlug, getSortedServices } from "../../data/services";
 import { AnimatedSection, TiltCard } from "../../components/AnimationProvider";
@@ -81,8 +80,6 @@ export default function ServiceDetailPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      <Header />
-      
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">

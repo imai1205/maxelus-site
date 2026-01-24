@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Link from "next/link";
 
 interface StoryStep {
   icon: React.ReactNode;
@@ -374,7 +375,7 @@ export default function StorySlider() {
             </button>
           ) : currentStep === storySteps.length - 1 ? (
             <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
-              <a
+              <Link
                 href="/contact"
                 onClick={(e) => e.stopPropagation()}
                 className="flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 md:px-8 py-3 md:py-4 rounded-full transition-all hover:scale-105 shadow-lg text-sm md:text-base"
@@ -383,14 +384,14 @@ export default function StorySlider() {
                 <svg className="w-4 md:w-5 h-4 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/works"
                 onClick={(e) => e.stopPropagation()}
                 className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 md:px-8 py-3 md:py-4 rounded-full border border-white/30 transition-all hover:scale-105 text-sm md:text-base"
               >
                 実績を見る
-              </a>
+              </Link>
             </div>
           ) : (
             <button

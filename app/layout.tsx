@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import { PageLoader, PageTransition } from "./components/PageTransition";
+import ConditionalHeader from "./components/ConditionalHeader";
+// CMS機能をコメントアウト（将来の復旧用）
+// import PreviewClickHandler from "@/components/cms/PreviewClickHandler";
+// import CMSLiveUpdater from "./components/CMSLiveUpdater";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -34,7 +39,13 @@ export default function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
       <body className={`${notoSansJP.variable} font-sans antialiased`}>
+        {/* CMS機能をコメントアウト（将来の復旧用） */}
+        {/* <Suspense fallback={null}>
+          <PreviewClickHandler />
+          <CMSLiveUpdater />
+        </Suspense> */}
         <PageLoader />
+        <ConditionalHeader />
         <PageTransition>{children}</PageTransition>
       </body>
     </html>
