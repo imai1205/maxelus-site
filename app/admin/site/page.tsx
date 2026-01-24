@@ -254,7 +254,7 @@ export default function AdminSitePage() {
           contact_phone: data.data.contact_phone || '',
           contact_address: data.data.contact_address || '',
           // Page Settings
-          strengths_page_title: data.data.strengths_page_title || 'マクセラスが選ばれる理由',
+          strengths_page_title: data.data.strengths_page_title || 'MAXELUSが選ばれる理由',
           strengths_page_subtitle: data.data.strengths_page_subtitle || '"作るだけ"では終わらない。現場で使える・更新できる・拡張できるシステムを、最短で形にします。',
           strengths_stats: typeof data.data.strengths_stats === 'string' 
             ? JSON.parse(data.data.strengths_stats) 
@@ -268,7 +268,7 @@ export default function AdminSitePage() {
           services_page_subtitle: data.data.services_page_subtitle || '図面管理／受発注・販売管理／Webアプリ／iPhoneデモ搭載LPまで一気通貫。',
           services_page_cta_primary_text: data.data.services_page_cta_primary_text || '無料相談する',
           services_page_cta_primary_href: data.data.services_page_cta_primary_href || '/contact',
-          services_page_cta_secondary_text: data.data.services_page_cta_secondary_text || 'マクセラスの強みを見る',
+          services_page_cta_secondary_text: data.data.services_page_cta_secondary_text || 'MAXELUSの強みを見る',
           services_page_cta_secondary_href: data.data.services_page_cta_secondary_href || '/strengths',
           strengths_page_cta_primary_text: data.data.strengths_page_cta_primary_text || '無料相談する',
           strengths_page_cta_primary_href: data.data.strengths_page_cta_primary_href || '/contact',

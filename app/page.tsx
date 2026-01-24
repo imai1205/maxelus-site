@@ -79,213 +79,108 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
       />
 
       {/* Background App Screens - 薄く表示 */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-[60%] h-full flex items-center justify-center">
-          {/* App screens in background - 複数のアプリ画面を薄く配置 */}
+          {/* App screens in background - IPhoneFrame-で始まる画像を配置 */}
           <div className="relative w-full h-full flex items-center justify-center">
-            {/* Shopping App - 左後ろ */}
-            <div 
-              className="absolute left-[5%] top-[20%] w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-1000"
-              style={{ transform: 'rotate(-15deg) translateZ(0)' }}
-            >
-              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
-                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
-                  <div className="absolute inset-0 bg-white">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/cbc55d0e-8194-451e-9e89-6510110e7f9f"
-                      alt="Shopping App"
-                      className="w-full h-full object-contain grayscale"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
+            {/* IPhoneFrame画像データ */}
+            {[
+              { src: '/cases/IPhoneFrame-nail.png', alt: 'ネイルサロン管理アプリ', pos: { left: '5%', top: '20%' }, rotate: -15, zIndex: 0 },
+              { src: '/cases/IPhoneFrame-kiji.png', alt: '記事管理アプリ', pos: { left: '15%', top: '30%' }, rotate: 10, zIndex: 1 },
+              { src: '/cases/IPhoneFrame-calc.png', alt: '計算アプリ', pos: { right: '10%', top: '25%' }, rotate: 15, zIndex: 0 },
+              { src: '/cases/IPhoneFrame-item.png', alt: 'アイテム管理アプリ', pos: { right: '5%', bottom: '15%' }, rotate: -10, zIndex: 0 },
+              { src: '/cases/IPhoneFrame-draw.png', alt: '図面管理アプリ', pos: { left: '25%', bottom: '20%' }, rotate: 5, zIndex: 2 },
+              { src: '/cases/IPhoneFrame-car.png', alt: '車関連アプリ', pos: { left: '35%', top: '35%' }, rotate: -5, zIndex: 3 },
+              { src: '/cases/IPhoneFrame-vegas.png', alt: 'ベガス関連アプリ', pos: { left: '10%', top: '50%' }, rotate: 8, zIndex: 1 },
+              { src: '/cases/IPhoneFrame-saron.png', alt: 'サロン管理アプリ', pos: { right: '15%', bottom: '30%' }, rotate: -8, zIndex: 1 },
+              { src: '/cases/IPhoneFrame-shop.png', alt: 'ショッピングアプリ', pos: { left: '45%', top: '15%' }, rotate: 12, zIndex: 2 },
+            ].map((app, index) => (
+              <div
+                key={index}
+                className="group absolute w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-700 ease-out hover:opacity-[0.4] hover:scale-125 hover:z-50 cursor-pointer"
+                style={{
+                  ...app.pos,
+                  zIndex: app.zIndex,
+                }}
+              >
+                <div 
+                  className="relative transition-all duration-700 ease-out group-hover:-translate-y-6 group-hover:shadow-[0_20px_60px_rgba(255,241,0,0.4)] group-hover:brightness-110"
+                  style={{
+                    transform: `rotate(${app.rotate}deg)`,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={app.src}
+                    alt={app.alt}
+                    className="w-full h-auto object-contain grayscale-[0.9] brightness-75 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:brightness-110 group-hover:contrast-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
-            </div>
-            
-            {/* Music App - 中央後ろ */}
-            <div 
-              className="absolute left-[15%] top-[30%] w-[220px] md:w-[300px] opacity-[0.06] md:opacity-[0.1] transition-all duration-1000"
-              style={{ transform: 'rotate(10deg) translateZ(0)', zIndex: 1 }}
-            >
-              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
-                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
-                  <div className="absolute inset-0 bg-white">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/42b0d8ed-a3ed-442f-bf6d-16f75529eca4"
-                      alt="Music App"
-                      className="w-full h-full object-contain grayscale"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Social App - 右後ろ */}
-            <div 
-              className="absolute right-[10%] top-[25%] w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-1000"
-              style={{ transform: 'rotate(15deg) translateZ(0)' }}
-            >
-              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
-                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
-                  <div className="absolute inset-0 bg-white">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/c9b8e7c1-234e-451f-b798-674ec6617358"
-                      alt="Social App"
-                      className="w-full h-full object-contain grayscale"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Travel App - 右下 */}
-            <div 
-              className="absolute right-[5%] bottom-[15%] w-[180px] md:w-[250px] opacity-[0.06] md:opacity-[0.1] transition-all duration-1000"
-              style={{ transform: 'rotate(-10deg) translateZ(0)' }}
-            >
-              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
-                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
-                  <div className="absolute inset-0 bg-white">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/df6b1f7c-dac9-4959-ba0d-b209abff45c9"
-                      alt="Travel App"
-                      className="w-full h-full object-contain grayscale"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Fitness App - 中央前 */}
-            <div 
-              className="absolute left-[25%] bottom-[20%] w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-1000"
-              style={{ transform: 'rotate(5deg) translateZ(0)', zIndex: 2 }}
-            >
-              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
-                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
-                  <div className="absolute inset-0 bg-white">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/2e720383-e3d1-4f66-8a2d-329b107a21c8"
-                      alt="Fitness App"
-                      className="w-full h-full object-contain grayscale"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Golf App - 中央前（メイン） */}
-            <div 
-              className="absolute left-[35%] top-[35%] w-[240px] md:w-[320px] opacity-[0.1] md:opacity-[0.15] transition-all duration-1000"
-              style={{ transform: 'rotate(-5deg) translateZ(0)', zIndex: 3 }}
-            >
-              <div className="relative bg-[#101828] rounded-[40px] p-3 shadow-2xl">
-                <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
-                  <div className="absolute inset-0 bg-white">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/42b0d8ed-a3ed-442f-bf6d-16f75529eca4"
-                      alt="Golf App"
-                      className="w-full h-full object-contain grayscale"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          {/* Left content */}
-          <div className="flex-1 max-w-full lg:max-w-[600px] space-y-6 md:space-y-8 text-center lg:text-left">
-            <AnimatedSection animation="fade-up" duration={800}>
-              <span className="section-bg-text left-0 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">HOME</span>
-              <div className="mb-4">
-                <span className="bg-[#fff100]/20 text-[#fff100] px-3 py-1 rounded-full text-sm font-medium">
-                  AI × 最新手法で最短実現
-                </span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-                完全オーダーメイドで
-                <br />
-                課題を解決する
-                <br />
-                WEB・アプリ制作
-              </h1>
-            </AnimatedSection>
-            <AnimatedSection animation="fade-up" delay={300} duration={800}>
-              <p className="text-lg md:text-xl text-white/90 mb-2">
-                ユーザーに使われる、成果につながるプロダクトを
-              </p>
-              <p className="text-base md:text-lg text-white/80">
-                企画から運用まで伴走してお届けします
-              </p>
-            </AnimatedSection>
-            <AnimatedSection animation="fade-up" delay={500} duration={800}>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                <Link 
-                  href={primaryHref} 
-                  prefetch={true} 
-                  className="inline-flex items-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg transition-all hover:scale-105 shadow-lg"
-                >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  {primaryText}
-                </Link>
-                <Link 
-                  href={secondaryHref} 
-                  prefetch={true} 
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg transition-all hover:scale-105 backdrop-blur-sm"
-                >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                  {secondaryText}
-                </Link>
-              </div>
-            </AnimatedSection>
-          </div>
-          {/* Right content - Stats */}
-          <AnimatedSection animation="fade-up" delay={200} duration={1000} className="flex-1 relative w-full max-w-[500px] lg:max-w-none">
-            <div className="grid grid-cols-3 gap-6 text-white">
-              <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold">4.7</p>
-                <p className="text-xs md:text-sm">評価</p>
-                <p className="text-xs text-white/60">2,107人</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold">1位</p>
-                <p className="text-xs md:text-sm">導入</p>
-                <p className="text-xs text-white/60">実績順位</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold">8倍</p>
-                <p className="text-xs md:text-sm">以上</p>
-                <p className="text-xs text-white/60">CV向上率</p>
-              </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32 min-h-[90vh] md:min-h-screen flex flex-col">
+        <div className="flex-1 flex flex-col justify-center">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Left content */}
+            <div className="flex-1 max-w-full lg:max-w-[600px] space-y-6 md:space-y-8 text-center lg:text-left">
+              <AnimatedSection animation="fade-up" duration={800}>
+                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">HOME</span>
+                <div className="mb-4">
+                  <span className="bg-[#fff100]/20 text-[#fff100] px-3 py-1 rounded-full text-sm font-medium">
+                    AI × 最新手法で最短実現
+                  </span>
+                </div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                  完全オーダーメイドで
+                  <br />
+                  課題を解決する
+                  <br />
+                  WEB・アプリ制作
+                </h1>
+              </AnimatedSection>
+              <AnimatedSection animation="fade-up" delay={300} duration={800}>
+                <p className="text-lg md:text-xl text-white/90 mb-2">
+                  ユーザーに使われる、成果につながるプロダクトを
+                </p>
+                <p className="text-base md:text-lg text-white/80">
+                  企画から運用まで伴走してお届けします
+                </p>
+              </AnimatedSection>
             </div>
-          </AnimatedSection>
+          </div>
         </div>
+        {/* CTA Buttons - 右下に配置 */}
+        <AnimatedSection animation="fade-up" delay={500} duration={800} className="mt-auto pt-8">
+          <div className="flex flex-row gap-3 justify-center lg:justify-end">
+            <Link 
+              href={primaryHref} 
+              prefetch={true} 
+              className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm md:text-base transition-all hover:scale-105 shadow-lg"
+            >
+              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              {primaryText}
+            </Link>
+            <Link 
+              href={secondaryHref} 
+              prefetch={true} 
+              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm md:text-base transition-all hover:scale-105 backdrop-blur-sm"
+            >
+              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              {secondaryText}
+            </Link>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );
@@ -318,7 +213,7 @@ function ChallengeSection() {
       <div className="relative max-w-[1100px] mx-auto">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-10 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">CHALLENGE</span>
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">CHALLENGE</span>
           <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest mb-2">PROBLEM</p>
           <h2 
             data-cms-key="site.challenge_title"
@@ -395,11 +290,11 @@ function SolutionSection() {
     <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden bg-white">
       <div className="relative max-w-[1100px] mx-auto">
         <AnimatedSection animation="zoom-in" className="relative text-center mb-12">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">APPROACH</span>
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">APPROACH</span>
           <div className="relative space-y-4 md:space-y-6">
             <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
             <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
-              Maxerasは
+              MAXELUSは
               <br />
               <span className="animate-text-gradient">オーダーメイド × 伴走</span>
               <br />
@@ -468,11 +363,6 @@ function ServicesSection() {
       link: "/lp/business-dx-design"
     },
     {
-      title: "PoC/MVP開発",
-      description: "最小機能でスタート。使いながら改善する",
-      link: "/services"
-    },
-    {
       title: "AI機能組込み・自動化",
       description: "要約/分類/検索/生成/動画分析。AIで業務を自動化",
       link: "/services"
@@ -494,19 +384,19 @@ function ServicesSection() {
       <div className="max-w-[1100px] mx-auto relative">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">SERVICES</span>
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">SERVICES</span>
           <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
             対応できる内容
           </h2>
         </AnimatedSection>
         
         {/* Services grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 justify-items-center sm:justify-items-stretch">
           {services.map((service, i) => (
-            <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-              <Link href={service.link}>
-                <TiltCard maxTilt={6} className="h-full">
-                  <div className="service-card bg-white rounded-[12px] md:rounded-[14px] shadow-md p-5 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 border-[#e5e7eb] hover:border-[#fff100]">
+            <AnimatedSection key={i} animation="fade-up" delay={i * 100} className="w-full sm:w-auto">
+              <Link href={service.link} className="block w-full sm:w-auto">
+                <TiltCard maxTilt={6} className="h-full w-full sm:max-w-[320px]">
+                  <div className="service-card bg-white rounded-[12px] md:rounded-[14px] shadow-md p-5 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 border-[#e5e7eb] hover:border-[#fff100] w-full">
                     {/* Shimmer effect */}
                     <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
                     
@@ -538,7 +428,7 @@ function WorksSection() {
       <div className="max-w-[1100px] mx-auto">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">CASES</span>
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">CASES</span>
           <div className="relative space-y-2 md:space-y-4">
             <h2 
               data-cms-key="site.works_title"
@@ -717,7 +607,7 @@ function FAQSection() {
       <div className="max-w-[900px] mx-auto relative">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">FAQ</span>
+          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FAQ</span>
           <h2 
             data-cms-key="site.faq_title"
             className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight"
@@ -930,9 +820,11 @@ export default function Home() {
                   デザインと機能の両方を体験いただけます。
                 </p>
               </div>
-              <div className="relative bg-gradient-to-b from-[#fafafa] via-white to-[#fffef0] rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 shadow-xl md:shadow-2xl hover:shadow-3xl transition-shadow duration-500">
-                <SalonReservationAppMockup />
-                <p className="text-center text-xs md:text-sm text-[#6a7282] mt-6 md:mt-8 px-2">
+              <div className="relative bg-gradient-to-b from-[#fafafa] via-white to-[#fffef0] rounded-2xl md:rounded-3xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-xl md:shadow-2xl hover:shadow-3xl transition-shadow duration-500 overflow-hidden">
+                <div className="w-full overflow-x-auto">
+                  <SalonReservationAppMockup />
+                </div>
+                <p className="text-center text-xs md:text-sm text-[#6a7282] mt-4 md:mt-6 px-2">
                   ※上記はインタラクティブなデモUIです。タップ/クリックして動作をお試しください。<br className="hidden sm:block" />
                   実案件では要件に合わせて最適化します
                 </p>

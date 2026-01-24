@@ -77,7 +77,7 @@ export default function EyelashSalonLP() {
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <AnimatedSection animation="fade-up" className="relative">
-                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#ffa1ad]/10">HERO</span>
+                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#ffa1ad]/10">HERO</span>
                 <div className="space-y-6">
                   <h1 className="text-5xl md:text-6xl font-normal text-[#ffa1ad] tracking-[18px] leading-tight">
                     ま い に ち が
@@ -110,7 +110,7 @@ export default function EyelashSalonLP() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <AnimatedSection animation="fade-up" className="relative">
-                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">ABOUT</span>
+                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">ABOUT</span>
                 <div className="bg-gradient-to-br from-[rgba(255,241,242,1)] to-[rgba(255,228,230,0.5)] rounded-lg p-12 relative">
                   <h2 className="text-5xl md:text-6xl font-normal text-[#d1d5dc] tracking-[9px] text-center mb-8">
                     eyelash salon
@@ -152,7 +152,7 @@ export default function EyelashSalonLP() {
         <section id="menu" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-white to-[rgba(255,241,242,0.3)]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#ffa1ad]/10">MENU</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#ffa1ad]/10">MENU</span>
               <p className="text-[#ffa1ad] italic text-sm mb-2">Our Services</p>
               <h2 className="text-4xl md:text-5xl font-normal text-[#0a0a0a] tracking-[10.8px] mb-2">MENU</h2>
               <p className="text-[#6a7282] text-sm">メニュー</p>
@@ -198,7 +198,7 @@ export default function EyelashSalonLP() {
                 </div>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={200} className="relative">
-                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#ffa1ad]/10">FLOW</span>
+                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#ffa1ad]/10">FLOW</span>
                 <div className="mb-8">
                   <p className="text-[#ffa1ad] italic text-sm mb-2">Process</p>
                   <h2 className="text-4xl md:text-5xl font-normal text-[#0a0a0a] tracking-[10.8px] mb-2">FLOW</h2>
@@ -274,7 +274,7 @@ export default function EyelashSalonLP() {
                 </div>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={200} className="relative">
-                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#ffa1ad]/10">FAQ</span>
+                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#ffa1ad]/10">FAQ</span>
                 <div className="mb-8">
                   <p className="text-[#ffa1ad] italic text-sm mb-2">Questions</p>
                   <h2 className="text-4xl md:text-5xl font-normal text-[#0a0a0a] tracking-[10.8px] mb-2">FAQ</h2>

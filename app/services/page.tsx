@@ -315,7 +315,7 @@ export default function ServicesPage() {
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">SERVICES</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">SERVICES</span>
               <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                 SERVICES
               </p>
@@ -532,7 +532,7 @@ export default function ServicesPage() {
                   href="/strengths"
                   className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-8 py-4 rounded-full border border-white/30 transition-all hover:scale-105"
                 >
-                  マクセラスの強みを見る
+                  MAXELUSの強みを見る
                 </Link>
               </div>
             </AnimatedSection>

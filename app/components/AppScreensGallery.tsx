@@ -98,7 +98,7 @@ export default function AppScreensGallery() {
     <div className="relative py-12 md:py-16">
       {/* Section Title */}
       <AnimatedSection animation="fade-up" className="text-center mb-8 md:mb-12 relative">
-        <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">APPS</span>
+        <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">APPS</span>
         <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-2 relative">アプリ画面イメージ</h3>
         <p className="text-[#6b7280] text-sm md:text-base">横にスクロールして様々なアプリをご覧ください</p>
       </AnimatedSection>

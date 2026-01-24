@@ -253,6 +253,7 @@ export const servicesData: Service[] = [
         'セキュリティ・パフォーマンス最適化',
         '運用・改善まで見据えた設計',
         '透明性の高いコミュニケーション',
+        '分析ダッシュボード（データ可視化・BI）',
       ],
       targetAudience: [
         'アイデアはあるが要件が固まらない',
@@ -368,59 +369,6 @@ export const servicesData: Service[] = [
     priority: 1,
   },
   {
-    id: 'poc-mvp-development',
-    category: 'app-dx',
-    title: 'PoC/MVP開発',
-    catch: '最小機能でスタート。使いながら改善する。',
-    tags: ['MVP', 'PoC', 'プロトタイプ', 'アジャイル開発'],
-    shortDesc: '最小限の機能でプロトタイプを作成し、実際に使いながら改善を重ねます。無駄な開発コストを削減します。',
-    details: {
-      capabilities: [
-        '最小機能でのプロトタイプ開発',
-        'アジャイル開発手法の採用',
-        'ユーザーフィードバックの反映',
-        '段階的な機能追加',
-        'スケーラブルな設計',
-      ],
-      targetAudience: [
-        'アイデアを形にしたいが、どこから始めればいいかわからない',
-        '最小機能で試したい',
-        'ユーザーの反応を見ながら開発したい',
-        '開発コストを抑えたい',
-      ],
-      process: [
-        {
-          step: 1,
-          title: '要件定義・MVP設計',
-          description: '最小限の機能を定義し、MVPの設計を行います。',
-        },
-        {
-          step: 2,
-          title: '開発・リリース',
-          description: 'MVPを開発し、実際に使える状態でリリースします。',
-        },
-        {
-          step: 3,
-          title: '改善・拡張',
-          description: 'ユーザーフィードバックを反映しながら、段階的に機能を追加します。',
-        },
-      ],
-      pricing: '30万円〜（機能要件により変動）',
-      faq: [
-        {
-          question: 'MVPから本格的なシステムに拡張できますか？',
-          answer: 'はい、MVPの段階からスケーラブルな設計を心がけているため、後から機能を追加しやすい構造になっています。',
-        },
-        {
-          question: '開発期間はどの程度かかりますか？',
-          answer: 'MVPの場合、通常は1〜2ヶ月程度でリリース可能です。機能要件により変動します。',
-        },
-      ],
-    },
-    ctaType: 'inline',
-    priority: 2,
-  },
-  {
     id: 'ai-integration',
     category: 'app-dx',
     title: 'AI機能組込み',
@@ -478,59 +426,6 @@ export const servicesData: Service[] = [
     ctaType: 'lp',
     lpHref: '/lp/ai-ocr-automation',
     priority: 3,
-  },
-  {
-    id: 'analytics-dashboard',
-    category: 'app-dx',
-    title: '分析ダッシュボード',
-    catch: 'データを「見える化」して、意思決定を加速。',
-    tags: ['分析', 'ダッシュボード', 'BI', 'データ可視化'],
-    shortDesc: '複数のデータソースを統合し、リアルタイムで分析できるダッシュボードを構築。経営判断をサポートします。',
-    details: {
-      capabilities: [
-        '複数データソースの統合',
-        'リアルタイム分析・可視化',
-        'カスタムレポートの作成',
-        'アラート機能（閾値超過通知）',
-        'モバイル対応',
-      ],
-      targetAudience: [
-        'データがバラバラで統合したい',
-        'リアルタイムで状況を把握したい',
-        '経営判断の材料が欲しい',
-        'レポート作成に時間がかかる',
-      ],
-      process: [
-        {
-          step: 1,
-          title: 'データソース整理',
-          description: 'どのようなデータがあるか整理し、統合方法を設計します。',
-        },
-        {
-          step: 2,
-          title: 'ダッシュボード開発',
-          description: 'データを統合し、分析・可視化機能を実装します。',
-        },
-        {
-          step: 3,
-          title: '運用・改善',
-          description: '実際に使いながら、必要な指標やレポートを追加します。',
-        },
-      ],
-      pricing: '35万円〜（データソース数・機能要件により変動）',
-      faq: [
-        {
-          question: 'どのようなデータソースに対応していますか？',
-          answer: 'データベース、CSV、API、Excelなど、主要なデータソースに対応しています。',
-        },
-        {
-          question: 'リアルタイム更新はどの程度の頻度ですか？',
-          answer: 'データソースによりますが、通常は1分〜1時間ごとに更新可能です。リアルタイム更新も対応可能です。',
-        },
-      ],
-    },
-    ctaType: 'inline',
-    priority: 4,
   },
   {
     id: 'integration-automation',

@@ -2,8 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import Footer from "../components/Footer";
 import { AnimatedSection, TiltCard, AnimatedCounter } from "../components/AnimationProvider";
+
+// デモコンポーネントを動的インポート
+const SalonReservationAppMockup = dynamic(() => import("../components/SalonReservationAppMockup"), {
+  loading: () => <div className="h-[600px] flex items-center justify-center bg-white"><div className="animate-pulse text-[#6a7282]">読み込み中...</div></div>,
+  ssr: false
+});
 
 // Strength型定義
 interface Strength {
@@ -125,15 +132,14 @@ const fallbackStrengths = [
 
 // 実績数値データ
 const stats = [
-  { label: "導入実績", value: 50, suffix: "社以上" },
-  { label: "継続率", value: 95, suffix: "%" },
+  { label: "満足度", value: 95, suffix: "%" },
   { label: "平均開発期間", value: 2, suffix: "ヶ月〜" },
-  { label: "業界経験", value: 10, suffix: "年以上" }
 ];
 
 export default function StrengthsPage() {
   // フォールバックデータを即座に表示（初期状態）
   const [loading, setLoading] = useState(false);
+  const [showDemoModal, setShowDemoModal] = useState(false);
   const [strengths, setStrengths] = useState<Strength[]>(
     fallbackStrengths.map((s, i) => ({
       id: s.id,
@@ -152,7 +158,7 @@ export default function StrengthsPage() {
     cta_secondary_text?: string;
     cta_secondary_href?: string;
   } | null>({
-    title: 'マクセラスが選ばれる理由',
+    title: 'MAXELUSが選ばれる理由',
     subtitle: '"作るだけ"では終わらない。現場で使える・更新できる・拡張できるシステムを、最短で形にします。',
     cta_primary_text: '無料相談する',
     cta_primary_href: '/contact',
@@ -183,7 +189,7 @@ export default function StrengthsPage() {
         }
         if (siteSettings.ok) {
           setPageSettings({
-            title: siteSettings.data?.strengths_page_title || 'マクセラスが選ばれる理由',
+            title: siteSettings.data?.strengths_page_title || 'MAXELUSが選ばれる理由',
             subtitle: siteSettings.data?.strengths_page_subtitle || '"作るだけ"では終わらない。現場で使える・更新できる・拡張できるシステムを、最短で形にします。',
             cta_primary_text: siteSettings.data?.strengths_page_cta_primary_text || '無料相談する',
             cta_primary_href: siteSettings.data?.strengths_page_cta_primary_href || '/contact',
@@ -228,12 +234,12 @@ export default function StrengthsPage() {
           
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">STRENGTHS</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">STRENGTHS</span>
               <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                 STRENGTHS
               </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight px-2 relative">
-                {pageSettings?.title || 'マクセラスが選ばれる理由'}
+                {pageSettings?.title || 'MAXELUSが選ばれる理由'}
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-2 relative">
                 {pageSettings?.subtitle || '"作るだけ"では終わらない。現場で使える・更新できる・拡張できるシステムを、最短で形にします。'}
@@ -362,34 +368,89 @@ export default function StrengthsPage() {
               ].map((item, index) => (
                 <AnimatedSection key={index} animation="fade-up" delay={Math.min(index * 50, 200)}>
                   <TiltCard maxTilt={5} className="h-full">
-                    <Link href={item.href} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full block group">
-                      <div className="aspect-video bg-[#e5e7eb] overflow-hidden">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img 
-                          src={item.image} 
-                          alt={item.title}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                      <div className="p-4 sm:p-6">
-                        <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">{item.title}</h3>
-                        <p className="text-xs sm:text-sm text-[#6b7280]">{item.description}</p>
-                        <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1">
-                          詳細を見る
-                          <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
+                    {item.title === "iPhoneデモ" ? (
+                      <button
+                        onClick={() => setShowDemoModal(true)}
+                        className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group text-left"
+                      >
+                        <div className="aspect-video bg-[#e5e7eb] overflow-hidden">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img 
+                            src={item.image} 
+                            alt={item.title}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                            decoding="async"
+                          />
                         </div>
-                      </div>
-                    </Link>
+                        <div className="p-4 sm:p-6">
+                          <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">{item.title}</h3>
+                          <p className="text-xs sm:text-sm text-[#6b7280]">{item.description}</p>
+                          <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1">
+                            デモを表示
+                            <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </div>
+                        </div>
+                      </button>
+                    ) : (
+                      <Link href={item.href} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full block group">
+                        <div className="aspect-video bg-[#e5e7eb] overflow-hidden">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img 
+                            src={item.image} 
+                            alt={item.title}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                        <div className="p-4 sm:p-6">
+                          <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">{item.title}</h3>
+                          <p className="text-xs sm:text-sm text-[#6b7280]">{item.description}</p>
+                          <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1">
+                            詳細を見る
+                            <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </div>
+                        </div>
+                      </Link>
+                    )}
                   </TiltCard>
                 </AnimatedSection>
               ))}
             </div>
           </div>
         </section>
+
+        {/* Demo Modal */}
+        {showDemoModal && (
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setShowDemoModal(false)}
+          >
+            <div 
+              className="relative bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowDemoModal(false)}
+                className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all hover:scale-110"
+                aria-label="閉じる"
+              >
+                <svg className="w-6 h-6 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-[#1a1a1a] mb-4 text-center">サロン予約アプリデモ</h3>
+                <SalonReservationAppMockup />
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* CTA Section */}
         <section className="bg-[#0b1220] py-16 md:py-24 relative overflow-hidden">

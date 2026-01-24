@@ -17,11 +17,11 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "マクセラス | 業務システム・Webアプリ開発",
+  title: "MAXELUS | 業務システム・Webアプリ開発",
   description: "ホームページ制作からWebアプリ開発、業務DX支援まで。触れるデモで完成イメージを明確に。製造業、医療、建設など幅広い業界で実績があります。",
   keywords: ["Webアプリ開発", "業務システム", "DX", "ホームページ制作", "システム開発"],
   openGraph: {
-    title: "マクセラス | 業務システム・Webアプリ開発",
+    title: "MAXELUS | 業務システム・Webアプリ開発",
     description: "ホームページ制作からWebアプリ開発、業務DX支援まで。触れるデモで完成イメージを明確に。",
     type: "website",
   },

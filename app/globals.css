@@ -64,14 +64,13 @@ html {
 
 /* Section background text */
 .section-bg-text {
-  font-size: 128px;
   font-weight: bold;
   color: #f3f4f6;
   opacity: 0.1;
-  letter-spacing: 2.56px;
-  line-height: 192px;
+  letter-spacing: 0.02em;
   position: absolute;
   white-space: nowrap;
+  /* レスポンシブ対応：font-sizeはインラインで指定 */
 }
 
 /* Card hover effects */

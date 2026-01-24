@@ -40,7 +40,7 @@ export default function BusinessDXDesignLP() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
-            Maxeras
+            MAXELUS
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#solution" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
@@ -163,7 +163,7 @@ export default function BusinessDXDesignLP() {
           
           <div className="relative max-w-[1100px] mx-auto">
             <AnimatedSection animation="zoom-in" className="relative text-center">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">SOLUTION</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">SOLUTION</span>
               <div className="relative space-y-4 md:space-y-6">
                 <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
                 <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
@@ -191,7 +191,7 @@ export default function BusinessDXDesignLP() {
           <div className="max-w-[1100px] mx-auto relative">
             {/* Section heading */}
             <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">SERVICES</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">SERVICES</span>
               <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
                 対応できる内容
               </h2>
@@ -271,7 +271,7 @@ export default function BusinessDXDesignLP() {
         <section id="contact" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">CONTACT</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CONTACT</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">お問い合わせ</h2>
               <p className="text-[#6b7280]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
             </AnimatedSection>

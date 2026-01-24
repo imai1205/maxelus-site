@@ -61,7 +61,7 @@ export default function AICodingEducationLP() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
             <div className="text-center">
               <AnimatedSection animation="fade-up" className="relative">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">EDUCATION</span>
+                <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">EDUCATION</span>
                 <div className="flex flex-wrap justify-center gap-3 mb-6">
                   <span className="bg-white border border-[#ff6900] text-[#f54900] px-3 py-1 rounded-full text-sm font-bold">
                     業務効率化ツール
@@ -199,7 +199,7 @@ export default function AICodingEducationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">REVOLUTION</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">REVOLUTION</span>
               <div className="bg-[#ff6900] text-white px-6 py-3 rounded-full inline-block mb-6 relative">
                 <p className="text-lg font-bold">生成AIの登場によって</p>
                 <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-[#ff6900]" />
@@ -218,7 +218,7 @@ export default function AICodingEducationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fffbeb]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">CONCEPT</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">CONCEPT</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#0a0a0a] mb-4 relative">
                 誰でもすぐに取り組める
                 <br />
@@ -270,7 +270,7 @@ export default function AICodingEducationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">STATS</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">STATS</span>
               <h2 className="text-xl md:text-2xl font-bold text-[#0a0a0a] mb-8 relative">AI使用率</h2>
             </AnimatedSection>
             <div className="bg-white rounded-2xl p-6 border border-[#e5e7eb] shadow-lg">
@@ -303,7 +303,7 @@ export default function AICodingEducationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fffbeb]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">PROJECTS</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PROJECTS</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#ff6900] mb-8 relative">作れるもの</h2>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -341,7 +341,7 @@ export default function AICodingEducationLP() {
         <section id="cases" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">CASES</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">CASES</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#ff6900] mb-8 relative">CASE</h2>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -379,7 +379,7 @@ export default function AICodingEducationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">VOICES</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VOICES</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#ff6900] mb-8 relative">実践者の声</h2>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -423,7 +423,7 @@ export default function AICodingEducationLP() {
         <section id="curriculum" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">CURRICULUM</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">CURRICULUM</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#ff6900] mb-8 relative">学べる内容</h2>
             </AnimatedSection>
             <div className="space-y-4 mb-12">
@@ -488,7 +488,7 @@ export default function AICodingEducationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fffbeb]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">BENEFITS</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">BENEFITS</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#ff6900] mb-8 relative">5大特典</h2>
             </AnimatedSection>
             <div className="space-y-4">
@@ -539,7 +539,7 @@ export default function AICodingEducationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">WHY</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">WHY</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#0a0a0a] mb-4 relative">
                 なぜ
                 <span className="text-[#ff6900]">無料</span>
@@ -579,7 +579,7 @@ export default function AICodingEducationLP() {
         <section id="contact" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[#ff6900] to-[#f54900]">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-white/10">CONTACT</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-white/10">CONTACT</span>
               <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 relative">
                 今すぐ
                 <span className="text-[#ffdf20]">ご視聴</span>

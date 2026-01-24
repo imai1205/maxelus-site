@@ -8,6 +8,64 @@ import { cases, type Case } from "@/app/data/casesData";
 import AppScreensGallery from "@/app/components/AppScreensGallery";
 import SalonReservationAppMockup from "@/app/components/SalonReservationAppMockup";
 
+// デモ画面画像データ（public/cases/フォルダの画像を使用）
+const caseImages = [
+  {
+    id: 'nail',
+    title: 'ネイルサロン管理アプリ',
+    iphoneImage: '/cases/nail.png',
+    macbookImage: '/cases/nail.png',
+  },
+  {
+    id: 'kiji',
+    title: '記事管理アプリ',
+    iphoneImage: '/cases/kiji.png',
+    macbookImage: '/cases/kiji.png',
+  },
+  {
+    id: 'calc',
+    title: '計算アプリ',
+    iphoneImage: '/cases/calc.png',
+    macbookImage: '/cases/calc.png',
+  },
+  {
+    id: 'item',
+    title: 'アイテム管理アプリ',
+    iphoneImage: '/cases/item.png',
+    macbookImage: '/cases/item.png',
+  },
+  {
+    id: 'draw',
+    title: '図面管理アプリ',
+    iphoneImage: '/cases/draw.png',
+    macbookImage: '/cases/draw.png',
+  },
+  {
+    id: 'car',
+    title: '車関連アプリ',
+    iphoneImage: '/cases/car.png',
+    macbookImage: '/cases/car.png',
+  },
+  {
+    id: 'vegas',
+    title: 'ベガス関連アプリ',
+    iphoneImage: '/cases/vegas.png',
+    macbookImage: '/cases/vegas.png',
+  },
+  {
+    id: 'saron',
+    title: 'サロン管理アプリ',
+    iphoneImage: '/cases/saron.png',
+    macbookImage: '/cases/saron.png',
+  },
+  {
+    id: 'shop',
+    title: 'ショッピングアプリ',
+    iphoneImage: '/cases/shop.png',
+    macbookImage: '/cases/shop.png',
+  },
+];
+
 export default function FullOrderAppDevelopmentLP() {
   const [formData, setFormData] = useState({
     name: "",
@@ -15,6 +73,7 @@ export default function FullOrderAppDevelopmentLP() {
     company: "",
     message: "",
   });
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,14 +93,14 @@ export default function FullOrderAppDevelopmentLP() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
-            Maxeras
+            MAXELUS
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#merits" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               メリット
             </a>
             <a href="#results" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
-              実績
+              事例
             </a>
             <a href="#cases" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               事例
@@ -78,7 +137,7 @@ export default function FullOrderAppDevelopmentLP() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <AnimatedSection animation="fade-up" className="relative">
-                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">FULL ORDER</span>
+                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">FULL ORDER</span>
                 <div className="mb-4">
                   <span className="bg-[#fff100]/20 text-[#fff100] px-3 py-1 rounded-full text-sm font-medium">
                     AI × 最新手法で最短実現
@@ -154,9 +213,9 @@ export default function FullOrderAppDevelopmentLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">APPROACH</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">APPROACH</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
-                Maxerasは
+                MAXELUSは
                 <br />
                 <span className="text-[#fff100]">オーダーメイド × 伴走</span>
                 <br />
@@ -211,7 +270,7 @@ export default function FullOrderAppDevelopmentLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">PROBLEMS</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">PROBLEMS</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">こんなお悩みありませんか？</h2>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -256,8 +315,8 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="merits" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">MERIT</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">Maxerasで開発する5つのメリット</h2>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">MERIT</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">MAXELUSで開発する5つのメリット</h2>
             </AnimatedSection>
             <div className="space-y-6">
               {[
@@ -307,15 +366,14 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="results" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">RESULTS</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">実績</h2>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">DEMO</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">デモ画面</h2>
               <p className="text-[#6b7280]">様々な業界のクライアント様にご利用いただいています</p>
             </AnimatedSection>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
               {[
                 { value: "50+", label: "プロジェクト実績" },
                 { value: "98%", label: "顧客満足度" },
-                { value: "4.8", label: "平均評価" },
                 { value: "24h", label: "平均返信時間" },
               ].map((stat, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
@@ -327,69 +385,78 @@ export default function FullOrderAppDevelopmentLP() {
               ))}
             </div>
             
-            {/* App Screens Gallery - Figmaデザインをそのまま表示 */}
+            {/* App Screens Gallery - スライダー形式 */}
             <div className="bg-white rounded-xl p-6 md:p-8 mb-8">
               <div className="relative w-full max-w-6xl mx-auto">
-                <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
-                  {/* iPhone */}
-                  <div className="relative w-[280px] h-[610px] flex-shrink-0">
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[28px] bg-black rounded-b-[20px] flex items-center justify-center">
-                      <div className="w-[50px] h-[5px] bg-[#1e2939] rounded-full"></div>
-                      <div className="absolute left-[20px] w-[10px] h-[10px] rounded-full border border-[#4a5565] bg-[#364153]"></div>
-                    </div>
-                    <div className="absolute top-0 left-0 w-[280px] h-[570px] bg-[#101828] rounded-[40px] shadow-[0px_25px_50px_0px_rgba(0,0,0,0.25)] p-3">
-                      <div className="w-full h-full bg-black rounded-[32px] overflow-hidden relative">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src="https://www.figma.com/api/mcp/asset/07dbf711-4b5b-4537-9b9b-117c68736604"
-                          alt="サロン予約アプリ - iPhone"
-                          className="w-full h-full object-contain"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                    </div>
-                    <p className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[#4a5565] text-sm mt-2">iPhone</p>
-                  </div>
-
-                  {/* MacBook */}
-                  <div className="relative w-[640px] h-[483px] flex-shrink-0 hidden lg:block">
-                    <div className="absolute top-0 left-0 w-[640px] h-[435px]">
-                      <div className="absolute top-0 left-0 w-[640px] h-[415px] bg-[#1e2939] rounded-t-[12px] shadow-[0px_25px_50px_0px_rgba(0,0,0,0.25)] p-2">
-                        <div className="w-full h-full bg-black rounded-t-[8px] overflow-hidden relative">
+                {/* スライダーコンテナ */}
+                <div className="relative overflow-hidden rounded-lg bg-white">
+                  <div 
+                    className="flex transition-transform duration-500 ease-in-out"
+                    style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+                  >
+                    {caseImages.map((caseImage, index) => (
+                      <div key={caseImage.id} className="min-w-full flex-shrink-0 flex items-center justify-center">
+                        {/* 白背景に直接画像を表示 */}
+                        <div className="relative w-full max-w-5xl mx-auto">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
-                            src="https://www.figma.com/api/mcp/asset/8bf82df4-9242-4f84-a11d-2a6c99aa583d"
-                            alt="サロン予約アプリ - MacBook"
-                            className="w-full h-full object-contain"
+                            src={caseImage.iphoneImage}
+                            alt={caseImage.title}
+                            className="w-full h-auto object-contain"
                             loading="lazy"
                             decoding="async"
                           />
                         </div>
                       </div>
-                      <div className="absolute bottom-0 left-0 w-[640px] h-[20px]">
-                        <div className="absolute top-0 left-0 w-full h-[4px] bg-[#364153]"></div>
-                        <div className="absolute top-[4px] left-0 w-full h-[16px] bg-gradient-to-b from-[#d1d5dc] to-[#99a1af] rounded-b-[8px] shadow-[0px_10px_15px_0px_rgba(0,0,0,0.1),0px_4px_6px_0px_rgba(0,0,0,0.1)] flex items-center justify-center px-[260px] pt-[11px]">
-                          <div className="w-full h-[2px] bg-[#6a7282] opacity-50 rounded-full"></div>
-                        </div>
-                      </div>
-                      <div className="absolute -bottom-[8px] left-[10px] w-[620px] h-[8px] bg-black/20 blur-[12px] rounded-full"></div>
-                    </div>
-                    <p className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[#4a5565] text-sm mt-2">MacBook</p>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <div className="bg-white rounded-xl p-8">
-              <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-4">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className="aspect-square bg-[#f3f4f6] rounded-lg flex items-center justify-center">
-                    <span className="text-xs text-[#6b7280]">Client {i}</span>
+                {/* インジケーターとナビゲーションボタン */}
+                <div className="flex items-center justify-center gap-4 mt-6">
+                  {/* 左矢印ボタン */}
+                  <button
+                    onClick={() => setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : caseImages.length - 1))}
+                    className="bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all hover:scale-110"
+                    aria-label="前の画像"
+                  >
+                    <svg className="w-5 h-5 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+
+                  {/* ページ番号表示 */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-[#6b7280]">
+                      {currentImageIndex + 1} / {caseImages.length}
+                    </span>
+                    {/* インジケーター */}
+                    <div className="flex gap-2">
+                      {caseImages.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`h-2 rounded-full transition-all ${
+                            index === currentImageIndex ? 'bg-[#fff100] w-8' : 'bg-[#d1d5dc] w-2'
+                          }`}
+                          aria-label={`画像 ${index + 1} に移動`}
+                        />
+                      ))}
+                    </div>
                   </div>
-                ))}
+
+                  {/* 右矢印ボタン */}
+                  <button
+                    onClick={() => setCurrentImageIndex((prev) => (prev < caseImages.length - 1 ? prev + 1 : 0))}
+                    className="bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all hover:scale-110"
+                    aria-label="次の画像"
+                  >
+                    <svg className="w-5 h-5 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-              <p className="text-xs text-[#6b7280] text-center">※ クライアント様の許可を得たロゴのみ掲載予定</p>
             </div>
           </div>
         </section>
@@ -398,7 +465,7 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="cases" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">CASES</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CASES</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">導入事例</h2>
               <p className="text-[#6b7280]">実際の課題解決事例をご紹介します</p>
             </AnimatedSection>
@@ -481,7 +548,7 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="flow" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">FLOW</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">FLOW</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">制作フロー</h2>
               <p className="text-[#6b7280]">企画から運用改善まで、一貫してサポートします</p>
             </AnimatedSection>
@@ -559,7 +626,7 @@ export default function FullOrderAppDevelopmentLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[#ff6900] to-[#f54900]">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-white/10">CTA</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-white/10">CTA</span>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative">
                 今、動かないことが
                 <br />
@@ -616,7 +683,7 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="contact" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] text-[#d1d5dc]/10">CONTACT</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CONTACT</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">お問い合わせ</h2>
               <p className="text-[#6b7280]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
             </AnimatedSection>

@@ -30,7 +30,7 @@ export default function AboutPage() {
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">ABOUT</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">ABOUT</span>
               <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                 ABOUT US
               </p>
@@ -48,7 +48,7 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">OVERVIEW</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">OVERVIEW</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-8 text-center relative">
                 会社概要
               </h2>
@@ -61,7 +61,7 @@ export default function AboutPage() {
                     会社名
                   </dt>
                   <dd className="text-base md:text-lg text-[#1a1a1a] font-medium">
-                    株式会社マクセラス
+                    株式会社MAXELUS
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]">
@@ -105,7 +105,7 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">BUSINESS</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">BUSINESS</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 事業内容
               </h2>
@@ -164,7 +164,7 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">ABOUT</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">ABOUT</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-6 relative">
                 私たちについて
               </h2>
@@ -173,7 +173,7 @@ export default function AboutPage() {
             <AnimatedSection animation="fade-up" delay={200}>
               <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
                 <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
-                  マクセラスは、AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです。
+                  MAXELUSは、AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです。
                   要件定義や設計だけで終わらず、実際に現場・組織の中で動くところまで落とし込み、改善まで伴走します。
                 </p>
                 <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed">
@@ -190,7 +190,7 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">VALUE</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VALUE</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 できること（提供価値）
               </h2>
@@ -393,7 +393,7 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">MESSAGE</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">MESSAGE</span>
               <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 代表挨拶
               </h2>
@@ -411,7 +411,7 @@ export default function AboutPage() {
                   こうした状況は、業界や規模を問わず多くの組織で起こり得ます。
                 </p>
                 <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
-                  マクセラスは、そうした&quot;止まりがちな流れ&quot;を、
+                  MAXELUSは、そうした&quot;止まりがちな流れ&quot;を、
                   AIとデータ、そしてモダンな開発手法でつなぎ直し、
                   最短で現場に届くプロダクトとして提供します。
                 </p>

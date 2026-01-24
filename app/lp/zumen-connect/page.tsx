@@ -64,7 +64,7 @@ export default function ZumenConnectLP() {
               {/* Left Content */}
               <div>
                 <AnimatedSection animation="fade-up" className="relative">
-                  <span className="section-bg-text left-0 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px]">PRODUCT</span>
+                  <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">PRODUCT</span>
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-6 leading-tight relative">
                     図面・関連資料・見積を、
                     <br />
@@ -155,7 +155,7 @@ export default function ZumenConnectLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">PROBLEM</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PROBLEM</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 現場の3つの課題を、一気に解決
               </h2>
@@ -211,7 +211,7 @@ export default function ZumenConnectLP() {
         <section id="features" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">FEATURES</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FEATURES</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 必要な機能を、すべて統合
               </h2>
@@ -270,7 +270,7 @@ export default function ZumenConnectLP() {
         <section id="outcomes" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">OUTCOMES</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">OUTCOMES</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 導入企業が実感する効果
               </h2>
@@ -337,7 +337,7 @@ export default function ZumenConnectLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">PROCESS</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PROCESS</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 導入の流れ
               </h2>
@@ -401,7 +401,7 @@ export default function ZumenConnectLP() {
         <section id="pricing" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">PRICING</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PRICING</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 シンプルな料金体系
               </h2>
@@ -468,7 +468,7 @@ export default function ZumenConnectLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px]">SUPPORT</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">SUPPORT</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                 安心のサポート体制
               </h2>

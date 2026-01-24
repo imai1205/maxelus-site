@@ -212,7 +212,7 @@ function CaseDetailModal({
           {caseItem.screenshots && caseItem.screenshots.length > 0 && (
             <div className="mt-6 pt-6 border-t border-[#e5e7eb]">
               <p className="text-xs text-[#6b7280] mb-4">画面イメージ</p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {caseItem.screenshots.map((screenshot, i) => (
                   <div key={i} className="aspect-video rounded-lg overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -339,7 +339,7 @@ export default function CasesPage() {
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[40px] md:text-[80px] lg:text-[100px] text-white/10">CASES</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">CASES</span>
               <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                 CASES
               </p>
@@ -363,7 +363,7 @@ export default function CasesPage() {
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
             </AnimatedSection>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 justify-items-center sm:justify-items-stretch">
               {industries.map((industry, i) => (
                 <AnimatedSection
                   key={industry.id}
@@ -408,7 +408,7 @@ export default function CasesPage() {
               </AnimatedSection>
 
               {filteredCases.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center md:justify-items-stretch">
                   {filteredCases.map((caseItem) => (
                     <CaseCard
                       key={caseItem.id}
