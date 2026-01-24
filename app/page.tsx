@@ -79,7 +79,7 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
       />
 
       {/* Background App Screens - 薄く表示 */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-visible pointer-events-none">
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-[60%] h-full flex items-center justify-center">
           {/* App screens in background - IPhoneFrame-で始まる画像を配置 */}
           <div className="relative w-full h-full flex items-center justify-center">
@@ -94,13 +94,37 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
               { src: '/cases/IPhoneFrame-vegas.png', alt: 'ベガス関連アプリ', pos: { left: '10%', top: '50%' }, rotate: 8, zIndex: 1 },
               { src: '/cases/IPhoneFrame-saron.png', alt: 'サロン管理アプリ', pos: { right: '15%', bottom: '30%' }, rotate: -8, zIndex: 1 },
               { src: '/cases/IPhoneFrame-shop.png', alt: 'ショッピングアプリ', pos: { left: '45%', top: '15%' }, rotate: 12, zIndex: 2 },
-            ].map((app, index) => (
+            ].map((app, index) => {
+              // #region agent log
+              fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:97',message:'Image element created',data:{index,alt:app.alt,pos:app.pos,zIndex:app.zIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'run4',hypothesisId:'C'})}).catch(()=>{});
+              // #endregion
+              // #region agent log
+              fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:97',message:'Image element created',data:{index,alt:app.alt,pos:app.pos,zIndex:app.zIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'C'})}).catch(()=>{});
+              // #endregion
+              return (
               <div
                 key={index}
-                className="group absolute w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-700 ease-out hover:opacity-[0.4] hover:scale-125 hover:z-50 cursor-pointer"
+                className="group absolute w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-700 ease-out hover:opacity-[0.4] hover:scale-125 cursor-pointer"
                 style={{
                   ...app.pos,
-                  zIndex: app.zIndex,
+                  zIndex: app.zIndex + 10 + index, // 各画像に異なるz-indexを設定して重なりを管理
+                  pointerEvents: 'auto',
+                }}
+                onMouseEnter={(e) => {
+                  // #region agent log
+                  fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:108',message:'onMouseEnter fired',data:{index,alt:app.alt,currentZIndex:e.currentTarget.style.zIndex,computedZIndex:window.getComputedStyle(e.currentTarget).zIndex,rect:e.currentTarget.getBoundingClientRect()},timestamp:Date.now(),sessionId:'debug-session',runId:'run4',hypothesisId:'A'})}).catch(()=>{});
+                  // #endregion
+                  // ホバー時に確実に前面に来るように、z-indexを最大値に設定
+                  e.currentTarget.style.zIndex = '200';
+                  // #region agent log
+                  fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:111',message:'z-index set to 200',data:{index,alt:app.alt,newZIndex:e.currentTarget.style.zIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'run4',hypothesisId:'B'})}).catch(()=>{});
+                  // #endregion
+                }}
+                onMouseLeave={(e) => {
+                  // #region agent log
+                  fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:115',message:'onMouseLeave fired',data:{index,alt:app.alt},timestamp:Date.now(),sessionId:'debug-session',runId:'run4',hypothesisId:'A'})}).catch(()=>{});
+                  // #endregion
+                  e.currentTarget.style.zIndex = String(app.zIndex + 10 + index);
                 }}
               >
                 <div 
@@ -113,13 +137,14 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
                   <img
                     src={app.src}
                     alt={app.alt}
-                    className="w-full h-auto object-contain grayscale-[0.9] brightness-75 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:brightness-110 group-hover:contrast-105"
+                    className="w-full h-auto object-contain grayscale-[0.9] brightness-75 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:brightness-110 group-hover:contrast-105 pointer-events-none"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
       </div>
@@ -133,7 +158,7 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
                 <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">HOME</span>
                 <div className="mb-4">
                   <span className="bg-[#fff100]/20 text-[#fff100] px-3 py-1 rounded-full text-sm font-medium">
-                    AI × 最新手法で最短実現
+                    AI × 最新手法
                   </span>
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
@@ -354,7 +379,7 @@ function ServicesSection() {
   const services = [
     {
       title: "完全オーダーメイドアプリ開発",
-      description: "AI × 最新手法で最短実現。企画から運用まで伴走",
+      description: "AI × 最新手法。企画から運用まで伴走",
       link: "/lp/full-order-app-development"
     },
     {
@@ -402,7 +427,7 @@ function ServicesSection() {
                     
                     <h3 className="text-lg md:text-xl text-[#1a1a1a] mb-2 md:mb-3 group-hover:text-[#fdc700] transition-colors font-bold">{service.title}</h3>
                     <p className="text-xs md:text-sm text-[#6b7280] mb-4">{service.description}</p>
-                    <div className="flex items-center text-[#fff100] text-xs md:text-sm group-hover:translate-x-2 transition-transform">
+                    <div className="flex items-center text-[#1a1a1a] bg-[#fff100] px-3 py-1 rounded-full text-xs md:text-sm font-medium group-hover:translate-x-2 transition-transform">
                       詳しく見る
                       <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

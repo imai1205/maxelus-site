@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const imgLogo = "https://www.figma.com/api/mcp/asset/bab5858e-9bd6-4cc7-9783-62ba4339b159";
+const imgLogo = "/logo.png";
 
 export default function Footer() {
   return (
@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
           <div className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={imgLogo} alt="MAXELUS" className="h-10 w-auto brightness-0 invert" />
+            <img src={imgLogo} alt="マクセラス" className="h-10 w-auto brightness-0 invert" />
           </div>
           <nav className="flex flex-wrap gap-6 text-sm text-gray-400">
             <Link href="/" prefetch={true} className="hover:text-white transition-colors">ホーム</Link>

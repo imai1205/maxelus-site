@@ -166,10 +166,8 @@ export default function StrengthsPage() {
     cta_secondary_href: '/services',
   });
   const [stats, setStats] = useState<Array<{ label: string; value: number; suffix: string }>>([
-    { label: "導入実績", value: 50, suffix: "社以上" },
-    { label: "継続率", value: 95, suffix: "%" },
+    { label: "満足度", value: 95, suffix: "%" },
     { label: "平均開発期間", value: 2, suffix: "ヶ月〜" },
-    { label: "業界経験", value: 10, suffix: "年以上" }
   ]);
 
   // データ取得を非同期で実行（バックグラウンドで更新）
@@ -251,7 +249,7 @@ export default function StrengthsPage() {
         {/* Stats Section */}
         <section className="py-12 md:py-16 bg-[#fafafa] border-b border-[#e5e7eb]">
           <div className="max-w-6xl mx-auto px-4 md:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 max-w-2xl mx-auto">
               {stats.map((stat, index) => (
                 <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
                   <div className="text-center">

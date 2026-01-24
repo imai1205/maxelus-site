@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const imgLogo = "https://www.figma.com/api/mcp/asset/bab5858e-9bd6-4cc7-9783-62ba4339b159";
+const imgLogo = "/logo.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -32,7 +32,7 @@ export default function Header() {
       <div className="flex items-center justify-between h-14 md:h-16 px-4 md:px-8 max-w-[1200px] mx-auto">
         <Link href="/" className="flex items-center" prefetch={true}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={imgLogo} alt="MAXELUS" className="h-8 md:h-10 w-auto" />
+          <img src={imgLogo} alt="マクセラス" className="h-8 md:h-10 w-auto" />
         </Link>
         
         {/* Desktop Nav */}

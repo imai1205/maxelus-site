@@ -17,13 +17,25 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "MAXELUS | 業務システム・Webアプリ開発",
-  description: "ホームページ制作からWebアプリ開発、業務DX支援まで。触れるデモで完成イメージを明確に。製造業、医療、建設など幅広い業界で実績があります。",
-  keywords: ["Webアプリ開発", "業務システム", "DX", "ホームページ制作", "システム開発"],
+  title: "マクセラス | DX・ホームページ作成・Webアプリ開発",
+  description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
+  keywords: ["DX", "ホームページ作成", "Webアプリ開発", "業務システム", "システム開発", "マクセラス"],
   openGraph: {
-    title: "MAXELUS | 業務システム・Webアプリ開発",
-    description: "ホームページ制作からWebアプリ開発、業務DX支援まで。触れるデモで完成イメージを明確に。",
+    title: "マクセラス | DX・ホームページ作成・Webアプリ開発",
+    description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
     type: "website",
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'マクセラス',
+      },
+    ],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 };
 
