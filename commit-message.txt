@@ -1,8 +1,1 @@
-iPhoneの3Dモデルをシンプル化：iPhone Frame画像を立体的に表示
-
-- iPhone Frame画像（IPhoneFrame-saron.png）をそのまま前面に表示
-- 3Dの厚みを0.4に増やしてより立体的に
-- 後ろ側のど真ん中にマクセラスロゴを大きく配置（Appleマークを削除）
-- ロゴのサイズをframeWidth * 0.8 × frameHeight * 0.3に設定
-- 複雑な3Dモデル構造を削除し、シンプルな平面+厚みの構造に変更
-- テクスチャ読み込みを最適化（2つのテクスチャのみ）
+iPhone Frame画像をIPhoneFrame-car.pngに変更

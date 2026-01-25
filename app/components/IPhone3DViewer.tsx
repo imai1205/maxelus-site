@@ -60,7 +60,7 @@ export default function IPhone3DViewer() {
     : '/cases/logo(W).png';
 
   // iPhone Frame画像
-  const framePath = '/cases/IPhoneFrame-saron.png';
+  const framePath = '/cases/IPhoneFrame-car.png';
 
   // テクスチャを読み込む（最適化版）
   useEffect(() => {
