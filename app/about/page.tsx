@@ -103,7 +103,7 @@ export default function AboutPage() {
         </section>
 
         {/* 事業内容 */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">BUSINESS</span>
@@ -150,10 +150,10 @@ export default function AboutPage() {
                   delay={i * 50}
                 >
                   <GlassCard variant="light" padding="md" className="h-full group">
-                    <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
+                    <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs md:text-sm text-[#6b7280]">{item.description}</p>
+                    <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af]">{item.description}</p>
                   </GlassCard>
                 </AnimatedSection>
               ))}
@@ -162,22 +162,22 @@ export default function AboutPage() {
         </section>
 
         {/* 私たちについて */}
-        <section className="py-16 md:py-24 px-4 md:px-8">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">ABOUT</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-6 relative">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 relative">
                 私たちについて
               </h2>
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={200}>
               <GlassCard variant="light" padding="lg">
-                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-6">
                   MAXELUSは、AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです。
                   要件定義や設計だけで終わらず、実際に現場・組織の中で動くところまで落とし込み、改善まで伴走します。
                 </p>
-                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed">
+                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed">
                   「何を作るべきか」から一緒に整理し、
                   <br />
                   発見 → 判断 → 実行 が止まらない状態をつくることが私たちの役割です。
@@ -188,7 +188,7 @@ export default function AboutPage() {
         </section>
 
         {/* できること（提供価値） */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VALUE</span>
@@ -260,15 +260,15 @@ export default function AboutPage() {
                     <div className="mb-3">
                       <BubbleBadge variant="small">{value.number}</BubbleBadge>
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-1 group-hover:text-[#fdc700] transition-colors">
+                    <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-1 group-hover:text-[#fdc700] transition-colors">
                       {value.title}
                     </h3>
-                    <p className="text-xs text-[#6b7280] mb-4">{value.subtitle}</p>
+                    <p className="text-xs text-[#6b7280] dark:text-[#9ca3af] mb-4">{value.subtitle}</p>
                     <ul className="space-y-2">
                       {value.items.map((item, j) => (
                         <li
                           key={j}
-                          className="text-xs md:text-sm text-[#6b7280] flex items-start gap-2"
+                          className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] flex items-start gap-2"
                         >
                           <span className="text-[#fdc700] mt-1">•</span>
                           <span>{item}</span>
@@ -283,7 +283,7 @@ export default function AboutPage() {
         </section>
 
         {/* Mission / Vision / Value */}
-        <section className="py-16 md:py-24 px-4 md:px-8">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-6xl mx-auto">
             {/* Mission */}
             <AnimatedSection animation="fade-up" className="mb-8">
@@ -312,13 +312,13 @@ export default function AboutPage() {
                 <div className="mb-4">
                   <BubbleBadge variant="small">Vision</BubbleBadge>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                   未来像
                 </h2>
-                <p className="text-lg md:text-xl text-[#1a1a1a] leading-relaxed mb-4">
+                <p className="text-lg md:text-xl text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-4">
                   データとAIで、意思決定と実行が加速する社会をつくる。
                 </p>
-                <p className="text-base md:text-lg text-[#6b7280] leading-relaxed">
+                <p className="text-base md:text-lg text-[#6b7280] dark:text-[#9ca3af] leading-relaxed">
                   紙・勘・経験だけに依存せず、
                   必要な情報が必要なときに届き、次の一手が最短で打てる。
                   そんな「進化し続ける業務と組織」を増やしていきます。
@@ -332,7 +332,7 @@ export default function AboutPage() {
                 <div className="mb-6">
                   <BubbleBadge variant="small">Value</BubbleBadge>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6">
                   価値観・行動指針
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -367,10 +367,10 @@ export default function AboutPage() {
                     },
                   ].map((value, i) => (
                     <GlassCard key={i} variant="light" padding="sm" className="h-full group">
-                      <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
+                      <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">
                         {value.title}
                       </h3>
-                      <p className="text-xs md:text-sm text-[#6b7280]">{value.description}</p>
+                      <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af]">{value.description}</p>
                     </GlassCard>
                   ))}
                 </div>

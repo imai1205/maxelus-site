@@ -26,7 +26,7 @@ function IndustryCard({
   return (
     <div
       onClick={onClick}
-      className={`relative aspect-video rounded-2xl overflow-hidden cursor-pointer group transition-all duration-300 ${
+      className={`relative aspect-video rounded-2xl overflow-hidden cursor-pointer group transition-all duration-300 w-full ${
         isActive
           ? "ring-4 ring-[#fff100] scale-105"
           : "hover:scale-105 hover:shadow-2xl"
@@ -67,7 +67,7 @@ function CaseCard({
   return (
     <div
       onClick={onClick}
-      className="bg-white dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#374151] rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+      className="bg-white dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#374151] rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 w-full"
     >
       <div className="aspect-video overflow-hidden relative">
         <Image
@@ -94,7 +94,7 @@ function CaseCard({
             </span>
           ))}
         </div>
-        <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-2 group-hover:text-[#fdc700] transition-colors line-clamp-2">
+        <h3 className="text-base md:text-lg font-bold text-[#0b1220] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors line-clamp-2">
           {caseItem.title}
         </h3>
         <p className="text-xs md:text-sm text-[#666] dark:text-[#9ca3af] line-clamp-2">
@@ -370,7 +370,7 @@ export default function CasesPage() {
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
             </AnimatedSection>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 justify-items-center sm:justify-items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 w-full">
               {industries.map((industry, i) => (
                 <AnimatedSection
                   key={industry.id}
@@ -392,22 +392,22 @@ export default function CasesPage() {
         {selectedIndustry && (
           <section
             id="cases-list"
-            className="py-16 md:py-24 px-4 md:px-8 scroll-mt-20"
+            className="py-16 md:py-24 px-4 md:px-8 scroll-mt-20 bg-white dark:bg-[#0b1220]"
           >
             <div className="max-w-6xl mx-auto">
               <AnimatedSection animation="fade-up" className="mb-8">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-2">
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                       {selectedIndustry.label}の事例
                     </h2>
-                    <p className="text-[#6b7280]">
+                    <p className="text-[#6b7280] dark:text-[#9ca3af]">
                       {filteredCases.length}件の事例
                     </p>
                   </div>
                   <button
                     onClick={() => setSelectedIndustry(null)}
-                    className="text-sm text-[#6b7280] hover:text-[#1a1a1a] transition-colors"
+                    className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb] transition-colors"
                   >
                     すべての業種を見る
                   </button>
@@ -415,7 +415,7 @@ export default function CasesPage() {
               </AnimatedSection>
 
               {filteredCases.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center md:justify-items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full">
                   {filteredCases.map((caseItem) => (
                     <CaseCard
                       key={caseItem.id}
@@ -425,7 +425,7 @@ export default function CasesPage() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-12 text-[#6b7280]">
+                <div className="text-center py-12 text-[#6b7280] dark:text-[#9ca3af]">
                   <p>該当する事例がありません</p>
                 </div>
               )}

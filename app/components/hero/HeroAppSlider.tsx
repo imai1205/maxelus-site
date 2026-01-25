@@ -52,8 +52,11 @@ export default function HeroAppSlider() {
     }
   }, [currentIndex, cardWidth, isTransitioning]);
 
-  // 自動スクロール（ゆっくり流す）
+  // 自動スクロール（ゆっくり流す）- モバイルでは無効化
   useEffect(() => {
+    // モバイルでは自動スクロールを無効化
+    if (isMobile) return;
+    
     // 少し遅延してから開始（初期化を待つ）
     const startTimer = setTimeout(() => {
       const autoScroll = () => {
@@ -105,7 +108,7 @@ export default function HeroAppSlider() {
         clearInterval(autoScrollIntervalRef.current);
       }
     };
-  }, [cardWidthWithGap]);
+  }, [cardWidthWithGap, isMobile]);
 
   const handlePrev = () => {
     isUserScrollingRef.current = true;

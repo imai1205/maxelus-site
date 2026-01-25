@@ -485,7 +485,7 @@ export default function ServicesPage() {
         />
 
         {/* 3カテゴリセクション（3列グリッド方式） */}
-        <section className="py-16 md:py-24 px-4 md:px-8 relative overflow-hidden">
+        <section className="py-16 md:py-24 px-4 md:px-8 relative overflow-hidden bg-white dark:bg-[#0b1220]">
           {/* Desktop: 3列グリッド */}
           <div className="hidden md:block max-w-7xl mx-auto relative" style={{ minHeight: '600px' }}>
             {/* 全体の背景画像（選択されているカテゴリの背景） */}

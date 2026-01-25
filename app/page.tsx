@@ -160,15 +160,15 @@ function ChallengeSection() {
   ];
 
   return (
-    <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden">
+    <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden bg-white dark:bg-[#0b1220]">
       {/* Parallax Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-fixed opacity-5"
+        className="absolute inset-0 bg-cover bg-center bg-fixed opacity-5 dark:opacity-10"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80')`,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-[#f5f5f5] to-[#fafafa]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-[#f5f5f5] to-[#fafafa] dark:from-[#0b1220] dark:via-[#0b1220] dark:to-[#0b1220]" />
       <div className="relative max-w-[1100px] mx-auto">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-10 md:mb-16">
@@ -206,7 +206,7 @@ function ChallengeSection() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={imgXIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
                     </div>
-                    <span className="text-sm md:text-base text-[#1a1a1a]">{item}</span>
+                    <span className="text-sm md:text-base text-[#1a1a1a] dark:text-[#f9fafb]">{item}</span>
                   </GlassCard>
                 </MotionPress>
               ))}
@@ -237,7 +237,7 @@ function ChallengeSection() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={imgCheckIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
                     </div>
-                    <span className="text-sm md:text-base text-[#1a1a1a]">{item}</span>
+                    <span className="text-sm md:text-base text-[#1a1a1a] dark:text-[#f9fafb]">{item}</span>
                   </GlassCard>
                 </MotionPress>
               ))}
@@ -345,12 +345,12 @@ function ServicesSection() {
   ];
 
   return (
-    <section className="bg-[#fafafa] py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
+    <section className="bg-[#fafafa] dark:bg-[#1e293b] py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
       <div className="max-w-[1100px] mx-auto relative">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">SERVICES</span>
-          <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
+          <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight">
             対応できる内容
           </h2>
         </AnimatedSection>
@@ -369,12 +369,12 @@ function ServicesSection() {
                   </div>
                   
                   {/* Title */}
-                  <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-2 md:mb-3 group-hover:text-[#fdc700] transition-colors">
+                  <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 md:mb-3 group-hover:text-[#fdc700] transition-colors">
                     {service.title}
                   </h3>
                   
                   {/* Description */}
-                  <p className="text-xs md:text-sm text-[#6b7280] mb-4">
+                  <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] mb-4">
                     {service.description}
                   </p>
                   
