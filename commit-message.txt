@@ -1,1 +1,6 @@
-iPhone Frame画像をIPhoneFrame-car.pngに変更
+iPhoneの3Dモデルを改善：黒枠を薄く、角を丸く、ロゴの向きを修正
+
+- 黒枠（側面）の厚みを0.4から0.15に減らしてより薄く
+- 角の丸いジオメトリ（createRoundedBox）を追加してiPhoneらしい角丸に
+- 後ろ側のマクセラスロゴの向きを修正（裏向きになっていたのを正しい向きに）
+- ロゴのサイズを調整（frameWidth * 0.7 × frameHeight * 0.25）

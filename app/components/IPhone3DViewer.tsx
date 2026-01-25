@@ -1,10 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { useTheme } from "./ThemeProvider";
+
+// 角の丸いボックスジオメトリを作成する関数
+function createRoundedBox(width: number, height: number, depth: number, radius: number) {
+  const shape = new THREE.Shape();
+  const w = width / 2;
+  const h = height / 2;
+  
+  shape.moveTo(-w + radius, -h);
+  shape.lineTo(w - radius, -h);
+  shape.quadraticCurveTo(w, -h, w, -h + radius);
+  shape.lineTo(w, h - radius);
+  shape.quadraticCurveTo(w, h, w - radius, h);
+  shape.lineTo(-w + radius, h);
+  shape.quadraticCurveTo(-w, h, -w, h - radius);
+  shape.lineTo(-w, -h + radius);
+  shape.quadraticCurveTo(-w, -h, -w + radius, -h);
+  
+  const extrudeSettings = {
+    depth: depth,
+    bevelEnabled: true,
+    bevelSegments: 8,
+    steps: 1,
+    bevelSize: radius,
+    bevelThickness: radius,
+  };
+  
+  return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+}
 
 // iPhoneの3Dモデル（iPhone Frame画像を立体的に表示）
 function IPhoneModel({ frameTexture, logoTexture }: { 
@@ -14,28 +42,34 @@ function IPhoneModel({ frameTexture, logoTexture }: {
   // iPhone Frame画像のアスペクト比を保持（約9:19.5）
   const frameWidth = 3.0;
   const frameHeight = 6.5;
-  const frameDepth = 0.4; // 厚みを増やす
+  const frameDepth = 0.15; // 厚みを薄く（黒枠を小さく）
+  const cornerRadius = 0.3; // 角の丸み
+
+  // 角の丸いジオメトリ
+  const roundedGeometry = useMemo(() => 
+    createRoundedBox(frameWidth, frameHeight, frameDepth, cornerRadius), 
+    []
+  );
 
   return (
     <group>
-      {/* 前面 - iPhone Frame画像 */}
+      {/* 前面 - iPhone Frame画像（角の丸いマスク） */}
       {frameTexture && (
-        <mesh position={[0, 0, frameDepth / 2]}>
+        <mesh position={[0, 0, frameDepth / 2 + 0.01]}>
           <planeGeometry args={[frameWidth, frameHeight]} />
           <meshStandardMaterial map={frameTexture} />
         </mesh>
       )}
 
-      {/* 側面（厚みを表現） */}
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[frameWidth, frameHeight, frameDepth]} />
+      {/* 側面（角の丸い厚みを表現、黒枠を薄く） */}
+      <mesh position={[0, 0, 0]} geometry={roundedGeometry}>
         <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
       </mesh>
 
-      {/* 後ろ側 - マクセラスロゴ（ど真ん中に大きく配置） */}
+      {/* 後ろ側 - マクセラスロゴ（ど真ん中に大きく配置、正しい向き） */}
       {logoTexture && (
-        <mesh position={[0, 0, -frameDepth / 2]} rotation={[0, Math.PI, 0]}>
-          <planeGeometry args={[frameWidth * 0.8, frameHeight * 0.3]} />
+        <mesh position={[0, 0, -frameDepth / 2 - 0.01]} rotation={[0, 0, 0]}>
+          <planeGeometry args={[frameWidth * 0.7, frameHeight * 0.25]} />
           <meshStandardMaterial map={logoTexture} transparent />
         </mesh>
       )}
