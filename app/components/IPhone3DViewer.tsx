@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { useTheme } from "./ThemeProvider";
@@ -35,9 +35,9 @@ function createRoundedBox(width: number, height: number, depth: number, radius: 
 }
 
 // iPhoneの3Dモデル（iPhone Frame画像を立体的に表示）
-function IPhoneModel({ framePath, logoPath }: { 
-  framePath: string;
-  logoPath: string;
+function IPhoneModel({ frameTexture, logoTexture }: { 
+  frameTexture: THREE.Texture | null;
+  logoTexture: THREE.Texture | null;
 }) {
   // iPhone Frame画像のアスペクト比を保持（約9:19.5）
   const frameWidth = 3.0;
@@ -51,34 +51,15 @@ function IPhoneModel({ framePath, logoPath }: {
     []
   );
 
-  // useLoaderでテクスチャを読み込む（エラーハンドリング付き）
-  let frameTexture: THREE.Texture | null = null;
-  let logoTexture: THREE.Texture | null = null;
-
-  try {
-    frameTexture = useLoader(THREE.TextureLoader, framePath);
-    frameTexture.flipY = false;
-  } catch (error) {
-    console.error('Frameテクスチャ読み込みエラー:', error);
-  }
-
-  try {
-    logoTexture = useLoader(THREE.TextureLoader, logoPath);
-    logoTexture.flipY = false;
-  } catch (error) {
-    console.error('ロゴテクスチャ読み込みエラー:', error);
-  }
-
   return (
     <group>
       {/* 前面 - iPhone Frame画像 */}
-      <mesh position={[0, 0, frameDepth / 2 + 0.01]}>
+      <mesh position={[0, 0, frameDepth / 2 + 0.01]} key={`front-${frameTexture ? 'loaded' : 'empty'}`}>
         <planeGeometry args={[frameWidth, frameHeight]} />
-        {frameTexture ? (
-          <meshStandardMaterial map={frameTexture} />
-        ) : (
-          <meshStandardMaterial color="#333333" />
-        )}
+        <meshStandardMaterial 
+          map={frameTexture || null}
+          color={frameTexture ? undefined : "#ff0000"} // デバッグ用：赤
+        />
       </mesh>
 
       {/* 側面（角の丸い厚みを表現、黒枠を薄く） */}
@@ -87,13 +68,13 @@ function IPhoneModel({ framePath, logoPath }: {
       </mesh>
 
       {/* 後ろ側 - マクセラスロゴ（ど真ん中に大きく配置、正しい向き） */}
-      <mesh position={[0, 0, -frameDepth / 2 - 0.01]} rotation={[0, 0, 0]}>
+      <mesh position={[0, 0, -frameDepth / 2 - 0.01]} rotation={[0, 0, 0]} key={`back-${logoTexture ? 'loaded' : 'empty'}`}>
         <planeGeometry args={[frameWidth * 0.7, frameHeight * 0.25]} />
-        {logoTexture ? (
-          <meshStandardMaterial map={logoTexture} transparent />
-        ) : (
-          <meshStandardMaterial color="#ffffff" />
-        )}
+        <meshStandardMaterial 
+          map={logoTexture || null}
+          transparent={!!logoTexture}
+          color={logoTexture ? undefined : "#00ff00"} // デバッグ用：緑
+        />
       </mesh>
     </group>
   );
@@ -103,6 +84,10 @@ function IPhoneModel({ framePath, logoPath }: {
 // メインコンポーネント
 export default function IPhone3DViewer() {
   const [isRotating, setIsRotating] = useState(true);
+  const [textures, setTextures] = useState<{ 
+    frame: THREE.Texture | null; 
+    logo: THREE.Texture | null;
+  }>({ frame: null, logo: null });
   const { resolvedTheme } = useTheme();
 
   // ロゴパスをテーマに応じて切り替え
@@ -113,6 +98,62 @@ export default function IPhone3DViewer() {
   // iPhone Frame画像
   const framePath = '/cases/IPhoneFrame-car.png';
 
+  // テクスチャを読み込む（シンプルな方法）
+  useEffect(() => {
+    const loader = new THREE.TextureLoader();
+    let frameTexture: THREE.Texture | null = null;
+    let logoTexture: THREE.Texture | null = null;
+    let isCancelled = false;
+
+    console.log('テクスチャ読み込み開始:', { framePath, logoPath });
+
+    // iPhone Frameテクスチャを読み込み
+    loader.load(
+      framePath,
+      (texture) => {
+        if (isCancelled) {
+          texture.dispose();
+          return;
+        }
+        console.log('Frameテクスチャ読み込み成功:', texture);
+        texture.flipY = false;
+        texture.needsUpdate = true;
+        frameTexture = texture;
+        setTextures(prev => ({ ...prev, frame: frameTexture }));
+      },
+      undefined,
+      (error) => {
+        console.error('Frameテクスチャ読み込みエラー:', error, framePath);
+      }
+    );
+
+    // ロゴテクスチャを読み込み
+    loader.load(
+      logoPath,
+      (texture) => {
+        if (isCancelled) {
+          texture.dispose();
+          return;
+        }
+        console.log('ロゴテクスチャ読み込み成功:', texture);
+        texture.flipY = false;
+        texture.needsUpdate = true;
+        logoTexture = texture;
+        setTextures(prev => ({ ...prev, logo: logoTexture }));
+      },
+      undefined,
+      (error) => {
+        console.error('ロゴテクスチャ読み込みエラー:', error, logoPath);
+      }
+    );
+
+    return () => {
+      isCancelled = true;
+      frameTexture?.dispose();
+      logoTexture?.dispose();
+    };
+  }, [framePath, logoPath]);
+
   return (
     <div className="w-full h-[500px] relative bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220] rounded-xl overflow-hidden">
       <Canvas
@@ -121,10 +162,10 @@ export default function IPhone3DViewer() {
         className="w-full h-full"
       >
         {/* ライティング（明るく調整） */}
-        <ambientLight intensity={1.0} />
-        <directionalLight position={[5, 5, 5]} intensity={1.5} />
-        <directionalLight position={[-5, -5, -5]} intensity={0.8} />
-        <pointLight position={[0, 0, 10]} intensity={1.0} />
+        <ambientLight intensity={2.0} />
+        <directionalLight position={[5, 5, 5]} intensity={2.0} />
+        <directionalLight position={[-5, -5, -5]} intensity={1.0} />
+        <pointLight position={[0, 0, 10]} intensity={2.0} />
 
         {/* カメラコントロール（マウス/タッチで回転） */}
         <OrbitControls
@@ -138,12 +179,10 @@ export default function IPhone3DViewer() {
         />
 
         {/* iPhoneモデル（iPhone Frame画像を立体的に表示） */}
-        <Suspense fallback={null}>
-          <IPhoneModel 
-            framePath={framePath}
-            logoPath={logoPath}
-          />
-        </Suspense>
+        <IPhoneModel 
+          frameTexture={textures.frame}
+          logoTexture={textures.logo}
+        />
 
         {/* 環境マッピング（反射を追加） */}
         <Environment preset="city" />
