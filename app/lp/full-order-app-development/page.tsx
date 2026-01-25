@@ -446,20 +446,21 @@ export default function FullOrderAppDevelopmentLP() {
                     style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
                   >
                     {caseImages.map((caseImage, index) => (
-                      <div key={caseImage.id} className="min-w-full flex-shrink-0 flex items-center justify-center">
-                        <div className="relative w-full max-w-5xl mx-auto">
-                          <div className="text-center mb-2">
+                      <div key={caseImage.id} className="min-w-full flex-shrink-0 flex flex-col items-center justify-center">
+                        <div className="relative w-full max-w-5xl mx-auto px-4">
+                          <div className="text-center mb-1">
                             <h4 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">{caseImage.title}</h4>
-                            <p className="text-sm text-[#6b7280] dark:text-[#9ca3af]">Webアプリデモ</p>
+                            <p className="text-xs text-[#6b7280] dark:text-[#9ca3af]">Webアプリデモ</p>
                           </div>
-                          {/* 元の画像をそのまま表示 */}
-                          <div className="relative w-full aspect-[9/19.5]">
+                          {/* 元の画像をそのまま表示 - 余白を最小限に */}
+                          <div className="relative w-full flex items-center justify-center">
                             <Image
                               src={caseImage.iphoneImage}
                               alt={caseImage.title}
-                              fill
+                              width={800}
+                              height={1600}
                               sizes="(max-width: 768px) 100vw, 800px"
-                              className="object-contain"
+                              className="object-contain w-auto h-auto max-h-[500px] md:max-h-[600px]"
                               loading="lazy"
                             />
                           </div>
