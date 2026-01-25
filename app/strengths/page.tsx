@@ -267,11 +267,12 @@ export default function StrengthsPage() {
                 ))}
               </div>
             </div>
-            <AnimatedSection animation="fade-up">
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] text-center mb-3 md:mb-4 px-2">
+            <AnimatedSection animation="fade-up" className="relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">STRENGTHS</span>
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-3 md:mb-4 px-2 relative">
                 5つの強み
               </h2>
-              <p className="text-sm sm:text-base text-[#6b7280] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2">
+              <p className="text-sm sm:text-base text-[#6b7280] dark:text-[#9ca3af] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2 relative">
                 抽象的な「強み」ではなく、具体的な特徴でお伝えします。
               </p>
             </AnimatedSection>

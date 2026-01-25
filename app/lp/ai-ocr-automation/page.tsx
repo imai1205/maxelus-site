@@ -48,11 +48,12 @@ export default function AIOCRAutomationLP() {
         {/* 価値（3つ） */}
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">REASONS</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 選ばれる理由
               </h2>
-              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -93,8 +94,9 @@ export default function AIOCRAutomationLP() {
         {/* 事例枠（カード3つ：ダミー） */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">CASES</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 導入事例
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -129,8 +131,9 @@ export default function AIOCRAutomationLP() {
         {/* 進め方（3ステップ） */}
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FLOW</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 進め方
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -199,8 +202,9 @@ export default function AIOCRAutomationLP() {
         {/* FAQ */}
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FAQ</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 よくある質問
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />

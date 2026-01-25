@@ -429,11 +429,12 @@ export default function ZumenConnectLP() {
           </div>
 
           <div className="relative z-10 max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-white/10">CTA</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative">
                 まずは、無料デモで&quot;探す時間&quot;が消える体験を。
               </h2>
-              <p className="text-lg text-white/70">
+              <p className="text-lg text-white/70 relative">
                 実際の画面を見ながら、御社の課題解決をご提案します
               </p>
             </AnimatedSection>

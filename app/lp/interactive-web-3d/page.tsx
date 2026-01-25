@@ -155,11 +155,12 @@ export default function InteractiveWeb3DLP() {
         {/* 体験デモセクション */}
         <section id="demo" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b] scroll-mt-20">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">DEMO</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 体験デモ
               </h2>
-              <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8">
+              <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8 relative">
                 3つの体験をタブで切り替えてご覧ください
               </p>
             </AnimatedSection>
@@ -171,11 +172,12 @@ export default function InteractiveWeb3DLP() {
         {/* できること（カード3〜6） */}
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FEATURES</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 できること
               </h2>
-              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -231,8 +233,9 @@ export default function InteractiveWeb3DLP() {
         {/* 用途例（業種別） */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">USE CASES</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 用途例
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -282,8 +285,9 @@ export default function InteractiveWeb3DLP() {
         {/* 事例枠（カード3つ：ダミー） */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">CASES</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 制作事例
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -318,8 +322,9 @@ export default function InteractiveWeb3DLP() {
         {/* 進め方（3ステップ） */}
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FLOW</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 進め方
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -388,8 +393,9 @@ export default function InteractiveWeb3DLP() {
         {/* FAQ */}
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FAQ</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 よくある質問
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />

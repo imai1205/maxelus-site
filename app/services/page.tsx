@@ -571,11 +571,12 @@ export default function ServicesPage() {
         {/* FAQ Section */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#0b1220]">
           <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FAQ</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 よくある質問
               </h2>
-              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
             <div className="space-y-4">
@@ -626,8 +627,9 @@ export default function ServicesPage() {
           </div>
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 text-center">
-            <AnimatedSection animation="fade-up">
-              <h2 className="text-2xl md:text-4xl font-bold text-white mb-6">
+            <AnimatedSection animation="fade-up" className="relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-white/10">CONTACT</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 relative">
                 まずは無料相談から
               </h2>
               <p className="text-base md:text-lg text-white/70 mb-8 max-w-2xl mx-auto">

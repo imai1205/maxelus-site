@@ -286,12 +286,13 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-6xl mx-auto">
             {/* Mission */}
-            <AnimatedSection animation="fade-up" className="mb-8">
-              <GlassCard variant="dark" padding="lg" className="bg-gradient-to-br from-[#0b1220] to-[#1e293b]">
+            <AnimatedSection animation="fade-up" className="mb-8 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">MISSION</span>
+              <GlassCard variant="dark" padding="lg" className="bg-gradient-to-br from-[#0b1220] to-[#1e293b] relative">
                 <div className="mb-4">
                   <BubbleBadge variant="small">Mission</BubbleBadge>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">使命</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 relative">使命</h2>
                 <p className="text-lg md:text-xl text-white leading-relaxed mb-4">
                   業務を効率化し、本当に大切なことに時間を使える世界をつくる。
                 </p>
@@ -307,12 +308,13 @@ export default function AboutPage() {
             </AnimatedSection>
 
             {/* Vision */}
-            <AnimatedSection animation="fade-up" delay={100} className="mb-8">
-              <GlassCard variant="light" padding="lg" className="border-2 border-[#fff100]/50">
+            <AnimatedSection animation="fade-up" delay={100} className="mb-8 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VISION</span>
+              <GlassCard variant="light" padding="lg" className="border-2 border-[#fff100]/50 relative">
                 <div className="mb-4">
                   <BubbleBadge variant="small">Vision</BubbleBadge>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                   未来像
                 </h2>
                 <p className="text-lg md:text-xl text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-4">
@@ -327,12 +329,13 @@ export default function AboutPage() {
             </AnimatedSection>
 
             {/* Value */}
-            <AnimatedSection animation="fade-up" delay={200}>
-              <GlassCard variant="light" padding="lg">
+            <AnimatedSection animation="fade-up" delay={200} className="relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VALUE</span>
+              <GlassCard variant="light" padding="lg" className="relative">
                 <div className="mb-6">
                   <BubbleBadge variant="small">Value</BubbleBadge>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 relative">
                   価値観・行動指針
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">

@@ -363,11 +363,12 @@ export default function CasesPage() {
         {/* Industry Cards Section */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">INDUSTRY</span>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 業種から探す
               </h2>
-              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 w-full">
