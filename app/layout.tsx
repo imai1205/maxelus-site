@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   keywords: ["DX", "ホームページ作成", "Webアプリ開発", "業務システム", "システム開発", "マクセラス"],
   openGraph: {
     title: {
-      default: "DX・ホームページ作成・Webアプリ開発",
+      default: `${siteName} | DX・ホームページ作成・Webアプリ開発`,
       template: `%s | ${siteName}`,
     },
     description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: {
-      default: "DX・ホームページ作成・Webアプリ開発",
+      default: `${siteName} | DX・ホームページ作成・Webアプリ開発`,
       template: `%s | ${siteName}`,
     },
     description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
