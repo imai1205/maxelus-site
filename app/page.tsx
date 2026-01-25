@@ -16,6 +16,8 @@ import {
   GradientOrbs
 } from "./components/AnimationProvider";
 import { homeCasesData, type HomeCase } from "./data/homeCasesData";
+import HeroAppSlider from "./components/hero/HeroAppSlider";
+import { GlassCard, BubbleBadge, MotionPress, Section } from "../components/ui";
 
 // Dynamic imports for heavy components - improves initial page load
 // const InteractiveDemo = dynamic(() => import("./components/InteractiveDemo"), {
@@ -51,7 +53,7 @@ const imgWorks3 = "https://www.figma.com/api/mcp/asset/9039d5eb-93bd-427d-9fdf-9
 const imgArrowRight = "https://www.figma.com/api/mcp/asset/dff0d741-b040-4a48-9c0c-9c756232f4c2";
 
 
-// Hero Section Component - 新しい内容
+// Hero Section Component - シンプルな実装
 function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_primary_href?: string; cta_secondary_text?: string; cta_secondary_href?: string } | null }) {
   const primaryHref = settings?.cta_primary_href || '/contact';
   const secondaryHref = settings?.cta_secondary_href || '/cases';
@@ -60,8 +62,7 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
 
   return (
     <section className="relative min-h-[90vh] md:min-h-screen overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220]">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10" style={{ zIndex: 0 }}>
         <div
           className="absolute inset-0"
           style={{
@@ -71,97 +72,27 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
         />
       </div>
 
-      {/* Gradient Orbs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" style={{ zIndex: 0 }} />
       <div
         className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse"
-        style={{ animationDelay: "1s" }}
+        style={{ animationDelay: "1s", zIndex: 0 }}
       />
 
-      {/* Background App Screens - 薄く表示 */}
-      <div className="absolute inset-0 overflow-visible pointer-events-none">
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-[60%] h-full flex items-center justify-center">
-          {/* App screens in background - IPhoneFrame-で始まる画像を配置 */}
-          <div className="relative w-full h-full flex items-center justify-center">
-            {/* IPhoneFrame画像データ */}
-            {[
-              { src: '/cases/IPhoneFrame-nail.png', alt: 'ネイルサロン管理アプリ', pos: { left: '5%', top: '20%' }, rotate: -15, zIndex: 0 },
-              { src: '/cases/IPhoneFrame-kiji.png', alt: '記事管理アプリ', pos: { left: '15%', top: '30%' }, rotate: 10, zIndex: 1 },
-              { src: '/cases/IPhoneFrame-calc.png', alt: '計算アプリ', pos: { right: '10%', top: '25%' }, rotate: 15, zIndex: 0 },
-              { src: '/cases/IPhoneFrame-item.png', alt: 'アイテム管理アプリ', pos: { right: '5%', bottom: '15%' }, rotate: -10, zIndex: 0 },
-              { src: '/cases/IPhoneFrame-draw.png', alt: '図面管理アプリ', pos: { left: '25%', bottom: '20%' }, rotate: 5, zIndex: 2 },
-              { src: '/cases/IPhoneFrame-car.png', alt: '車関連アプリ', pos: { left: '35%', top: '35%' }, rotate: -5, zIndex: 3 },
-              { src: '/cases/IPhoneFrame-vegas.png', alt: 'ベガス関連アプリ', pos: { left: '10%', top: '50%' }, rotate: 8, zIndex: 1 },
-              { src: '/cases/IPhoneFrame-saron.png', alt: 'サロン管理アプリ', pos: { right: '15%', bottom: '30%' }, rotate: -8, zIndex: 1 },
-              { src: '/cases/IPhoneFrame-shop.png', alt: 'ショッピングアプリ', pos: { left: '45%', top: '15%' }, rotate: 12, zIndex: 2 },
-            ].map((app, index) => {
-              // #region agent log
-              fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:97',message:'Image element created',data:{index,alt:app.alt,pos:app.pos,zIndex:app.zIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'run4',hypothesisId:'C'})}).catch(()=>{});
-              // #endregion
-              // #region agent log
-              fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:97',message:'Image element created',data:{index,alt:app.alt,pos:app.pos,zIndex:app.zIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'C'})}).catch(()=>{});
-              // #endregion
-              return (
-              <div
-                key={index}
-                className="group absolute w-[200px] md:w-[280px] opacity-[0.08] md:opacity-[0.12] transition-all duration-700 ease-out hover:opacity-[0.4] hover:scale-125 cursor-pointer"
-                style={{
-                  ...app.pos,
-                  zIndex: app.zIndex + 10 + index, // 各画像に異なるz-indexを設定して重なりを管理
-                  pointerEvents: 'auto',
-                }}
-                onMouseEnter={(e) => {
-                  // #region agent log
-                  fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:108',message:'onMouseEnter fired',data:{index,alt:app.alt,currentZIndex:e.currentTarget.style.zIndex,computedZIndex:window.getComputedStyle(e.currentTarget).zIndex,rect:e.currentTarget.getBoundingClientRect()},timestamp:Date.now(),sessionId:'debug-session',runId:'run4',hypothesisId:'A'})}).catch(()=>{});
-                  // #endregion
-                  // ホバー時に確実に前面に来るように、z-indexを最大値に設定
-                  e.currentTarget.style.zIndex = '200';
-                  // #region agent log
-                  fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:111',message:'z-index set to 200',data:{index,alt:app.alt,newZIndex:e.currentTarget.style.zIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'run4',hypothesisId:'B'})}).catch(()=>{});
-                  // #endregion
-                }}
-                onMouseLeave={(e) => {
-                  // #region agent log
-                  fetch('http://127.0.0.1:7243/ingest/24768147-434f-4056-aa68-04126791c72c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:115',message:'onMouseLeave fired',data:{index,alt:app.alt},timestamp:Date.now(),sessionId:'debug-session',runId:'run4',hypothesisId:'A'})}).catch(()=>{});
-                  // #endregion
-                  e.currentTarget.style.zIndex = String(app.zIndex + 10 + index);
-                }}
-              >
-                <div 
-                  className="relative transition-all duration-700 ease-out group-hover:-translate-y-6 group-hover:shadow-[0_20px_60px_rgba(255,241,0,0.4)] group-hover:brightness-110"
-                  style={{
-                    transform: `rotate(${app.rotate}deg)`,
-                  }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={app.src}
-                    alt={app.alt}
-                    className="w-full h-auto object-contain grayscale-[0.9] brightness-75 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:brightness-110 group-hover:contrast-105 pointer-events-none"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              </div>
-            );
-            })}
-          </div>
-        </div>
-      </div>
+      <HeroAppSlider />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32 min-h-[90vh] md:min-h-screen flex flex-col">
+      <div className="absolute top-0 left-0 right-0 max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32 flex flex-col pointer-events-none" style={{ zIndex: 200 }}>
         <div className="flex-1 flex flex-col justify-center">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-            {/* Left content */}
-            <div className="flex-1 max-w-full lg:max-w-[600px] space-y-6 md:space-y-8 text-center lg:text-left">
+            <div className="w-full lg:w-auto lg:max-w-[600px] space-y-6 md:space-y-8 text-center lg:text-left relative pointer-events-none px-4 py-6 rounded-2xl backdrop-blur-xl bg-[#1e293b]/80 border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]" style={{ zIndex: 500, background: 'rgba(30, 41, 59, 0.8)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
+              <div className="pointer-events-auto relative z-10">
               <AnimatedSection animation="fade-up" duration={800}>
-                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">HOME</span>
-                <div className="mb-4">
-                  <span className="bg-[#fff100]/20 text-[#fff100] px-3 py-1 rounded-full text-sm font-medium">
+                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10 absolute" style={{ zIndex: 0 }}>HOME</span>
+                <div className="mb-4 relative z-10">
+                  <BubbleBadge>
                     AI × 最新手法
-                  </span>
+                  </BubbleBadge>
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight relative z-50">
                   完全オーダーメイドで
                   <br />
                   課題を解決する
@@ -170,19 +101,20 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
                 </h1>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={300} duration={800}>
-                <p className="text-lg md:text-xl text-white/90 mb-2">
+                <p className="text-lg md:text-xl text-white/90 mb-2 relative z-50">
                   ユーザーに使われる、成果につながるプロダクトを
                 </p>
-                <p className="text-base md:text-lg text-white/80">
+                <p className="text-base md:text-lg text-white/80 relative z-50">
                   企画から運用まで伴走してお届けします
                 </p>
               </AnimatedSection>
+              </div>
             </div>
           </div>
         </div>
-        {/* CTA Buttons - 右下に配置 */}
-        <AnimatedSection animation="fade-up" delay={500} duration={800} className="mt-auto pt-8">
-          <div className="flex flex-row gap-3 justify-center lg:justify-end">
+        <div className="mt-auto pt-8" style={{ zIndex: 20 }}>
+          <AnimatedSection animation="fade-up" delay={500} duration={800}>
+            <div className="flex flex-row gap-3 justify-center lg:justify-end">
             <Link 
               href={primaryHref} 
               prefetch={true} 
@@ -204,8 +136,9 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
               </svg>
               {secondaryText}
             </Link>
-          </div>
-        </AnimatedSection>
+            </div>
+          </AnimatedSection>
+        </div>
       </div>
     </section>
   );
@@ -261,27 +194,30 @@ function ChallengeSection() {
             <p className="text-sm font-bold text-[#6b7280] uppercase tracking-wide mb-3 md:mb-4 text-center md:text-left">Before</p>
             <StaggeredContainer className="space-y-3 md:space-y-4" staggerDelay={150}>
               {beforeItems.map((item, i) => (
-                <div 
-                  key={i} 
-                  data-cms-key={`site.challenge_before_${i}`}
-                  className="before-card bg-white border border-[#ffe2e2] rounded-[12px] md:rounded-[14px] flex items-center gap-3 md:gap-4 px-3 md:px-4 py-3 md:py-4 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:border-red-300"
-                >
-                  <div className="before-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center animate-scale-pulse flex-shrink-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imgXIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
-                  </div>
-                  <span className="text-sm md:text-base text-[#1a1a1a]">{item}</span>
-                </div>
+                <MotionPress key={i}>
+                  <GlassCard
+                    variant="light"
+                    padding="sm"
+                    className="flex items-center gap-3 md:gap-4 border-[#ffe2e2] hover:border-red-300"
+                    data-cms-key={`site.challenge_before_${i}`}
+                  >
+                    <div className="before-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center animate-scale-pulse flex-shrink-0 bg-red-100">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={imgXIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
+                    </div>
+                    <span className="text-sm md:text-base text-[#1a1a1a]">{item}</span>
+                  </GlassCard>
+                </MotionPress>
               ))}
             </StaggeredContainer>
           </AnimatedSection>
           
           {/* Arrow */}
           <AnimatedSection animation="zoom-in" delay={400} className="my-2 md:my-0">
-            <div className="bg-[#fff100] rounded-full w-12 md:w-16 h-12 md:h-16 flex items-center justify-center shadow-lg animate-pulse-glow hover:rotate-180 transition-transform duration-700 cursor-pointer rotate-90 md:rotate-0">
+            <MotionPress className="bg-[#fff100] rounded-full w-12 md:w-16 h-12 md:h-16 flex items-center justify-center shadow-lg animate-pulse-glow hover:rotate-180 transition-transform duration-700 cursor-pointer rotate-90 md:rotate-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={imgArrowTransform} alt="" className="w-6 md:w-8 h-6 md:h-8" />
-            </div>
+            </MotionPress>
           </AnimatedSection>
           
           {/* After */}
@@ -289,17 +225,20 @@ function ChallengeSection() {
             <p className="text-sm font-bold text-[#6b7280] uppercase tracking-wide mb-3 md:mb-4 text-center md:text-left">After</p>
             <StaggeredContainer className="space-y-3 md:space-y-4" staggerDelay={150}>
               {afterItems.map((item, i) => (
-                <div 
-                  key={i} 
-                  data-cms-key={`site.challenge_after_${i}`}
-                  className="after-card bg-white border border-[#dcfce7] rounded-[12px] md:rounded-[14px] flex items-center gap-3 md:gap-4 px-3 md:px-4 py-3 md:py-4 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:border-green-400"
-                >
-                  <div className="after-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center animate-scale-pulse flex-shrink-0" style={{ animationDelay: `${i * 200}ms` }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imgCheckIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
-                  </div>
-                  <span className="text-sm md:text-base text-[#1a1a1a]">{item}</span>
-                </div>
+                <MotionPress key={i}>
+                  <GlassCard
+                    variant="light"
+                    padding="sm"
+                    className="flex items-center gap-3 md:gap-4 border-[#dcfce7] hover:border-green-400"
+                    data-cms-key={`site.challenge_after_${i}`}
+                  >
+                    <div className="after-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center animate-scale-pulse flex-shrink-0 bg-green-100" style={{ animationDelay: `${i * 200}ms` }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={imgCheckIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
+                    </div>
+                    <span className="text-sm md:text-base text-[#1a1a1a]">{item}</span>
+                  </GlassCard>
+                </MotionPress>
               ))}
             </StaggeredContainer>
           </AnimatedSection>
@@ -420,21 +359,32 @@ function ServicesSection() {
           {services.map((service, i) => (
             <AnimatedSection key={i} animation="fade-up" delay={i * 100} className="w-full sm:w-auto">
               <Link href={service.link} className="block w-full sm:w-auto">
-                <TiltCard maxTilt={6} className="h-full w-full sm:max-w-[320px]">
-                  <div className="service-card bg-white rounded-[12px] md:rounded-[14px] shadow-md p-5 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 border-[#e5e7eb] hover:border-[#fff100] w-full">
-                    {/* Shimmer effect */}
-                    <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
-                    
-                    <h3 className="text-lg md:text-xl text-[#1a1a1a] mb-2 md:mb-3 group-hover:text-[#fdc700] transition-colors font-bold">{service.title}</h3>
-                    <p className="text-xs md:text-sm text-[#6b7280] mb-4">{service.description}</p>
-                    <div className="flex items-center text-[#1a1a1a] bg-[#fff100] px-3 py-1 rounded-full text-xs md:text-sm font-medium group-hover:translate-x-2 transition-transform">
-                      詳しく見る
-                      <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </div>
+                <GlassCard variant="light" padding="md" className="h-full w-full sm:max-w-[320px] group">
+                  {/* Icon */}
+                  <div className="mb-4 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-[#fff100]/10 rounded-xl group-hover:bg-[#fff100]/20 transition-colors">
+                    <svg className="w-6 h-6 md:w-7 md:h-7 text-[#fff100]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
                   </div>
-                </TiltCard>
+                  
+                  {/* Title */}
+                  <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-2 md:mb-3 group-hover:text-[#fdc700] transition-colors">
+                    {service.title}
+                  </h3>
+                  
+                  {/* Description */}
+                  <p className="text-xs md:text-sm text-[#6b7280] mb-4">
+                    {service.description}
+                  </p>
+                  
+                  {/* Arrow */}
+                  <div className="flex items-center text-[#111] text-xs md:text-sm font-medium group-hover:translate-x-2 transition-transform">
+                    <BubbleBadge variant="small">詳しく見る</BubbleBadge>
+                    <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
+                </GlassCard>
               </Link>
             </AnimatedSection>
           ))}
@@ -515,22 +465,27 @@ function WorksSection() {
                 {work.hasLP && work.lpHref ? (
                   <Link 
                     href={work.lpHref} 
-                    className="works-card bg-white border border-[#e5e7eb] rounded-lg md:rounded-xl overflow-hidden block h-full group cursor-pointer"
+                    className="works-card block h-full group"
                   >
-                    <div className="aspect-video overflow-hidden relative">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                        <span className="text-white text-sm">LPを見る →</span>
+                    <GlassCard variant="light" padding="none" className="h-full overflow-hidden">
+                      <div className="aspect-video overflow-hidden relative">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <span className="text-white text-sm">LPを見る →</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-4 md:p-6">
-                      <p className="text-xs md:text-sm text-[#fff100] mb-1 md:mb-2 font-medium">{work.category}</p>
+                      <div className="p-4 md:p-6">
+                      <div className="mb-1 md:mb-2">
+                        <BubbleBadge variant="small">{work.category}</BubbleBadge>
+                      </div>
                       <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-1 md:mb-2 group-hover:text-[#fdc700] transition-colors line-clamp-2">{work.title}</h3>
                       <p className="text-xs md:text-sm text-[#666] mb-2 line-clamp-2">{work.description}</p>
                       {work.outcome && (
-                        <p className="text-xs text-[#fff100] mb-3 font-medium line-clamp-1">{work.outcome}</p>
+                        <div className="mb-3">
+                          <BubbleBadge variant="small">{work.outcome}</BubbleBadge>
+                        </div>
                       )}
                       {work.serviceTags && work.serviceTags.length > 0 && (
                         <div className="flex flex-wrap gap-1 mb-3">
@@ -541,26 +496,31 @@ function WorksSection() {
                           ))}
                         </div>
                       )}
-                      <div className="flex items-center text-[#fff100] text-xs md:text-sm group-hover:translate-x-2 transition-transform">
-                        LPを見る
+                      <div className="flex items-center text-[#111] text-xs md:text-sm group-hover:translate-x-2 transition-transform">
+                        <BubbleBadge variant="small">LPを見る</BubbleBadge>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={imgArrowRight} alt="" className="w-3 md:w-4 h-3 md:h-4 ml-1" />
                       </div>
-                    </div>
+                      </div>
+                    </GlassCard>
                   </Link>
                 ) : (
-                  <div className="works-card bg-white border border-[#e5e7eb] rounded-lg md:rounded-xl overflow-hidden block h-full group">
+                  <GlassCard variant="light" padding="none" className="h-full overflow-hidden">
                     <div className="aspect-video overflow-hidden relative">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                     <div className="p-4 md:p-6">
-                      <p className="text-xs md:text-sm text-[#fff100] mb-1 md:mb-2 font-medium">{work.category}</p>
+                      <div className="mb-1 md:mb-2">
+                        <BubbleBadge variant="small">{work.category}</BubbleBadge>
+                      </div>
                       <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-1 md:mb-2 group-hover:text-[#fdc700] transition-colors line-clamp-2">{work.title}</h3>
                       <p className="text-xs md:text-sm text-[#666] mb-2 line-clamp-2">{work.description}</p>
                       {work.outcome && (
-                        <p className="text-xs text-[#fff100] mb-3 font-medium line-clamp-1">{work.outcome}</p>
+                        <div className="mb-3">
+                          <BubbleBadge variant="small">{work.outcome}</BubbleBadge>
+                        </div>
                       )}
                       {work.serviceTags && work.serviceTags.length > 0 && (
                         <div className="flex flex-wrap gap-1 mb-3">
@@ -575,7 +535,7 @@ function WorksSection() {
                         準備中
                       </div>
                     </div>
-                  </div>
+                  </GlassCard>
                 )}
               </TiltCard>
             </AnimatedSection>
@@ -794,8 +754,8 @@ export default function Home() {
     cta_primary_href: '/contact',
     cta_secondary_text: '事例を見る',
     cta_secondary_href: '/cases',
-    cta_section_title: '既製品に合わせるのをやめて、\n"自社に最適化"しませんか？',
-    cta_section_subtitle: 'まずは無料相談で、課題整理→触れるデモ提示まで一緒に進めます。',
+    cta_section_title: '社内業務の効率化と\n売上拡大を加速させませんか？',
+    cta_section_subtitle: 'オーダーメイドのアプリとホームページで、競合に差をつけ、成長を加速させましょう。\n\nまずは無料相談で、課題整理→触れるデモ提示まで一緒に進めます。',
   });
 
   // CMS機能をコメントアウト（将来の復旧用）
@@ -823,7 +783,7 @@ export default function Home() {
 
   return (
     <ParallaxProvider>
-      <div className="min-h-screen bg-white font-sans relative overflow-x-hidden">
+      <div className="min-h-screen font-sans relative overflow-x-hidden">
         {/* Lightweight Gradient Orbs - CSS only, no JS */}
         <GradientOrbs />
         

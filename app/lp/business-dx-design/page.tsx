@@ -28,10 +28,41 @@ export default function BusinessDXDesignLP() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // フォーム送信処理（後で実装）
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          company: formData.company || '',
+          email: formData.email,
+          inquiryType: '業務DX設計',
+          budget: '',
+          timeline: '',
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('送信に失敗しました');
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('送信に失敗しました。もう一度お試しください。');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -275,6 +306,31 @@ export default function BusinessDXDesignLP() {
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">お問い合わせ</h2>
               <p className="text-[#6b7280]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
             </AnimatedSection>
+            {isSubmitted ? (
+              <div className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8 text-center">
+                <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+                  お問い合わせありがとうございます
+                </h3>
+                <p className="text-[#6b7280] mb-8">
+                  担当者より2営業日以内にご連絡いたします。<br />
+                  しばらくお待ちください。
+                </p>
+                <Link 
+                  href="/"
+                  className="inline-flex items-center gap-2 text-[#fdc700] hover:text-[#e5b400] font-medium transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  トップページに戻る
+                </Link>
+              </div>
+            ) : (
             <form onSubmit={handleSubmit} className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8">
               <div className="space-y-6">
                 <div>
@@ -328,12 +384,24 @@ export default function BusinessDXDesignLP() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#fff100] to-[#fdc700] hover:from-[#fdc700] hover:to-[#fff100] text-[#1a1a1a] font-bold px-6 py-4 rounded-lg transition-all hover:scale-105 flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-[#fff100] to-[#fdc700] hover:from-[#fdc700] hover:to-[#fff100] disabled:bg-[#e5e7eb] disabled:cursor-not-allowed text-[#1a1a1a] font-bold px-6 py-4 rounded-lg transition-all hover:scale-105 disabled:hover:scale-100 flex items-center justify-center gap-2"
                 >
-                  送信する
+                  {isSubmitting ? (
+                    <>
+                      <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      送信中...
+                    </>
+                  ) : (
+                    '送信する'
+                  )}
                 </button>
               </div>
             </form>
+            )}
           </div>
         </section>
       </main>

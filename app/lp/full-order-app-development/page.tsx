@@ -5,8 +5,8 @@ import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
 import { cases, type Case } from "@/app/data/casesData";
-import AppScreensGallery from "@/app/components/AppScreensGallery";
 import SalonReservationAppMockup from "@/app/components/SalonReservationAppMockup";
+import IPhoneFrameSlider from "@/app/components/IPhoneFrameSlider";
 
 // デモ画面画像データ（public/cases/フォルダの画像を使用）
 const caseImages = [
@@ -75,10 +75,41 @@ export default function FullOrderAppDevelopmentLP() {
   });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // フォーム送信処理（後で実装）
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          company: formData.company || '',
+          email: formData.email,
+          inquiryType: '完全オーダーメイドアプリ開発',
+          budget: '',
+          timeline: '',
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('送信に失敗しました');
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('送信に失敗しました。もう一度お試しください。');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // 関連事例を取得（アプリ開発に関連する事例を優先的に表示）
@@ -102,7 +133,7 @@ export default function FullOrderAppDevelopmentLP() {
             <a href="#results" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               事例
             </a>
-            <a href="#cases" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#demo" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               事例
             </a>
             <a href="#flow" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
@@ -140,7 +171,7 @@ export default function FullOrderAppDevelopmentLP() {
                 <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">FULL ORDER</span>
                 <div className="mb-4">
                   <span className="bg-[#fff100]/20 text-[#fff100] px-3 py-1 rounded-full text-sm font-medium">
-                    AI × 最新手法で最短実現
+                    完全オーダーメイドで課題を解決する WEB・アプリ制作
                   </span>
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
@@ -167,14 +198,14 @@ export default function FullOrderAppDevelopmentLP() {
                     無料相談する
                   </Link>
                   <Link
-                    href="#cases"
+                    href="#demo"
                     className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-full transition-all hover:scale-105"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
-                    事例を見る
+                    デモ画面を見る
                   </Link>
                 </div>
                 <div className="flex gap-6 text-white">
@@ -362,8 +393,23 @@ export default function FullOrderAppDevelopmentLP() {
           </div>
         </section>
 
-        {/* Results Section */}
-        <section id="results" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        {/* App Screens Section - アプリ画面イメージ */}
+        <section id="app-screens" className="py-16 md:py-24 px-4 md:px-8 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">APPS</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">アプリ画面イメージ</h2>
+              <p className="text-[#6b7280]">横にスクロールして様々なアプリ画面をご覧ください</p>
+            </AnimatedSection>
+            
+            <div className="bg-white rounded-xl p-6 md:p-8">
+              <IPhoneFrameSlider />
+            </div>
+          </div>
+        </section>
+
+        {/* Results Section - デモ画面 */}
+        <section id="demo" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">DEMO</span>
@@ -385,8 +431,12 @@ export default function FullOrderAppDevelopmentLP() {
               ))}
             </div>
             
-            {/* App Screens Gallery - スライダー形式 */}
+            {/* Webアプリデモ - 元の画像をそのままスライド */}
             <div className="bg-white rounded-xl p-6 md:p-8 mb-8">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-2">Webアプリデモ</h3>
+                <p className="text-[#6b7280]">様々なWebアプリのデモ画面をご覧ください</p>
+              </div>
               <div className="relative w-full max-w-6xl mx-auto">
                 {/* スライダーコンテナ */}
                 <div className="relative overflow-hidden rounded-lg bg-white">
@@ -396,8 +446,12 @@ export default function FullOrderAppDevelopmentLP() {
                   >
                     {caseImages.map((caseImage, index) => (
                       <div key={caseImage.id} className="min-w-full flex-shrink-0 flex items-center justify-center">
-                        {/* 白背景に直接画像を表示 */}
                         <div className="relative w-full max-w-5xl mx-auto">
+                          <div className="text-center mb-4">
+                            <h4 className="text-lg md:text-xl font-bold text-[#1a1a1a]">{caseImage.title}</h4>
+                            <p className="text-sm text-[#6b7280]">Webアプリデモ</p>
+                          </div>
+                          {/* 元の画像をそのまま表示 */}
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={caseImage.iphoneImage}
@@ -687,6 +741,31 @@ export default function FullOrderAppDevelopmentLP() {
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">お問い合わせ</h2>
               <p className="text-[#6b7280]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
             </AnimatedSection>
+            {isSubmitted ? (
+              <div className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8 text-center">
+                <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+                  お問い合わせありがとうございます
+                </h3>
+                <p className="text-[#6b7280] mb-8">
+                  担当者より2営業日以内にご連絡いたします。<br />
+                  しばらくお待ちください。
+                </p>
+                <Link 
+                  href="/"
+                  className="inline-flex items-center gap-2 text-[#fdc700] hover:text-[#e5b400] font-medium transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  トップページに戻る
+                </Link>
+              </div>
+            ) : (
             <form onSubmit={handleSubmit} className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8">
               <div className="space-y-6">
                 <div>
@@ -740,12 +819,25 @@ export default function FullOrderAppDevelopmentLP() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#fff100] to-[#fdc700] hover:from-[#fdc700] hover:to-[#fff100] text-[#1a1a1a] font-bold px-6 py-4 rounded-lg transition-all hover:scale-105 flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-[#fff100] to-[#fdc700] hover:from-[#fdc700] hover:to-[#fff100] disabled:bg-[#e5e7eb] disabled:cursor-not-allowed text-[#1a1a1a] font-bold px-6 py-4 rounded-lg transition-all hover:scale-105 disabled:hover:scale-100 flex items-center justify-center gap-2"
                 >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
-                  送信する
+                  {isSubmitting ? (
+                    <>
+                      <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      送信中...
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                      送信する
+                    </>
+                  )}
                 </button>
                 <p className="text-xs text-[#6b7280] text-center">
                   送信いただいた情報は、弊社の
@@ -756,11 +848,7 @@ export default function FullOrderAppDevelopmentLP() {
                 </p>
               </div>
             </form>
-            <div className="mt-8 text-center">
-              <p className="text-[#6b7280] mb-2">お急ぎの方はお電話でも受け付けております</p>
-              <p className="text-2xl font-bold text-[#1a1a1a] mb-1">03-XXXX-XXXX</p>
-              <p className="text-sm text-[#6b7280]">平日 10:00〜19:00（土日祝除く）</p>
-            </div>
+            )}
           </div>
         </section>
       </main>

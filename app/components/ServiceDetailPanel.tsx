@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Service } from "@/app/data/servicesData";
+import AppScreensGallery from "./AppScreensGallery";
 
 interface ServiceDetailPanelProps {
   service: Service;
@@ -42,6 +43,13 @@ export default function ServiceDetailPanel({
             </svg>
           </button>
         </div>
+
+        {/* デモ画面（完全オーダーメイドアプリ開発のみ） */}
+        {service.id === 'full-order-app-development' && (
+          <section className="mb-8">
+            <AppScreensGallery />
+          </section>
+        )}
 
         {/* できること */}
         <section className="mb-8">

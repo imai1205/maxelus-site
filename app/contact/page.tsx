@@ -11,7 +11,6 @@ function ContactForm() {
     name: "",
     company: "",
     email: "",
-    phone: "",
     inquiryType: "",
     budget: "",
     timeline: "",
@@ -131,20 +130,6 @@ function ContactForm() {
           />
         </div>
 
-        {/* Phone */}
-        <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
-            電話番号
-          </label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="090-1234-5678"
-            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all"
-          />
-        </div>
 
         {/* Inquiry Type */}
         <div>

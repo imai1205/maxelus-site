@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
+import { GlassCard, BubbleBadge, MotionPress, Section } from "@/components/ui";
 
 export default function ZumenConnectLP() {
   const [formData, setFormData] = useState({
@@ -12,15 +13,44 @@ export default function ZumenConnectLP() {
     department: "",
     position: "",
     email: "",
-    phone: "",
     message: "",
     privacy: false,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // フォーム送信処理（後で実装）
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          company: formData.company || '',
+          email: formData.email,
+          inquiryType: '図面コネクト',
+          budget: '',
+          timeline: '',
+          message: formData.message || '',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('送信に失敗しました');
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('送信に失敗しました。もう一度お試しください。');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -136,23 +166,22 @@ export default function ZumenConnectLP() {
 
               {/* Right Content - Image */}
               <AnimatedSection animation="fade-up" delay={200}>
-                <div className="relative">
-                  <div className="bg-white rounded-2xl shadow-2xl p-4 border border-[#e5e7eb]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
-                      alt="図面コネクト ダッシュボード"
-                      className="w-full h-auto rounded-lg"
-                    />
-                  </div>
-                </div>
+                <GlassCard variant="light" padding="none" className="overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/cases/zumen-connect-home.png"
+                    alt="図面コネクト ホーム画面"
+                    className="w-full h-auto"
+                    style={{ mixBlendMode: 'multiply' }}
+                  />
+                </GlassCard>
               </AnimatedSection>
             </div>
           </div>
         </section>
 
         {/* Problem/Solution Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <Section padding="lg" className="bg-gradient-to-b from-white via-[#fafafa] to-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PROBLEM</span>
@@ -186,7 +215,7 @@ export default function ZumenConnectLP() {
                 },
               ].map((item, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-                  <div className="bg-white rounded-2xl p-8 shadow-lg border border-[#e5e7eb] hover:shadow-xl transition-shadow">
+                  <GlassCard variant="light" padding="lg">
                     <div className="w-12 h-12 bg-[#fff100] rounded-full flex items-center justify-center text-2xl mb-6">
                       {item.icon}
                     </div>
@@ -200,15 +229,15 @@ export default function ZumenConnectLP() {
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </GlassCard>
                 </AnimatedSection>
               ))}
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Features Section */}
-        <section id="features" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section id="features" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[#fafafa] via-white to-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FEATURES</span>
@@ -220,46 +249,41 @@ export default function ZumenConnectLP() {
               </p>
             </AnimatedSection>
 
-            {/* Feature screenshots */}
-            <div className="grid md:grid-cols-3 gap-6 mb-16">
-              {[1, 2, 3].map((i) => (
-                <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-                  <div className="bg-white rounded-xl overflow-hidden shadow-lg">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={`https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80&sig=${i}`}
-                      alt={`機能${i}`}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-
-            {/* Feature cards grid */}
-            <div className="grid md:grid-cols-4 gap-6">
+            {/* Feature cards grid with images */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { number: "01", title: "自動OCR整理", desc: "図面から図番・品名・材質・処理などを自動抽出。", benefit: "入力工数とミスを削減" },
-                { number: "02", title: "AI類似検索", desc: "過去の類似図面を即座に検索・参照可能に。", benefit: "見積スピードUP" },
-                { number: "03", title: "関連資料リンク", desc: "図面に見積・工程表・3Dデータ・指示書を紐付け。", benefit: "必要情報が1画面に集約" },
-                { number: "04", title: "条件検索", desc: "材質・処理・日付などAND/OR検索でヒット。", benefit: "目的の図面に即到達" },
-                { number: "05", title: "見積作成", desc: "抽出情報を反映し、テンプレートと履歴で標準化。", benefit: "作成時間を大幅短縮" },
-                { number: "06", title: "進捗管理", desc: "案件のステータス管理、ガント/カレンダー表示。", benefit: "プロジェクトを可視化" },
-                { number: "07", title: "原価/実績", desc: "見積と実績を比較し、原価管理の精度を改善。", benefit: "利益率向上に貢献" },
-                { number: "08", title: "モバイル", desc: "スマホ・タブレットから現場や出張先でアクセス。", benefit: "場所を選ばず業務継続" },
+                { number: "01", title: "自動OCR整理", desc: "図面から図番・品名・材質・処理などを自動抽出。", benefit: "入力工数とミスを削減", image: '/cases/zumen-connect-search.png' },
+                { number: "02", title: "AI類似検索", desc: "過去の類似図面を即座に検索・参照可能に。", benefit: "見積スピードUP", image: '/cases/zumen-connect-ruizi.png' },
+                { number: "03", title: "関連資料リンク", desc: "図面に見積・工程表・3Dデータ・指示書を紐付け。", benefit: "必要情報が1画面に集約", image: null },
+                { number: "04", title: "条件検索", desc: "材質・処理・日付などAND/OR検索でヒット。", benefit: "目的の図面に即到達", image: null },
+                { number: "05", title: "見積作成", desc: "抽出情報を反映し、テンプレートと履歴で標準化。", benefit: "作成時間を大幅短縮", image: '/cases/zumen-connect-make-quote.png' },
+                { number: "06", title: "進捗管理", desc: "案件のステータス管理、ガント/カレンダー表示。", benefit: "プロジェクトを可視化", image: '/cases/zumen-connect-status.png' },
+                { number: "07", title: "原価/実績", desc: "見積と実績を比較し、原価管理の精度を改善。", benefit: "利益率向上に貢献", image: null },
+                { number: "08", title: "モバイル", desc: "スマホ・タブレットから現場や出張先でアクセス。", benefit: "場所を選ばず業務継続", image: '/cases/IPhoneFrame-draw.png' },
               ].map((feature, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 50}>
-                  <div className="bg-white rounded-xl p-6 shadow-lg border border-[#e5e7eb] hover:shadow-xl transition-shadow h-full">
+                  <GlassCard variant="light" padding="md" className="h-full">
+                    {feature.image && (
+                      <div className="mb-4 -mx-4 -mt-4 overflow-hidden rounded-t-2xl">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={feature.image}
+                          alt={feature.title}
+                          className="w-full h-auto"
+                          style={{ mixBlendMode: 'multiply' }}
+                        />
+                      </div>
+                    )}
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-sm font-bold text-[#1a1a1a]">{feature.number}</span>
+                      <BubbleBadge variant="small">{feature.number}</BubbleBadge>
                       <svg className="w-5 h-5 text-[#6b7280]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
                     <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">{feature.title}</h3>
                     <p className="text-sm text-[#6b7280] mb-3">{feature.desc}</p>
-                    <p className="text-xs text-[#fff100] font-medium">{feature.benefit}</p>
-                  </div>
+                    <BubbleBadge variant="small">{feature.benefit}</BubbleBadge>
+                  </GlassCard>
                 </AnimatedSection>
               ))}
             </div>
@@ -311,7 +335,7 @@ export default function ZumenConnectLP() {
                 },
               ].map((outcome, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-                  <div className="bg-white rounded-xl p-6 shadow-lg border border-[#e5e7eb] text-center">
+                  <GlassCard variant="light" padding="md" className="text-center">
                     <div className="w-10 h-10 bg-[#fff100] rounded-full flex items-center justify-center text-xl mx-auto mb-4">
                       {outcome.icon}
                     </div>
@@ -319,80 +343,16 @@ export default function ZumenConnectLP() {
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <span className="text-lg font-bold text-[#1a1a1a]">{outcome.before}</span>
                       <span className="text-xl text-[#6b7280]">→</span>
-                      <span className="text-2xl font-bold text-[#fff100]">{outcome.after}</span>
+                      <BubbleBadge variant="small">{outcome.after}</BubbleBadge>
                     </div>
                     <p className="text-xs text-[#6b7280]">{outcome.desc}</p>
-                  </div>
+                  </GlassCard>
                 </AnimatedSection>
               ))}
             </div>
 
             <p className="text-center text-sm text-[#6b7280] mt-8">
               ※効果は導入環境により異なります。まずはデモで体験してください。
-            </p>
-          </div>
-        </section>
-
-        {/* How It Works Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
-          <div className="max-w-7xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PROCESS</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
-                導入の流れ
-              </h2>
-              <p className="text-lg text-[#6b7280]">
-                ヒアリングから運用開始まで、丁寧にサポートします
-              </p>
-            </AnimatedSection>
-
-            <div className="grid md:grid-cols-4 gap-6">
-              {[
-                {
-                  step: "01",
-                  title: "デモ＋ヒアリング",
-                  desc: "訪問またはビデオ会議で実際の画面をご確認。課題や運用をお聞かせください。",
-                },
-                {
-                  step: "02",
-                  title: "初期設定",
-                  desc: "ユーザー権限、テンプレート、運用ルールを一緒に設計します。",
-                },
-                {
-                  step: "03",
-                  title: "取り込み支援",
-                  desc: "既存の図面・データの移行をサポート。代行取り込みも可能です。",
-                },
-                {
-                  step: "04",
-                  title: "運用開始",
-                  desc: "専任担当が定着までサポート。随時ご要望をヒアリングし改善します。",
-                },
-              ].map((step, i) => (
-                <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-                  <div className="relative">
-                    {i < 3 && (
-                      <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-[#e5e7eb] z-0" />
-                    )}
-                    <div className="bg-white rounded-xl p-6 shadow-lg border border-[#e5e7eb] relative z-10">
-                      <div className="w-12 h-12 bg-[#fff100] rounded-full flex items-center justify-center text-lg font-bold text-[#1a1a1a] mb-4">
-                        {step.step}
-                      </div>
-                      <div className="w-10 h-10 bg-[#fafafa] rounded-full flex items-center justify-center mb-4">
-                        <svg className="w-5 h-5 text-[#6b7280]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                      <h3 className="text-lg font-bold text-[#1a1a1a] mb-3">{step.title}</h3>
-                      <p className="text-sm text-[#6b7280] leading-relaxed">{step.desc}</p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-
-            <p className="text-center text-sm text-[#6b7280] mt-8">
-              最短即日から運用開始可能。お急ぎの場合もご相談ください。
             </p>
           </div>
         </section>
@@ -411,12 +371,12 @@ export default function ZumenConnectLP() {
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up">
-              <div className="bg-white rounded-2xl border-2 border-[#fff100] shadow-xl overflow-hidden">
-                <div className="bg-[#fff100] px-8 py-6">
+              <GlassCard variant="light" padding="lg" className="border-2 border-[#fff100]">
+                <div className="bg-[#fff100] -mx-6 -mt-6 mb-6 px-8 py-6 rounded-t-2xl">
                   <h3 className="text-2xl font-bold text-[#1a1a1a]">スタンダードプラン</h3>
                   <p className="text-sm text-[#1a1a1a]/70 mt-2">すべての機能が使えるオールインワンプラン</p>
                 </div>
-                <div className="px-8 py-8 text-center">
+                <div className="text-center">
                   <div className="flex items-baseline justify-center gap-2 mb-2">
                     <span className="text-5xl font-bold text-[#1a1a1a]">30,000</span>
                     <span className="text-2xl text-[#6b7280]">円〜</span>
@@ -446,80 +406,18 @@ export default function ZumenConnectLP() {
                     ))}
                   </div>
 
-                  <Link
-                    href="#contact"
-                    className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-3 rounded-full transition-all hover:scale-105 w-full"
-                  >
+                  <MotionPress as="a" href="#contact" className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-3 rounded-full w-full">
                     無料デモを申し込む
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </Link>
+                  </MotionPress>
                   <p className="text-xs text-[#6b7280] mt-4">
                     まずはデモで運用イメージを確認 → その後お見積り
                   </p>
                 </div>
-              </div>
+              </GlassCard>
             </AnimatedSection>
-          </div>
-        </section>
-
-        {/* Support Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
-          <div className="max-w-7xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">SUPPORT</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
-                安心のサポート体制
-              </h2>
-              <p className="text-lg text-[#6b7280]">
-                導入から定着まで、専任担当がしっかりサポート
-              </p>
-            </AnimatedSection>
-
-            <div className="grid md:grid-cols-4 gap-6 mb-12">
-              {[
-                {
-                  icon: "📚",
-                  title: "操作説明",
-                  desc: "ハンズオンセミナーで実際の操作を習得",
-                },
-                {
-                  icon: "💬",
-                  title: "日常サポート",
-                  desc: "チャット・メール・電話でいつでも質問可能",
-                },
-                {
-                  icon: "📅",
-                  title: "定期ミーティング",
-                  desc: "運用状況を確認し、改善提案を実施",
-                },
-                {
-                  icon: "🔄",
-                  title: "継続改善",
-                  desc: "ご要望をヒアリングし、システムを進化",
-                },
-              ].map((support, i) => (
-                <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-                  <div className="bg-white rounded-xl p-6 shadow-lg border border-[#e5e7eb] text-center">
-                    <div className="w-16 h-16 bg-[#fff100] rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                      {support.icon}
-                    </div>
-                    <h3 className="text-lg font-bold text-[#1a1a1a] mb-3">{support.title}</h3>
-                    <p className="text-sm text-[#6b7280]">{support.desc}</p>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-
-            <div className="bg-white rounded-xl p-8 shadow-lg border border-[#e5e7eb] text-center max-w-2xl mx-auto">
-              <p className="text-lg text-[#1a1a1a]">
-                <span className="font-bold">専任担当制</span>
-                で、御社の業務を深く理解。
-                <br />
-                最適な運用方法を一緒に作り上げます。
-              </p>
-            </div>
           </div>
         </section>
 
@@ -541,7 +439,33 @@ export default function ZumenConnectLP() {
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={200}>
-              <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-2xl">
+              <GlassCard variant="light" padding="lg">
+                {isSubmitted ? (
+                  <div className="text-center">
+                    <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
+                      <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+                      お問い合わせありがとうございます
+                    </h3>
+                    <p className="text-[#6b7280] mb-8">
+                      担当者より2営業日以内にご連絡いたします。<br />
+                      しばらくお待ちください。
+                    </p>
+                    <Link 
+                      href="/"
+                      className="inline-flex items-center gap-2 text-[#fdc700] hover:text-[#e5b400] font-medium transition-colors"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                      </svg>
+                      トップページに戻る
+                    </Link>
+                  </div>
+                ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
@@ -600,18 +524,6 @@ export default function ZumenConnectLP() {
                 </div>
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
-                    電話番号 <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
-                  />
-                </div>
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                     お問い合わせ内容（任意）
                   </label>
                   <textarea
@@ -638,12 +550,25 @@ export default function ZumenConnectLP() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-3 rounded-full transition-all hover:scale-105 flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#fff100] hover:bg-[#fdc700] disabled:bg-[#e5e7eb] disabled:cursor-not-allowed text-[#1a1a1a] font-medium px-8 py-3 rounded-full transition-all hover:scale-105 disabled:hover:scale-100 flex items-center justify-center gap-2"
                 >
-                  無料デモを申し込む
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  {isSubmitting ? (
+                    <>
+                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      送信中...
+                    </>
+                  ) : (
+                    <>
+                      無料デモを申し込む
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </>
+                  )}
                 </button>
                 <div className="text-center mt-6">
                   <p className="text-sm text-[#6b7280] mb-4">または</p>
@@ -654,7 +579,9 @@ export default function ZumenConnectLP() {
                     資料をダウンロード
                   </Link>
                 </div>
-              </form>
+                </form>
+                )}
+              </GlassCard>
             </AnimatedSection>
           </div>
         </section>

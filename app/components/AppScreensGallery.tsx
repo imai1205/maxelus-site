@@ -56,9 +56,32 @@ const appScreens = [
   },
 ];
 
+const ITEM_WIDTH_MOBILE = 320; // 80vw相当
+const ITEM_WIDTH_DESKTOP = 400;
+const GAP = 24;
+const AUTO_SCROLL_SPEED = 0.3; // px/frame（ゆっくり流す）
+
 export default function AppScreensGallery() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const autoScrollIntervalRef = useRef<number | null>(null);
+  const isUserScrollingRef = useRef<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const itemWidth = isMobile ? ITEM_WIDTH_MOBILE : ITEM_WIDTH_DESKTOP;
+  const itemWidthWithGap = itemWidth + GAP;
+
+  // 3セット複製（無限ループ用）
+  const loopScreens = [...appScreens, ...appScreens, ...appScreens];
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -67,11 +90,11 @@ export default function AppScreensGallery() {
     const handleScroll = () => {
       const scrollLeft = container.scrollLeft;
       const containerWidth = container.clientWidth;
-      const itemWidth = containerWidth * 0.8; // 各アイテムの幅（80vw or 400px）
-      const gap = 24; // gap-6 = 24px
-      const totalItemWidth = itemWidth + gap;
-      const newIndex = Math.round(scrollLeft / totalItemWidth);
-      setActiveIndex(Math.min(newIndex, appScreens.length - 1));
+      const totalItemWidth = itemWidthWithGap;
+      const centerOffset = (container.scrollWidth - containerWidth) / 2;
+      const relativeScroll = scrollLeft - centerOffset;
+      const newIndex = Math.round(relativeScroll / totalItemWidth) % appScreens.length;
+      setActiveIndex(newIndex >= 0 ? newIndex : appScreens.length + newIndex);
     };
 
     // スクロールイベントをthrottle
@@ -92,6 +115,70 @@ export default function AppScreensGallery() {
     return () => {
       container.removeEventListener("scroll", throttledScroll);
     };
+  }, [itemWidthWithGap]);
+
+  // 自動スクロール（ゆっくり流す）+ 無限ループ
+  useEffect(() => {
+    const autoScroll = () => {
+      if (scrollContainerRef.current && !isUserScrollingRef.current) {
+        const container = scrollContainerRef.current;
+        const scrollLeft = container.scrollLeft;
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+        const centerOffset = (scrollWidth - clientWidth) / 2;
+        const totalItemWidth = itemWidthWithGap;
+        const threshold = totalItemWidth * 0.3;
+
+        // 右端に近づいたら左端にジャンプ
+        if (scrollLeft > centerOffset + (appScreens.length * totalItemWidth) - threshold) {
+          container.scrollTo({
+            left: centerOffset - (appScreens.length * totalItemWidth) + threshold,
+            behavior: 'auto'
+          });
+          return;
+        }
+        // 左端に近づいたら右端にジャンプ
+        if (scrollLeft < centerOffset - (appScreens.length * totalItemWidth) - threshold) {
+          container.scrollTo({
+            left: centerOffset + (appScreens.length * totalItemWidth) - threshold,
+            behavior: 'auto'
+          });
+          return;
+        }
+
+        // 自動スクロール
+        container.scrollLeft += AUTO_SCROLL_SPEED;
+      }
+    };
+
+    // 少し遅延してから開始（初期化を待つ）
+    const startTimer = setTimeout(() => {
+      autoScrollIntervalRef.current = window.setInterval(autoScroll, 16); // 60fps
+    }, 100);
+
+    return () => {
+      clearTimeout(startTimer);
+      if (autoScrollIntervalRef.current) {
+        clearInterval(autoScrollIntervalRef.current);
+      }
+    };
+  }, [itemWidthWithGap]);
+
+  // 初期位置：真ん中セットの開始位置
+  useEffect(() => {
+    const initPosition = () => {
+      if (scrollContainerRef.current) {
+        const container = scrollContainerRef.current;
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+        const centerOffset = (scrollWidth - clientWidth) / 2;
+        container.scrollLeft = centerOffset;
+      }
+    };
+    
+    // 少し遅延してから初期位置を設定（レイアウトが確定してから）
+    const timer = setTimeout(initPosition, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -112,23 +199,47 @@ export default function AppScreensGallery() {
         {/* Scrollable container */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-8 snap-x snap-mandatory"
+          className="relative w-full overflow-x-auto overflow-y-visible scrollbar-hide"
           style={{
             scrollBehavior: "smooth",
+            WebkitOverflowScrolling: 'touch',
+          }}
+          onScroll={() => {
+            isUserScrollingRef.current = true;
+            setTimeout(() => {
+              isUserScrollingRef.current = false;
+            }, 1000);
+          }}
+          onTouchStart={() => {
+            isUserScrollingRef.current = true;
+          }}
+          onTouchEnd={() => {
+            setTimeout(() => {
+              isUserScrollingRef.current = false;
+            }, 1000);
           }}
         >
-          {appScreens.map((app, index) => {
-            const isActive = index === activeIndex;
-            const distance = Math.abs(index - activeIndex);
+          <div
+            className="flex gap-6 items-center justify-center"
+            style={{
+              width: 'max-content',
+              paddingLeft: '50%',
+              paddingRight: '50%',
+            }}
+          >
+            {loopScreens.map((app, index) => {
+            const isActive = index % appScreens.length === activeIndex;
+            const distance = Math.abs((index % appScreens.length) - activeIndex);
             const opacity = distance === 0 ? 1 : distance === 1 ? 0.3 : distance === 2 ? 0.15 : 0.1;
             const scale = distance === 0 ? 1 : distance === 1 ? 0.85 : distance === 2 ? 0.75 : 0.7;
             const zIndex = distance === 0 ? 10 : distance === 1 ? 5 : 1;
 
             return (
               <div
-                key={app.id}
-                className="flex-shrink-0 w-[80vw] md:w-[400px] transition-all duration-700 ease-out snap-center"
+                key={`${app.id}-${index}`}
+                className="flex-shrink-0 transition-all duration-700 ease-out"
                 style={{
+                  width: `${itemWidth}px`,
                   opacity,
                   transform: `scale(${scale}) translateZ(0)`,
                   zIndex,
@@ -161,6 +272,7 @@ export default function AppScreensGallery() {
               </div>
             );
           })}
+          </div>
         </div>
       </div>
 
@@ -172,14 +284,18 @@ export default function AppScreensGallery() {
             onClick={() => {
               const container = scrollContainerRef.current;
               if (!container) return;
+              isUserScrollingRef.current = true;
               const containerWidth = container.clientWidth;
-              const itemWidth = containerWidth * 0.8; // 80vw
-              const gap = 24;
-              const scrollPosition = index * (itemWidth + gap) - (containerWidth - itemWidth) / 2;
+              const scrollWidth = container.scrollWidth;
+              const centerOffset = (scrollWidth - containerWidth) / 2;
+              const scrollPosition = centerOffset + (index * itemWidthWithGap) - (containerWidth - itemWidth) / 2;
               container.scrollTo({
-                left: Math.max(0, scrollPosition),
+                left: scrollPosition,
                 behavior: "smooth",
               });
+              setTimeout(() => {
+                isUserScrollingRef.current = false;
+              }, 1000);
             }}
             className={`w-2 h-2 rounded-full transition-all ${
               index === activeIndex

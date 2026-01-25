@@ -13,6 +13,90 @@ import {
   type ServiceCategory,
 } from "../data/servicesData";
 
+// カテゴリごとの背景画像
+const categoryBackgrounds: Record<ServiceCategory, string> = {
+  'app-dx': '/cases/shop.png',
+  'website': '/cases/homepage.png',
+  'product': '/cases/zumen-connect-home.png',
+};
+
+// 全体背景画像セクション（選択されているカテゴリの背景を表示）
+function BackgroundImageSection({ activeCategory }: { activeCategory: ServiceCategory | null }) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const scrollProgress = Math.max(0, Math.min(1, (windowHeight - rect.top) / windowHeight));
+        setScrollY(scrollProgress);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // 初期値設定
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (!activeCategory) return null;
+
+  const backgroundImage = categoryBackgrounds[activeCategory];
+  const opacity = Math.max(0.3, 1 - scrollY * 1.2); // スクロールで消えていく
+
+  // カテゴリごとの背景サイズと位置の設定
+  const backgroundStyles: Record<ServiceCategory, { backgroundSize: string; backgroundPosition: string }> = {
+    'app-dx': {
+      backgroundSize: 'contain', // iPhoneとMacBookが全部見えるサイズ
+      backgroundPosition: 'center center',
+    },
+    'website': {
+      backgroundSize: 'contain', // ホームページ全体が見えるサイズ
+      backgroundPosition: 'center center',
+    },
+    'product': {
+      backgroundSize: 'contain', // プロダクト全体が見えるサイズ
+      backgroundPosition: 'center top', // 位置をもう少し上に
+    },
+  };
+
+  const style = backgroundStyles[activeCategory];
+
+  return (
+    <div 
+      ref={sectionRef}
+      className="absolute inset-0 transition-opacity duration-700 ease-out rounded-3xl overflow-hidden pointer-events-none"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: style.backgroundSize,
+        backgroundPosition: style.backgroundPosition,
+        backgroundRepeat: 'no-repeat',
+        opacity: Math.max(0.7, opacity * 0.95), // 背景画像をもっと見えるように
+        transform: `translateY(${scrollY * 40}px)`, // パララックス効果（scaleを削除）
+        zIndex: 0,
+      }}
+    >
+      {/* グラデーションオーバーレイ - ほぼぼかさず */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.05))',
+        }}
+      />
+      
+      {/* ガラスモーフィズムオーバーレイ - ほぼぼかさず */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(2px)', // ほぼぼかさず
+        }}
+      />
+    </div>
+  );
+}
+
 // カテゴリナビゲーション（Sticky + タブ方式）
 function CategoryNav({
   activeCategory,
@@ -61,11 +145,11 @@ function ServiceCard({
 }) {
   const isSpecial = service.special;
 
-  const cardClassName = `service-card bg-white rounded-2xl shadow-lg p-6 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 ${
+  const cardClassName = `service-card rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 backdrop-blur-xl ${
     isSpecial
-      ? "border-[#fff100] bg-gradient-to-br from-[#fffef0] to-white"
-      : "border-[#e5e7eb]/50"
-  } ${service.ctaType === "lp" && service.lpHref ? "hover:border-[#fff100] cursor-pointer" : ""}`;
+      ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 shadow-[#fff100]/20"
+      : "border-white/40 bg-white/75"
+  } ${service.ctaType === "lp" && service.lpHref ? "hover:border-[#fff100]/80 cursor-pointer" : ""}`;
 
   const cardContent = (
     <>
@@ -81,14 +165,14 @@ function ServiceCard({
 
             {/* Metric（成果イメージ） */}
             {service.metric && (
-              <div className="mb-4 p-3 bg-[#fafafa] rounded-lg">
-                <div className="text-xs text-[#6b7280] mb-1">
+              <div className="mb-3 p-2 bg-[#fafafa] rounded-lg">
+                <div className="text-[10px] text-[#6b7280] mb-0.5">
                   {service.metric.label}
                 </div>
-                <div className="text-2xl font-bold text-[#1a1a1a]">
+                <div className="text-lg md:text-xl font-bold text-[#1a1a1a]">
                   {service.metric.value}
                   {service.metric.suffix && (
-                    <span className="text-lg text-[#6b7280]">
+                    <span className="text-sm text-[#6b7280]">
                       {service.metric.suffix}
                     </span>
                   )}
@@ -97,26 +181,31 @@ function ServiceCard({
             )}
 
             {/* Title */}
-            <h3 className="text-xl md:text-2xl font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
+            <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-1 group-hover:text-[#fdc700] transition-colors">
               {service.title}
             </h3>
 
             {/* Catch */}
-            <p className="text-base md:text-lg text-[#1a1a1a] font-medium mb-3">
+            <p className="text-sm md:text-base text-[#1a1a1a] font-medium mb-2">
               {service.catch}
             </p>
 
             {/* Short Description */}
-            <p className="text-sm md:text-base text-[#6b7280] mb-5 leading-relaxed">
+            <p className="text-xs md:text-sm text-[#6b7280] mb-4 leading-relaxed" style={{
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}>
               {service.shortDesc}
             </p>
 
             {/* Tags */}
-            <div className="flex gap-2 flex-wrap mb-6">
-              {service.tags.slice(0, 4).map((tag, j) => (
+            <div className="flex gap-1.5 flex-wrap mb-4">
+              {service.tags.slice(0, 3).map((tag, j) => (
                 <span
                   key={j}
-                  className="text-xs md:text-sm px-3 py-1 bg-[#f3f4f6] text-[#6b7280] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
+                  className="text-[10px] md:text-xs px-2 py-0.5 bg-[#f3f4f6] text-[#6b7280] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
                   style={{ transitionDelay: `${j * 50}ms` }}
                 >
                   {tag}
@@ -125,17 +214,17 @@ function ServiceCard({
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col gap-2">
               <Link
                 href="/contact"
-                className="flex-1 inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 py-3 rounded-full transition-all hover:scale-105 group/btn"
+                className="w-full inline-flex items-center justify-center gap-1.5 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full transition-all hover:scale-105 group/btn"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
               >
                 無料相談
                 <svg
-                  className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"
+                  className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -149,12 +238,16 @@ function ServiceCard({
                 </svg>
               </Link>
               {service.ctaType === "lp" && service.lpHref ? (
-                <div
-                  className="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all hover:scale-105 pointer-events-none"
+                <Link
+                  href={service.id === 'full-order-app-development' ? `${service.lpHref}#demo` : service.lpHref}
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
                 >
-                  LPを見る
+                  {service.id === 'full-order-app-development' ? 'デモ画面を見る' : 'LPを見る'}
                   <svg
-                    className="w-4 h-4"
+                    className="w-3 h-3"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -166,18 +259,18 @@ function ServiceCard({
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     />
                   </svg>
-                </div>
+                </Link>
               ) : (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     onToggle();
                   }}
-                  className="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
                 >
                   {isOpen ? "閉じる" : "詳細を開く"}
                   <svg
-                    className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    className={`w-3 h-3 transition-transform ${isOpen ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -226,43 +319,75 @@ function ServiceCard({
   );
 }
 
-// カテゴリセクション（タブ/パネル方式用）
+// カテゴリセクション（3列グリッド方式用）
 function CategorySection({
   category,
   services,
   openServiceId,
   onServiceToggle,
   isActive,
+  onCategoryClick,
 }: {
   category: ServiceCategory;
   services: Service[];
   openServiceId: string | null;
   onServiceToggle: (id: string) => void;
   isActive: boolean;
+  onCategoryClick: () => void;
 }) {
-  if (!isActive) return null;
-
   return (
-    <div className="max-w-6xl mx-auto">
+    <div 
+      className={`relative transition-all duration-500 cursor-pointer overflow-hidden rounded-2xl ${
+        isActive 
+          ? 'scale-105 z-20' 
+          : 'scale-95 opacity-70 z-10 hover:opacity-90 hover:scale-100'
+      }`}
+      onClick={onCategoryClick}
+    >
+      {/* ガラスモーフィズムオーバーレイ */}
+      <div 
+        className="absolute inset-0 -z-10 backdrop-blur-sm"
+        style={{
+          background: 'rgba(255, 255, 255, 0.5)',
+          borderRadius: '1rem',
+          border: '1px solid rgba(255, 255, 255, 0.3)',
+        }}
+      />
+
+      <div className="relative z-0 p-4 md:p-6">
       {/* Section Heading */}
-      <AnimatedSection animation="fade-up" className="mb-12">
-        <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
-          {categoryNames[category]}
-        </h2>
-        <div className="w-20 h-1 bg-[#fff100] rounded-full" />
+      <AnimatedSection animation="fade-up" className="mb-6">
+        <button
+          onClick={onCategoryClick}
+          className={`text-left w-full transition-all duration-300 ${
+            isActive 
+              ? 'text-[#1a1a1a]' 
+              : 'text-[#6b7280] hover:text-[#1a1a1a]'
+          }`}
+        >
+          <h2 className={`text-xl md:text-2xl font-bold mb-2 transition-all ${
+            isActive ? 'text-[#1a1a1a]' : 'text-[#6b7280]'
+          }`}>
+            {categoryNames[category]}
+          </h2>
+          <div className={`h-1 bg-[#fff100] rounded-full transition-all ${
+            isActive ? 'w-20' : 'w-0'
+          }`} />
+        </button>
       </AnimatedSection>
 
-      {/* Services Grid */}
-      <div className="space-y-6">
-        {services.map((service, index) => (
-          <ServiceCard
-            key={service.id}
-            service={service}
-            index={index}
-            isOpen={openServiceId === service.id}
-            onToggle={() => onServiceToggle(service.id)}
-          />
-        ))}
+        {/* Services Grid - コンパクト表示 */}
+        <div className="space-y-3">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              index={index}
+              isOpen={openServiceId === service.id}
+              onToggle={() => onServiceToggle(service.id)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -352,31 +477,39 @@ export default function ServicesPage() {
           onCategoryClick={handleCategoryClick}
         />
 
-        {/* 3カテゴリセクション（タブ/パネル方式） */}
-        <section className="py-16 md:py-24 px-4 md:px-8">
-          {/* Desktop: タブ方式 */}
-          <div className="hidden md:block max-w-6xl mx-auto">
-            <CategorySection
-              category="app-dx"
-              services={appDxServices}
-              openServiceId={openServiceId}
-              onServiceToggle={handleServiceToggle}
-              isActive={activeCategory === "app-dx"}
-            />
-            <CategorySection
-              category="website"
-              services={websiteServices}
-              openServiceId={openServiceId}
-              onServiceToggle={handleServiceToggle}
-              isActive={activeCategory === "website"}
-            />
-            <CategorySection
-              category="product"
-              services={productServices}
-              openServiceId={openServiceId}
-              onServiceToggle={handleServiceToggle}
-              isActive={activeCategory === "product"}
-            />
+        {/* 3カテゴリセクション（3列グリッド方式） */}
+        <section className="py-16 md:py-24 px-4 md:px-8 relative overflow-hidden">
+          {/* Desktop: 3列グリッド */}
+          <div className="hidden md:block max-w-7xl mx-auto relative" style={{ minHeight: '600px' }}>
+            {/* 全体の背景画像（選択されているカテゴリの背景） */}
+            <BackgroundImageSection activeCategory={activeCategory} />
+            
+            <div className="grid grid-cols-3 gap-6 md:gap-8 relative z-10">
+              <CategorySection
+                category="app-dx"
+                services={appDxServices}
+                openServiceId={openServiceId}
+                onServiceToggle={handleServiceToggle}
+                isActive={activeCategory === "app-dx"}
+                onCategoryClick={() => handleCategoryClick("app-dx")}
+              />
+              <CategorySection
+                category="website"
+                services={websiteServices}
+                openServiceId={openServiceId}
+                onServiceToggle={handleServiceToggle}
+                isActive={activeCategory === "website"}
+                onCategoryClick={() => handleCategoryClick("website")}
+              />
+              <CategorySection
+                category="product"
+                services={productServices}
+                openServiceId={openServiceId}
+                onServiceToggle={handleServiceToggle}
+                isActive={activeCategory === "product"}
+                onCategoryClick={() => handleCategoryClick("product")}
+              />
+            </div>
           </div>
 
           {/* Mobile: アコーディオン方式 */}

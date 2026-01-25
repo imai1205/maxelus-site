@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Footer from "../components/Footer";
 import { AnimatedSection } from "../components/AnimationProvider";
+import { GlassCard, BubbleBadge } from "@/components/ui";
 
 export default function AboutPage() {
   return (
@@ -54,9 +55,9 @@ export default function AboutPage() {
               </h2>
             </AnimatedSection>
 
-            <div className="bg-white rounded-2xl border border-[#e5e7eb] shadow-lg p-6 md:p-8">
+            <GlassCard variant="light" padding="lg">
               <dl className="space-y-6">
-                <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]">
+                <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
                   <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     会社名
                   </dt>
@@ -64,7 +65,7 @@ export default function AboutPage() {
                     株式会社MAXELUS
                   </dd>
                 </div>
-                <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]">
+                <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
                   <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     法人番号
                   </dt>
@@ -72,7 +73,7 @@ export default function AboutPage() {
                     1130001080399
                   </dd>
                 </div>
-                <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]">
+                <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
                   <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     代表取締役社長
                   </dt>
@@ -80,7 +81,7 @@ export default function AboutPage() {
                     今井 俊喜
                   </dd>
                 </div>
-                <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]">
+                <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
                   <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     取締役副社長
                   </dt>
@@ -97,7 +98,7 @@ export default function AboutPage() {
                   </dd>
                 </div>
               </dl>
-            </div>
+            </GlassCard>
           </div>
         </section>
 
@@ -112,7 +113,7 @@ export default function AboutPage() {
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {[
                 {
                   title: "DX支援 / AI開発",
@@ -146,14 +147,14 @@ export default function AboutPage() {
                 <AnimatedSection
                   key={i}
                   animation="fade-up"
-                  delay={i * 100}
+                  delay={i * 50}
                 >
-                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow h-full">
-                    <h3 className="text-lg font-bold text-[#1a1a1a] mb-3">
+                  <GlassCard variant="light" padding="md" className="h-full group">
+                    <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-[#6b7280]">{item.description}</p>
-                  </div>
+                    <p className="text-xs md:text-sm text-[#6b7280]">{item.description}</p>
+                  </GlassCard>
                 </AnimatedSection>
               ))}
             </div>
@@ -171,7 +172,7 @@ export default function AboutPage() {
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={200}>
-              <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+              <GlassCard variant="light" padding="lg">
                 <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
                   MAXELUSは、AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです。
                   要件定義や設計だけで終わらず、実際に現場・組織の中で動くところまで落とし込み、改善まで伴走します。
@@ -181,7 +182,7 @@ export default function AboutPage() {
                   <br />
                   発見 → 判断 → 実行 が止まらない状態をつくることが私たちの役割です。
                 </p>
-              </div>
+              </GlassCard>
             </AnimatedSection>
           </div>
         </section>
@@ -197,50 +198,55 @@ export default function AboutPage() {
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
-            <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {[
                 {
                   number: "1",
-                  title: "企画・設計（0→1 / 改善設計）",
+                  title: "企画・設計",
+                  subtitle: "0→1 / 改善設計",
                   items: [
-                    "事業/業務ヒアリング、課題の言語化、優先順位づけ",
-                    "MVP設計（最小で最大効果が出る形に絞る）",
-                    "画面構成・導線設計、情報設計、UI/UX改善",
+                    "事業/業務ヒアリング、課題の言語化",
+                    "MVP設計",
+                    "画面構成・導線設計、UI/UX改善",
                   ],
                 },
                 {
                   number: "2",
-                  title: "開発（Webサイト〜業務アプリまで）",
+                  title: "開発",
+                  subtitle: "Webサイト〜業務アプリまで",
                   items: [
-                    "Next.js / React などモダン技術での高速開発",
-                    "管理画面（ミニCMS）構築、更新しやすい運用設計",
-                    "予約・問い合わせ・会員機能・決済・権限管理などの実装",
+                    "Next.js / React などモダン技術",
+                    "管理画面（ミニCMS）構築",
+                    "予約・問い合わせ・会員機能・決済",
                   ],
                 },
                 {
                   number: "3",
-                  title: "AI活用（実装まで含めて）",
+                  title: "AI活用",
+                  subtitle: "実装まで含めて",
                   items: [
-                    "OCR / 画像解析 / 自然言語処理などのAI機能組み込み",
-                    "AIチャット（社内ナレッジ/FAQ/業務支援）",
-                    "文章生成・分類・データ整形などの自動化",
+                    "OCR / 画像解析 / 自然言語処理",
+                    "AIチャット（社内ナレッジ/FAQ）",
+                    "文章生成・分類・データ整形",
                   ],
                 },
                 {
                   number: "4",
-                  title: "自動化・連携（手作業をなくす）",
+                  title: "自動化・連携",
+                  subtitle: "手作業をなくす",
                   items: [
-                    "API連携、外部サービス統合、データ連携基盤づくり",
-                    "ワークフロー自動化（通知・集計・登録・更新の自動化）",
+                    "API連携、外部サービス統合",
+                    "ワークフロー自動化",
                     "手入力/転記/属人化の削減",
                   ],
                 },
                 {
                   number: "5",
-                  title: "運用・改善（作って終わりにしない）",
+                  title: "運用・改善",
+                  subtitle: "作って終わりにしない",
                   items: [
-                    "アクセス解析、改善提案、継続的な機能追加",
-                    "ユーザーの声を反映する改善サイクルの構築",
+                    "アクセス解析、改善提案",
+                    "継続的な機能追加",
                     "速度・セキュリティ・品質のチューニング",
                   ],
                 },
@@ -248,41 +254,28 @@ export default function AboutPage() {
                 <AnimatedSection
                   key={i}
                   animation="fade-up"
-                  delay={i * 100}
+                  delay={i * 50}
                 >
-                  <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-[#fff100] rounded-full flex items-center justify-center text-[#1a1a1a] font-bold text-lg">
-                        {value.number}
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold text-[#1a1a1a] pt-2">
-                        {value.title}
-                      </h3>
+                  <GlassCard variant="light" padding="md" className="h-full group">
+                    <div className="mb-3">
+                      <BubbleBadge variant="small">{value.number}</BubbleBadge>
                     </div>
-                    <ul className="space-y-2 ml-16">
+                    <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-1 group-hover:text-[#fdc700] transition-colors">
+                      {value.title}
+                    </h3>
+                    <p className="text-xs text-[#6b7280] mb-4">{value.subtitle}</p>
+                    <ul className="space-y-2">
                       {value.items.map((item, j) => (
                         <li
                           key={j}
-                          className="flex items-start gap-3 text-[#6b7280]"
+                          className="text-xs md:text-sm text-[#6b7280] flex items-start gap-2"
                         >
-                          <svg
-                            className="w-5 h-5 text-[#fdc700] mt-0.5 flex-shrink-0"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
+                          <span className="text-[#fdc700] mt-1">•</span>
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </GlassCard>
                 </AnimatedSection>
               ))}
             </div>
@@ -293,56 +286,56 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             {/* Mission */}
-            <AnimatedSection animation="fade-up" className="mb-12">
-              <div className="bg-gradient-to-br from-[#0b1220] to-[#1e293b] rounded-2xl p-8 md:p-12 text-white">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl">🎯</span>
-                  <h2 className="text-2xl md:text-3xl font-bold">Mission（使命）</h2>
+            <AnimatedSection animation="fade-up" className="mb-8">
+              <GlassCard variant="dark" padding="lg" className="bg-gradient-to-br from-[#0b1220] to-[#1e293b]">
+                <div className="mb-4">
+                  <BubbleBadge variant="small">Mission</BubbleBadge>
                 </div>
-                <p className="text-lg md:text-xl leading-relaxed">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">使命</h2>
+                <p className="text-lg md:text-xl text-white leading-relaxed mb-4">
                   業務を効率化し、本当に大切なことに時間を使える世界をつくる。
                 </p>
-                <p className="text-base md:text-lg text-white/80 mt-4 leading-relaxed">
+                <p className="text-base md:text-lg text-white/80 leading-relaxed mb-4">
                   情報の分断やムダな作業を減らし、
                   「見つける・決める・動く」をスムーズにつなげることで、
                   人が本来向き合うべき 判断・創造・挑戦 に時間を取り戻します。
                 </p>
-                <p className="text-base md:text-lg text-white/80 mt-4 leading-relaxed">
+                <p className="text-base md:text-lg text-white/80 leading-relaxed">
                   AIとデータを味方につけ、再現性のある品質とスピードを提供します。
                 </p>
-              </div>
+              </GlassCard>
             </AnimatedSection>
 
             {/* Vision */}
-            <AnimatedSection animation="fade-up" delay={200} className="mb-12">
-              <div className="bg-gradient-to-br from-[#fffef0] to-white rounded-2xl p-8 md:p-12 border-2 border-[#fff100]">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl">🔮</span>
-                  <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">
-                    Vision（未来像）
-                  </h2>
+            <AnimatedSection animation="fade-up" delay={100} className="mb-8">
+              <GlassCard variant="light" padding="lg" className="border-2 border-[#fff100]/50">
+                <div className="mb-4">
+                  <BubbleBadge variant="small">Vision</BubbleBadge>
                 </div>
-                <p className="text-lg md:text-xl text-[#1a1a1a] leading-relaxed">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+                  未来像
+                </h2>
+                <p className="text-lg md:text-xl text-[#1a1a1a] leading-relaxed mb-4">
                   データとAIで、意思決定と実行が加速する社会をつくる。
                 </p>
-                <p className="text-base md:text-lg text-[#6b7280] mt-4 leading-relaxed">
+                <p className="text-base md:text-lg text-[#6b7280] leading-relaxed">
                   紙・勘・経験だけに依存せず、
                   必要な情報が必要なときに届き、次の一手が最短で打てる。
                   そんな「進化し続ける業務と組織」を増やしていきます。
                 </p>
-              </div>
+              </GlassCard>
             </AnimatedSection>
 
             {/* Value */}
-            <AnimatedSection animation="fade-up" delay={400}>
-              <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
-                <div className="flex items-center gap-3 mb-8">
-                  <span className="text-2xl">💎</span>
-                  <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">
-                    Value（価値観・行動指針）
-                  </h2>
+            <AnimatedSection animation="fade-up" delay={200}>
+              <GlassCard variant="light" padding="lg">
+                <div className="mb-6">
+                  <BubbleBadge variant="small">Value</BubbleBadge>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-6">
+                  価値観・行動指針
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                   {[
                     {
                       title: "Evolve（進化）",
@@ -373,18 +366,15 @@ export default function AboutPage() {
                         "最新技術を&quot;使える形&quot;に落とし込み、素早く価値に変える。",
                     },
                   ].map((value, i) => (
-                    <div
-                      key={i}
-                      className="bg-[#fafafa] rounded-xl p-6 hover:bg-[#fffef0] transition-colors"
-                    >
-                      <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">
+                    <GlassCard key={i} variant="light" padding="sm" className="h-full group">
+                      <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
                         {value.title}
                       </h3>
-                      <p className="text-sm text-[#6b7280]">{value.description}</p>
-                    </div>
+                      <p className="text-xs md:text-sm text-[#6b7280]">{value.description}</p>
+                    </GlassCard>
                   ))}
                 </div>
-              </div>
+              </GlassCard>
             </AnimatedSection>
           </div>
         </section>
@@ -401,7 +391,7 @@ export default function AboutPage() {
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={200}>
-              <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+              <GlassCard variant="light" padding="lg">
                 <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
                   私は大学卒業後、メーカーの営業として多様な現場を訪れ、課題解決に携わってきました。
                   その中で強く感じたのは、「本当の課題は、技術や努力ではなく&quot;仕組み&quot;の方にあることが多い」という事実です。
@@ -419,11 +409,11 @@ export default function AboutPage() {
                   「速さ」だけではなく、「使われ続けること」「成果につながること」にこだわり、
                   構想から実装、運用改善まで一貫して伴走していきます。
                 </p>
-                <div className="mt-8 pt-6 border-t border-[#e5e7eb] text-right">
+                <div className="mt-8 pt-6 border-t border-[#e5e7eb]/50 text-right">
                   <p className="text-sm text-[#6b7280] mb-1">代表取締役／CEO</p>
                   <p className="text-lg font-bold text-[#1a1a1a]">今井 俊喜</p>
                 </div>
-              </div>
+              </GlassCard>
             </AnimatedSection>
           </div>
         </section>

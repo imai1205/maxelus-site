@@ -237,7 +237,7 @@ export const servicesData: Service[] = [
     id: 'full-order-app-development',
     category: 'app-dx',
     title: '完全オーダーメイドアプリ開発',
-    catch: 'AI × 最新手法で最短実現。完全オーダーメイドで課題を解決するWEB・アプリ制作',
+    catch: '完全オーダーメイドで課題を解決するWEB・アプリ制作',
     tags: ['完全オーダー', 'アプリ開発', 'Web開発', 'UI/UX', '伴走型'],
     metric: {
       label: '開発期間',
@@ -319,8 +319,8 @@ export const servicesData: Service[] = [
     category: 'app-dx',
     title: '業務DX設計',
     catch: '業務の「型」を見つけて、システム化の道筋を。',
-    tags: ['DX設計', '業務分析', 'システム設計', 'ワークフロー'],
-    shortDesc: '現状の業務を分析し、システム化できる部分を特定。最適なシステム設計を提案します。',
+    tags: ['DX設計', '業務分析', 'システム設計', 'ワークフロー', 'AI', 'API連携', 'クラウド'],
+    shortDesc: '現状の業務を分析し、システム化できる部分を特定。AI機能組込み、API連携、クラウド運用設計まで含めた最適なシステム設計を提案します。',
     details: {
       capabilities: [
         '業務フローの分析・可視化',
@@ -328,12 +328,24 @@ export const servicesData: Service[] = [
         '最適なシステム設計の提案',
         'ROI試算・効果測定',
         '段階的な導入計画の策定',
+        'AI機能の組込み（文書の要約・分類、画像・動画分析、検索機能強化、チャットボットなど）',
+        '既存システムとのAPI連携（Slack、Google Workspace、会計ソフトなど）',
+        'ワークフローの自動化',
+        'クラウドインフラの設計・構築（AWS/GCP/Azure）',
+        'セキュリティ対策・コスト最適化',
+        '監視・アラート設定',
       ],
       targetAudience: [
         '業務をシステム化したいが何から始めればいいかわからない',
         '現状の業務フローを整理したい',
         'システム化の効果を試算したい',
         '段階的な導入計画が欲しい',
+        'AI機能を業務に組み込みたい',
+        '複数のシステム間で二重入力が発生している',
+        '既存システムとの連携を実現したい',
+        'クラウドへの移行を検討している',
+        'セキュリティ対策を強化したい',
+        '運用コストを削減したい',
       ],
       process: [
         {
@@ -352,7 +364,7 @@ export const servicesData: Service[] = [
           description: '提案した設計に基づいてシステムを実装し、運用サポートを行います。',
         },
       ],
-      pricing: '20万円〜（業務の複雑さにより変動）',
+      pricing: '20万円〜（業務の複雑さ・機能要件により変動。AI機能組込み、API連携、クラウド運用設計を含む場合は追加費用）',
       faq: [
         {
           question: 'どの程度の期間で設計が完了しますか？',
@@ -367,118 +379,6 @@ export const servicesData: Service[] = [
     ctaType: 'lp',
     lpHref: '/lp/business-dx-design',
     priority: 1,
-  },
-  {
-    id: 'ai-integration',
-    category: 'app-dx',
-    title: 'AI機能組込み',
-    catch: '要約/分類/検索/生成/動画分析。AIで業務を自動化。',
-    tags: ['AI', '自動化', '機械学習', 'OCR', '自然言語処理'],
-    metric: {
-      label: '処理時間',
-      value: '80%',
-      suffix: '削減',
-    },
-    shortDesc: 'AI技術を活用して、資料の要約・分類・検索、動画分析などを自動化。業務効率を大幅に向上させます。',
-    details: {
-      capabilities: [
-        '文書の要約・分類（自然言語処理）',
-        '画像・動画の分析（コンピュータビジョン）',
-        '検索機能の強化（セマンティック検索）',
-        'チャットボット・自動応答',
-        '予測分析・レコメンデーション',
-      ],
-      targetAudience: [
-        '大量の資料を処理するのに時間がかかる',
-        '検索がうまく機能していない',
-        '問い合わせ対応を自動化したい',
-        'データから予測や分析をしたい',
-      ],
-      process: [
-        {
-          step: 1,
-          title: '要件定義・AI選定',
-          description: 'どのようなAI機能が必要かヒアリングし、最適なAI技術を選定します。',
-        },
-        {
-          step: 2,
-          title: '実装・学習',
-          description: 'AI機能を実装し、必要に応じて学習データを準備して精度を向上させます。',
-        },
-        {
-          step: 3,
-          title: '運用・改善',
-          description: '実際に運用しながら、精度を改善し、機能を追加します。',
-        },
-      ],
-      pricing: '40万円〜（AI機能の複雑さ・データ量により変動）',
-      faq: [
-        {
-          question: 'どの程度の精度が出ますか？',
-          answer: 'AI機能により異なりますが、一般的には80%以上の精度を目指します。学習データを増やすことでさらに向上します。',
-        },
-        {
-          question: '既存システムに組み込めますか？',
-          answer: 'はい、API形式で提供するため、既存システムに組み込むことができます。',
-        },
-      ],
-    },
-    ctaType: 'lp',
-    lpHref: '/lp/ai-ocr-automation',
-    priority: 3,
-  },
-  {
-    id: 'integration-automation',
-    category: 'app-dx',
-    title: '既存連携・自動化',
-    catch: 'Slack/Google/会計/予約/CSV/API。つながる。',
-    tags: ['連携', '自動化', 'API', 'ワークフロー'],
-    shortDesc: '既存のSaaSやシステムをAPIで連携し、二重入力を排除。ワークフローを自動化します。',
-    details: {
-      capabilities: [
-        'SaaS間の連携（Slack、Google Workspace、会計ソフトなど）',
-        'API連携の実装',
-        'ワークフローの自動化',
-        'データ同期・変換',
-        'エラーハンドリング・通知',
-      ],
-      targetAudience: [
-        '複数のシステム間で二重入力が発生している',
-        '手作業のワークフローを自動化したい',
-        'システム間の連携を実現したい',
-        'データの同期に時間がかかる',
-      ],
-      process: [
-        {
-          step: 1,
-          title: '現状分析・設計',
-          description: '連携が必要なシステムを整理し、連携方法を設計します。',
-        },
-        {
-          step: 2,
-          title: '実装・テスト',
-          description: 'API連携を実装し、テストを行います。',
-        },
-        {
-          step: 3,
-          title: '運用・監視',
-          description: '実際に運用しながら、エラー監視や改善を行います。',
-        },
-      ],
-      pricing: '25万円〜（連携システム数・複雑さにより変動）',
-      faq: [
-        {
-          question: 'どのようなシステムと連携できますか？',
-          answer: 'APIが提供されているシステムであれば連携可能です。Slack、Google Workspace、会計ソフト、予約システムなどに対応しています。',
-        },
-        {
-          question: 'データの同期はどの程度の頻度で行われますか？',
-          answer: 'リアルタイム同期、定期的な同期（1分〜1時間ごと）など、要件に応じて設定可能です。',
-        },
-      ],
-    },
-    ctaType: 'inline',
-    priority: 5,
   },
   {
     id: 'ai-coding-education',
@@ -539,59 +439,6 @@ export const servicesData: Service[] = [
     lpHref: '/lp/ai-coding-education',
     priority: 1,
   },
-  {
-    id: 'cloud-operation',
-    category: 'app-dx',
-    title: 'クラウド運用設計',
-    catch: '安定稼働・セキュリティ・コスト最適化。',
-    tags: ['クラウド', '運用', 'セキュリティ', 'インフラ'],
-    shortDesc: 'AWS/GCP/Azureでのインフラ設計から運用まで。安定稼働・セキュリティ・コスト最適化を実現します。',
-    details: {
-      capabilities: [
-        'クラウドインフラの設計・構築',
-        'セキュリティ対策（認証・暗号化・監視）',
-        'コスト最適化',
-        '監視・アラート設定',
-        'バックアップ・災害対策',
-      ],
-      targetAudience: [
-        'クラウドへの移行を検討している',
-        'セキュリティ対策を強化したい',
-        '運用コストを削減したい',
-        '安定稼働を実現したい',
-      ],
-      process: [
-        {
-          step: 1,
-          title: '要件定義・設計',
-          description: 'システム要件を整理し、最適なクラウド設計を提案します。',
-        },
-        {
-          step: 2,
-          title: '構築・移行',
-          description: 'クラウドインフラを構築し、既存システムを移行します。',
-        },
-        {
-          step: 3,
-          title: '運用・監視',
-          description: '運用監視を行い、セキュリティやコストを継続的に最適化します。',
-        },
-      ],
-      pricing: '30万円〜（インフラ規模・要件により変動）',
-      faq: [
-        {
-          question: 'どのクラウドプロバイダーに対応していますか？',
-          answer: 'AWS、GCP、Azureの主要3社に対応しています。要件に応じて最適なプロバイダーを選定します。',
-        },
-        {
-          question: '運用サポートはどの程度まで対応しますか？',
-          answer: '監視・アラート設定、セキュリティアップデート、コスト最適化など、継続的な運用サポートに対応しています。',
-        },
-      ],
-    },
-    ctaType: 'inline',
-    priority: 6,
-  },
 
   // ========== ホームページ制作 ==========
   {
@@ -648,70 +495,17 @@ export const servicesData: Service[] = [
     priority: 1,
   },
   {
-    id: 'website-business',
-    category: 'website',
-    title: 'ビジネス',
-    catch: '導線設計/SEO/計測。成果につながるサイト。',
-    tags: ['導線設計', 'SEO', '計測', 'コンバージョン'],
-    shortDesc: '導線設計・SEO対策・計測機能を組み込んだ、成果につながるサイトを制作。集客から問い合わせまで最適化します。',
-    details: {
-      capabilities: [
-        '導線設計（ユーザーの行動を最適化）',
-        'SEO対策（検索順位向上）',
-        '計測機能（Google Analytics、ヒートマップなど）',
-        'A/Bテスト',
-        'コンバージョン最適化',
-      ],
-      targetAudience: [
-        'サイトからの問い合わせを増やしたい',
-        '検索順位を上げたい',
-        'ユーザーの行動を分析したい',
-        '成果につながるサイトが欲しい',
-      ],
-      process: [
-        {
-          step: 1,
-          title: '要件定義・分析',
-          description: '目標を整理し、競合分析やユーザー分析を行います。',
-        },
-        {
-          step: 2,
-          title: '設計・制作',
-          description: '導線設計を行い、SEO対策や計測機能を組み込んでサイトを制作します。',
-        },
-        {
-          step: 3,
-          title: '運用・改善',
-          description: '計測データを分析し、継続的に改善を行います。',
-        },
-      ],
-      pricing: '30万円〜（ページ数・機能要件により変動）',
-      faq: [
-        {
-          question: 'SEO対策はどの程度効果がありますか？',
-          answer: 'キーワードや競合状況により異なりますが、適切な対策により検索順位の向上が期待できます。',
-        },
-        {
-          question: '計測データはどのように見られますか？',
-          answer: 'Google Analyticsやヒートマップツールのダッシュボードから、リアルタイムで確認できます。',
-        },
-      ],
-    },
-    ctaType: 'inline',
-    priority: 2,
-  },
-  {
     id: 'website-special',
     category: 'website',
     title: 'スペシャル',
-    catch: 'WordPressではできない体験型Web。',
-    tags: ['3D', 'インタラクティブ', 'アニメーション', '体験型'],
+    catch: 'WordPressではできない体験型Web。導線設計・SEO・計測機能も盛り込み。',
+    tags: ['3D', 'インタラクティブ', 'アニメーション', '体験型', '導線設計', 'SEO', '計測'],
     metric: {
       label: '印象',
       value: '10倍',
       suffix: '向上',
     },
-    shortDesc: '3Dモデル、インタラクティブアニメーション、iPhoneデモなど、WordPressでは実現できない「体験型」のWebサイトを制作。',
+    shortDesc: '3Dモデル、インタラクティブアニメーション、iPhoneデモなど、WordPressでは実現できない「体験型」のWebサイトを制作。導線設計・SEO対策・計測機能も組み込み、成果につながるサイトに。',
     details: {
       capabilities: [
         '3Dモデルの組み込み・操作',
@@ -719,12 +513,21 @@ export const servicesData: Service[] = [
         'iPhoneデモの組み込み（実際に操作可能）',
         'パララックススクロール',
         'カスタムCMS（更新しやすい設計）',
+        '導線設計（ユーザーの行動を最適化）',
+        'SEO対策（検索順位向上）',
+        '計測機能（Google Analytics、ヒートマップなど）',
+        'A/Bテスト',
+        'コンバージョン最適化',
       ],
       targetAudience: [
         '他社と差をつけたい',
         '印象に残るサイトが欲しい',
         'WordPressでは物足りない',
         '体験型のサイトを作りたい',
+        'サイトからの問い合わせを増やしたい',
+        '検索順位を上げたい',
+        'ユーザーの行動を分析したい',
+        '成果につながるサイトが欲しい',
       ],
       process: [
         {
@@ -752,6 +555,14 @@ export const servicesData: Service[] = [
         {
           question: 'スマホでも快適に動作しますか？',
           answer: 'はい、最新のWeb技術により、スマホでも快適に動作します。ただし、3Dなどの重い機能は軽量化を心がけています。',
+        },
+        {
+          question: 'SEO対策はどの程度効果がありますか？',
+          answer: 'キーワードや競合状況により異なりますが、適切な対策により検索順位の向上が期待できます。',
+        },
+        {
+          question: '計測データはどのように見られますか？',
+          answer: 'Google Analyticsやヒートマップツールのダッシュボードから、リアルタイムで確認できます。',
         },
       ],
     },
