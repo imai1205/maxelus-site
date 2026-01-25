@@ -1,7 +1,8 @@
-インタラクティブWeb・3D LPにiPhoneの3D回転ビューアーを実装
+iPhoneの3Dモデルを改善：角を丸くし、実際の画像とロゴを表示
 
-- Three.jsとReact Three Fiberを使用してiPhoneの3Dモデルを実装
-- マウスドラッグ/タッチスワイプでiPhoneを360度回転可能
-- 自動回転機能と手動操作の切り替えボタンを追加
-- 携帯とパソコンの両方で操作可能
-- 3D表示タブに実際に操作できる3Dモデルを追加
+- iPhoneの3Dモデルを角の丸い形状に変更（createRoundedBox関数を使用）
+- 画面に実際のiPhone Frame画像（IPhoneFrame-saron.png）を表示
+- 後ろ側にAppleマークを追加（簡易版、Canvasで生成）
+- 後ろ側にマクセラスロゴを追加（ダークモード/ライトモードで自動切り替え）
+- ThemeProviderにresolvedThemeを追加してuseThemeフックでアクセス可能に
+- テクスチャローダーを実装して画像を非同期で読み込み

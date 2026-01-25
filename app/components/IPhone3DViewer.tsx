@@ -1,37 +1,67 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useState, useEffect, useMemo } from "react";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
+import { useTheme } from "./ThemeProvider";
 
-// iPhoneの3Dモデル（簡易版）
-function IPhoneModel() {
+// 角の丸いボックスジオメトリを作成する関数
+function createRoundedBox(width: number, height: number, depth: number, radius: number) {
+  const shape = new THREE.Shape();
+  const w = width / 2;
+  const h = height / 2;
+  
+  shape.moveTo(-w + radius, -h);
+  shape.lineTo(w - radius, -h);
+  shape.quadraticCurveTo(w, -h, w, -h + radius);
+  shape.lineTo(w, h - radius);
+  shape.quadraticCurveTo(w, h, w - radius, h);
+  shape.lineTo(-w + radius, h);
+  shape.quadraticCurveTo(-w, h, -w, h - radius);
+  shape.lineTo(-w, -h + radius);
+  shape.quadraticCurveTo(-w, -h, -w + radius, -h);
+  
+  const extrudeSettings = {
+    depth: depth - radius * 2,
+    bevelEnabled: true,
+    bevelSegments: 8,
+    steps: 1,
+    bevelSize: radius,
+    bevelThickness: radius,
+  };
+  
+  return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+}
+
+// iPhoneの3Dモデル（改善版）
+function IPhoneModel({ screenTexture, logoTexture, appleTexture }: { 
+  screenTexture: THREE.Texture | null;
+  logoTexture: THREE.Texture | null;
+  appleTexture: THREE.Texture | null;
+}) {
+  const bodyGeometry = useMemo(() => createRoundedBox(2.5, 5.5, 0.3, 0.15), []);
+  const screenGeometry = useMemo(() => createRoundedBox(2.2, 4.8, 0.05, 0.1), []);
 
   return (
     <group>
-      {/* iPhone本体 */}
-      <mesh position={[0, 0, 0]}>
-        {/* iPhoneのボディ（黒いフレーム） */}
-        <boxGeometry args={[2.5, 5.5, 0.3]} />
+      {/* iPhone本体（角の丸いボディ） */}
+      <mesh position={[0, 0, 0]} geometry={bodyGeometry}>
         <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
       </mesh>
 
-      {/* 画面部分 */}
-      <mesh position={[0, 0, 0.16]}>
-        <boxGeometry args={[2.2, 4.8, 0.05]} />
+      {/* 画面部分（角の丸い） */}
+      <mesh position={[0, 0, 0.16]} geometry={screenGeometry}>
         <meshStandardMaterial color="#000000" />
       </mesh>
 
-      {/* 画面のコンテンツ（簡易表示） */}
-      <mesh position={[0, 0.5, 0.18]}>
-        <boxGeometry args={[2.0, 1.0, 0.02]} />
-        <meshStandardMaterial color="#007AFF" />
-      </mesh>
-      <mesh position={[0, -0.5, 0.18]}>
-        <boxGeometry args={[2.0, 1.0, 0.02]} />
-        <meshStandardMaterial color="#34C759" />
-      </mesh>
+      {/* 画面のコンテンツ（実際のiPhone Frame画像） */}
+      {screenTexture && (
+        <mesh position={[0, 0, 0.18]}>
+          <planeGeometry args={[2.0, 4.4]} />
+          <meshStandardMaterial map={screenTexture} />
+        </mesh>
+      )}
 
       {/* Dynamic Island */}
       <mesh position={[0, 2.3, 0.18]}>
@@ -44,20 +74,141 @@ function IPhoneModel() {
         <circleGeometry args={[0.1, 16]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
+
+      {/* 後ろ側 - Appleマーク */}
+      {appleTexture && (
+        <mesh position={[0, 0, -0.15]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[0.8, 1.0]} />
+          <meshStandardMaterial map={appleTexture} transparent />
+        </mesh>
+      )}
+
+      {/* 後ろ側 - マクセラスロゴ */}
+      {logoTexture && (
+        <mesh position={[0, -1.5, -0.15]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[1.2, 0.4]} />
+          <meshStandardMaterial map={logoTexture} transparent />
+        </mesh>
+      )}
     </group>
   );
+}
+
+// テクスチャローダーコンポーネント
+function TextureLoader({ 
+  screenPath, 
+  logoPath, 
+  applePath,
+  onLoad 
+}: { 
+  screenPath: string;
+  logoPath: string;
+  applePath: string;
+  onLoad: (textures: { screen: THREE.Texture | null; logo: THREE.Texture | null; apple: THREE.Texture | null }) => void;
+}) {
+  const loader = new THREE.TextureLoader();
+  
+  useEffect(() => {
+    let screenTexture: THREE.Texture | null = null;
+    let logoTexture: THREE.Texture | null = null;
+    let appleTexture: THREE.Texture | null = null;
+    let loadedCount = 0;
+    const total = 3;
+
+    const checkComplete = () => {
+      loadedCount++;
+      if (loadedCount === total) {
+        onLoad({ screen: screenTexture, logo: logoTexture, apple: appleTexture });
+      }
+    };
+
+    // 画面テクスチャを読み込み
+    loader.load(
+      screenPath,
+      (texture) => {
+        texture.flipY = false;
+        screenTexture = texture;
+        checkComplete();
+      },
+      undefined,
+      () => {
+        checkComplete();
+      }
+    );
+
+    // ロゴテクスチャを読み込み
+    loader.load(
+      logoPath,
+      (texture) => {
+        texture.flipY = false;
+        logoTexture = texture;
+        checkComplete();
+      },
+      undefined,
+      () => {
+        checkComplete();
+      }
+    );
+
+    // Appleマークテクスチャを生成（簡易版 - 後で実際の画像に置き換え可能）
+    const canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      // 白い背景
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.fillRect(0, 0, 256, 256);
+      // Appleロゴ風のシンプルな円形
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(128, 128, 80, 0, Math.PI * 2);
+      ctx.fill();
+      // 内側に小さな円（Appleの葉っぱ部分を表現）
+      ctx.fillStyle = '#1a1a1a';
+      ctx.beginPath();
+      ctx.arc(128, 100, 20, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    appleTexture = new THREE.CanvasTexture(canvas);
+    appleTexture.flipY = false;
+    checkComplete();
+
+    return () => {
+      screenTexture?.dispose();
+      logoTexture?.dispose();
+      appleTexture?.dispose();
+    };
+  }, [screenPath, logoPath, applePath, onLoad]);
+
+  return null;
 }
 
 // メインコンポーネント
 export default function IPhone3DViewer() {
   const [isRotating, setIsRotating] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [textures, setTextures] = useState<{ 
+    screen: THREE.Texture | null; 
+    logo: THREE.Texture | null; 
+    apple: THREE.Texture | null;
+  }>({ screen: null, logo: null, apple: null });
+  const { resolvedTheme } = useTheme();
+
+  // ロゴパスをテーマに応じて切り替え
+  const logoPath = resolvedTheme === 'dark' 
+    ? '/cases/logo(D).png' 
+    : '/cases/logo(W).png';
+
+  // iPhone Frame画像（ランダムに1つ選択、または最初のものを使用）
+  const screenPath = '/cases/IPhoneFrame-saron.png';
 
   useEffect(() => {
-    // 少し遅延させてローディングを表示
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
+    if (textures.screen && textures.logo && textures.apple) {
+      const timer = setTimeout(() => setIsLoading(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [textures]);
 
   if (isLoading) {
     return (
@@ -76,6 +227,14 @@ export default function IPhone3DViewer() {
         gl={{ antialias: true, alpha: true }}
         className="w-full h-full"
       >
+        {/* テクスチャローダー */}
+        <TextureLoader 
+          screenPath={screenPath}
+          logoPath={logoPath}
+          applePath=""
+          onLoad={setTextures}
+        />
+
         {/* ライティング */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
@@ -94,7 +253,13 @@ export default function IPhone3DViewer() {
         />
 
         {/* iPhoneモデル */}
-        <IPhoneModel />
+        {textures.screen && (
+          <IPhoneModel 
+            screenTexture={textures.screen}
+            logoTexture={textures.logo}
+            appleTexture={textures.apple}
+          />
+        )}
 
         {/* 環境マッピング（反射を追加） */}
         <Environment preset="city" />
