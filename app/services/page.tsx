@@ -241,6 +241,7 @@ function ServiceCard({
                 <Link
                   href={service.id === 'full-order-app-development' ? `${service.lpHref}#demo` : service.lpHref}
                   className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all hover:scale-105"
+                  prefetch={true}
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
@@ -291,24 +292,23 @@ function ServiceCard({
   return (
     <div className="w-full">
       <AnimatedSection animation="fade-up" delay={index * 100}>
-        <TiltCard maxTilt={5} className="h-full">
-          {service.ctaType === "lp" && service.lpHref ? (
-            <Link
-              href={service.lpHref}
-              className={cardClassName}
-              onClick={(e: React.MouseEvent) => {
-                // 内部のボタンクリック時はカードのクリックを無効化
-                if ((e.target as HTMLElement).closest("a, button")) {
-                  e.stopPropagation();
-                }
-              }}
-            >
-              {cardContent}
-            </Link>
-          ) : (
+        {service.ctaType === "lp" && service.lpHref ? (
+          <Link
+            href={service.id === 'full-order-app-development' ? `${service.lpHref}#demo` : service.lpHref}
+            className="block h-full"
+            prefetch={true}
+          >
+            <TiltCard maxTilt={5} className="h-full">
+              <div className={cardClassName}>
+                {cardContent}
+              </div>
+            </TiltCard>
+          </Link>
+        ) : (
+          <TiltCard maxTilt={5} className="h-full">
             <div className={cardClassName}>{cardContent}</div>
-          )}
-        </TiltCard>
+          </TiltCard>
+        )}
       </AnimatedSection>
 
       {/* Detail Panel（Accordion方式：同時に1つだけ開く） */}
@@ -337,12 +337,11 @@ function CategorySection({
 }) {
   return (
     <div 
-      className={`relative transition-all duration-500 cursor-pointer overflow-hidden rounded-2xl ${
+      className={`relative transition-all duration-500 overflow-hidden rounded-2xl ${
         isActive 
           ? 'scale-105 z-20' 
           : 'scale-95 opacity-70 z-10 hover:opacity-90 hover:scale-100'
       }`}
-      onClick={onCategoryClick}
     >
       {/* ガラスモーフィズムオーバーレイ */}
       <div 
