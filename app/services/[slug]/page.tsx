@@ -79,7 +79,7 @@ export default function ServiceDetailPage() {
   const otherServices = getSortedServices().filter(s => s.slug !== slug).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -140,13 +140,13 @@ export default function ServiceDetailPage() {
 
         {/* Features Section */}
         {detailContent?.features && (
-          <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+          <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
             <div className="max-w-6xl mx-auto">
               <AnimatedSection animation="fade-up">
-                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] text-center mb-4">
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-4">
                   特長
                 </h2>
-                <p className="text-[#6b7280] text-center mb-12 md:mb-16">
+                <p className="text-[#6b7280] dark:text-[#9ca3af] text-center mb-12 md:mb-16">
                   このサービスの主な機能と特長
                 </p>
               </AnimatedSection>
@@ -155,14 +155,14 @@ export default function ServiceDetailPage() {
                 {detailContent.features.map((feature, index) => (
                   <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
                     <TiltCard maxTilt={5} className="h-full">
-                      <div className="bg-white rounded-2xl p-6 md:p-8 h-full shadow-lg hover:shadow-xl transition-shadow">
-                        <div className="w-14 h-14 bg-[#fffef0] rounded-xl flex items-center justify-center text-[#fdc700] mb-6">
+                      <div className="bg-white dark:bg-[#0b1220] rounded-2xl p-6 md:p-8 h-full shadow-lg hover:shadow-xl transition-shadow border border-[#e5e7eb] dark:border-[#374151]">
+                        <div className="w-14 h-14 bg-[#fffef0] dark:bg-[#1e293b] rounded-xl flex items-center justify-center text-[#fdc700] mb-6">
                           <FeatureIcon icon={feature.icon} />
                         </div>
-                        <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-3">
+                        <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-3">
                           {feature.title}
                         </h3>
-                        <p className="text-sm md:text-base text-[#6b7280] leading-relaxed">
+                        <p className="text-sm md:text-base text-[#6b7280] dark:text-[#9ca3af] leading-relaxed">
                           {feature.description}
                         </p>
                       </div>
@@ -176,13 +176,13 @@ export default function ServiceDetailPage() {
 
         {/* Benefits Section */}
         {detailContent?.benefits && (
-          <section className="py-16 md:py-24 px-4 md:px-8">
+          <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
             <div className="max-w-4xl mx-auto">
               <AnimatedSection animation="fade-up">
-                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] text-center mb-4">
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-4">
                   導入メリット
                 </h2>
-                <p className="text-[#6b7280] text-center mb-12 md:mb-16">
+                <p className="text-[#6b7280] dark:text-[#9ca3af] text-center mb-12 md:mb-16">
                   このサービスを導入することで得られるメリット
                 </p>
               </AnimatedSection>
@@ -190,13 +190,13 @@ export default function ServiceDetailPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 {detailContent.benefits.map((benefit, index) => (
                   <AnimatedSection key={index} animation="fade-up" delay={index * 50}>
-                    <div className="flex items-start gap-4 p-4 md:p-6 bg-[#fafafa] rounded-xl">
+                    <div className="flex items-start gap-4 p-4 md:p-6 bg-[#fafafa] dark:bg-[#1e293b] rounded-xl border border-[#e5e7eb] dark:border-[#374151]">
                       <div className="w-8 h-8 bg-[#fff100] rounded-full flex items-center justify-center flex-shrink-0">
                         <svg className="w-5 h-5 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <p className="text-base md:text-lg text-[#1a1a1a] font-medium">
+                      <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] font-medium">
                         {benefit}
                       </p>
                     </div>
@@ -227,13 +227,13 @@ export default function ServiceDetailPage() {
         )}
 
         {/* CTA Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-white to-[#fafafa]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-white to-[#fafafa] dark:from-[#0b1220] dark:to-[#1e293b]">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection animation="fade-up">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-6">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6">
                 まずは無料相談から
               </h2>
-              <p className="text-base md:text-lg text-[#6b7280] mb-8 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-[#6b7280] dark:text-[#9ca3af] mb-8 max-w-2xl mx-auto">
                 「こんなこと実現できる？」という段階からOK。<br />
                 課題を整理するところから、一緒にスタートしましょう。
               </p>
@@ -249,7 +249,7 @@ export default function ServiceDetailPage() {
                 </Link>
                 <Link 
                   href="/services"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-[#1a1a1a] font-medium px-8 py-4 rounded-full border border-[#e5e7eb] transition-all hover:bg-[#fafafa] hover:scale-105"
+                  className="inline-flex items-center justify-center gap-2 bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb] font-medium px-8 py-4 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all hover:bg-[#fafafa] dark:hover:bg-[#374151] hover:scale-105"
                 >
                   サービス一覧に戻る
                 </Link>
@@ -260,10 +260,10 @@ export default function ServiceDetailPage() {
 
         {/* Other Services */}
         {otherServices.length > 0 && (
-          <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+          <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
             <div className="max-w-6xl mx-auto">
               <AnimatedSection animation="fade-up">
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-12">
                   その他のサービス
                 </h2>
               </AnimatedSection>
@@ -274,12 +274,12 @@ export default function ServiceDetailPage() {
                     <Link 
                       href={s.externalUrl || `/services/${s.slug}`}
                       target={s.externalUrl ? "_blank" : undefined}
-                      className="block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1"
+                      className="block bg-white dark:bg-[#0b1220] rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-[#e5e7eb] dark:border-[#374151]"
                     >
-                      <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">
+                      <h3 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                         {s.title}
                       </h3>
-                      <p className="text-sm text-[#6b7280] mb-4">
+                      <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] mb-4">
                         {s.catch}
                       </p>
                       <span className="text-sm text-[#fdc700] font-medium flex items-center gap-1">

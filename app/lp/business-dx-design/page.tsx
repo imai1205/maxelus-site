@@ -178,7 +178,7 @@ export default function BusinessDXDesignLP() {
         </section>
 
         {/* Solution Section - 元のホームページから移動 */}
-        <section id="solution" className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden">
+        <section id="solution" className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden bg-white dark:bg-[#0b1220]">
           {/* Parallax Background */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-fixed opacity-5"
@@ -186,7 +186,7 @@ export default function BusinessDXDesignLP() {
               backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80')`,
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-[#fffef8] to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-[#fffef8] to-white dark:from-[#0b1220] dark:via-[#1e293b] dark:to-[#0b1220]" />
           
           {/* Background decoration */}
           <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-bl from-[#fff100]/10 to-transparent rounded-full blur-3xl" />
@@ -304,19 +304,19 @@ export default function BusinessDXDesignLP() {
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CONTACT</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">お問い合わせ</h2>
-              <p className="text-[#6b7280]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
+              <p className="text-[#6b7280] dark:text-[#9ca3af]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
             </AnimatedSection>
             {isSubmitted ? (
-              <div className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8 text-center">
+              <div className="bg-white dark:bg-[#0b1220] border-2 border-[#e5e7eb] dark:border-[#374151] rounded-xl p-8 text-center">
                 <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                   お問い合わせありがとうございます
                 </h3>
-                <p className="text-[#6b7280] mb-8">
+                <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8">
                   担当者より2営業日以内にご連絡いたします。<br />
                   しばらくお待ちください。
                 </p>
@@ -331,10 +331,10 @@ export default function BusinessDXDesignLP() {
                 </Link>
               </div>
             ) : (
-            <form onSubmit={handleSubmit} className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8">
+            <form onSubmit={handleSubmit} className="bg-white dark:bg-[#0b1220] border-2 border-[#e5e7eb] dark:border-[#374151] rounded-xl p-8">
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                     お名前 <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -342,12 +342,12 @@ export default function BusinessDXDesignLP() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
                     placeholder="山田 太郎"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                     メールアドレス <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -355,22 +355,22 @@ export default function BusinessDXDesignLP() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
                     placeholder="example@company.com"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">会社名</label>
+                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">会社名</label>
                   <input
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
                     placeholder="株式会社サンプル"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                     お問い合わせ内容 <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -378,7 +378,7 @@ export default function BusinessDXDesignLP() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={5}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
                     placeholder="ご相談内容をできるだけ詳しくお書きください。"
                   />
                 </div>

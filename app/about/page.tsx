@@ -380,7 +380,7 @@ export default function AboutPage() {
         </section>
 
         {/* 代表挨拶 */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">MESSAGE</span>
@@ -392,26 +392,26 @@ export default function AboutPage() {
 
             <AnimatedSection animation="fade-up" delay={200}>
               <GlassCard variant="light" padding="lg">
-                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-6">
                   私は大学卒業後、メーカーの営業として多様な現場を訪れ、課題解決に携わってきました。
                   その中で強く感じたのは、「本当の課題は、技術や努力ではなく&quot;仕組み&quot;の方にあることが多い」という事実です。
                 </p>
-                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-6">
                   情報が散らばり、手作業や転記が増え、判断が遅れ、改善が続かない。
                   こうした状況は、業界や規模を問わず多くの組織で起こり得ます。
                 </p>
-                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-6">
                   MAXELUSは、そうした&quot;止まりがちな流れ&quot;を、
                   AIとデータ、そしてモダンな開発手法でつなぎ直し、
                   最短で現場に届くプロダクトとして提供します。
                 </p>
-                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed">
+                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed">
                   「速さ」だけではなく、「使われ続けること」「成果につながること」にこだわり、
                   構想から実装、運用改善まで一貫して伴走していきます。
                 </p>
-                <div className="mt-8 pt-6 border-t border-[#e5e7eb]/50 text-right">
-                  <p className="text-sm text-[#6b7280] mb-1">代表取締役／CEO</p>
-                  <p className="text-lg font-bold text-[#1a1a1a]">今井 俊喜</p>
+                <div className="mt-8 pt-6 border-t border-[#e5e7eb] dark:border-[#374151]/50 text-right">
+                  <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] mb-1">代表取締役／CEO</p>
+                  <p className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb]">今井 俊喜</p>
                 </div>
               </GlassCard>
             </AnimatedSection>

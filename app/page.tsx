@@ -258,7 +258,7 @@ function SolutionSection() {
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">APPROACH</span>
           <div className="relative space-y-4 md:space-y-6">
             <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
-            <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
+            <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
               MAXELUSは
               <br />
               <span className="animate-text-gradient">オーダーメイド × 伴走</span>
@@ -303,8 +303,8 @@ function SolutionSection() {
                 <div className="w-16 h-16 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-full flex items-center justify-center text-[#1a1a1a] mx-auto mb-4">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{item.title}</h3>
-                <p className="text-[#6b7280]">{item.description}</p>
+                <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">{item.title}</h3>
+                <p className="text-[#6b7280] dark:text-[#9ca3af]">{item.description}</p>
               </div>
             </AnimatedSection>
           ))}
@@ -400,7 +400,7 @@ function WorksSection() {
   const works = homeCasesData;
 
   return (
-    <section id="works" className="bg-[#fafafa] py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
+    <section id="works" className="bg-[#fafafa] dark:bg-[#1e293b] py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
       <div className="max-w-[1100px] mx-auto">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
@@ -408,13 +408,13 @@ function WorksSection() {
           <div className="relative space-y-2 md:space-y-4">
             <h2 
               data-cms-key="site.works_title"
-              className="text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight"
+              className="text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
             >
               事例
             </h2>
             <p 
               data-cms-key="site.works_subtitle"
-              className="text-sm md:text-lg text-[#6b7280] px-4"
+              className="text-sm md:text-lg text-[#6b7280] dark:text-[#9ca3af] px-4"
             >
               製造業、医療、建設など、幅広い業種で実績があります
             </p>
@@ -424,34 +424,34 @@ function WorksSection() {
         {/* Stats */}
         <AnimatedSection animation="fade-up" delay={200} className="flex justify-center gap-6 sm:gap-10 md:gap-16 mb-8 md:mb-12">
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a]">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
               <AnimatedCounter end={50} suffix="+" className="animate-text-gradient" />
             </div>
             <p 
               data-cms-key="site.works_stat_1_label"
-              className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2"
+              className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] mt-1 md:mt-2"
             >
               プロジェクト実績
             </p>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a]">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
               <AnimatedCounter end={98} suffix="%" className="animate-text-gradient" />
             </div>
             <p 
               data-cms-key="site.works_stat_2_label"
-              className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2"
+              className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] mt-1 md:mt-2"
             >
               顧客満足度
             </p>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a]">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
               <AnimatedCounter end={15} suffix="+" className="animate-text-gradient" />
             </div>
             <p 
               data-cms-key="site.works_stat_3_label"
-              className="text-xs md:text-sm text-[#6b7280] mt-1 md:mt-2"
+              className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] mt-1 md:mt-2"
             >
               業界対応
             </p>
@@ -491,7 +491,7 @@ function WorksSection() {
                       {work.serviceTags && work.serviceTags.length > 0 && (
                         <div className="flex flex-wrap gap-1 mb-3">
                           {work.serviceTags.slice(0, 3).map((tag, j) => (
-                            <span key={j} className="text-xs px-2 py-0.5 bg-[#fafafa] text-[#6b7280] rounded-full">
+                            <span key={j} className="text-xs px-2 py-0.5 bg-[#fafafa] dark:bg-[#0b1220] text-[#6b7280] dark:text-[#9ca3af] rounded-full">
                               {tag}
                             </span>
                           ))}
@@ -532,7 +532,7 @@ function WorksSection() {
                       {work.serviceTags && work.serviceTags.length > 0 && (
                         <div className="flex flex-wrap gap-1 mb-3">
                           {work.serviceTags.slice(0, 3).map((tag, j) => (
-                            <span key={j} className="text-xs px-2 py-0.5 bg-[#fafafa] text-[#6b7280] rounded-full">
+                            <span key={j} className="text-xs px-2 py-0.5 bg-[#fafafa] dark:bg-[#0b1220] text-[#6b7280] dark:text-[#9ca3af] rounded-full">
                               {tag}
                             </span>
                           ))}
@@ -613,9 +613,9 @@ function FAQSection() {
           {faqs.map((faq, i) => (
             <div 
               key={i} 
-              className="faq-card p-4 md:p-6 group hover:shadow-lg transition-all duration-300 hover:border-[#fff100] cursor-pointer"
+              className="faq-card p-4 md:p-6 group hover:shadow-lg transition-all duration-300 hover:border-[#fff100] cursor-pointer bg-white dark:bg-[#0b1220] border border-[#e5e7eb] dark:border-[#374151] rounded-lg"
             >
-              <h3 className="text-base md:text-xl text-[#1a1a1a] mb-2 md:mb-3 flex items-start md:items-center gap-2 md:gap-3">
+              <h3 className="text-base md:text-xl text-[#1a1a1a] dark:text-[#f9fafb] mb-2 md:mb-3 flex items-start md:items-center gap-2 md:gap-3">
                 <span className="w-6 md:w-8 h-6 md:h-8 bg-[#fff100] rounded-full flex items-center justify-center text-xs md:text-sm font-bold text-[#1a1a1a] group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5 md:mt-0">
                   Q
                 </span>
@@ -628,7 +628,7 @@ function FAQSection() {
               </h3>
               <p 
                 data-cms-key={`site.faq_${i}_a`}
-                className="text-sm md:text-base text-[#6b7280] leading-6 pl-8 md:pl-11"
+                className="text-sm md:text-base text-[#6b7280] dark:text-[#9ca3af] leading-6 pl-8 md:pl-11"
               >
                 {faq.answer}
               </p>
