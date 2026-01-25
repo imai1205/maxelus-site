@@ -19,13 +19,13 @@ export default function ServiceDetailPanel({
   if (!isOpen) return null;
 
   return (
-    <div className="mt-4 bg-white rounded-2xl border border-[#e5e7eb] shadow-lg overflow-hidden animate-fade-in">
+    <div className="mt-4 bg-white dark:bg-[#1e293b] rounded-2xl border border-[#e5e7eb] dark:border-[#374151] shadow-lg overflow-hidden animate-fade-in">
       <div className="p-6 md:p-8">
         {/* 閉じるボタン */}
         <div className="flex justify-end mb-6">
           <button
             onClick={onClose}
-            className="text-[#6b7280] hover:text-[#1a1a1a] transition-colors"
+            className="text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb] transition-colors"
             aria-label="閉じる"
           >
             <svg
@@ -53,7 +53,7 @@ export default function ServiceDetailPanel({
 
         {/* できること */}
         <section className="mb-8">
-          <h4 className="text-lg font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
+          <h4 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 flex items-center gap-2">
             <span className="w-1 h-6 bg-[#fff100] rounded-full" />
             できること
           </h4>
@@ -61,7 +61,7 @@ export default function ServiceDetailPanel({
             {service.details.capabilities.map((capability, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3 text-[#6b7280]"
+                className="flex items-start gap-3 text-[#6b7280] dark:text-[#9ca3af]"
               >
                 <svg
                   className="w-5 h-5 text-[#fdc700] mt-0.5 flex-shrink-0"
@@ -84,7 +84,7 @@ export default function ServiceDetailPanel({
 
         {/* こんな人におすすめ */}
         <section className="mb-8">
-          <h4 className="text-lg font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
+          <h4 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 flex items-center gap-2">
             <span className="w-1 h-6 bg-[#fff100] rounded-full" />
             こんな人におすすめ
           </h4>
@@ -92,7 +92,7 @@ export default function ServiceDetailPanel({
             {service.details.targetAudience.map((target, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3 text-[#6b7280]"
+                className="flex items-start gap-3 text-[#6b7280] dark:text-[#9ca3af]"
               >
                 <svg
                   className="w-5 h-5 text-[#fdc700] mt-0.5 flex-shrink-0"
@@ -115,7 +115,7 @@ export default function ServiceDetailPanel({
 
         {/* 進め方（3ステップ） */}
         <section className="mb-8">
-          <h4 className="text-lg font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
+          <h4 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 flex items-center gap-2">
             <span className="w-1 h-6 bg-[#fff100] rounded-full" />
             進め方
           </h4>
@@ -123,16 +123,16 @@ export default function ServiceDetailPanel({
             {service.details.process.map((step, i) => (
               <div
                 key={i}
-                className="flex gap-4 p-4 bg-[#fafafa] rounded-xl"
+                className="flex gap-4 p-4 bg-[#fafafa] dark:bg-[#0b1220]/50 rounded-xl border border-[#e5e7eb] dark:border-[#374151]"
               >
                 <div className="flex-shrink-0 w-8 h-8 bg-[#fff100] rounded-full flex items-center justify-center text-[#1a1a1a] font-bold">
                   {step.step}
                 </div>
                 <div className="flex-1">
-                  <h5 className="font-bold text-[#1a1a1a] mb-1">
+                  <h5 className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-1">
                     {step.title}
                   </h5>
-                  <p className="text-sm text-[#6b7280]">
+                  <p className="text-sm text-[#6b7280] dark:text-[#9ca3af]">
                     {step.description}
                   </p>
                 </div>
@@ -143,18 +143,18 @@ export default function ServiceDetailPanel({
 
         {/* 料金目安 */}
         <section className="mb-8">
-          <h4 className="text-lg font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
+          <h4 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 flex items-center gap-2">
             <span className="w-1 h-6 bg-[#fff100] rounded-full" />
             料金目安
           </h4>
-          <p className="text-lg font-medium text-[#1a1a1a] bg-[#fffef0] px-4 py-3 rounded-lg border border-[#fff100]">
+          <p className="text-lg font-medium text-[#1a1a1a] dark:text-[#f9fafb] bg-[#fffef0] dark:bg-[#0b1220]/50 px-4 py-3 rounded-lg border border-[#fff100] dark:border-[#fff100]/60">
             {service.details.pricing}
           </p>
         </section>
 
         {/* よくある質問 */}
         <section className="mb-8">
-          <h4 className="text-lg font-bold text-[#1a1a1a] mb-4 flex items-center gap-2">
+          <h4 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 flex items-center gap-2">
             <span className="w-1 h-6 bg-[#fff100] rounded-full" />
             よくある質問
           </h4>
@@ -162,12 +162,12 @@ export default function ServiceDetailPanel({
             {service.details.faq.map((faq, i) => (
               <div
                 key={i}
-                className="p-4 bg-[#fafafa] rounded-xl"
+                className="p-4 bg-[#fafafa] dark:bg-[#0b1220]/50 rounded-xl border border-[#e5e7eb] dark:border-[#374151]"
               >
-                <h5 className="font-bold text-[#1a1a1a] mb-2">
+                <h5 className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                   Q. {faq.question}
                 </h5>
-                <p className="text-sm text-[#6b7280]">
+                <p className="text-sm text-[#6b7280] dark:text-[#9ca3af]">
                   A. {faq.answer}
                 </p>
               </div>
@@ -176,7 +176,7 @@ export default function ServiceDetailPanel({
         </section>
 
         {/* CTA */}
-        <section className="pt-6 border-t border-[#e5e7eb]">
+        <section className="pt-6 border-t border-[#e5e7eb] dark:border-[#374151]">
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/contact"
@@ -200,7 +200,7 @@ export default function ServiceDetailPanel({
             {service.ctaType === "lp" && service.lpHref && (
               <Link
                 href={service.lpHref}
-                className="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
+                className="flex-1 inline-flex items-center justify-center gap-2 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all hover:scale-105"
               >
                 LPを見る
                 <svg

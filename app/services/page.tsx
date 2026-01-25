@@ -147,8 +147,8 @@ function ServiceCard({
 
   const cardClassName = `service-card rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 backdrop-blur-xl ${
     isSpecial
-      ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 shadow-[#fff100]/20"
-      : "border-white/40 dark:border-[#374151]/40 bg-white/75 dark:bg-[#1e293b]/75"
+      ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 dark:from-[#1e293b]/90 dark:to-[#0b1220]/90 dark:border-[#fff100]/40 shadow-[#fff100]/20"
+      : "border-white/40 dark:border-[#374151]/60 bg-white/75 dark:bg-[#1e293b]/90"
   } ${service.ctaType === "lp" && service.lpHref ? "hover:border-[#fff100]/80 cursor-pointer" : ""}`;
 
   const cardContent = (
@@ -165,7 +165,7 @@ function ServiceCard({
 
             {/* Metric（成果イメージ） */}
             {service.metric && (
-              <div className="mb-3 p-2 bg-[#fafafa] dark:bg-[#1e293b] rounded-lg">
+              <div className="mb-3 p-2 bg-[#fafafa] dark:bg-[#0b1220]/50 rounded-lg border border-[#e5e7eb] dark:border-[#374151]">
                 <div className="text-[10px] text-[#6b7280] dark:text-[#9ca3af] mb-0.5">
                   {service.metric.label}
                 </div>
@@ -205,7 +205,7 @@ function ServiceCard({
               {service.tags.slice(0, 3).map((tag, j) => (
                 <span
                   key={j}
-                  className="text-[10px] md:text-xs px-2 py-0.5 bg-[#f3f4f6] dark:bg-[#1e293b] text-[#6b7280] dark:text-[#9ca3af] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
+                  className="text-[10px] md:text-xs px-2 py-0.5 bg-[#f3f4f6] dark:bg-[#0b1220]/50 dark:border dark:border-[#374151] text-[#6b7280] dark:text-[#9ca3af] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] dark:group-hover:bg-[#fff100] dark:group-hover:text-[#1a1a1a] transition-colors duration-300"
                   style={{ transitionDelay: `${j * 50}ms` }}
                 >
                   {tag}
@@ -346,20 +346,8 @@ function CategorySection({
     >
       {/* ガラスモーフィズムオーバーレイ */}
       <div 
-        className="absolute inset-0 -z-10 backdrop-blur-sm dark:backdrop-blur-md"
-        style={{
-          background: 'rgba(255, 255, 255, 0.5)',
-          borderRadius: '1rem',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-        }}
+        className="absolute inset-0 -z-10 backdrop-blur-sm dark:backdrop-blur-md bg-white/50 dark:bg-[#1e293b]/80 rounded-2xl border border-white/30 dark:border-[#374151]/50"
       />
-      <style jsx global>{`
-        .dark [data-category-section],
-        .dark .category-section-overlay {
-          background: rgba(30, 41, 59, 0.5) !important;
-          border: 1px solid rgba(55, 65, 81, 0.3) !important;
-        }
-      `}</style>
 
       <div className="relative z-0 p-4 md:p-6">
       {/* Section Heading */}
@@ -534,7 +522,7 @@ export default function ServicesPage() {
                 return (
                   <div
                     key={category}
-                    className="bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden"
+                    className="bg-white dark:bg-[#1e293b] rounded-2xl border border-[#e5e7eb] dark:border-[#374151] overflow-hidden"
                   >
                     <button
                       onClick={() =>
@@ -542,7 +530,7 @@ export default function ServicesPage() {
                       }
                       className="w-full px-6 py-4 flex items-center justify-between text-left"
                     >
-                      <h3 className="text-lg font-bold text-[#1a1a1a]">
+                      <h3 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
                         {categoryNames[category]}
                       </h3>
                       <svg
@@ -582,10 +570,10 @@ export default function ServicesPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#0b1220]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 よくある質問
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -619,11 +607,11 @@ export default function ServicesPage() {
                   animation="fade-up"
                   delay={i * 100}
                 >
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h3 className="font-bold text-[#1a1a1a] mb-2">
+                  <div className="bg-white dark:bg-[#1e293b] rounded-xl p-6 shadow-sm border border-[#e5e7eb] dark:border-[#374151]">
+                    <h3 className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                       Q. {faq.question}
                     </h3>
-                    <p className="text-[#6b7280]">{faq.answer}</p>
+                    <p className="text-[#6b7280] dark:text-[#9ca3af]">{faq.answer}</p>
                   </div>
                 </AnimatedSection>
               ))}
