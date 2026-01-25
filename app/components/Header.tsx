@@ -5,12 +5,31 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const imgLogo = "/logo.png";
-
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [imgLogo, setImgLogo] = useState('/cases/logo(W).png');
   const pathname = usePathname();
+  
+  // テーマを取得（クライアントサイドのみ）
+  useEffect(() => {
+    const updateLogo = () => {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const logo = isDark ? '/cases/logo(D).png' : '/cases/logo(W).png';
+      setImgLogo(logo);
+    };
+
+    // 初期設定
+    updateLogo();
+
+    // システム設定の変更を監視
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", updateLogo);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateLogo);
+    };
+  }, []);
 
   const isActive = (path: string) => pathname === path;
 
