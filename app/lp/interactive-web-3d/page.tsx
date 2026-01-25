@@ -12,6 +12,12 @@ const IPhoneDemo = dynamic(() => import("@/app/components/InteractiveDemo").then
   ssr: false
 });
 
+// 3D iPhoneビューアーを動的インポート（Three.jsが必要）
+const IPhone3DViewer = dynamic(() => import("@/app/components/IPhone3DViewer"), {
+  loading: () => <div className="h-[500px] flex items-center justify-center bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220] rounded-xl"><div className="animate-pulse text-white/70 text-sm md:text-base">3Dモデルを読み込み中...</div></div>,
+  ssr: false
+});
+
 // 体験デモタブコンポーネント
 function DemoTabs() {
   const [activeTab, setActiveTab] = useState<"3d" | "interactive" | "iphone">("3d");
@@ -43,21 +49,10 @@ function DemoTabs() {
       <div className="p-6 md:p-12 min-h-[500px] flex items-center justify-center">
         {activeTab === "3d" && (
           <div className="w-full max-w-4xl">
-            <div className="aspect-video bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220] rounded-xl relative overflow-hidden">
-              {/* 3D風UI（軽量ダミー） */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  {/* 3D風のキューブ（CSSのみ） */}
-                  <div className="w-32 h-32 md:w-48 md:h-48 relative transform-gpu">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-lg shadow-2xl transform rotate-45 hover:rotate-90 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#fdc700] to-[#fff100] rounded-lg shadow-2xl transform -rotate-45 hover:-rotate-90 transition-transform duration-700 opacity-50" />
-                  </div>
-                  <p className="text-white/70 text-sm md:text-base mt-8 text-center">
-                    3Dモデルを操作できます（後で本物に差し替え可能）
-                  </p>
-                </div>
-              </div>
-            </div>
+            <IPhone3DViewer />
+            <p className="text-[#6b7280] dark:text-[#9ca3af] text-sm md:text-base mt-4 text-center">
+              マウスでドラッグ、またはタッチでスワイプしてiPhoneを回転させることができます
+            </p>
           </div>
         )}
 
