@@ -1,90 +1,41 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { useTheme } from "./ThemeProvider";
 
-// 角の丸いボックスジオメトリを作成する関数
-function createRoundedBox(width: number, height: number, depth: number, radius: number) {
-  const shape = new THREE.Shape();
-  const w = width / 2;
-  const h = height / 2;
-  
-  shape.moveTo(-w + radius, -h);
-  shape.lineTo(w - radius, -h);
-  shape.quadraticCurveTo(w, -h, w, -h + radius);
-  shape.lineTo(w, h - radius);
-  shape.quadraticCurveTo(w, h, w - radius, h);
-  shape.lineTo(-w + radius, h);
-  shape.quadraticCurveTo(-w, h, -w, h - radius);
-  shape.lineTo(-w, -h + radius);
-  shape.quadraticCurveTo(-w, -h, -w + radius, -h);
-  
-  const extrudeSettings = {
-    depth: depth - radius * 2,
-    bevelEnabled: true,
-    bevelSegments: 8,
-    steps: 1,
-    bevelSize: radius,
-    bevelThickness: radius,
-  };
-  
-  return new THREE.ExtrudeGeometry(shape, extrudeSettings);
-}
-
-// iPhoneの3Dモデル（改善版）
-function IPhoneModel({ screenTexture, logoTexture, appleTexture }: { 
-  screenTexture: THREE.Texture | null;
+// iPhoneの3Dモデル（iPhone Frame画像を立体的に表示）
+function IPhoneModel({ frameTexture, logoTexture }: { 
+  frameTexture: THREE.Texture | null;
   logoTexture: THREE.Texture | null;
-  appleTexture: THREE.Texture | null;
 }) {
-  const bodyGeometry = useMemo(() => createRoundedBox(2.5, 5.5, 0.3, 0.15), []);
-  const screenGeometry = useMemo(() => createRoundedBox(2.2, 4.8, 0.05, 0.1), []);
+  // iPhone Frame画像のアスペクト比を保持（約9:19.5）
+  const frameWidth = 3.0;
+  const frameHeight = 6.5;
+  const frameDepth = 0.4; // 厚みを増やす
 
   return (
     <group>
-      {/* iPhone本体（角の丸いボディ） */}
-      <mesh position={[0, 0, 0]} geometry={bodyGeometry}>
-        <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
-      </mesh>
-
-      {/* 画面部分（角の丸い） */}
-      <mesh position={[0, 0, 0.16]} geometry={screenGeometry}>
-        <meshStandardMaterial color="#000000" />
-      </mesh>
-
-      {/* 画面のコンテンツ（実際のiPhone Frame画像、なければ黒画面） */}
-      <mesh position={[0, 0, 0.18]}>
-        <planeGeometry args={[2.0, 4.4]} />
-        <meshStandardMaterial map={screenTexture || null} color={screenTexture ? undefined : "#000000"} />
-      </mesh>
-
-      {/* Dynamic Island */}
-      <mesh position={[0, 2.3, 0.18]}>
-        <boxGeometry args={[0.6, 0.15, 0.02]} />
-        <meshStandardMaterial color="#000000" />
-      </mesh>
-
-      {/* カメラ部分 */}
-      <mesh position={[0.8, 2.1, 0.18]}>
-        <circleGeometry args={[0.1, 16]} />
-        <meshStandardMaterial color="#1a1a1a" />
-      </mesh>
-
-      {/* 後ろ側 - Appleマーク */}
-      {appleTexture && (
-        <mesh position={[0, 0, -0.15]} rotation={[0, Math.PI, 0]}>
-          <planeGeometry args={[0.8, 1.0]} />
-          <meshStandardMaterial map={appleTexture} transparent />
+      {/* 前面 - iPhone Frame画像 */}
+      {frameTexture && (
+        <mesh position={[0, 0, frameDepth / 2]}>
+          <planeGeometry args={[frameWidth, frameHeight]} />
+          <meshStandardMaterial map={frameTexture} />
         </mesh>
       )}
 
-      {/* 後ろ側 - マクセラスロゴ */}
+      {/* 側面（厚みを表現） */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[frameWidth, frameHeight, frameDepth]} />
+        <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
+      </mesh>
+
+      {/* 後ろ側 - マクセラスロゴ（ど真ん中に大きく配置） */}
       {logoTexture && (
-        <mesh position={[0, -1.5, -0.15]} rotation={[0, Math.PI, 0]}>
-          <planeGeometry args={[1.2, 0.4]} />
+        <mesh position={[0, 0, -frameDepth / 2]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[frameWidth * 0.8, frameHeight * 0.3]} />
           <meshStandardMaterial map={logoTexture} transparent />
         </mesh>
       )}
@@ -92,41 +43,15 @@ function IPhoneModel({ screenTexture, logoTexture, appleTexture }: {
   );
 }
 
-// Appleマークテクスチャを生成する関数
-function createAppleTexture(): THREE.Texture {
-  const canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 256;
-  const ctx = canvas.getContext('2d');
-  if (ctx) {
-    // 白い背景
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-    ctx.fillRect(0, 0, 256, 256);
-    // Appleロゴ風のシンプルな円形
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.arc(128, 128, 80, 0, Math.PI * 2);
-    ctx.fill();
-    // 内側に小さな円（Appleの葉っぱ部分を表現）
-    ctx.fillStyle = '#1a1a1a';
-    ctx.beginPath();
-    ctx.arc(128, 100, 20, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.flipY = false;
-  return texture;
-}
 
 // メインコンポーネント
 export default function IPhone3DViewer() {
   const [isRotating, setIsRotating] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [textures, setTextures] = useState<{ 
-    screen: THREE.Texture | null; 
-    logo: THREE.Texture | null; 
-    apple: THREE.Texture | null;
-  }>({ screen: null, logo: null, apple: null });
+    frame: THREE.Texture | null; 
+    logo: THREE.Texture | null;
+  }>({ frame: null, logo: null });
   const { resolvedTheme } = useTheme();
 
   // ロゴパスをテーマに応じて切り替え
@@ -135,46 +60,40 @@ export default function IPhone3DViewer() {
     : '/cases/logo(W).png';
 
   // iPhone Frame画像
-  const screenPath = '/cases/IPhoneFrame-saron.png';
+  const framePath = '/cases/IPhoneFrame-saron.png';
 
   // テクスチャを読み込む（最適化版）
   useEffect(() => {
     const loader = new THREE.TextureLoader();
-    let screenTexture: THREE.Texture | null = null;
+    let frameTexture: THREE.Texture | null = null;
     let logoTexture: THREE.Texture | null = null;
-    let appleTexture: THREE.Texture | null = null;
     let loadedCount = 0;
-    const total = 3;
+    const total = 2;
     let isCancelled = false;
-
-    // Appleマークテクスチャを即座に生成（同期処理）
-    appleTexture = createAppleTexture();
-    loadedCount++;
-    
-    // すぐに基本モデルを表示（テクスチャなしでも表示）
-    if (loadedCount === 1) {
-      setIsLoading(false);
-      setTextures({ screen: null, logo: null, apple: appleTexture });
-    }
 
     const checkComplete = () => {
       if (isCancelled) return;
       loadedCount++;
       if (loadedCount === total) {
-        setTextures({ screen: screenTexture, logo: logoTexture, apple: appleTexture });
+        setIsLoading(false);
+        setTextures({ frame: frameTexture, logo: logoTexture });
+      } else if (loadedCount === 1) {
+        // 1つでも読み込めたら表示開始
+        setIsLoading(false);
+        setTextures({ frame: frameTexture, logo: logoTexture });
       }
     };
 
-    // 画面テクスチャを読み込み（非同期、エラー時はスキップ）
+    // iPhone Frameテクスチャを読み込み
     loader.load(
-      screenPath,
+      framePath,
       (texture) => {
         if (isCancelled) {
           texture.dispose();
           return;
         }
         texture.flipY = false;
-        screenTexture = texture;
+        frameTexture = texture;
         checkComplete();
       },
       undefined,
@@ -185,7 +104,7 @@ export default function IPhone3DViewer() {
       }
     );
 
-    // ロゴテクスチャを読み込み（非同期、エラー時はスキップ）
+    // ロゴテクスチャを読み込み
     loader.load(
       logoPath,
       (texture) => {
@@ -207,11 +126,10 @@ export default function IPhone3DViewer() {
 
     return () => {
       isCancelled = true;
-      screenTexture?.dispose();
+      frameTexture?.dispose();
       logoTexture?.dispose();
-      appleTexture?.dispose();
     };
-  }, [screenPath, logoPath]);
+  }, [framePath, logoPath]);
 
   return (
     <div className="w-full h-[500px] relative bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220] rounded-xl overflow-hidden">
@@ -244,11 +162,10 @@ export default function IPhone3DViewer() {
           autoRotateSpeed={1}
         />
 
-        {/* iPhoneモデル（テクスチャがなくても表示） */}
+        {/* iPhoneモデル（iPhone Frame画像を立体的に表示） */}
         <IPhoneModel 
-          screenTexture={textures.screen}
+          frameTexture={textures.frame}
           logoTexture={textures.logo}
-          appleTexture={textures.apple}
         />
 
         {/* 環境マッピング（反射を追加） */}
