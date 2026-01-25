@@ -17,14 +17,25 @@ const notoSansJP = Noto_Sans_JP({
   preload: true,
 });
 
+const siteName = "マクセラス";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maxelustech.com";
+
 export const metadata: Metadata = {
-  title: "マクセラス | DX・ホームページ作成・Webアプリ開発",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} | DX・ホームページ作成・Webアプリ開発`,
+    template: `%s | ${siteName}`,
+  },
   description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
   keywords: ["DX", "ホームページ作成", "Webアプリ開発", "業務システム", "システム開発", "マクセラス"],
   openGraph: {
-    title: "マクセラス | DX・ホームページ作成・Webアプリ開発",
+    title: {
+      default: "DX・ホームページ作成・Webアプリ開発",
+      template: `%s | ${siteName}`,
+    },
     description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
     type: "website",
+    siteName: siteName,
     images: [
       {
         url: '/logo.png',
@@ -33,6 +44,14 @@ export const metadata: Metadata = {
         alt: 'マクセラス',
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: {
+      default: "DX・ホームページ作成・Webアプリ開発",
+      template: `%s | ${siteName}`,
+    },
+    description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
   },
   icons: {
     icon: '/favicon.ico',
