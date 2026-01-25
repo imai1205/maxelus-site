@@ -17,7 +17,7 @@ function DemoTabs() {
   const [activeTab, setActiveTab] = useState<"3d" | "interactive" | "iphone">("3d");
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-lg overflow-hidden">
       {/* タブナビゲーション */}
       <div className="flex border-b border-[#e5e7eb]">
         {[
@@ -31,7 +31,7 @@ function DemoTabs() {
             className={`flex-1 px-6 py-4 text-sm md:text-base font-medium transition-all ${
               activeTab === tab.id
                 ? "bg-[#fff100] text-[#1a1a1a] border-b-2 border-[#1a1a1a]"
-                : "text-[#6b7280] hover:bg-[#fafafa]"
+                : "text-[#6b7280] dark:text-[#9ca3af] hover:bg-[#fafafa] dark:hover:bg-[#374151]"
             }`}
           >
             {tab.label}
@@ -79,7 +79,7 @@ function DemoTabs() {
                 </button>
               ))}
             </div>
-            <p className="text-[#6b7280] text-sm md:text-base mt-6 text-center">
+            <p className="text-[#6b7280] dark:text-[#9ca3af] text-sm md:text-base mt-6 text-center">
               クリックすると反応します（インタラクティブUIの例）
             </p>
           </div>
@@ -97,7 +97,7 @@ function DemoTabs() {
 
 export default function InteractiveWeb3DLP() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -158,13 +158,13 @@ export default function InteractiveWeb3DLP() {
         </section>
 
         {/* 体験デモセクション */}
-        <section id="demo" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] scroll-mt-20">
+        <section id="demo" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b] scroll-mt-20">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 体験デモ
               </h2>
-              <p className="text-[#6b7280] mb-8">
+              <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8">
                 3つの体験をタブで切り替えてご覧ください
               </p>
             </AnimatedSection>
@@ -177,7 +177,7 @@ export default function InteractiveWeb3DLP() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 できること
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -221,7 +221,7 @@ export default function InteractiveWeb3DLP() {
                   animation="fade-up"
                   delay={i * 100}
                 >
-                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow h-full">
+                  <div className="bg-white dark:bg-[#1e293b] rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow h-full">
                     <h3 className="text-xl font-bold text-[#1a1a1a] mb-3">
                       {value.title}
                     </h3>
@@ -237,7 +237,7 @@ export default function InteractiveWeb3DLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 用途例
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -288,7 +288,7 @@ export default function InteractiveWeb3DLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 制作事例
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -324,7 +324,7 @@ export default function InteractiveWeb3DLP() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 進め方
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -394,7 +394,7 @@ export default function InteractiveWeb3DLP() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 よくある質問
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />

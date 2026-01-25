@@ -6,7 +6,7 @@ import { AnimatedSection } from "@/app/components/AnimationProvider";
 
 export default function AIOCRAutomationLP() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -49,7 +49,7 @@ export default function AIOCRAutomationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 選ばれる理由
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -78,11 +78,11 @@ export default function AIOCRAutomationLP() {
                   animation="fade-up"
                   delay={i * 100}
                 >
-                  <div className="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 className="text-xl font-bold text-[#1a1a1a] mb-3">
+                  <div className="bg-white dark:bg-[#1e293b] rounded-2xl p-6 shadow-lg">
+                    <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-3">
                       {value.title}
                     </h3>
-                    <p className="text-[#6b7280]">{value.description}</p>
+                    <p className="text-[#6b7280] dark:text-[#9ca3af]">{value.description}</p>
                   </div>
                 </AnimatedSection>
               ))}
@@ -94,7 +94,7 @@ export default function AIOCRAutomationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 導入事例
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -107,15 +107,15 @@ export default function AIOCRAutomationLP() {
                   animation="fade-up"
                   delay={i * 100}
                 >
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+                  <div className="bg-white dark:bg-[#1e293b] rounded-2xl overflow-hidden shadow-lg">
                     <div className="aspect-video bg-[#e5e7eb] flex items-center justify-center">
                       <span className="text-[#6b7280]">事例画像 {i}</span>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">
+                      <h3 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                         事例タイトル {i}
                       </h3>
-                      <p className="text-[#6b7280] text-sm">
+                      <p className="text-[#6b7280] dark:text-[#9ca3af] text-sm">
                         事例の説明文が入ります。後からFigmaデザインで差し替えます。
                       </p>
                     </div>
@@ -130,7 +130,7 @@ export default function AIOCRAutomationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 進め方
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />
@@ -162,7 +162,7 @@ export default function AIOCRAutomationLP() {
                   animation="fade-up"
                   delay={i * 100}
                 >
-                  <div className="flex gap-4 p-6 bg-[#fafafa] rounded-xl">
+                  <div className="flex gap-4 p-6 bg-[#fafafa] dark:bg-[#1e293b] rounded-xl">
                     <div className="flex-shrink-0 w-12 h-12 bg-[#fff100] rounded-full flex items-center justify-center text-[#1a1a1a] font-bold text-lg">
                       {step.step}
                     </div>
@@ -200,7 +200,7 @@ export default function AIOCRAutomationLP() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 よくある質問
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />

@@ -2,6 +2,7 @@
 
 import { useState, memo, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import Footer from "./components/Footer";
 import { 
@@ -175,13 +176,13 @@ function ChallengeSection() {
           <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest mb-2">PROBLEM</p>
           <h2 
             data-cms-key="site.challenge_title"
-            className="relative text-[26px] md:text-[36px] lg:text-[42px] font-bold text-[#1a1a1a] tracking-tight"
+            className="relative text-[26px] md:text-[36px] lg:text-[42px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
           >
             課題は&quot;ズレ&quot;から起きる
           </h2>
           <p 
             data-cms-key="site.challenge_subtitle"
-            className="text-sm md:text-base text-[#6b7280] mt-3 max-w-xl mx-auto"
+            className="text-sm md:text-base text-[#6b7280] dark:text-[#9ca3af] mt-3 max-w-xl mx-auto"
           >
             開発の失敗の多くは、認識のズレから生まれます。
           </p>
@@ -251,7 +252,7 @@ function ChallengeSection() {
 // Solution Section Component - 新しい内容
 function SolutionSection() {
   return (
-    <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden bg-white">
+    <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden bg-white dark:bg-[#0b1220]">
       <div className="relative max-w-[1100px] mx-auto">
         <AnimatedSection animation="zoom-in" className="relative text-center mb-12">
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">APPROACH</span>
@@ -507,8 +508,14 @@ function WorksSection() {
                 ) : (
                   <GlassCard variant="light" padding="none" className="h-full overflow-hidden">
                     <div className="aspect-video overflow-hidden relative">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+                      <Image 
+                        src={work.image} 
+                        alt={work.title} 
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                        loading="lazy"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                     <div className="p-4 md:p-6">
@@ -584,7 +591,7 @@ function FAQSection() {
   ];
 
   return (
-    <section className="bg-[#fafafa] py-12 md:py-24 px-4 md:px-12 lg:px-40 relative overflow-hidden">
+    <section className="bg-[#fafafa] dark:bg-[#1e293b] py-12 md:py-24 px-4 md:px-12 lg:px-40 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-0 w-40 md:w-64 h-40 md:h-64 bg-[#fff100]/5 rounded-full blur-3xl -translate-y-1/2" />
       <div className="absolute top-1/2 right-0 w-40 md:w-64 h-40 md:h-64 bg-[#fdc700]/5 rounded-full blur-3xl -translate-y-1/2" />
@@ -595,7 +602,7 @@ function FAQSection() {
           <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FAQ</span>
           <h2 
             data-cms-key="site.faq_title"
-            className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight"
+            className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
           >
             よくある質問
           </h2>
@@ -794,22 +801,22 @@ export default function Home() {
           <ChallengeSection />
           {/* <InteractiveDemo /> */}
           {/* サロン予約アプリのデモ */}
-          <section className="bg-white py-12 md:py-32 px-4 md:px-8 relative overflow-hidden">
+          <section className="bg-white dark:bg-[#0b1220] py-12 md:py-32 px-4 md:px-8 relative overflow-hidden">
             <div className="max-w-[1200px] mx-auto relative">
               <div className="text-center mb-8 md:mb-12">
-                <h2 className="text-2xl md:text-4xl font-bold text-[#0a0a0a] mb-4">
+                <h2 className="text-2xl md:text-4xl font-bold text-[#0a0a0a] dark:text-[#f9fafb] mb-4">
                   触れるデモで合意
                 </h2>
-                <p className="text-sm md:text-base text-[#6a7282] max-w-2xl mx-auto">
+                <p className="text-sm md:text-base text-[#6a7282] dark:text-[#9ca3af] max-w-2xl mx-auto">
                   実際に動くデモアプリで、完成イメージを共有します。<br className="hidden sm:block" />
                   デザインと機能の両方を体験いただけます。
                 </p>
               </div>
-              <div className="relative bg-gradient-to-b from-[#fafafa] via-white to-[#fffef0] rounded-2xl md:rounded-3xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-xl md:shadow-2xl hover:shadow-3xl transition-shadow duration-500 overflow-hidden">
+              <div className="relative bg-gradient-to-b from-[#fafafa] dark:from-[#1e293b] via-white dark:via-[#0b1220] to-[#fffef0] dark:to-[#0a0a0a] rounded-2xl md:rounded-3xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-xl md:shadow-2xl hover:shadow-3xl transition-shadow duration-500 overflow-hidden">
                 <div className="w-full overflow-x-auto">
                   <SalonReservationAppMockup />
                 </div>
-                <p className="text-center text-xs md:text-sm text-[#6a7282] mt-4 md:mt-6 px-2">
+                <p className="text-center text-xs md:text-sm text-[#6a7282] dark:text-[#9ca3af] mt-4 md:mt-6 px-2">
                   ※上記はインタラクティブなデモUIです。タップ/クリックして動作をお試しください。<br className="hidden sm:block" />
                   実案件では要件に合わせて最適化します
                 </p>

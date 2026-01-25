@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Footer from "../components/Footer";
 import { AnimatedSection, TiltCard } from "../components/AnimationProvider";
 import {
@@ -31,13 +32,13 @@ function IndustryCard({
           : "hover:scale-105 hover:shadow-2xl"
       }`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={industry.heroImage}
         alt={industry.label}
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        className="object-cover group-hover:scale-110 transition-transform duration-700"
         loading="lazy"
-        decoding="async"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
       <div className="absolute inset-0 flex flex-col justify-end p-6">
@@ -66,14 +67,16 @@ function CaseCard({
   return (
     <div
       onClick={onClick}
-      className="bg-white border border-[#e5e7eb] rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+      className="bg-white dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#374151] rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       <div className="aspect-video overflow-hidden relative">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={caseItem.image}
           alt={caseItem.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover group-hover:scale-110 transition-transform duration-700"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
@@ -94,7 +97,7 @@ function CaseCard({
         <h3 className="text-base md:text-lg font-bold text-[#0b1220] mb-2 group-hover:text-[#fdc700] transition-colors line-clamp-2">
           {caseItem.title}
         </h3>
-        <p className="text-xs md:text-sm text-[#666] line-clamp-2">
+        <p className="text-xs md:text-sm text-[#666] dark:text-[#9ca3af] line-clamp-2">
           {caseItem.summary}
         </p>
       </div>
@@ -116,20 +119,22 @@ function CaseDetailModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-fade-in"
+        className="bg-white dark:bg-[#1e293b] rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Image */}
         <div className="relative aspect-video">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={caseItem.image}
             alt={caseItem.title}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 768px"
+            className="object-cover"
+            priority={false}
           />
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors"
+            className="absolute top-4 right-4 w-10 h-10 bg-white/90 dark:bg-[#1e293b]/90 hover:bg-white dark:hover:bg-[#374151] rounded-full flex items-center justify-center transition-colors text-[#1a1a1a] dark:text-[#f9fafb]"
           >
             <svg
               className="w-6 h-6"
@@ -165,7 +170,7 @@ function CaseDetailModal({
         {/* Content */}
         <div className="p-6 md:p-8">
           {/* Summary */}
-          <p className="text-[#6b7280] mb-6">{caseItem.summary}</p>
+          <p className="text-[#6b7280] dark:text-[#9ca3af] mb-6">{caseItem.summary}</p>
 
           {/* Details */}
           <div className="space-y-6">
@@ -194,7 +199,7 @@ function CaseDetailModal({
           {/* Technologies */}
           {caseItem.technologies && caseItem.technologies.length > 0 && (
             <div className="mt-6 pt-6 border-t border-[#e5e7eb]">
-              <p className="text-xs text-[#6b7280] mb-2">使用技術</p>
+              <p className="text-xs text-[#6b7280] dark:text-[#9ca3af] mb-2">使用技術</p>
               <div className="flex flex-wrap gap-2">
                 {caseItem.technologies.map((tech, i) => (
                   <span
@@ -211,15 +216,17 @@ function CaseDetailModal({
           {/* Screenshots */}
           {caseItem.screenshots && caseItem.screenshots.length > 0 && (
             <div className="mt-6 pt-6 border-t border-[#e5e7eb]">
-              <p className="text-xs text-[#6b7280] mb-4">画面イメージ</p>
+              <p className="text-xs text-[#6b7280] dark:text-[#9ca3af] mb-4">画面イメージ</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {caseItem.screenshots.map((screenshot, i) => (
-                  <div key={i} className="aspect-video rounded-lg overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                  <div key={i} className="aspect-video rounded-lg overflow-hidden relative">
+                    <Image
                       src={screenshot}
                       alt={`画面イメージ ${i + 1}`}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                      loading="lazy"
                     />
                   </div>
                 ))}
@@ -229,7 +236,7 @@ function CaseDetailModal({
 
           {/* CTA */}
           <div className="mt-8 text-center">
-            <p className="text-sm text-[#6b7280] mb-4">
+            <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] mb-4">
               同様の課題をお持ちですか？
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -255,7 +262,7 @@ function CaseDetailModal({
               {caseItem.lpHref && (
                 <Link
                   href={caseItem.lpHref}
-                  className="inline-flex items-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-8 py-3 rounded-xl border border-[#e5e7eb] transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium px-8 py-3 rounded-xl border border-[#e5e7eb] dark:border-[#374151] transition-all hover:scale-105"
                 >
                   LPを見る
                   <svg
@@ -315,7 +322,7 @@ export default function CasesPage() {
   }, [selectedIndustry]);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -354,10 +361,10 @@ export default function CasesPage() {
         </section>
 
         {/* Industry Cards Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                 業種から探す
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto" />

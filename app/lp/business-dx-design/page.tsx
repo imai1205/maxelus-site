@@ -66,18 +66,18 @@ export default function BusinessDXDesignLP() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg border-b border-[#e5e7eb] dark:border-[#374151]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
+          <Link href="/" className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
             MAXELUS
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#solution" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#solution" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               解決策
             </a>
-            <a href="#services" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#services" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               サービス
             </a>
             <Link
@@ -125,7 +125,7 @@ export default function BusinessDXDesignLP() {
               {/* Left content */}
               <div className="flex-1 max-w-full lg:max-w-[450px] space-y-4 md:space-y-6 text-center lg:text-left">
                 <AnimatedSection animation="fade-up" duration={800}>
-                  <h1 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-bold leading-[36px] sm:leading-[46px] md:leading-[54px] lg:leading-[62px] tracking-tight text-[#1a1a1a]">
+                  <h1 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-bold leading-[36px] sm:leading-[46px] md:leading-[54px] lg:leading-[62px] tracking-tight text-[#1a1a1a] dark:text-[#f9fafb]">
                     そのソフト、現場に合わせて
                     <br />
                     <span className="animate-text-gradient">&quot;我慢して&quot;</span>
@@ -133,7 +133,7 @@ export default function BusinessDXDesignLP() {
                   </h1>
                 </AnimatedSection>
                 <AnimatedSection animation="fade-up" delay={300} duration={800}>
-                  <p className="text-base md:text-lg text-[#6b7280] leading-[26px] md:leading-[29px]">
+                  <p className="text-base md:text-lg text-[#6b7280] dark:text-[#9ca3af] leading-[26px] md:leading-[29px]">
                     業務にソフトを合わせる時代は終わり。<br className="hidden sm:block" />
                     まずは&quot;触れるデモ&quot;で、最短ルートを見える化します。
                   </p>
@@ -163,7 +163,7 @@ export default function BusinessDXDesignLP() {
               {/* Right content - Demo image */}
               <AnimatedSection animation="fade-up" delay={200} duration={1000} className="flex-1 relative w-full max-w-[500px] lg:max-w-none">
                 <div className="absolute inset-0 blur-[64px] bg-gradient-to-br from-[rgba(255,241,0,0.2)] via-[rgba(255,215,0,0.1)] to-transparent animate-morph" />
-                <TiltCard maxTilt={8} className="relative bg-white border border-[#e5e7eb] rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden">
+                <TiltCard maxTilt={8} className="relative bg-white dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#374151] rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={imgHeroDemo} 
@@ -197,14 +197,14 @@ export default function BusinessDXDesignLP() {
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">SOLUTION</span>
               <div className="relative space-y-4 md:space-y-6">
                 <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
-                <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
+                <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
                   その業務、システム化して
                   <br />
                   <span className="animate-text-gradient">&quot;人を増やさず&quot;</span>
                   回すのはどうですか？
                 </h2>
                 <AnimatedSection animation="fade-up" delay={500}>
-                  <p className="text-base md:text-lg text-[#6b7280]">
+                  <p className="text-base md:text-lg text-[#6b7280] dark:text-[#9ca3af]">
                     日々のムダを減らして、現場の処理速度を上げる。
                   </p>
                 </AnimatedSection>
@@ -214,7 +214,7 @@ export default function BusinessDXDesignLP() {
         </section>
 
         {/* Services Section - 元のホームページから移動 */}
-        <section id="services" className="bg-white py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
+        <section id="services" className="bg-white dark:bg-[#0b1220] py-12 md:py-24 px-4 md:px-12 lg:px-24 relative overflow-hidden">
           {/* Animated background blobs */}
           <div className="absolute -top-40 -left-40 w-60 md:w-80 h-60 md:h-80 bg-[#fff100]/5 rounded-full blur-3xl animate-morph" />
           <div className="absolute -bottom-40 -right-40 w-72 md:w-96 h-72 md:h-96 bg-[#fdc700]/5 rounded-full blur-3xl animate-morph" style={{ animationDelay: "-3s" }} />
@@ -223,7 +223,7 @@ export default function BusinessDXDesignLP() {
             {/* Section heading */}
             <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">SERVICES</span>
-              <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] tracking-tight">
+              <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight">
                 対応できる内容
               </h2>
             </AnimatedSection>
@@ -271,7 +271,7 @@ export default function BusinessDXDesignLP() {
               ].map((service, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
                   <TiltCard maxTilt={6} className="h-full">
-                    <div className="service-card bg-white rounded-[12px] md:rounded-[14px] shadow-md p-5 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
+                    <div className="service-card bg-white dark:bg-[#1e293b] rounded-[12px] md:rounded-[14px] shadow-md p-5 md:p-8 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
                       {/* Shimmer effect */}
                       <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
                       
@@ -283,8 +283,8 @@ export default function BusinessDXDesignLP() {
                           <img src={service.icon as string} alt="" className="w-5 md:w-6 h-5 md:h-6" />
                         )}
                       </div>
-                      <h3 className="text-lg md:text-xl text-[#1a1a1a] mb-1 md:mb-2 group-hover:text-[#fdc700] transition-colors font-bold">{service.title}</h3>
-                      <p className="text-xs md:text-sm text-[#6b7280] mb-3 md:mb-4 line-clamp-2">{service.description}</p>
+                      <h3 className="text-lg md:text-xl text-[#1a1a1a] dark:text-[#f9fafb] mb-1 md:mb-2 group-hover:text-[#fdc700] transition-colors font-bold">{service.title}</h3>
+                      <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] mb-3 md:mb-4 line-clamp-2">{service.description}</p>
                       <div className="flex gap-1.5 md:gap-2 flex-wrap">
                         {service.tags.map((tag, j) => (
                           <span key={j} className="tag text-xs md:text-sm px-2 md:px-3 py-0.5 md:py-1 group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300" style={{ transitionDelay: `${j * 50}ms` }}>{tag}</span>
@@ -299,11 +299,11 @@ export default function BusinessDXDesignLP() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section id="contact" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CONTACT</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">お問い合わせ</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">お問い合わせ</h2>
               <p className="text-[#6b7280]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
             </AnimatedSection>
             {isSubmitted ? (

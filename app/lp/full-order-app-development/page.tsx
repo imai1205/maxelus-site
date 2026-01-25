@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
 import { cases, type Case } from "@/app/data/casesData";
@@ -119,24 +120,24 @@ export default function FullOrderAppDevelopmentLP() {
   ].slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg border-b border-[#e5e7eb] dark:border-[#374151]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
+          <Link href="/" className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
             MAXELUS
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#merits" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#merits" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               メリット
             </a>
-            <a href="#results" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#results" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               事例
             </a>
-            <a href="#demo" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#demo" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               事例
             </a>
-            <a href="#flow" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#flow" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               制作フロー
             </a>
             <Link
@@ -241,7 +242,7 @@ export default function FullOrderAppDevelopmentLP() {
         </section>
 
         {/* Maxelus Approach Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">APPROACH</span>
@@ -288,8 +289,8 @@ export default function FullOrderAppDevelopmentLP() {
                     <div className="w-16 h-16 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-full flex items-center justify-center text-[#1a1a1a] mx-auto mb-4">
                       {item.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{item.title}</h3>
-                    <p className="text-[#6b7280]">{item.description}</p>
+                    <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">{item.title}</h3>
+                    <p className="text-[#6b7280] dark:text-[#9ca3af]">{item.description}</p>
                   </div>
                 </AnimatedSection>
               ))}
@@ -298,7 +299,7 @@ export default function FullOrderAppDevelopmentLP() {
         </section>
 
         {/* Problems Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">PROBLEMS</span>
@@ -452,14 +453,16 @@ export default function FullOrderAppDevelopmentLP() {
                             <p className="text-sm text-[#6b7280]">Webアプリデモ</p>
                           </div>
                           {/* 元の画像をそのまま表示 */}
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={caseImage.iphoneImage}
-                            alt={caseImage.title}
-                            className="w-full h-auto object-contain"
-                            loading="lazy"
-                            decoding="async"
-                          />
+                          <div className="relative w-full aspect-[9/19.5]">
+                            <Image
+                              src={caseImage.iphoneImage}
+                              alt={caseImage.title}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 800px"
+                              className="object-contain"
+                              loading="lazy"
+                            />
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -528,13 +531,13 @@ export default function FullOrderAppDevelopmentLP() {
                 <AnimatedSection key={caseItem.id} animation="fade-up" delay={i * 100}>
                   <div className="bg-white border-2 border-[#e5e7eb] rounded-xl overflow-hidden hover:border-[#fff100] transition-all hover:shadow-xl group">
                     <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-[#f3f4f6] to-[#e5e7eb]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={caseItem.image}
                         alt={caseItem.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
                         loading="lazy"
-                        decoding="async"
                       />
                       <div className="absolute top-4 right-4 bg-[#fff100] text-[#1a1a1a] px-3 py-1.5 rounded-full text-xs font-bold shadow-md">
                         {caseItem.tags[0] || '事例'}

@@ -54,21 +54,21 @@ export default function ZumenConnectLP() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg border-b border-[#e5e7eb] dark:border-[#374151]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
+          <Link href="/" className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
             図面コネクト
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#features" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#features" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               機能
             </a>
-            <a href="#outcomes" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#outcomes" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               効果
             </a>
-            <a href="#pricing" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#pricing" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               料金
             </a>
             <Link
@@ -95,7 +95,7 @@ export default function ZumenConnectLP() {
               <div>
                 <AnimatedSection animation="fade-up" className="relative">
                   <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">PRODUCT</span>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-6 leading-tight relative">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 leading-tight relative">
                     図面・関連資料・見積を、
                     <br />
                     <span className="text-[#fff100]">探す時間ゼロへ。</span>
@@ -120,8 +120,8 @@ export default function ZumenConnectLP() {
                           </svg>
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-[#1a1a1a]">{item.label}</div>
-                          <div className="text-xs text-[#6b7280]">{item.desc}</div>
+                          <div className="text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb]">{item.label}</div>
+                          <div className="text-xs text-[#6b7280] dark:text-[#9ca3af]">{item.desc}</div>
                         </div>
                       </div>
                     ))}
@@ -140,14 +140,14 @@ export default function ZumenConnectLP() {
                     </Link>
                     <Link
                       href="#contact"
-                      className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all"
+                      className="inline-flex items-center justify-center gap-2 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all"
                     >
                       資料をダウンロード
                     </Link>
                   </div>
 
                   {/* Additional info */}
-                  <div className="flex flex-wrap gap-6 text-sm text-[#6b7280]">
+                  <div className="flex flex-wrap gap-6 text-sm text-[#6b7280] dark:text-[#9ca3af]">
                     <div className="flex items-center gap-2">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -185,10 +185,10 @@ export default function ZumenConnectLP() {
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PROBLEM</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 現場の3つの課題を、一気に解決
               </h2>
-              <p className="text-lg text-[#6b7280] relative">
+              <p className="text-lg text-[#6b7280] dark:text-[#9ca3af] relative">
                 図面管理の煩雑さを、シンプルな仕組みで効率化します
               </p>
             </AnimatedSection>
@@ -219,8 +219,8 @@ export default function ZumenConnectLP() {
                     <div className="w-12 h-12 bg-[#fff100] rounded-full flex items-center justify-center text-2xl mb-6">
                       {item.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-[#1a1a1a] mb-3">{item.title}</h3>
-                    <p className="text-[#6b7280] mb-6">{item.description}</p>
+                    <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-3">{item.title}</h3>
+                    <p className="text-[#6b7280] dark:text-[#9ca3af] mb-6">{item.description}</p>
                     <ul className="space-y-2">
                       {item.items.map((listItem, j) => (
                         <li key={j} className="flex items-start gap-2">
@@ -241,7 +241,7 @@ export default function ZumenConnectLP() {
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FEATURES</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 必要な機能を、すべて統合
               </h2>
               <p className="text-lg text-[#6b7280]">
@@ -295,7 +295,7 @@ export default function ZumenConnectLP() {
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">OUTCOMES</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 導入企業が実感する効果
               </h2>
               <p className="text-lg text-[#6b7280]">
@@ -362,7 +362,7 @@ export default function ZumenConnectLP() {
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PRICING</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 シンプルな料金体系
               </h2>
               <p className="text-lg text-[#6b7280]">

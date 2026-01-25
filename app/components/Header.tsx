@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const imgLogo = "/logo.png";
@@ -26,13 +27,12 @@ export default function Header() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? "bg-white/95 backdrop-blur-lg shadow-lg shadow-black/5 border-b border-[#e5e7eb]" 
-        : "bg-white/80 backdrop-blur-md border-b border-transparent"
+        ? "bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg shadow-lg shadow-black/5 border-b border-[#e5e7eb] dark:border-[#374151]" 
+        : "bg-white/80 dark:bg-[#0b1220]/80 backdrop-blur-md border-b border-transparent"
     }`}>
       <div className="flex items-center justify-between h-14 md:h-16 px-4 md:px-8 max-w-[1200px] mx-auto">
         <Link href="/" className="flex items-center" prefetch={true}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={imgLogo} alt="マクセラス" className="h-8 md:h-10 w-auto" />
+          <Image src={imgLogo} alt="マクセラス" width={120} height={40} className="h-8 md:h-10 w-auto" priority />
         </Link>
         
         {/* Desktop Nav */}
@@ -41,7 +41,7 @@ export default function Header() {
             href="/" 
             prefetch={true}
             className={`text-sm nav-link relative group transition-all duration-200 ${
-              isActive("/") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
+              isActive("/") ? "text-[#0b1220] dark:text-[#f9fafb] font-medium" : "text-[#666] dark:text-[#9ca3af] hover:text-[#0b1220] dark:hover:text-[#f9fafb]"
             }`}
           >
             ホーム
@@ -53,7 +53,7 @@ export default function Header() {
             href="/services" 
             prefetch={true}
             className={`text-sm nav-link relative group transition-all duration-200 ${
-              pathname.startsWith("/services") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
+              pathname.startsWith("/services") ? "text-[#0b1220] dark:text-[#f9fafb] font-medium" : "text-[#666] dark:text-[#9ca3af] hover:text-[#0b1220] dark:hover:text-[#f9fafb]"
             }`}
           >
             サービス
@@ -120,10 +120,10 @@ export default function Header() {
         
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="メニュー"
-        >
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1e293b] transition-colors text-[#1a1a1a] dark:text-[#f9fafb]"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="メニュー"
+          >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             {mobileMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -136,7 +136,7 @@ export default function Header() {
       
       {/* Mobile Menu */}
       <div 
-        className={`md:hidden bg-white border-t border-[#e5e7eb] overflow-hidden transition-all duration-300 ${
+        className={`md:hidden bg-white dark:bg-[#0b1220] border-t border-[#e5e7eb] dark:border-[#374151] overflow-hidden transition-all duration-300 ${
           mobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -144,7 +144,7 @@ export default function Header() {
           <Link 
             href="/" 
             prefetch={true}
-            className={`text-base py-2 transition-colors ${isActive("/") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
+            className={`text-base py-2 transition-colors ${isActive("/") ? "text-[#0b1220] dark:text-[#f9fafb] font-medium" : "text-[#666] dark:text-[#9ca3af]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
             ホーム
@@ -152,7 +152,7 @@ export default function Header() {
           <Link 
             href="/services" 
             prefetch={true}
-            className={`text-base py-2 transition-colors ${pathname.startsWith("/services") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
+            className={`text-base py-2 transition-colors ${pathname.startsWith("/services") ? "text-[#0b1220] dark:text-[#f9fafb] font-medium" : "text-[#666] dark:text-[#9ca3af]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
             サービス

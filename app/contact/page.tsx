@@ -54,16 +54,16 @@ function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center animate-fade-in">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl p-8 md:p-12 text-center animate-fade-in">
         <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
           <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
           お問い合わせありがとうございます
         </h2>
-        <p className="text-[#6b7280] mb-8">
+        <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8">
           担当者より2営業日以内にご連絡いたします。<br />
           しばらくお待ちください。
         </p>
@@ -81,11 +81,11 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-6 md:p-10">
+    <form onSubmit={handleSubmit} className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl p-6 md:p-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
             お名前 <span className="text-[#dc2626]">*</span>
           </label>
           <input
@@ -101,7 +101,7 @@ function ContactForm() {
 
         {/* Company */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
             会社名
           </label>
           <input
@@ -116,7 +116,7 @@ function ContactForm() {
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
             メールアドレス <span className="text-[#dc2626]">*</span>
           </label>
           <input
@@ -133,7 +133,7 @@ function ContactForm() {
 
         {/* Inquiry Type */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
             ご相談内容 <span className="text-[#dc2626]">*</span>
           </label>
           <select
@@ -141,7 +141,7 @@ function ContactForm() {
             value={formData.inquiryType}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white"
+            className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
           >
             <option value="">選択してください</option>
             <option value="hp">ホームページ制作</option>
@@ -155,14 +155,14 @@ function ContactForm() {
 
         {/* Budget */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
             ご予算
           </label>
           <select
             name="budget"
             value={formData.budget}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white"
+            className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
           >
             <option value="">選択してください</option>
             <option value="~30">〜30万円</option>
@@ -176,14 +176,14 @@ function ContactForm() {
 
         {/* Timeline */}
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
             希望納期
           </label>
           <select
             name="timeline"
             value={formData.timeline}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white"
+            className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
           >
             <option value="">選択してください</option>
             <option value="asap">できるだけ早く</option>
@@ -196,7 +196,7 @@ function ContactForm() {
 
         {/* Message */}
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
             ご相談内容の詳細 <span className="text-[#dc2626]">*</span>
           </label>
           <textarea

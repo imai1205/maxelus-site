@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import "./globals.css";
 import { PageLoader, PageTransition } from "./components/PageTransition";
 import ConditionalHeader from "./components/ConditionalHeader";
+import { ThemeProvider } from "./components/ThemeProvider";
 // CMS機能をコメントアウト（将来の復旧用）
 // import PreviewClickHandler from "@/components/cms/PreviewClickHandler";
 // import CMSLiveUpdater from "./components/CMSLiveUpdater";
@@ -51,14 +52,16 @@ export default function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
       <body className={`${notoSansJP.variable} font-sans antialiased`}>
-        {/* CMS機能をコメントアウト（将来の復旧用） */}
-        {/* <Suspense fallback={null}>
-          <PreviewClickHandler />
-          <CMSLiveUpdater />
-        </Suspense> */}
-        <PageLoader />
-        <ConditionalHeader />
-        <PageTransition>{children}</PageTransition>
+        <ThemeProvider>
+          {/* CMS機能をコメントアウト（将来の復旧用） */}
+          {/* <Suspense fallback={null}>
+            <PreviewClickHandler />
+            <CMSLiveUpdater />
+          </Suspense> */}
+          <PageLoader />
+          <ConditionalHeader />
+          <PageTransition>{children}</PageTransition>
+        </ThemeProvider>
       </body>
     </html>
   );

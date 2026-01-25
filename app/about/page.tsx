@@ -7,7 +7,7 @@ import { GlassCard, BubbleBadge } from "@/components/ui";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -50,7 +50,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">OVERVIEW</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-8 text-center relative">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-8 text-center relative">
                 会社概要
               </h2>
             </AnimatedSection>
@@ -58,42 +58,42 @@ export default function AboutPage() {
             <GlassCard variant="light" padding="lg">
               <dl className="space-y-6">
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
                     会社名
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a] font-medium">
+                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] font-medium">
                     株式会社MAXELUS
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
                     法人番号
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a]">
+                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb]">
                     1130001080399
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
                     代表取締役社長
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a]">
+                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb]">
                     今井 俊喜
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
                     取締役副社長
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a]">
+                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb]">
                     榎本 青波
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
                     所在地
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a]">
+                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb]">
                     〒614-8121 京都府八幡市下奈良小宮1
                   </dd>
                 </div>
@@ -107,7 +107,7 @@ export default function AboutPage() {
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">BUSINESS</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 事業内容
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
@@ -192,7 +192,7 @@ export default function AboutPage() {
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VALUE</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 できること（提供価値）
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
@@ -384,7 +384,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">MESSAGE</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 代表挨拶
               </h2>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />

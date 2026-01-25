@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { AnimatedSection } from "./AnimationProvider";
 
 // Figmaから取得したアプリ画面イメージのURL（実際のスクリーンショット画像を使用）
@@ -250,13 +251,14 @@ export default function AppScreensGallery() {
                   <div className="relative bg-black rounded-[32px] overflow-hidden aspect-[9/19.5]">
                     {/* Screen Content - フルフレーム画像を使用 */}
                     <div className="absolute inset-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={app.image}
                         alt={app.name}
-                        className="w-full h-full object-contain"
+                        fill
+                        sizes="(max-width: 768px) 320px, 400px"
+                        className="object-contain"
                         loading="lazy"
-                        decoding="async"
+                        unoptimized={app.image.startsWith('https://www.figma.com')}
                       />
                     </div>
                   </div>

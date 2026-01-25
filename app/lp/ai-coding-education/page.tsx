@@ -19,21 +19,21 @@ const imgIcon3 = "https://www.figma.com/api/mcp/asset/bfb7285b-65f8-4fa0-8f47-66
 
 export default function AICodingEducationLP() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg border-b border-[#e5e7eb] dark:border-[#374151]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
+          <Link href="/" className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
             AIコーディング教育
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#curriculum" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#curriculum" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               カリキュラム
             </a>
-            <a href="#cases" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#cases" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               事例
             </a>
-            <a href="#pricing" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
+            <a href="#pricing" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
               料金
             </a>
             <Link
@@ -92,12 +92,12 @@ export default function AICodingEducationLP() {
                     プログラミング×AI
                   </h1>
                 </div>
-                <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 max-w-4xl mx-auto">
+                <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl p-6 md:p-8 mb-8 max-w-4xl mx-auto">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="bg-[#ff6900] rounded px-3 py-1">
                       <p className="text-white font-bold text-sm md:text-base">AI Coding/I</p>
                     </div>
-                    <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a]">
+                    <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
                       1day 講座
                     </h2>
                   </div>
@@ -107,12 +107,12 @@ export default function AICodingEducationLP() {
                       { text: "毎日必要な面倒な作業" },
                       { text: "誰でもできるような単純作業" },
                     ].map((item, i) => (
-                      <div key={i} className="bg-white border border-[#e5e7eb] rounded-lg p-4 shadow-md flex items-start gap-3">
+                      <div key={i} className="bg-white dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#374151] rounded-lg p-4 shadow-md flex items-start gap-3">
                         <div className="bg-[#ff6900] rounded p-1 flex-shrink-0">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={imgIcon3} alt="" className="w-4 h-4" />
                         </div>
-                        <p className="text-sm font-bold text-[#1a1a1a]">{item.text}</p>
+                        <p className="text-sm font-bold text-[#1a1a1a] dark:text-[#f9fafb]">{item.text}</p>
                       </div>
                     ))}
                   </div>

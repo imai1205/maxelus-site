@@ -109,7 +109,7 @@ function CategoryNav({
   const categories: ServiceCategory[] = ["app-dx", "website", "product"];
 
   return (
-    <div className="sticky top-14 md:top-16 z-40 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb] shadow-sm">
+    <div className="sticky top-14 md:top-16 z-40 bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg border-b border-[#e5e7eb] dark:border-[#374151] shadow-sm">
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="flex items-center gap-2 md:gap-4 overflow-x-auto py-4 scrollbar-hide">
           {categories.map((category) => (
@@ -119,7 +119,7 @@ function CategoryNav({
               className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium whitespace-nowrap transition-all ${
                 activeCategory === category
                   ? "bg-[#fff100] text-[#1a1a1a] shadow-md"
-                  : "bg-[#f3f4f6] text-[#6b7280] hover:bg-[#e5e7eb]"
+                  : "bg-[#f3f4f6] dark:bg-[#1e293b] text-[#6b7280] dark:text-[#9ca3af] hover:bg-[#e5e7eb] dark:hover:bg-[#374151]"
               }`}
             >
               {categoryNames[category]}
@@ -148,7 +148,7 @@ function ServiceCard({
   const cardClassName = `service-card rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 backdrop-blur-xl ${
     isSpecial
       ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 shadow-[#fff100]/20"
-      : "border-white/40 bg-white/75"
+      : "border-white/40 dark:border-[#374151]/40 bg-white/75 dark:bg-[#1e293b]/75"
   } ${service.ctaType === "lp" && service.lpHref ? "hover:border-[#fff100]/80 cursor-pointer" : ""}`;
 
   const cardContent = (
@@ -165,14 +165,14 @@ function ServiceCard({
 
             {/* Metric（成果イメージ） */}
             {service.metric && (
-              <div className="mb-3 p-2 bg-[#fafafa] rounded-lg">
-                <div className="text-[10px] text-[#6b7280] mb-0.5">
+              <div className="mb-3 p-2 bg-[#fafafa] dark:bg-[#1e293b] rounded-lg">
+                <div className="text-[10px] text-[#6b7280] dark:text-[#9ca3af] mb-0.5">
                   {service.metric.label}
                 </div>
-                <div className="text-lg md:text-xl font-bold text-[#1a1a1a]">
+                <div className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
                   {service.metric.value}
                   {service.metric.suffix && (
-                    <span className="text-sm text-[#6b7280]">
+                    <span className="text-sm text-[#6b7280] dark:text-[#9ca3af]">
                       {service.metric.suffix}
                     </span>
                   )}
@@ -181,17 +181,17 @@ function ServiceCard({
             )}
 
             {/* Title */}
-            <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-1 group-hover:text-[#fdc700] transition-colors">
+            <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-1 group-hover:text-[#fdc700] transition-colors">
               {service.title}
             </h3>
 
             {/* Catch */}
-            <p className="text-sm md:text-base text-[#1a1a1a] font-medium mb-2">
+            <p className="text-sm md:text-base text-[#1a1a1a] dark:text-[#f9fafb] font-medium mb-2">
               {service.catch}
             </p>
 
             {/* Short Description */}
-            <p className="text-xs md:text-sm text-[#6b7280] mb-4 leading-relaxed" style={{
+            <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] mb-4 leading-relaxed" style={{
               display: '-webkit-box',
               WebkitLineClamp: 3,
               WebkitBoxOrient: 'vertical',
@@ -205,7 +205,7 @@ function ServiceCard({
               {service.tags.slice(0, 3).map((tag, j) => (
                 <span
                   key={j}
-                  className="text-[10px] md:text-xs px-2 py-0.5 bg-[#f3f4f6] text-[#6b7280] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
+                  className="text-[10px] md:text-xs px-2 py-0.5 bg-[#f3f4f6] dark:bg-[#1e293b] text-[#6b7280] dark:text-[#9ca3af] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
                   style={{ transitionDelay: `${j * 50}ms` }}
                 >
                   {tag}
@@ -240,7 +240,7 @@ function ServiceCard({
               {service.ctaType === "lp" && service.lpHref ? (
                 <Link
                   href={service.id === 'full-order-app-development' ? `${service.lpHref}#demo` : service.lpHref}
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all hover:scale-105"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
@@ -266,7 +266,7 @@ function ServiceCard({
                     e.stopPropagation();
                     onToggle();
                   }}
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all hover:scale-105"
                 >
                   {isOpen ? "閉じる" : "詳細を開く"}
                   <svg
@@ -346,13 +346,20 @@ function CategorySection({
     >
       {/* ガラスモーフィズムオーバーレイ */}
       <div 
-        className="absolute inset-0 -z-10 backdrop-blur-sm"
+        className="absolute inset-0 -z-10 backdrop-blur-sm dark:backdrop-blur-md"
         style={{
           background: 'rgba(255, 255, 255, 0.5)',
           borderRadius: '1rem',
           border: '1px solid rgba(255, 255, 255, 0.3)',
         }}
       />
+      <style jsx global>{`
+        .dark [data-category-section],
+        .dark .category-section-overlay {
+          background: rgba(30, 41, 59, 0.5) !important;
+          border: 1px solid rgba(55, 65, 81, 0.3) !important;
+        }
+      `}</style>
 
       <div className="relative z-0 p-4 md:p-6">
       {/* Section Heading */}
@@ -361,12 +368,12 @@ function CategorySection({
           onClick={onCategoryClick}
           className={`text-left w-full transition-all duration-300 ${
             isActive 
-              ? 'text-[#1a1a1a]' 
-              : 'text-[#6b7280] hover:text-[#1a1a1a]'
+              ? 'text-[#1a1a1a] dark:text-[#f9fafb]' 
+              : 'text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]'
           }`}
         >
           <h2 className={`text-xl md:text-2xl font-bold mb-2 transition-all ${
-            isActive ? 'text-[#1a1a1a]' : 'text-[#6b7280]'
+            isActive ? 'text-[#1a1a1a] dark:text-[#f9fafb]' : 'text-[#6b7280] dark:text-[#9ca3af]'
           }`}>
             {categoryNames[category]}
           </h2>
@@ -416,7 +423,7 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">

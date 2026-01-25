@@ -44,11 +44,11 @@ export default function EyelashSalonLP() {
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg border-b border-[#e5e7eb] dark:border-[#374151]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
+          <Link href="/" className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
             eyelash salon
           </Link>
           <nav className="hidden md:flex items-center gap-6">
@@ -106,7 +106,7 @@ export default function EyelashSalonLP() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <section id="about" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <AnimatedSection animation="fade-up" className="relative">
@@ -165,7 +165,7 @@ export default function EyelashSalonLP() {
                 { title: "オフのみ", price: "¥3,300", desc: "丁寧なオフサービス" },
               ].map((menu, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-                  <div className="bg-white rounded-lg shadow-md p-8 text-center">
+                  <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow-md p-8 text-center">
                     <h3 className="text-lg font-normal text-[#0a0a0a] tracking-[0.9px] mb-3">{menu.title}</h3>
                     <p className="text-2xl text-[#ff637e] mb-2">{menu.price}</p>
                     <p className="text-xs text-[#4a5565]">{menu.desc}</p>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import Footer from "../components/Footer";
 import { AnimatedSection, TiltCard, AnimatedCounter } from "../components/AnimationProvider";
@@ -215,7 +216,7 @@ export default function StrengthsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -256,11 +257,11 @@ export default function StrengthsPage() {
                 {stats.map((stat, index) => (
                   <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
                     <div className="text-center">
-                      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-1 md:mb-2">
+                      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-1 md:mb-2">
                         <AnimatedCounter end={stat.value} duration={2000} />
                         <span className="text-sm sm:text-lg md:text-xl lg:text-2xl text-[#fdc700]">{stat.suffix}</span>
                       </div>
-                      <p className="text-xs sm:text-sm md:text-base text-[#6b7280] break-words">{stat.label}</p>
+                      <p className="text-xs sm:text-sm md:text-base text-[#6b7280] dark:text-[#9ca3af] break-words">{stat.label}</p>
                     </div>
                   </AnimatedSection>
                 ))}
@@ -280,7 +281,7 @@ export default function StrengthsPage() {
               {strengths.map((strength, index) => (
                 <AnimatedSection key={strength.id} animation="fade-up" delay={Math.min(index * 50, 300)}>
                   <TiltCard maxTilt={3} className="h-full">
-                    <div className="bg-white rounded-xl md:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#e5e7eb]/50 h-full flex flex-col">
+                    <div className="bg-white dark:bg-[#1e293b] rounded-xl md:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#e5e7eb] dark:border-[#374151] h-full flex flex-col">
                       <div className="p-4 md:p-6 flex-1">
                         {/* Icon & Number */}
                         <div className="flex items-center gap-3 mb-3">
@@ -293,12 +294,12 @@ export default function StrengthsPage() {
                         </div>
                         
                         {/* Title */}
-                        <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#1a1a1a] mb-2 md:mb-3 leading-tight">
+                        <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 md:mb-3 leading-tight">
                           {strength.title}
                         </h3>
                         
                         {/* Description */}
-                        <p className="text-xs sm:text-sm md:text-base text-[#6b7280] mb-3 md:mb-4 leading-relaxed line-clamp-3">
+                        <p className="text-xs sm:text-sm md:text-base text-[#6b7280] dark:text-[#9ca3af] mb-3 md:mb-4 leading-relaxed line-clamp-3">
                           {strength.description}
                         </p>
                         
@@ -312,7 +313,7 @@ export default function StrengthsPage() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                   </svg>
                                 </div>
-                                <span className="text-xs sm:text-sm text-[#1a1a1a] leading-relaxed break-words line-clamp-2">{feature}</span>
+                                <span className="text-xs sm:text-sm text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed break-words line-clamp-2">{feature}</span>
                               </li>
                             ))}
                           </ul>
@@ -327,7 +328,7 @@ export default function StrengthsPage() {
         </section>
 
         {/* 対応可能なサービスデモセクション */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up">
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] text-center mb-3 md:mb-4 px-2">
@@ -348,13 +349,13 @@ export default function StrengthsPage() {
                   >
                     <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center">
                       {/* ホームページの画像 - iPhone画面とPC画面の両方が見えるサイズ */}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img 
+                      <Image 
                         src="/cases/homepage.png" 
                         alt="ホームページ"
-                        className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-contain hover:scale-105 transition-transform duration-500"
                         loading="lazy"
-                        decoding="async"
                       />
                     </div>
                     <div className="p-4 md:p-6">
@@ -380,13 +381,13 @@ export default function StrengthsPage() {
                   >
                     <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center">
                       {/* iPhoneとPCの両方が見える画像 - クリックで動くデモを表示 */}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img 
+                      <Image 
                         src="/cases/nail.png" 
                         alt="Webアプリ - iPhoneとPC"
-                        className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-contain hover:scale-105 transition-transform duration-500"
                         loading="lazy"
-                        decoding="async"
                       />
                     </div>
                     <div className="p-4 md:p-6">
@@ -412,13 +413,13 @@ export default function StrengthsPage() {
                   >
                     <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center p-4">
                       {/* iPhone Frame画像 - carを使用、iPhone画面とPC画面の両方が見えるサイズ */}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img 
+                      <Image 
                         src="/cases/IPhoneFrame-car.png" 
                         alt="iOSアプリ - iPhone Frame"
-                        className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-contain hover:scale-105 transition-transform duration-500"
                         loading="lazy"
-                        decoding="async"
                       />
                     </div>
                     <div className="p-4 md:p-6">
