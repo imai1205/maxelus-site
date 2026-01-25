@@ -246,7 +246,7 @@ export default function FullOrderAppDevelopmentLP() {
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">APPROACH</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                 MAXELUSは
                 <br />
                 <span className="text-[#fff100]">オーダーメイド × 伴走</span>
@@ -324,18 +324,18 @@ export default function FullOrderAppDevelopmentLP() {
                 },
               ].map((problem, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-                    <div className="w-16 h-16 bg-[#f3f4f6] rounded-lg flex items-center justify-center mb-4">
-                      <svg className="w-8 h-8 text-[#6b7280]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="bg-white dark:bg-[#0b1220] rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-[#e5e7eb] dark:border-[#374151]">
+                    <div className="w-16 h-16 bg-[#f3f4f6] dark:bg-[#1e293b] rounded-lg flex items-center justify-center mb-4">
+                      <svg className="w-8 h-8 text-[#6b7280] dark:text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-[#1a1a1a] mb-1">
+                    <h3 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-1">
                       {problem.title}
                       <br />
                       {problem.subtitle}
                     </h3>
-                    <p className="text-sm text-[#6b7280] mt-2">{problem.description}</p>
+                    <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] mt-2">{problem.description}</p>
                   </div>
                 </AnimatedSection>
               ))}
@@ -344,11 +344,11 @@ export default function FullOrderAppDevelopmentLP() {
         </section>
 
         {/* Merits Section */}
-        <section id="merits" className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <section id="merits" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">MERIT</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">MAXELUSで開発する5つのメリット</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">MAXELUSで開発する5つのメリット</h2>
             </AnimatedSection>
             <div className="space-y-6">
               {[
@@ -379,13 +379,13 @@ export default function FullOrderAppDevelopmentLP() {
                 },
               ].map((merit, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
-                  <div className="flex gap-6 items-start bg-white border-2 border-[#e5e7eb] rounded-xl p-6 hover:border-[#fff100] transition-colors">
+                  <div className="flex gap-6 items-start bg-white dark:bg-[#1e293b] border-2 border-[#e5e7eb] dark:border-[#374151] rounded-xl p-6 hover:border-[#fff100] transition-colors">
                     <div className="w-14 h-14 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-lg flex items-center justify-center text-[#1a1a1a] font-bold text-xl flex-shrink-0">
                       {merit.number}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{merit.title}</h3>
-                      <p className="text-[#6b7280]">{merit.description}</p>
+                      <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">{merit.title}</h3>
+                      <p className="text-[#6b7280] dark:text-[#9ca3af]">{merit.description}</p>
                     </div>
                   </div>
                 </AnimatedSection>
@@ -395,29 +395,29 @@ export default function FullOrderAppDevelopmentLP() {
         </section>
 
         {/* App Screens Section - アプリ画面イメージ */}
-        <section id="app-screens" className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <section id="app-screens" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">APPS</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">アプリ画面イメージ</h2>
-              <p className="text-[#6b7280]">横にスクロールして様々なアプリ画面をご覧ください</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">アプリ画面イメージ</h2>
+              <p className="text-[#6b7280] dark:text-[#9ca3af]">横にスクロールして様々なアプリ画面をご覧ください</p>
             </AnimatedSection>
             
-            <div className="bg-white rounded-xl p-6 md:p-8">
+            <div className="bg-white dark:bg-[#1e293b] rounded-xl p-6 md:p-8 border border-[#e5e7eb] dark:border-[#374151]">
               <IPhoneFrameSlider />
             </div>
           </div>
         </section>
 
         {/* Results Section - デモ画面 */}
-        <section id="demo" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section id="demo" className="py-8 md:py-12 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-7xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
+            <AnimatedSection animation="fade-up" className="text-center mb-8 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">DEMO</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">デモ画面</h2>
-              <p className="text-[#6b7280]">様々な業界のクライアント様にご利用いただいています</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">デモ画面</h2>
+              <p className="text-[#6b7280] dark:text-[#9ca3af]">様々な業界のクライアント様にご利用いただいています</p>
             </AnimatedSection>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
               {[
                 { value: "50+", label: "プロジェクト実績" },
                 { value: "98%", label: "顧客満足度" },
@@ -426,17 +426,17 @@ export default function FullOrderAppDevelopmentLP() {
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
                   <div className="text-center">
                     <p className="text-4xl md:text-5xl font-bold text-[#fff100] mb-2">{stat.value}</p>
-                    <p className="text-sm text-[#6b7280]">{stat.label}</p>
+                    <p className="text-sm text-[#6b7280] dark:text-[#9ca3af]">{stat.label}</p>
                   </div>
                 </AnimatedSection>
               ))}
             </div>
             
             {/* Webアプリデモ - 元の画像をそのままスライド */}
-            <div className="bg-white rounded-xl p-6 md:p-8 mb-8">
+            <div className="bg-white dark:bg-[#0b1220] rounded-xl p-6 md:p-8 mb-8 border border-[#e5e7eb] dark:border-[#374151]">
               <div className="text-center mb-6">
-                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-2">Webアプリデモ</h3>
-                <p className="text-[#6b7280]">様々なWebアプリのデモ画面をご覧ください</p>
+                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">Webアプリデモ</h3>
+                <p className="text-[#6b7280] dark:text-[#9ca3af]">様々なWebアプリのデモ画面をご覧ください</p>
               </div>
               <div className="relative w-full max-w-6xl mx-auto">
                 {/* スライダーコンテナ */}
@@ -449,8 +449,8 @@ export default function FullOrderAppDevelopmentLP() {
                       <div key={caseImage.id} className="min-w-full flex-shrink-0 flex items-center justify-center">
                         <div className="relative w-full max-w-5xl mx-auto">
                           <div className="text-center mb-4">
-                            <h4 className="text-lg md:text-xl font-bold text-[#1a1a1a]">{caseImage.title}</h4>
-                            <p className="text-sm text-[#6b7280]">Webアプリデモ</p>
+                            <h4 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">{caseImage.title}</h4>
+                            <p className="text-sm text-[#6b7280] dark:text-[#9ca3af]">Webアプリデモ</p>
                           </div>
                           {/* 元の画像をそのまま表示 */}
                           <div className="relative w-full aspect-[9/19.5]">
@@ -474,17 +474,17 @@ export default function FullOrderAppDevelopmentLP() {
                   {/* 左矢印ボタン */}
                   <button
                     onClick={() => setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : caseImages.length - 1))}
-                    className="bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all hover:scale-110"
+                    className="bg-white/90 dark:bg-[#1e293b]/90 hover:bg-white dark:hover:bg-[#1e293b] rounded-full p-2.5 shadow-lg transition-all hover:scale-110 border border-[#e5e7eb] dark:border-[#374151]"
                     aria-label="前の画像"
                   >
-                    <svg className="w-5 h-5 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-[#1a1a1a] dark:text-[#f9fafb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
 
                   {/* ページ番号表示 */}
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-[#6b7280]">
+                    <span className="text-sm text-[#6b7280] dark:text-[#9ca3af]">
                       {currentImageIndex + 1} / {caseImages.length}
                     </span>
                     {/* インジケーター */}
@@ -505,10 +505,10 @@ export default function FullOrderAppDevelopmentLP() {
                   {/* 右矢印ボタン */}
                   <button
                     onClick={() => setCurrentImageIndex((prev) => (prev < caseImages.length - 1 ? prev + 1 : 0))}
-                    className="bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all hover:scale-110"
+                    className="bg-white/90 dark:bg-[#1e293b]/90 hover:bg-white dark:hover:bg-[#1e293b] rounded-full p-2.5 shadow-lg transition-all hover:scale-110 border border-[#e5e7eb] dark:border-[#374151]"
                     aria-label="次の画像"
                   >
-                    <svg className="w-5 h-5 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-[#1a1a1a] dark:text-[#f9fafb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
@@ -519,18 +519,18 @@ export default function FullOrderAppDevelopmentLP() {
         </section>
 
         {/* Cases Section */}
-        <section id="cases" className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <section id="cases" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CASES</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">導入事例</h2>
-              <p className="text-[#6b7280]">実際の課題解決事例をご紹介します</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">導入事例</h2>
+              <p className="text-[#6b7280] dark:text-[#9ca3af]">実際の課題解決事例をご紹介します</p>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedCases.map((caseItem, i) => (
                 <AnimatedSection key={caseItem.id} animation="fade-up" delay={i * 100}>
-                  <div className="bg-white border-2 border-[#e5e7eb] rounded-xl overflow-hidden hover:border-[#fff100] transition-all hover:shadow-xl group">
-                    <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-[#f3f4f6] to-[#e5e7eb]">
+                  <div className="bg-white dark:bg-[#1e293b] border-2 border-[#e5e7eb] dark:border-[#374151] rounded-xl overflow-hidden hover:border-[#fff100] transition-all hover:shadow-xl group">
+                    <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-[#f3f4f6] to-[#e5e7eb] dark:from-[#0b1220] dark:to-[#1e293b]">
                       <Image
                         src={caseItem.image}
                         alt={caseItem.title}
@@ -544,20 +544,20 @@ export default function FullOrderAppDevelopmentLP() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-4 leading-tight min-h-[3rem]">
+                      <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 leading-tight min-h-[3rem]">
                         {caseItem.title}
                       </h3>
-                      <div className="space-y-2.5 text-sm text-[#6b7280] mb-6">
+                      <div className="space-y-2.5 text-sm text-[#6b7280] dark:text-[#9ca3af] mb-6">
                         <div className="flex items-start gap-2">
-                          <span className="font-bold text-[#1a1a1a] flex-shrink-0">課題：</span>
+                          <span className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] flex-shrink-0">課題：</span>
                           <span className="flex-1">{caseItem.problem}</span>
                         </div>
                         <div className="flex items-start gap-2">
-                          <span className="font-bold text-[#1a1a1a] flex-shrink-0">施策：</span>
+                          <span className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] flex-shrink-0">施策：</span>
                           <span className="flex-1">{caseItem.solution}</span>
                         </div>
                         <div className="flex items-start gap-2">
-                          <span className="font-bold text-[#1a1a1a] flex-shrink-0">結果：</span>
+                          <span className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] flex-shrink-0">結果：</span>
                           <span className="flex-1 text-[#fff100] font-semibold">{caseItem.impact}</span>
                         </div>
                       </div>
@@ -602,12 +602,12 @@ export default function FullOrderAppDevelopmentLP() {
         </section>
 
         {/* Flow Section */}
-        <section id="flow" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
+        <section id="flow" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">FLOW</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">制作フロー</h2>
-              <p className="text-[#6b7280]">企画から運用改善まで、一貫してサポートします</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">制作フロー</h2>
+              <p className="text-[#6b7280] dark:text-[#9ca3af]">企画から運用改善まで、一貫してサポートします</p>
             </AnimatedSection>
             <div className="max-w-4xl mx-auto">
               <div className="relative">
@@ -651,25 +651,25 @@ export default function FullOrderAppDevelopmentLP() {
                           {flow.step}
                         </div>
                         <div className="flex-1 pt-2">
-                          <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{flow.title}</h3>
-                          <p className="text-[#6b7280]">{flow.description}</p>
+                          <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">{flow.title}</h3>
+                          <p className="text-[#6b7280] dark:text-[#9ca3af]">{flow.description}</p>
                         </div>
                       </div>
                     </AnimatedSection>
                   ))}
                 </div>
               </div>
-              <div className="mt-8 bg-[#f3f4f6] rounded-xl p-6">
+              <div className="mt-8 bg-[#f3f4f6] dark:bg-[#0b1220] rounded-xl p-6 border border-[#e5e7eb] dark:border-[#374151]">
                 <div className="flex items-start gap-4">
                   <svg className="w-5 h-5 text-[#fff100] flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div>
-                    <h3 className="font-bold text-[#1a1a1a] mb-2">標準的な開発期間</h3>
-                    <p className="text-sm text-[#6b7280] mb-1">
+                    <h3 className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">標準的な開発期間</h3>
+                    <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] mb-1">
                       プロジェクト規模により異なりますが、一般的なスマホアプリで2〜4ヶ月、Webサービスで1.5〜3ヶ月
                     </p>
-                    <p className="text-xs text-[#6b7280]">
+                    <p className="text-xs text-[#6b7280] dark:text-[#9ca3af]">
                       ※ AI活用により従来より30〜50%の期間短縮を実現しています
                     </p>
                   </div>
@@ -737,24 +737,24 @@ export default function FullOrderAppDevelopmentLP() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <section id="contact" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CONTACT</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2 relative">お問い合わせ</h2>
-              <p className="text-[#6b7280]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">お問い合わせ</h2>
+              <p className="text-[#6b7280] dark:text-[#9ca3af]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
             </AnimatedSection>
             {isSubmitted ? (
-              <div className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8 text-center">
+              <div className="bg-white dark:bg-[#1e293b] border-2 border-[#e5e7eb] dark:border-[#374151] rounded-xl p-8 text-center">
                 <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
                   お問い合わせありがとうございます
                 </h3>
-                <p className="text-[#6b7280] mb-8">
+                <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8">
                   担当者より2営業日以内にご連絡いたします。<br />
                   しばらくお待ちください。
                 </p>
@@ -769,10 +769,10 @@ export default function FullOrderAppDevelopmentLP() {
                 </Link>
               </div>
             ) : (
-            <form onSubmit={handleSubmit} className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8">
+            <form onSubmit={handleSubmit} className="bg-white dark:bg-[#1e293b] border-2 border-[#e5e7eb] dark:border-[#374151] rounded-xl p-8">
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                     お名前 <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -780,12 +780,12 @@ export default function FullOrderAppDevelopmentLP() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
                     placeholder="山田 太郎"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                     メールアドレス <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -793,22 +793,22 @@ export default function FullOrderAppDevelopmentLP() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
                     placeholder="example@company.com"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">会社名</label>
+                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">会社名</label>
                   <input
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
                     placeholder="株式会社サンプル"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
                     お問い合わせ内容 <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -816,7 +816,7 @@ export default function FullOrderAppDevelopmentLP() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={5}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
                     placeholder="ご相談内容をできるだけ詳しくお書きください。 例：ECサイトのスマホアプリを作りたい、現在の課題は〇〇です..."
                   />
                 </div>
@@ -842,7 +842,7 @@ export default function FullOrderAppDevelopmentLP() {
                     </>
                   )}
                 </button>
-                <p className="text-xs text-[#6b7280] text-center">
+                <p className="text-xs text-[#6b7280] dark:text-[#9ca3af] text-center">
                   送信いただいた情報は、弊社の
                   <Link href="/privacy" className="text-[#fff100] underline">
                     プライバシーポリシー
