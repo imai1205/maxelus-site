@@ -53,13 +53,15 @@ function IPhoneModel({ frameTexture, logoTexture }: {
 
   return (
     <group>
-      {/* 前面 - iPhone Frame画像（角の丸いマスク） */}
-      {frameTexture && (
-        <mesh position={[0, 0, frameDepth / 2 + 0.01]}>
-          <planeGeometry args={[frameWidth, frameHeight]} />
+      {/* 前面 - iPhone Frame画像 */}
+      <mesh position={[0, 0, frameDepth / 2 + 0.01]}>
+        <planeGeometry args={[frameWidth, frameHeight]} />
+        {frameTexture ? (
           <meshStandardMaterial map={frameTexture} />
-        </mesh>
-      )}
+        ) : (
+          <meshStandardMaterial color="#333333" />
+        )}
+      </mesh>
 
       {/* 側面（角の丸い厚みを表現、黒枠を薄く） */}
       <mesh position={[0, 0, 0]} geometry={roundedGeometry}>
@@ -67,12 +69,14 @@ function IPhoneModel({ frameTexture, logoTexture }: {
       </mesh>
 
       {/* 後ろ側 - マクセラスロゴ（ど真ん中に大きく配置、正しい向き） */}
-      {logoTexture && (
-        <mesh position={[0, 0, -frameDepth / 2 - 0.01]} rotation={[0, 0, 0]}>
-          <planeGeometry args={[frameWidth * 0.7, frameHeight * 0.25]} />
+      <mesh position={[0, 0, -frameDepth / 2 - 0.01]} rotation={[0, 0, 0]}>
+        <planeGeometry args={[frameWidth * 0.7, frameHeight * 0.25]} />
+        {logoTexture ? (
           <meshStandardMaterial map={logoTexture} transparent />
-        </mesh>
-      )}
+        ) : (
+          <meshStandardMaterial color="#ffffff" />
+        )}
+      </mesh>
     </group>
   );
 }
@@ -96,7 +100,7 @@ export default function IPhone3DViewer() {
   // iPhone Frame画像
   const framePath = '/cases/IPhoneFrame-car.png';
 
-  // テクスチャを読み込む（最適化版）
+  // テクスチャを読み込む（デバッグ版）
   useEffect(() => {
     const loader = new THREE.TextureLoader();
     let frameTexture: THREE.Texture | null = null;
@@ -105,16 +109,22 @@ export default function IPhone3DViewer() {
     const total = 2;
     let isCancelled = false;
 
+    console.log('テクスチャ読み込み開始:', { framePath, logoPath });
+
     const checkComplete = () => {
       if (isCancelled) return;
       loadedCount++;
+      console.log('テクスチャ読み込み進捗:', { loadedCount, total, frameTexture: !!frameTexture, logoTexture: !!logoTexture });
+      
       if (loadedCount === total) {
         setIsLoading(false);
         setTextures({ frame: frameTexture, logo: logoTexture });
+        console.log('全テクスチャ読み込み完了');
       } else if (loadedCount === 1) {
         // 1つでも読み込めたら表示開始
         setIsLoading(false);
         setTextures({ frame: frameTexture, logo: logoTexture });
+        console.log('最初のテクスチャ読み込み完了、表示開始');
       }
     };
 
@@ -126,12 +136,17 @@ export default function IPhone3DViewer() {
           texture.dispose();
           return;
         }
+        console.log('Frameテクスチャ読み込み成功:', texture);
         texture.flipY = false;
+        texture.needsUpdate = true;
         frameTexture = texture;
         checkComplete();
       },
-      undefined,
-      () => {
+      (progress) => {
+        console.log('Frameテクスチャ読み込み進捗:', progress);
+      },
+      (error) => {
+        console.error('Frameテクスチャ読み込みエラー:', error, framePath);
         if (!isCancelled) {
           checkComplete();
         }
@@ -146,12 +161,17 @@ export default function IPhone3DViewer() {
           texture.dispose();
           return;
         }
+        console.log('ロゴテクスチャ読み込み成功:', texture);
         texture.flipY = false;
+        texture.needsUpdate = true;
         logoTexture = texture;
         checkComplete();
       },
-      undefined,
-      () => {
+      (progress) => {
+        console.log('ロゴテクスチャ読み込み進捗:', progress);
+      },
+      (error) => {
+        console.error('ロゴテクスチャ読み込みエラー:', error, logoPath);
         if (!isCancelled) {
           checkComplete();
         }
@@ -179,11 +199,11 @@ export default function IPhone3DViewer() {
         gl={{ antialias: true, alpha: true }}
         className="w-full h-full"
       >
-        {/* ライティング */}
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        <directionalLight position={[-5, -5, -5]} intensity={0.5} />
-        <pointLight position={[0, 0, 10]} intensity={0.5} />
+        {/* ライティング（明るく調整） */}
+        <ambientLight intensity={1.0} />
+        <directionalLight position={[5, 5, 5]} intensity={1.5} />
+        <directionalLight position={[-5, -5, -5]} intensity={0.8} />
+        <pointLight position={[0, 0, 10]} intensity={1.0} />
 
         {/* カメラコントロール（マウス/タッチで回転） */}
         <OrbitControls
