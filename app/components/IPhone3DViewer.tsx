@@ -34,9 +34,8 @@ function createRoundedBox(width: number, height: number, depth: number, radius: 
   return new THREE.ExtrudeGeometry(shape, extrudeSettings);
 }
 
-// iPhoneの3Dモデル（iPhone Frame画像を立体的に表示）
-function IPhoneModel({ frameTexture, logoTexture }: { 
-  frameTexture: THREE.Texture | null;
+// iPhoneのような形でロゴを前面に表示するモデル
+function LogoModel({ logoTexture }: { 
   logoTexture: THREE.Texture | null;
 }) {
   // iPhone Frame画像のアスペクト比を保持（約9:19.5）
@@ -45,36 +44,77 @@ function IPhoneModel({ frameTexture, logoTexture }: {
   const frameDepth = 0.15; // 厚みを薄く（黒枠を小さく）
   const cornerRadius = 0.3; // 角の丸み
 
-  // 角の丸いジオメトリ
+  // ロゴのサイズ（iPhoneの前面に表示）
+  const logoWidth = frameWidth * 0.8;
+  const logoHeight = frameHeight * 0.3;
+
+  // 角の丸いジオメトリ（iPhoneのフレーム）
   const roundedGeometry = useMemo(() => 
     createRoundedBox(frameWidth, frameHeight, frameDepth, cornerRadius), 
     []
   );
 
+  // ロゴマテリアル（メタリックで光る）- テクスチャが確実に適用されるように
+  const logoMaterial = useMemo(() => {
+    if (logoTexture) {
+      const img = logoTexture.image as HTMLImageElement | undefined;
+      console.log('ロゴマテリアル作成:', { hasTexture: !!logoTexture, width: img?.width, height: img?.height });
+      const mat = new THREE.MeshStandardMaterial({ 
+        map: logoTexture,
+        transparent: true,
+        metalness: 0.9, // メタリック感
+        roughness: 0.1, // 滑らかで光る
+        emissive: new THREE.Color(0x000000),
+        emissiveIntensity: 0.1
+      });
+      // テクスチャを確実に設定
+      mat.map = logoTexture;
+      mat.needsUpdate = true;
+      logoTexture.needsUpdate = true;
+      return mat;
+    }
+    console.log('ロゴマテリアル作成（テクスチャなし）');
+    return new THREE.MeshStandardMaterial({ 
+      color: "#ff0000", // デバッグ用：赤
+      metalness: 0.9,
+      roughness: 0.1
+    });
+  }, [logoTexture]);
+
+  // 側面のマテリアル（メタリック）
+  const sideMaterial = useMemo(() => 
+    new THREE.MeshStandardMaterial({ 
+      color: "#1a1a1a",
+      metalness: 0.95,
+      roughness: 0.05
+    }), 
+    []
+  );
+
   return (
     <group>
-      {/* 前面 - iPhone Frame画像 */}
-      <mesh position={[0, 0, frameDepth / 2 + 0.01]} key={`front-${frameTexture ? 'loaded' : 'empty'}`}>
-        <planeGeometry args={[frameWidth, frameHeight]} />
-        <meshStandardMaterial 
-          map={frameTexture || null}
-          color={frameTexture ? undefined : "#ff0000"} // デバッグ用：赤
-        />
+      {/* 前面 - ロゴ画像（iPhoneの画面部分に表示、正しい向き、最前面に配置） */}
+      <mesh 
+        position={[0, 0, frameDepth / 2 + 0.02]} 
+        rotation={[0, 0, 0]}
+        key={`logo-${logoTexture ? 'loaded' : 'empty'}`}
+      >
+        <planeGeometry args={[logoWidth, logoHeight]} />
+        {logoTexture ? (
+          <meshStandardMaterial 
+            map={logoTexture}
+            transparent={true}
+            metalness={0.9}
+            roughness={0.1}
+          />
+        ) : (
+          <meshStandardMaterial color="#ff0000" />
+        )}
       </mesh>
 
-      {/* 側面（角の丸い厚みを表現、黒枠を薄く） */}
+      {/* 側面（角の丸い厚みを表現、メタリック） */}
       <mesh position={[0, 0, 0]} geometry={roundedGeometry}>
-        <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
-      </mesh>
-
-      {/* 後ろ側 - マクセラスロゴ（ど真ん中に大きく配置、正しい向き） */}
-      <mesh position={[0, 0, -frameDepth / 2 - 0.01]} rotation={[0, 0, 0]} key={`back-${logoTexture ? 'loaded' : 'empty'}`}>
-        <planeGeometry args={[frameWidth * 0.7, frameHeight * 0.25]} />
-        <meshStandardMaterial 
-          map={logoTexture || null}
-          transparent={!!logoTexture}
-          color={logoTexture ? undefined : "#00ff00"} // デバッグ用：緑
-        />
+        <primitive object={sideMaterial} attach="material" />
       </mesh>
     </group>
   );
@@ -85,9 +125,8 @@ function IPhoneModel({ frameTexture, logoTexture }: {
 export default function IPhone3DViewer() {
   const [isRotating, setIsRotating] = useState(true);
   const [textures, setTextures] = useState<{ 
-    frame: THREE.Texture | null; 
     logo: THREE.Texture | null;
-  }>({ frame: null, logo: null });
+  }>({ logo: null });
   const { resolvedTheme } = useTheme();
 
   // ロゴパスをテーマに応じて切り替え
@@ -95,37 +134,14 @@ export default function IPhone3DViewer() {
     ? '/cases/logo(D).png' 
     : '/cases/logo(W).png';
 
-  // iPhone Frame画像
-  const framePath = '/cases/IPhoneFrame-car.png';
 
-  // テクスチャを読み込む（シンプルな方法）
+  // ロゴテクスチャのみを読み込む（シンプルな方法）
   useEffect(() => {
     const loader = new THREE.TextureLoader();
-    let frameTexture: THREE.Texture | null = null;
     let logoTexture: THREE.Texture | null = null;
     let isCancelled = false;
 
-    console.log('テクスチャ読み込み開始:', { framePath, logoPath });
-
-    // iPhone Frameテクスチャを読み込み
-    loader.load(
-      framePath,
-      (texture) => {
-        if (isCancelled) {
-          texture.dispose();
-          return;
-        }
-        console.log('Frameテクスチャ読み込み成功:', texture);
-        texture.flipY = false;
-        texture.needsUpdate = true;
-        frameTexture = texture;
-        setTextures(prev => ({ ...prev, frame: frameTexture }));
-      },
-      undefined,
-      (error) => {
-        console.error('Frameテクスチャ読み込みエラー:', error, framePath);
-      }
-    );
+    console.log('ロゴテクスチャ読み込み開始:', { logoPath });
 
     // ロゴテクスチャを読み込み
     loader.load(
@@ -135,11 +151,19 @@ export default function IPhone3DViewer() {
           texture.dispose();
           return;
         }
-        console.log('ロゴテクスチャ読み込み成功:', texture);
+        console.log('ロゴテクスチャ読み込み成功:', texture, { 
+          width: texture.image?.width, 
+          height: texture.image?.height,
+          flipY: texture.flipY 
+        });
         texture.flipY = false;
         texture.needsUpdate = true;
         logoTexture = texture;
-        setTextures(prev => ({ ...prev, logo: logoTexture }));
+        console.log('ロゴテクスチャをstateに設定:', { hasTexture: !!logoTexture });
+        setTextures(prev => {
+          console.log('ロゴテクスチャstate更新:', { prev: !!prev.logo, new: !!logoTexture });
+          return { ...prev, logo: logoTexture };
+        });
       },
       undefined,
       (error) => {
@@ -149,23 +173,30 @@ export default function IPhone3DViewer() {
 
     return () => {
       isCancelled = true;
-      frameTexture?.dispose();
       logoTexture?.dispose();
     };
-  }, [framePath, logoPath]);
+  }, [logoPath]);
+
 
   return (
-    <div className="w-full h-[500px] relative bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220] rounded-xl overflow-hidden">
+    <div className={`w-full h-[500px] relative rounded-xl overflow-hidden ${
+      resolvedTheme === 'dark' 
+        ? 'bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220]' 
+        : 'bg-gradient-to-br from-[#f8f9fa] via-[#ffffff] to-[#f0f2f5]'
+    }`}>
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
         className="w-full h-full"
       >
-        {/* ライティング（明るく調整） */}
-        <ambientLight intensity={2.0} />
-        <directionalLight position={[5, 5, 5]} intensity={2.0} />
-        <directionalLight position={[-5, -5, -5]} intensity={1.0} />
+        {/* ライティング（メタリック感を強調） */}
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[5, 5, 5]} intensity={2.5} />
+        <directionalLight position={[-5, -5, -5]} intensity={1.5} />
+        <directionalLight position={[0, 5, 0]} intensity={1.0} />
         <pointLight position={[0, 0, 10]} intensity={2.0} />
+        <pointLight position={[-5, 0, 5]} intensity={1.5} />
+        <pointLight position={[5, 0, 5]} intensity={1.5} />
 
         {/* カメラコントロール（マウス/タッチで回転） */}
         <OrbitControls
@@ -178,9 +209,8 @@ export default function IPhone3DViewer() {
           autoRotateSpeed={1}
         />
 
-        {/* iPhoneモデル（iPhone Frame画像を立体的に表示） */}
-        <IPhoneModel 
-          frameTexture={textures.frame}
+        {/* ロゴモデル（ロゴのみを表示） */}
+        <LogoModel 
           logoTexture={textures.logo}
         />
 
