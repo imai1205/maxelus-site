@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
+import { useState, useMemo, Suspense } from "react";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { useTheme } from "./ThemeProvider";
@@ -35,9 +35,9 @@ function createRoundedBox(width: number, height: number, depth: number, radius: 
 }
 
 // iPhoneの3Dモデル（iPhone Frame画像を立体的に表示）
-function IPhoneModel({ frameTexture, logoTexture }: { 
-  frameTexture: THREE.Texture | null;
-  logoTexture: THREE.Texture | null;
+function IPhoneModel({ framePath, logoPath }: { 
+  framePath: string;
+  logoPath: string;
 }) {
   // iPhone Frame画像のアスペクト比を保持（約9:19.5）
   const frameWidth = 3.0;
@@ -50,6 +50,24 @@ function IPhoneModel({ frameTexture, logoTexture }: {
     createRoundedBox(frameWidth, frameHeight, frameDepth, cornerRadius), 
     []
   );
+
+  // useLoaderでテクスチャを読み込む（エラーハンドリング付き）
+  let frameTexture: THREE.Texture | null = null;
+  let logoTexture: THREE.Texture | null = null;
+
+  try {
+    frameTexture = useLoader(THREE.TextureLoader, framePath);
+    frameTexture.flipY = false;
+  } catch (error) {
+    console.error('Frameテクスチャ読み込みエラー:', error);
+  }
+
+  try {
+    logoTexture = useLoader(THREE.TextureLoader, logoPath);
+    logoTexture.flipY = false;
+  } catch (error) {
+    console.error('ロゴテクスチャ読み込みエラー:', error);
+  }
 
   return (
     <group>
@@ -85,11 +103,6 @@ function IPhoneModel({ frameTexture, logoTexture }: {
 // メインコンポーネント
 export default function IPhone3DViewer() {
   const [isRotating, setIsRotating] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
-  const [textures, setTextures] = useState<{ 
-    frame: THREE.Texture | null; 
-    logo: THREE.Texture | null;
-  }>({ frame: null, logo: null });
   const { resolvedTheme } = useTheme();
 
   // ロゴパスをテーマに応じて切り替え
@@ -100,100 +113,8 @@ export default function IPhone3DViewer() {
   // iPhone Frame画像
   const framePath = '/cases/IPhoneFrame-car.png';
 
-  // テクスチャを読み込む（デバッグ版）
-  useEffect(() => {
-    const loader = new THREE.TextureLoader();
-    let frameTexture: THREE.Texture | null = null;
-    let logoTexture: THREE.Texture | null = null;
-    let loadedCount = 0;
-    const total = 2;
-    let isCancelled = false;
-
-    console.log('テクスチャ読み込み開始:', { framePath, logoPath });
-
-    const checkComplete = () => {
-      if (isCancelled) return;
-      loadedCount++;
-      console.log('テクスチャ読み込み進捗:', { loadedCount, total, frameTexture: !!frameTexture, logoTexture: !!logoTexture });
-      
-      if (loadedCount === total) {
-        setIsLoading(false);
-        setTextures({ frame: frameTexture, logo: logoTexture });
-        console.log('全テクスチャ読み込み完了');
-      } else if (loadedCount === 1) {
-        // 1つでも読み込めたら表示開始
-        setIsLoading(false);
-        setTextures({ frame: frameTexture, logo: logoTexture });
-        console.log('最初のテクスチャ読み込み完了、表示開始');
-      }
-    };
-
-    // iPhone Frameテクスチャを読み込み
-    loader.load(
-      framePath,
-      (texture) => {
-        if (isCancelled) {
-          texture.dispose();
-          return;
-        }
-        console.log('Frameテクスチャ読み込み成功:', texture);
-        texture.flipY = false;
-        texture.needsUpdate = true;
-        frameTexture = texture;
-        checkComplete();
-      },
-      (progress) => {
-        console.log('Frameテクスチャ読み込み進捗:', progress);
-      },
-      (error) => {
-        console.error('Frameテクスチャ読み込みエラー:', error, framePath);
-        if (!isCancelled) {
-          checkComplete();
-        }
-      }
-    );
-
-    // ロゴテクスチャを読み込み
-    loader.load(
-      logoPath,
-      (texture) => {
-        if (isCancelled) {
-          texture.dispose();
-          return;
-        }
-        console.log('ロゴテクスチャ読み込み成功:', texture);
-        texture.flipY = false;
-        texture.needsUpdate = true;
-        logoTexture = texture;
-        checkComplete();
-      },
-      (progress) => {
-        console.log('ロゴテクスチャ読み込み進捗:', progress);
-      },
-      (error) => {
-        console.error('ロゴテクスチャ読み込みエラー:', error, logoPath);
-        if (!isCancelled) {
-          checkComplete();
-        }
-      }
-    );
-
-    return () => {
-      isCancelled = true;
-      frameTexture?.dispose();
-      logoTexture?.dispose();
-    };
-  }, [framePath, logoPath]);
-
   return (
     <div className="w-full h-[500px] relative bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220] rounded-xl overflow-hidden">
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center z-10 bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220]">
-          <div className="animate-pulse text-white/70 text-sm md:text-base">
-            3Dモデルを読み込み中...
-          </div>
-        </div>
-      )}
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
@@ -217,10 +138,12 @@ export default function IPhone3DViewer() {
         />
 
         {/* iPhoneモデル（iPhone Frame画像を立体的に表示） */}
-        <IPhoneModel 
-          frameTexture={textures.frame}
-          logoTexture={textures.logo}
-        />
+        <Suspense fallback={null}>
+          <IPhoneModel 
+            framePath={framePath}
+            logoPath={logoPath}
+          />
+        </Suspense>
 
         {/* 環境マッピング（反射を追加） */}
         <Environment preset="city" />
