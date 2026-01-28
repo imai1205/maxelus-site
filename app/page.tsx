@@ -84,61 +84,64 @@ function HeroSection({ settings }: { settings: { cta_primary_text?: string; cta_
       <div className="absolute top-0 left-0 right-0 max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32 flex flex-col pointer-events-none" style={{ zIndex: 200 }}>
         <div className="flex-1 flex flex-col justify-center">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="w-full lg:w-auto lg:max-w-[600px] space-y-6 md:space-y-8 text-center lg:text-left relative pointer-events-none px-4 py-6 rounded-2xl backdrop-blur-xl bg-[#1e293b]/80 border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]" style={{ zIndex: 500, background: 'rgba(30, 41, 59, 0.8)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
+            <div className="w-full lg:w-[85%] lg:max-w-[520px] space-y-5 md:space-y-6 text-center lg:text-left relative pointer-events-none px-5 py-5 md:px-6 md:py-6 rounded-2xl backdrop-blur-md bg-[#2d3a4f]/60 border border-white/12 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]" style={{ zIndex: 500, background: 'rgba(45, 58, 79, 0.6)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}>
               <div className="pointer-events-auto relative z-10">
               <AnimatedSection animation="fade-up" duration={800}>
                 <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10 absolute" style={{ zIndex: 0 }}>HOME</span>
-                <div className="mb-4 relative z-10">
-                  <BubbleBadge>
-                    AI × 最新手法
-                  </BubbleBadge>
+                <div className="mb-3 md:mb-4 relative" style={{ zIndex: 100 }}>
+                  <div className="relative inline-block">
+                    {/* バッジの後ろに光る効果 - より大きく、より明るく */}
+                    <div className="absolute -inset-2 bg-[#fff100] blur-2xl opacity-80 rounded-full" style={{ zIndex: -1 }} />
+                    <div className="absolute -inset-1 bg-[#fff100] blur-lg opacity-60 rounded-full" style={{ zIndex: -1 }} />
+                    <BubbleBadge className="relative bg-[#fff100] text-[#1a1a1a] font-bold shadow-2xl border-2 border-[#fdc700]/50" style={{ zIndex: 100, background: '#fff100', boxShadow: '0 0 30px rgba(255, 241, 0, 0.6), 0 4px 20px rgba(0, 0, 0, 0.3)' }}>
+                      AI × 最新手法
+                    </BubbleBadge>
+                  </div>
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight relative z-50">
+                {/* 大見出し */}
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-3 leading-tight relative z-50">
                   完全オーダーメイドで
                   <br />
-                  課題を解決する
-                  <br />
-                  WEB・アプリ制作
+                  課題解決
                 </h1>
+                {/* 中見出し */}
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white/90 mb-3 md:mb-4 relative z-50">
+                  WEB・アプリ制作
+                </h2>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={300} duration={800}>
-                <p className="text-lg md:text-xl text-white/90 mb-2 relative z-50">
-                  ユーザーに使われる、成果につながるプロダクトを
+                {/* サブテキスト - 1-2行に圧縮 */}
+                <p className="text-sm md:text-base text-white/80 mb-4 md:mb-5 relative z-50 leading-relaxed">
+                  ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします
                 </p>
-                <p className="text-base md:text-lg text-white/80 relative z-50">
-                  企画から運用まで伴走してお届けします
-                </p>
+                {/* CTAボタン - カード内に配置 */}
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <Link 
+                    href={primaryHref} 
+                    prefetch={true} 
+                    className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base transition-all hover:scale-105 shadow-lg"
+                  >
+                    <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    {primaryText}
+                  </Link>
+                  <Link 
+                    href={secondaryHref} 
+                    prefetch={true} 
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base transition-all hover:scale-105 backdrop-blur-sm border border-white/20"
+                  >
+                    <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    {secondaryText}
+                  </Link>
+                </div>
               </AnimatedSection>
               </div>
             </div>
           </div>
-        </div>
-        <div className="mt-auto pt-8" style={{ zIndex: 20 }}>
-          <AnimatedSection animation="fade-up" delay={500} duration={800}>
-            <div className="flex flex-row gap-3 justify-center lg:justify-end">
-            <Link 
-              href={primaryHref} 
-              prefetch={true} 
-              className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm md:text-base transition-all hover:scale-105 shadow-lg"
-            >
-              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
-              {primaryText}
-            </Link>
-            <Link 
-              href={secondaryHref} 
-              prefetch={true} 
-              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm md:text-base transition-all hover:scale-105 backdrop-blur-sm"
-            >
-              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-              {secondaryText}
-            </Link>
-            </div>
-          </AnimatedSection>
         </div>
       </div>
     </section>

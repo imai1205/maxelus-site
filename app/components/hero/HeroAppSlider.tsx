@@ -226,16 +226,16 @@ export default function HeroAppSlider() {
                       alt={app.alt}
                       className="w-full h-auto object-contain pointer-events-none"
                       style={{
-                        opacity: isHovered ? 1 : 0.55,
+                        opacity: isHovered ? 1 : 0.7,
                         filter: isHovered 
                           ? 'saturate(1.2) contrast(1.05)' 
-                          : 'grayscale(0.35)',
+                          : 'grayscale(0.2)',
                         transform: isHovered 
-                          ? 'scale(1.07) translateY(-10px)' 
+                          ? 'scale(1.07) translateY(-15px)' 
                           : 'scale(1)',
                         boxShadow: isHovered
-                          ? '0 20px 60px rgba(255, 241, 0, 0.3)'
-                          : 'none',
+                          ? '0 20px 60px rgba(255, 241, 0, 0.4), 0 0 0 rgba(0, 0, 0, 0)'
+                          : '0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.3)',
                         transition: 'all 0.3s ease-out',
                       }}
                       loading="lazy"
@@ -248,33 +248,6 @@ export default function HeroAppSlider() {
           </div>
         </div>
 
-        <div 
-          className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-4 pointer-events-none"
-          style={{ 
-            bottom: '16px',
-            zIndex: 50,
-          }}
-        >
-          <button
-            onClick={handlePrev}
-            className="pointer-events-auto bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300 hover:scale-110"
-            aria-label="前へ"
-          >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          
-          <button
-            onClick={handleNext}
-            className="pointer-events-auto bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300 hover:scale-110"
-            aria-label="次へ"
-          >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
       </div>
     </div>
   );
