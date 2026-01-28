@@ -328,12 +328,14 @@ interface TiltCardProps {
   children: ReactNode;
   className?: string;
   maxTilt?: number;
+  style?: React.CSSProperties;
 }
 
 export const TiltCard = memo(function TiltCard({ 
   children, 
   className = "", 
-  maxTilt = 8 
+  maxTilt = 8,
+  style
 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState("");
@@ -356,7 +358,7 @@ export const TiltCard = memo(function TiltCard({
     <div
       ref={ref}
       className={`transition-transform duration-200 ease-out gpu-accelerate ${className}`}
-      style={{ transform, transformStyle: "preserve-3d" }}
+      style={{ transform, transformStyle: "preserve-3d", ...style }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

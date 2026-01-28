@@ -625,13 +625,13 @@ function WorksSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
           {works.map((work, i) => (
             <AnimatedSection key={work.id} animation="fade-up" delay={i * 150}>
-              <TiltCard maxTilt={5} className="h-full">
-                {work.hasLP && work.lpHref ? (
-                  <Link 
-                    href={work.lpHref} 
-                    className="works-card block h-full group relative z-10 cursor-pointer"
-                    prefetch={true}
-                  >
+              {work.hasLP && work.lpHref ? (
+                <Link 
+                  href={work.lpHref} 
+                  className="works-card block h-full group relative z-10 cursor-pointer"
+                  prefetch={true}
+                >
+                  <TiltCard maxTilt={5} className="h-full">
                     <GlassCard variant="light" padding="none" className="h-full overflow-hidden">
                       <div className="aspect-video overflow-hidden relative">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -669,8 +669,10 @@ function WorksSection() {
                       </div>
                       </div>
                     </GlassCard>
-                  </Link>
-                ) : (
+                  </TiltCard>
+                </Link>
+              ) : (
+                <TiltCard maxTilt={5} className="h-full">
                   <GlassCard variant="light" padding="none" className="h-full overflow-hidden">
                     <div className="aspect-video overflow-hidden relative">
                       <Image 
@@ -708,8 +710,8 @@ function WorksSection() {
                       </div>
                     </div>
                   </GlassCard>
-                )}
-              </TiltCard>
+                </TiltCard>
+              )}
             </AnimatedSection>
           ))}
         </div>
