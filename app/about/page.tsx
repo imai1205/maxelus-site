@@ -31,13 +31,17 @@ export default function AboutPage() {
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">ABOUT</span>
-              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
-                ABOUT US
-              </p>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
-                会社情報
-              </h1>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>ABOUT</span>
+                <div className="relative">
+                  <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
+                    ABOUT US
+                  </p>
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
+                    会社情報
+                  </h1>
+                </div>
+              </div>
               <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
                 AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです
               </p>
@@ -49,10 +53,14 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">OVERVIEW</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-8 text-center relative">
-                会社概要
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>OVERVIEW</span>
+                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-8 text-center relative">
+                    会社概要
+                  </h2>
+                </div>
+              </div>
             </AnimatedSection>
 
             <GlassCard variant="light" padding="lg">
@@ -106,10 +114,12 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">BUSINESS</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                事業内容
-              </h2>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>BUSINESS</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  事業内容
+                </h2>
+              </div>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
@@ -165,10 +175,12 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">ABOUT</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 relative">
-                私たちについて
-              </h2>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>ABOUT</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 relative">
+                  私たちについて
+                </h2>
+              </div>
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={200}>
@@ -191,10 +203,12 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VALUE</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                できること（提供価値）
-              </h2>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>VALUE</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  できること（提供価値）
+                </h2>
+              </div>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
@@ -287,58 +301,63 @@ export default function AboutPage() {
           <div className="max-w-6xl mx-auto">
             {/* Mission */}
             <AnimatedSection animation="fade-up" className="mb-8 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">MISSION</span>
-              <GlassCard variant="dark" padding="lg" className="bg-gradient-to-br from-[#0b1220] to-[#1e293b] relative">
-                <div className="mb-4">
-                  <BubbleBadge variant="small">Mission</BubbleBadge>
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 relative">使命</h2>
-                <p className="text-lg md:text-xl text-white leading-relaxed mb-4">
-                  業務を効率化し、本当に大切なことに時間を使える世界をつくる。
-                </p>
-                <p className="text-base md:text-lg text-white/80 leading-relaxed mb-4">
-                  情報の分断やムダな作業を減らし、
-                  「見つける・決める・動く」をスムーズにつなげることで、
-                  人が本来向き合うべき 判断・創造・挑戦 に時間を取り戻します。
-                </p>
-                <p className="text-base md:text-lg text-white/80 leading-relaxed">
-                  AIとデータを味方につけ、再現性のある品質とスピードを提供します。
-                </p>
-              </GlassCard>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>MISSION</span>
+                <GlassCard variant="dark" padding="lg" className="bg-gradient-to-br from-[#0b1220] to-[#1e293b] relative">
+                  <div className="mb-4">
+                    <BubbleBadge variant="small">Mission</BubbleBadge>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 relative">使命</h2>
+                  <p className="text-lg md:text-xl text-white leading-relaxed mb-4">
+                    業務を効率化し、本当に大切なことに時間を使える世界をつくる。
+                  </p>
+                  <p className="text-base md:text-lg text-white/80 leading-relaxed mb-4">
+                    情報の分断やムダな作業を減らし、
+                    「見つける・決める・動く」をスムーズにつなげることで、
+                    人が本来向き合うべき 判断・創造・挑戦 に時間を取り戻します。
+                  </p>
+                  <p className="text-base md:text-lg text-white/80 leading-relaxed">
+                    AIとデータを味方につけ、再現性のある品質とスピードを提供します。
+                  </p>
+                </GlassCard>
+              </div>
             </AnimatedSection>
 
             {/* Vision */}
             <AnimatedSection animation="fade-up" delay={100} className="mb-8 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VISION</span>
-              <GlassCard variant="light" padding="lg" className="border-2 border-[#fff100]/50 relative">
-                <div className="mb-4">
-                  <BubbleBadge variant="small">Vision</BubbleBadge>
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                  未来像
-                </h2>
-                <p className="text-lg md:text-xl text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-4">
-                  データとAIで、意思決定と実行が加速する社会をつくる。
-                </p>
-                <p className="text-base md:text-lg text-[#6b7280] dark:text-[#9ca3af] leading-relaxed">
-                  紙・勘・経験だけに依存せず、
-                  必要な情報が必要なときに届き、次の一手が最短で打てる。
-                  そんな「進化し続ける業務と組織」を増やしていきます。
-                </p>
-              </GlassCard>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>VISION</span>
+                <GlassCard variant="light" padding="lg" className="border-2 border-[#fff100]/50 relative">
+                  <div className="mb-4">
+                    <BubbleBadge variant="small">Vision</BubbleBadge>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                    未来像
+                  </h2>
+                  <p className="text-lg md:text-xl text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-4">
+                    データとAIで、意思決定と実行が加速する社会をつくる。
+                  </p>
+                  <p className="text-base md:text-lg text-[#6b7280] dark:text-[#9ca3af] leading-relaxed">
+                    紙・勘・経験だけに依存せず、
+                    必要な情報が必要なときに届き、次の一手が最短で打てる。
+                    そんな「進化し続ける業務と組織」を増やしていきます。
+                  </p>
+                </GlassCard>
+              </div>
             </AnimatedSection>
 
             {/* Value */}
             <AnimatedSection animation="fade-up" delay={200} className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">VALUE</span>
-              <GlassCard variant="light" padding="lg" className="relative">
-                <div className="mb-6">
-                  <BubbleBadge variant="small">Value</BubbleBadge>
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 relative">
-                  価値観・行動指針
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>VALUE</span>
+                <GlassCard variant="light" padding="lg" className="relative">
+                  <div className="mb-6">
+                    <BubbleBadge variant="small">Value</BubbleBadge>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 relative">
+                    価値観・行動指針
+                  </h2>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                   {[
                     {
                       title: "Evolve（進化）",
@@ -376,8 +395,9 @@ export default function AboutPage() {
                       <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af]">{value.description}</p>
                     </GlassCard>
                   ))}
-                </div>
-              </GlassCard>
+                  </div>
+                </GlassCard>
+              </div>
             </AnimatedSection>
           </div>
         </section>
@@ -386,10 +406,12 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">MESSAGE</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                代表挨拶
-              </h2>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>MESSAGE</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  代表挨拶
+                </h2>
+              </div>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 

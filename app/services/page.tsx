@@ -461,15 +461,19 @@ export default function ServicesPage() {
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">SERVICES</span>
-              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
-                SERVICES
-              </p>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
-                アプリ開発とWeb制作で、
-                <br />
-                ビジネスを最短で形にします。
-              </h1>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>SERVICES</span>
+                <div className="relative">
+                  <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
+                    SERVICES
+                  </p>
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
+                    アプリ開発とWeb制作で、
+                    <br />
+                    ビジネスを最短で形にします。
+                  </h1>
+                </div>
+              </div>
               <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8">
                 アイデアを&quot;動くプロダクト&quot;に。アプリもWebも一気通貫で対応します。
               </p>
@@ -599,10 +603,12 @@ export default function ServicesPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#0b1220]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FAQ</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                よくある質問
-              </h2>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>FAQ</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  よくある質問
+                </h2>
+              </div>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 
@@ -655,10 +661,12 @@ export default function ServicesPage() {
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-white/10">CONTACT</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 relative">
-                まずは無料相談から
-              </h2>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>CONTACT</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 relative">
+                  まずは無料相談から
+                </h2>
+              </div>
               <p className="text-base md:text-lg text-white/70 mb-8 max-w-2xl mx-auto">
                 「こんなこと実現できる？」という段階からOK。
                 <br />

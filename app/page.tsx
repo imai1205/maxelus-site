@@ -175,14 +175,16 @@ function ChallengeSection() {
       <div className="relative max-w-[1100px] mx-auto">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-10 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">CHALLENGE</span>
           <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest mb-2">PROBLEM</p>
-          <h2 
-            data-cms-key="site.challenge_title"
-            className="relative text-[26px] md:text-[36px] lg:text-[42px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
-          >
-            課題は&quot;ズレ&quot;から起きる
-          </h2>
+          <div className="relative inline-block">
+            <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>CHALLENGE</span>
+            <h2 
+              data-cms-key="site.challenge_title"
+              className="relative text-[26px] md:text-[36px] lg:text-[42px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
+            >
+              課題は&quot;ズレ&quot;から起きる
+            </h2>
+          </div>
           <p 
             data-cms-key="site.challenge_subtitle"
             className="text-sm md:text-base text-[#6b7280] dark:text-[#9ca3af] mt-3 max-w-xl mx-auto"
@@ -205,9 +207,10 @@ function ChallengeSection() {
                     className="flex items-center gap-3 md:gap-4 border-[#ffe2e2] hover:border-red-300"
                     data-cms-key={`site.challenge_before_${i}`}
                   >
-                    <div className="before-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center animate-scale-pulse flex-shrink-0 bg-red-100">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={imgXIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
+                    <div className="before-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center flex-shrink-0 bg-red-100 dark:bg-red-900/30">
+                      <svg className="w-4 md:w-5 h-4 md:h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
                     </div>
                     <span className="text-sm md:text-base text-[#1a1a1a] dark:text-[#f9fafb]">{item}</span>
                   </GlassCard>
@@ -219,8 +222,9 @@ function ChallengeSection() {
           {/* Arrow */}
           <AnimatedSection animation="zoom-in" delay={400} className="my-2 md:my-0">
             <MotionPress className="bg-[#fff100] rounded-full w-12 md:w-16 h-12 md:h-16 flex items-center justify-center shadow-lg animate-pulse-glow hover:rotate-180 transition-transform duration-700 cursor-pointer rotate-90 md:rotate-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imgArrowTransform} alt="" className="w-6 md:w-8 h-6 md:h-8" />
+              <svg className="w-6 md:w-8 h-6 md:h-8 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </MotionPress>
           </AnimatedSection>
           
@@ -236,9 +240,10 @@ function ChallengeSection() {
                     className="flex items-center gap-3 md:gap-4 border-[#dcfce7] hover:border-green-400"
                     data-cms-key={`site.challenge_after_${i}`}
                   >
-                    <div className="after-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center animate-scale-pulse flex-shrink-0 bg-green-100" style={{ animationDelay: `${i * 200}ms` }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={imgCheckIcon} alt="" className="w-4 md:w-[18px] h-4 md:h-[18px]" />
+                    <div className="after-icon-bg rounded-full w-7 md:w-8 h-7 md:h-8 flex items-center justify-center flex-shrink-0 bg-green-100 dark:bg-green-900/30">
+                      <svg className="w-4 md:w-5 h-4 md:h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
                     </div>
                     <span className="text-sm md:text-base text-[#1a1a1a] dark:text-[#f9fafb]">{item}</span>
                   </GlassCard>
@@ -258,16 +263,18 @@ function SolutionSection() {
     <section className="relative py-16 md:py-32 px-4 md:px-12 overflow-hidden bg-white dark:bg-[#0b1220]">
       <div className="relative max-w-[1100px] mx-auto">
         <AnimatedSection animation="zoom-in" className="relative text-center mb-12">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">APPROACH</span>
           <div className="relative space-y-4 md:space-y-6">
             <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
-            <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2">
-              MAXELUSは
-              <br />
-              <span className="animate-text-gradient">オーダーメイド × 伴走</span>
-              <br />
-              で成果から逆算します
-            </h2>
+            <div className="relative inline-block">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>APPROACH</span>
+              <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2 relative">
+                MAXELUSは
+                <br />
+                <span className="animate-text-gradient">オーダーメイド × 伴走</span>
+                <br />
+                で成果から逆算します
+              </h2>
+            </div>
           </div>
         </AnimatedSection>
         
@@ -352,10 +359,12 @@ function ServicesSection() {
       <div className="max-w-[1100px] mx-auto relative">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">SERVICES</span>
-          <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight">
-            対応できる内容
-          </h2>
+          <div className="relative inline-block">
+            <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>SERVICES</span>
+            <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight">
+              対応できる内容
+            </h2>
+          </div>
         </AnimatedSection>
         
         {/* Services grid */}
@@ -398,6 +407,155 @@ function ServicesSection() {
   );
 }
 
+// ServiceTypes Section Component - ホームページ・Webアプリ・iOSアプリ、全部できます
+function ServiceTypesSection() {
+  const [showDemoModal, setShowDemoModal] = useState(false);
+
+  return (
+    <>
+      <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection animation="fade-up" className="relative">
+            <div className="relative flex justify-center">
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>SHOWCASE</span>
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-3 md:mb-4 px-2 relative">
+                  ホームページ・Webアプリ・iOSアプリ、全部できます
+                </h2>
+              </div>
+            </div>
+            <p className="text-sm sm:text-base text-[#6b7280] dark:text-[#9ca3af] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2 relative">
+              実際のデモ画面で、完成イメージを体験してください。
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+            {/* ホームページ */}
+            <AnimatedSection animation="fade-up" delay={0} className="flex w-full">
+              <TiltCard maxTilt={5} className="h-full w-full">
+                <Link
+                  href="/services"
+                  className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group flex flex-col"
+                >
+                  <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
+                    <Image 
+                      src="/cases/homepage.png" 
+                      alt="ホームページ"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-contain hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-4 md:p-6 flex-1 flex flex-col">
+                    <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">ホームページ</h3>
+                    <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">WordPressではできない体験型Web</p>
+                    <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                      詳しく見る
+                      <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
+              </TiltCard>
+            </AnimatedSection>
+
+            {/* Webアプリ */}
+            <AnimatedSection animation="fade-up" delay={50} className="flex w-full">
+              <TiltCard maxTilt={5} className="h-full w-full">
+                <button
+                  onClick={() => setShowDemoModal(true)}
+                  className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group text-left flex flex-col"
+                >
+                  <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
+                    <Image 
+                      src="/cases/nail.png" 
+                      alt="Webアプリ"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-contain hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-4 md:p-6 flex-1 flex flex-col">
+                    <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">Webアプリ</h3>
+                    <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">業務効率化・DXアプリ</p>
+                    <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                      デモを表示
+                      <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </button>
+              </TiltCard>
+            </AnimatedSection>
+
+            {/* iOSアプリ */}
+            <AnimatedSection animation="fade-up" delay={100} className="flex w-full">
+              <TiltCard maxTilt={5} className="h-full w-full">
+                <Link
+                  href="/lp/full-order-app-development"
+                  className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group flex flex-col"
+                >
+                  <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
+                    <Image 
+                      src="/cases/IPhoneFrame-car.png" 
+                      alt="iOSアプリ"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-contain hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-4 md:p-6 flex-1 flex flex-col">
+                    <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">iOSアプリ</h3>
+                    <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">ネイティブアプリ開発</p>
+                    <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                      詳しく見る
+                      <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
+              </TiltCard>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Modal */}
+      {showDemoModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setShowDemoModal(false)}
+        >
+          <div 
+            className="relative bg-white dark:bg-[#0b1220] rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowDemoModal(false)}
+              className="absolute top-4 right-4 z-10 bg-white/90 dark:bg-[#0b1220]/90 hover:bg-white dark:hover:bg-[#0b1220] rounded-full p-2 shadow-lg transition-all hover:scale-110"
+              aria-label="閉じる"
+            >
+              <svg className="w-6 h-6 text-[#1a1a1a] dark:text-[#f9fafb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <div className="p-8">
+              <h3 className="text-2xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 text-center">サロン予約アプリデモ</h3>
+              <SalonReservationAppMockup />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 // Works Section Component
 function WorksSection() {
   const works = homeCasesData;
@@ -407,12 +565,13 @@ function WorksSection() {
       <div className="max-w-[1100px] mx-auto">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">CASES</span>
-          <div className="relative space-y-2 md:space-y-4">
-            <h2 
-              data-cms-key="site.works_title"
-              className="text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
-            >
+          <div className="relative inline-block">
+            <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>CASES</span>
+            <div className="relative space-y-2 md:space-y-4">
+              <h2 
+                data-cms-key="site.works_title"
+                className="text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
+              >
               事例
             </h2>
             <p 
@@ -421,6 +580,7 @@ function WorksSection() {
             >
               製造業、医療、建設など、幅広い業種で実績があります
             </p>
+            </div>
           </div>
         </AnimatedSection>
         
@@ -602,13 +762,15 @@ function FAQSection() {
       <div className="max-w-[900px] mx-auto relative">
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
-          <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FAQ</span>
-          <h2 
-            data-cms-key="site.faq_title"
-            className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
-          >
-            よくある質問
-          </h2>
+          <div className="relative inline-block">
+            <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>FAQ</span>
+            <h2 
+              data-cms-key="site.faq_title"
+              className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
+            >
+              よくある質問
+            </h2>
+          </div>
         </AnimatedSection>
         
         {/* FAQ list */}
@@ -807,10 +969,13 @@ export default function Home() {
           <section className="bg-white dark:bg-[#0b1220] py-12 md:py-32 px-4 md:px-8 relative overflow-hidden">
             <div className="max-w-[1200px] mx-auto relative">
               <div className="text-center mb-8 md:mb-12">
-                <h2 className="text-2xl md:text-4xl font-bold text-[#0a0a0a] dark:text-[#f9fafb] mb-4">
-                  触れるデモで合意
-                </h2>
-                <p className="text-sm md:text-base text-[#6a7282] dark:text-[#9ca3af] max-w-2xl mx-auto">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>DEMO</span>
+                  <h2 className="text-2xl md:text-4xl font-bold text-[#0a0a0a] dark:text-[#f9fafb] mb-4 relative">
+                    触れるデモで合意
+                  </h2>
+                </div>
+                <p className="text-sm md:text-base text-[#6a7282] dark:text-[#9ca3af] max-w-2xl mx-auto relative">
                   実際に動くデモアプリで、完成イメージを共有します。<br className="hidden sm:block" />
                   デザインと機能の両方を体験いただけます。
                 </p>
@@ -828,6 +993,7 @@ export default function Home() {
           </section>
           <WorksSection />
           <StorySlider />
+          <ServiceTypesSection />
           <FAQSection />
           <CTASection settings={settings} />
         </main>

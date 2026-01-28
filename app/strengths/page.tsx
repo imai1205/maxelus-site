@@ -234,13 +234,17 @@ export default function StrengthsPage() {
           
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">STRENGTHS</span>
-              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
-                STRENGTHS
-              </p>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight px-2 relative">
-                {pageSettings?.title || 'MAXELUSが選ばれる理由'}
-              </h1>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>STRENGTHS</span>
+                <div className="relative">
+                  <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
+                    STRENGTHS
+                  </p>
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight px-2 relative">
+                    {pageSettings?.title || 'MAXELUSが選ばれる理由'}
+                  </h1>
+                </div>
+              </div>
               <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-2 relative">
                 {pageSettings?.subtitle || '"作るだけ"では終わらない。現場で使える・更新できる・拡張できるシステムを、最短で形にします。'}
               </p>
@@ -268,10 +272,14 @@ export default function StrengthsPage() {
               </div>
             </div>
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">STRENGTHS</span>
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-3 md:mb-4 px-2 relative">
-                5つの強み
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>STRENGTHS</span>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-3 md:mb-4 px-2 relative">
+                    5つの強み
+                  </h2>
+                </div>
+              </div>
               <p className="text-sm sm:text-base text-[#6b7280] dark:text-[#9ca3af] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2 relative">
                 抽象的な「強み」ではなく、具体的な特徴でお伝えします。
               </p>
@@ -331,37 +339,41 @@ export default function StrengthsPage() {
         {/* 対応可能なサービスデモセクション */}
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
-            <AnimatedSection animation="fade-up">
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] text-center mb-3 md:mb-4 px-2">
-                ホームページ・Webアプリ・iOSアプリ、全部できます
-              </h2>
-              <p className="text-sm sm:text-base text-[#6b7280] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2">
+            <AnimatedSection animation="fade-up" className="relative">
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>SHOWCASE</span>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-3 md:mb-4 px-2 relative">
+                    ホームページ・Webアプリ・iOSアプリ、全部できます
+                  </h2>
+                </div>
+              </div>
+              <p className="text-sm sm:text-base text-[#6b7280] dark:text-[#9ca3af] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2 relative">
                 実際のデモ画面で、完成イメージを体験してください。
               </p>
             </AnimatedSection>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {/* ホームページ - 画像で表示 */}
-              <AnimatedSection animation="fade-up" delay={0}>
-                <TiltCard maxTilt={5} className="h-full">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+              {/* ホームページ */}
+              <AnimatedSection animation="fade-up" delay={0} className="flex w-full">
+                <TiltCard maxTilt={5} className="h-full w-full">
                   <Link
-                    href="/"
-                    className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full block group"
+                    href="/services"
+                    className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group flex flex-col"
                   >
-                    <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center">
-                      {/* ホームページの画像 - iPhone画面とPC画面の両方が見えるサイズ */}
+                    <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
                       <Image 
                         src="/cases/homepage.png" 
                         alt="ホームページ"
                         fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-contain hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
                     </div>
-                    <div className="p-4 md:p-6">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">ホームページ</h3>
-                      <p className="text-xs sm:text-sm text-[#6b7280]">WordPressではできない体験型Web</p>
+                    <div className="p-4 md:p-6 flex-1 flex flex-col">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">ホームページ</h3>
+                      <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">WordPressではできない体験型Web</p>
                       <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                         詳しく見る
                         <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -373,27 +385,26 @@ export default function StrengthsPage() {
                 </TiltCard>
               </AnimatedSection>
 
-              {/* Webアプリ - iPhoneとPCの両方が見える画像、クリックで動く */}
-              <AnimatedSection animation="fade-up" delay={50}>
-                <TiltCard maxTilt={5} className="h-full">
+              {/* Webアプリ */}
+              <AnimatedSection animation="fade-up" delay={50} className="flex w-full">
+                <TiltCard maxTilt={5} className="h-full w-full">
                   <button
                     onClick={() => setShowDemoModal(true)}
-                    className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group text-left"
+                    className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group text-left flex flex-col"
                   >
-                    <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center">
-                      {/* iPhoneとPCの両方が見える画像 - クリックで動くデモを表示 */}
+                    <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
                       <Image 
                         src="/cases/nail.png" 
-                        alt="Webアプリ - iPhoneとPC"
+                        alt="Webアプリ"
                         fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-contain hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
                     </div>
-                    <div className="p-4 md:p-6">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">Webアプリ</h3>
-                      <p className="text-xs sm:text-sm text-[#6b7280]">業務効率化・DXアプリ</p>
+                    <div className="p-4 md:p-6 flex-1 flex flex-col">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">Webアプリ</h3>
+                      <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">業務効率化・DXアプリ</p>
                       <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                         デモを表示
                         <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -405,27 +416,26 @@ export default function StrengthsPage() {
                 </TiltCard>
               </AnimatedSection>
 
-              {/* iOSアプリ - iPhone Frame画像 */}
-              <AnimatedSection animation="fade-up" delay={100}>
-                <TiltCard maxTilt={5} className="h-full">
+              {/* iOSアプリ */}
+              <AnimatedSection animation="fade-up" delay={100} className="flex w-full">
+                <TiltCard maxTilt={5} className="h-full w-full">
                   <Link
                     href="/lp/full-order-app-development"
-                    className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full block group"
+                    className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group flex flex-col"
                   >
-                    <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center p-4">
-                      {/* iPhone Frame画像 - carを使用、iPhone画面とPC画面の両方が見えるサイズ */}
+                    <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
                       <Image 
                         src="/cases/IPhoneFrame-car.png" 
-                        alt="iOSアプリ - iPhone Frame"
+                        alt="iOSアプリ"
                         fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-contain hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
                     </div>
-                    <div className="p-4 md:p-6">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">iOSアプリ</h3>
-                      <p className="text-xs sm:text-sm text-[#6b7280]">ネイティブアプリ開発</p>
+                    <div className="p-4 md:p-6 flex-1 flex flex-col">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">iOSアプリ</h3>
+                      <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">ネイティブアプリ開発</p>
                       <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                         詳しく見る
                         <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">

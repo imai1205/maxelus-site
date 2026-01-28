@@ -99,12 +99,11 @@ html {
 /* Section background text */
 .section-bg-text {
   font-weight: bold;
-  color: #f3f4f6;
-  opacity: 0.1;
   letter-spacing: 0.02em;
   position: absolute;
   white-space: nowrap;
   /* レスポンシブ対応：font-sizeはインラインで指定 */
+  /* color と opacity はインラインで指定 */
 }
 
 /* Card hover effects */

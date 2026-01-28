@@ -346,13 +346,17 @@ export default function CasesPage() {
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">CASES</span>
-              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
-                CASES
-              </p>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
-                事例紹介
-              </h1>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>CASES</span>
+                <div className="relative">
+                  <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
+                    CASES
+                  </p>
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
+                    事例紹介
+                  </h1>
+                </div>
+              </div>
               <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
                 製造業、医療、建設など、幅広い業種で実績があります
               </p>
@@ -364,10 +368,12 @@ export default function CasesPage() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">INDUSTRY</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                業種から探す
-              </h2>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>INDUSTRY</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  業種から探す
+                </h2>
+              </div>
               <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
             </AnimatedSection>
 

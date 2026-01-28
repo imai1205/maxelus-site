@@ -217,17 +217,58 @@ export default function StorySlider() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [goToNext, goToPrev]);
 
+  // セクションに到達したら自動再生を開始
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            setIsAutoPlaying(true);
+            setProgress(0);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
   const currentStory = storySteps[currentStep];
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative min-h-[500px] md:min-h-[700px] overflow-hidden"
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-    >
-      {/* Background Images with Slide Animation */}
+    <>
+      {/* Section Title - 映像の外側に配置 */}
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220]">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative flex justify-center">
+            <div className="relative inline-block">
+              <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>PROCESS</span>
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-2 relative">
+                成果から逆算する設計プロセス
+              </h2>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section 
+        id="design-process"
+        ref={containerRef}
+        className="relative min-h-[500px] md:min-h-[700px] overflow-hidden"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        {/* Background Images with Slide Animation */}
       {storySteps.map((step, index) => (
         <div
           key={index}
@@ -447,5 +488,6 @@ export default function StorySlider() {
         </div>
       </div>
     </section>
+    </>
   );
 }
