@@ -629,12 +629,13 @@ function WorksSection() {
                 {work.hasLP && work.lpHref ? (
                   <Link 
                     href={work.lpHref} 
-                    className="works-card block h-full group"
+                    className="works-card block h-full group relative z-10 cursor-pointer"
+                    prefetch={true}
                   >
                     <GlassCard variant="light" padding="none" className="h-full overflow-hidden">
                       <div className="aspect-video overflow-hidden relative">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+                        <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="eager" decoding="async" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                           <span className="text-white text-sm">詳しく見る →</span>

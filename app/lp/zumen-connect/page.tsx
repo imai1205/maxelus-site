@@ -94,12 +94,14 @@ export default function ZumenConnectLP() {
               {/* Left Content */}
               <div>
                 <AnimatedSection animation="fade-up" className="relative">
-                  <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px]">PRODUCT</span>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 leading-tight relative">
-                    図面・関連資料・見積を、
-                    <br />
-                    <span className="text-[#fff100]">探す時間ゼロへ。</span>
-                  </h1>
+                  <div className="relative inline-block">
+                    <span className="section-bg-text left-0 -top-8 md:-top-12 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>PRODUCT</span>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 leading-tight relative">
+                      図面・関連資料・見積を、
+                      <br />
+                      <span className="text-[#fff100]">探す時間ゼロへ。</span>
+                    </h1>
+                  </div>
                   <p className="text-lg md:text-xl text-[#6b7280] dark:text-[#9ca3af] mb-6 leading-relaxed">
                     OCRで自動整理。AI類似検索で過去実績に即アクセス。
                     <br />
@@ -184,10 +186,14 @@ export default function ZumenConnectLP() {
         <Section padding="lg" className="bg-gradient-to-b from-white via-[#fafafa] to-white dark:from-[#0b1220] dark:via-[#1e293b] dark:to-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PROBLEM</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                現場の3つの課題を、一気に解決
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>PROBLEM</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                    現場の3つの課題を、一気に解決
+                  </h2>
+                </div>
+              </div>
               <p className="text-lg text-[#6b7280] dark:text-[#9ca3af] relative">
                 図面管理の煩雑さを、シンプルな仕組みで効率化します
               </p>
@@ -240,10 +246,14 @@ export default function ZumenConnectLP() {
         <section id="features" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[#fafafa] via-white to-[#fafafa] dark:from-[#1e293b] dark:via-[#0b1220] dark:to-[#1e293b]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">FEATURES</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                必要な機能を、すべて統合
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FEATURES</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                    必要な機能を、すべて統合
+                  </h2>
+                </div>
+              </div>
               <p className="text-lg text-[#6b7280] dark:text-[#9ca3af]">
                 図面管理から見積作成、進捗・原価管理まで一気通貫で対応
               </p>
@@ -294,10 +304,14 @@ export default function ZumenConnectLP() {
         <section id="outcomes" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">OUTCOMES</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                導入企業が実感する効果
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>OUTCOMES</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                    導入企業が実感する効果
+                  </h2>
+                </div>
+              </div>
               <p className="text-lg text-[#6b7280] dark:text-[#9ca3af]">
                 時間・コスト・精度、すべてが改善します
               </p>
@@ -361,10 +375,14 @@ export default function ZumenConnectLP() {
         <section id="pricing" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px]">PRICING</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                シンプルな料金体系
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>PRICING</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                    シンプルな料金体系
+                  </h2>
+                </div>
+              </div>
               <p className="text-lg text-[#6b7280] dark:text-[#9ca3af]">
                 必要な機能をすべて含んだワンプライス
               </p>
@@ -430,10 +448,14 @@ export default function ZumenConnectLP() {
 
           <div className="relative z-10 max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-white/10">CTA</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative">
-                まずは、無料デモで&quot;探す時間&quot;が消える体験を。
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>CTA</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative">
+                    まずは、無料デモで&quot;探す時間&quot;が消える体験を。
+                  </h2>
+                </div>
+              </div>
               <p className="text-lg text-white/70 relative">
                 実際の画面を見ながら、御社の課題解決をご提案します
               </p>
