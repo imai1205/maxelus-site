@@ -7,12 +7,14 @@ interface BubbleBadgeProps {
   children: ReactNode;
   className?: string;
   variant?: "default" | "large" | "small";
+  style?: React.CSSProperties;
 }
 
 export function BubbleBadge({
   children,
   className = "",
   variant = "default",
+  style,
 }: BubbleBadgeProps) {
   const shouldReduceMotion = useReducedMotion();
 
@@ -54,7 +56,7 @@ export function BubbleBadge({
   };
 
   return (
-    <motion.span className={baseClasses} {...motionProps}>
+    <motion.span className={baseClasses} style={style} {...motionProps}>
       {children}
     </motion.span>
   );
