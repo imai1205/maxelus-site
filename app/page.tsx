@@ -22,7 +22,7 @@ import { GlassCard, BubbleBadge, MotionPress, Section } from "../components/ui";
 
 // Dynamic imports for heavy components - improves initial page load
 // const InteractiveDemo = dynamic(() => import("./components/InteractiveDemo"), {
-//   loading: () => <div className="h-[600px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/50">読み込み中...</div></div>,
+//   loading: () => <div className="h-[600px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/25">読み込み中...</div></div>,
 //   ssr: false // クライアントサイドのみでレンダリング（初期表示を高速化）
 // });
 
@@ -33,7 +33,7 @@ const SalonReservationAppMockup = dynamic(() => import("./components/SalonReserv
 });
 
 const StorySlider = dynamic(() => import("./components/StorySlider"), {
-  loading: () => <div className="h-[500px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/50">読み込み中...</div></div>,
+  loading: () => <div className="h-[500px] flex items-center justify-center bg-[#0b1220]"><div className="animate-pulse text-white/25">読み込み中...</div></div>,
   ssr: false // クライアントサイドのみでレンダリング（初期表示を高速化）
 });
 
@@ -177,7 +177,7 @@ function ChallengeSection() {
         <AnimatedSection animation="fade-up" className="relative text-center mb-10 md:mb-16">
           <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest mb-2">PROBLEM</p>
           <div className="relative inline-block">
-            <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>CHALLENGE</span>
+            <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>CHALLENGE</span>
             <h2 
               data-cms-key="site.challenge_title"
               className="relative text-[26px] md:text-[36px] lg:text-[42px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
@@ -266,7 +266,7 @@ function SolutionSection() {
           <div className="relative space-y-4 md:space-y-6">
             <p className="text-sm md:text-base text-[#fdc700] font-medium tracking-widest">OUR APPROACH</p>
             <div className="relative inline-block">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>APPROACH</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>APPROACH</span>
               <h2 className="text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] leading-[36px] sm:leading-[44px] md:leading-[54px] lg:leading-[60px] tracking-tight px-2 relative">
                 MAXELUSは
                 <br />
@@ -360,7 +360,7 @@ function ServicesSection() {
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
           <div className="relative inline-block">
-            <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>SERVICES</span>
+            <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>SERVICES</span>
             <h2 className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight">
               対応できる内容
             </h2>
@@ -418,7 +418,7 @@ function ServiceTypesSection() {
           <AnimatedSection animation="fade-up" className="relative">
             <div className="relative flex justify-center">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>SHOWCASE</span>
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>SHOWCASE</span>
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-3 md:mb-4 px-2 relative">
                   ホームページ・Webアプリ・iOSアプリ、全部できます
                 </h2>
@@ -566,7 +566,7 @@ function WorksSection() {
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
           <div className="relative inline-block">
-            <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>CASES</span>
+            <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>CASES</span>
             <div className="relative space-y-2 md:space-y-4">
               <h2 
                 data-cms-key="site.works_title"
@@ -637,7 +637,7 @@ function WorksSection() {
                         <img src={work.image} alt={work.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <span className="text-white text-sm">LPを見る →</span>
+                          <span className="text-white text-sm">詳しく見る →</span>
                         </div>
                       </div>
                       <div className="p-4 md:p-6">
@@ -661,9 +661,10 @@ function WorksSection() {
                         </div>
                       )}
                       <div className="flex items-center text-[#111] text-xs md:text-sm group-hover:translate-x-2 transition-transform">
-                        <BubbleBadge variant="small">LPを見る</BubbleBadge>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={imgArrowRight} alt="" className="w-3 md:w-4 h-3 md:h-4 ml-1" />
+                        <BubbleBadge variant="small">詳しく見る</BubbleBadge>
+                        <svg className="w-3 md:w-4 h-3 md:h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
                       </div>
                       </div>
                     </GlassCard>
@@ -763,7 +764,7 @@ function FAQSection() {
         {/* Section heading */}
         <AnimatedSection animation="fade-up" className="relative text-center mb-8 md:mb-16">
           <div className="relative inline-block">
-            <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>FAQ</span>
+            <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FAQ</span>
             <h2 
               data-cms-key="site.faq_title"
               className="relative text-[24px] md:text-[32px] font-bold text-[#1a1a1a] dark:text-[#f9fafb] tracking-tight"
@@ -970,7 +971,7 @@ export default function Home() {
             <div className="max-w-[1200px] mx-auto relative">
               <div className="text-center mb-8 md:mb-12">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>DEMO</span>
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>DEMO</span>
                   <h2 className="text-2xl md:text-4xl font-bold text-[#0a0a0a] dark:text-[#f9fafb] mb-4 relative">
                     触れるデモで合意
                   </h2>

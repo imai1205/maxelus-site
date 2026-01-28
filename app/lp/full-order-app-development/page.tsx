@@ -245,14 +245,18 @@ export default function FullOrderAppDevelopmentLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">APPROACH</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                MAXELUSは
-                <br />
-                <span className="text-[#fff100]">オーダーメイド × 伴走</span>
-                <br />
-                で成果から逆算します
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[60px] sm:text-[72px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>APPROACH</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                    MAXELUSは
+                    <br />
+                    <span className="text-[#fff100]">オーダーメイド × 伴走</span>
+                    <br />
+                    で成果から逆算します
+                  </h2>
+                </div>
+              </div>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
@@ -302,8 +306,12 @@ export default function FullOrderAppDevelopmentLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">PROBLEMS</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">こんなお悩みありませんか？</h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[60px] sm:text-[72px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>PROBLEMS</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">こんなお悩みありませんか？</h2>
+                </div>
+              </div>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
@@ -347,8 +355,12 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="merits" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">MERIT</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">MAXELUSで開発する5つのメリット</h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[60px] sm:text-[72px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>MERIT</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">MAXELUSで開発する5つのメリット</h2>
+                </div>
+              </div>
             </AnimatedSection>
             <div className="space-y-6">
               {[
@@ -398,8 +410,12 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="app-screens" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">APPS</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">アプリ画面イメージ</h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[60px] sm:text-[72px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>APPS</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">アプリ画面イメージ</h2>
+                </div>
+              </div>
               <p className="text-[#6b7280] dark:text-[#9ca3af]">横にスクロールして様々なアプリ画面をご覧ください</p>
             </AnimatedSection>
             
@@ -413,8 +429,12 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="demo" className="py-8 md:py-12 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-8 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">DEMO</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">デモ画面</h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[60px] sm:text-[72px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>DEMO</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">デモ画面</h2>
+                </div>
+              </div>
               <p className="text-[#6b7280] dark:text-[#9ca3af]">様々な業界のクライアント様にご利用いただいています</p>
             </AnimatedSection>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
@@ -519,95 +539,16 @@ export default function FullOrderAppDevelopmentLP() {
           </div>
         </section>
 
-        {/* Cases Section */}
-        <section id="cases" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
-          <div className="max-w-7xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CASES</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">導入事例</h2>
-              <p className="text-[#6b7280] dark:text-[#9ca3af]">実際の課題解決事例をご紹介します</p>
-            </AnimatedSection>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedCases.map((caseItem, i) => (
-                <AnimatedSection key={caseItem.id} animation="fade-up" delay={i * 100}>
-                  <div className="bg-white dark:bg-[#1e293b] border-2 border-[#e5e7eb] dark:border-[#374151] rounded-xl overflow-hidden hover:border-[#fff100] transition-all hover:shadow-xl group">
-                    <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-[#f3f4f6] to-[#e5e7eb] dark:from-[#0b1220] dark:to-[#1e293b]">
-                      <Image
-                        src={caseItem.image}
-                        alt={caseItem.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                      <div className="absolute top-4 right-4 bg-[#fff100] text-[#1a1a1a] px-3 py-1.5 rounded-full text-xs font-bold shadow-md">
-                        {caseItem.tags[0] || '事例'}
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 leading-tight min-h-[3rem]">
-                        {caseItem.title}
-                      </h3>
-                      <div className="space-y-2.5 text-sm text-[#6b7280] dark:text-[#9ca3af] mb-6">
-                        <div className="flex items-start gap-2">
-                          <span className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] flex-shrink-0">課題：</span>
-                          <span className="flex-1">{caseItem.problem}</span>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <span className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] flex-shrink-0">施策：</span>
-                          <span className="flex-1">{caseItem.solution}</span>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <span className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] flex-shrink-0">結果：</span>
-                          <span className="flex-1 text-[#fff100] font-semibold">{caseItem.impact}</span>
-                        </div>
-                      </div>
-                      {caseItem.lpHref ? (
-                        <Link
-                          href={caseItem.lpHref}
-                          className="inline-flex items-center gap-2 text-[#fff100] font-medium hover:text-[#fdc700] transition-colors group/link"
-                        >
-                          詳しく見る
-                          <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </Link>
-                      ) : (
-                        <Link
-                          href={`/cases#${caseItem.id}`}
-                          className="inline-flex items-center gap-2 text-[#fff100] font-medium hover:text-[#fdc700] transition-colors group/link"
-                        >
-                          詳しく見る
-                          <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <Link
-                href="/cases"
-                className="inline-flex items-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 py-3 rounded-full transition-all hover:scale-105 shadow-md"
-              >
-                すべての事例を見る
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </section>
-
         {/* Flow Section */}
         <section id="flow" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">FLOW</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">制作フロー</h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[60px] sm:text-[72px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FLOW</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">制作フロー</h2>
+                </div>
+              </div>
               <p className="text-[#6b7280] dark:text-[#9ca3af]">企画から運用改善まで、一貫してサポートします</p>
             </AnimatedSection>
             <div className="max-w-4xl mx-auto">
@@ -684,12 +625,16 @@ export default function FullOrderAppDevelopmentLP() {
         <section className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[#ff6900] to-[#f54900]">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-white/10">CTA</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative">
-                今、動かないことが
-                <br />
-                最大の機会損失です
-              </h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[60px] sm:text-[72px] md:text-[80px] lg:text-[96px] text-white/25 absolute" style={{ opacity: 0.25 }}>CTA</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative">
+                    今、動かないことが
+                    <br />
+                    最大の機会損失です
+                  </h2>
+                </div>
+              </div>
               <p className="text-white/90 mb-8 text-lg">
                 デジタル市場は日々変化し、競合は着実に前進しています。
                 <br />
@@ -741,8 +686,12 @@ export default function FullOrderAppDevelopmentLP() {
         <section id="contact" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#d1d5dc]/10">CONTACT</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">お問い合わせ</h2>
+              <div className="relative flex justify-center">
+                <div className="relative inline-block">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[60px] sm:text-[72px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>CONTACT</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 relative">お問い合わせ</h2>
+                </div>
+              </div>
               <p className="text-[#6b7280] dark:text-[#9ca3af]">まずはお気軽にご相談ください。24時間以内に返信いたします</p>
             </AnimatedSection>
             {isSubmitted ? (

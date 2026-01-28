@@ -30,7 +30,7 @@ export const services: Service[] = [
     catch: "図面が『資産』になる。検索できる図面管理。",
     summary: "アップロードした図面をOCRで読み取り、AIで項目整理。図番・会社・材質などで探せる状態にして、現場のムダを削減します。",
     tags: ["図面管理", "OCR", "AI", "製造業", "検索"],
-    primaryCtaLabel: "図面コネクトLPを見る",
+    primaryCtaLabel: "図面コネクトの詳細を見る",
     externalUrl: "https://zumen-connect.example.com", // 外部LP
     order: 1,
     icon: "document"

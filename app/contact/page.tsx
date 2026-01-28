@@ -271,17 +271,19 @@ export default function ContactPage() {
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">CONTACT</span>
-              <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
-                CONTACT
-              </p>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
-                無料相談・お問い合わせ
-              </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
-                あなたの課題をお聞かせください。<br className="hidden md:block" />
-                最適なソリューションをご提案します。
-              </p>
+              <div className="relative inline-block">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>CONTACT</span>
+                <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
+                  CONTACT
+                </p>
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
+                  無料相談・お問い合わせ
+                </h1>
+                <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
+                  あなたの課題をお聞かせください。<br className="hidden md:block" />
+                  最適なソリューションをご提案します。
+                </p>
+              </div>
             </AnimatedSection>
           </div>
         </section>
@@ -293,7 +295,10 @@ export default function ContactPage() {
               {/* Benefits */}
               <div className="lg:col-span-1 order-2 lg:order-1">
                 <div className="sticky top-24 space-y-6">
-                  <h2 className="text-xl font-bold text-[#1a1a1a] mb-6">無料相談のメリット</h2>
+                  <div className="relative inline-block mb-6">
+                    <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[80px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>BENEFITS</span>
+                    <h2 className="text-xl font-bold text-[#1a1a1a] mb-6 relative">無料相談のメリット</h2>
+                  </div>
                   
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">

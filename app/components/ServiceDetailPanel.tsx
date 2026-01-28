@@ -202,7 +202,7 @@ export default function ServiceDetailPanel({
                 href={service.lpHref}
                 className="flex-1 inline-flex items-center justify-center gap-2 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all hover:scale-105"
               >
-                LPを見る
+                詳しく見る
                 <svg
                   className="w-5 h-5"
                   fill="none"

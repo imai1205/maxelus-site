@@ -16,7 +16,7 @@ export interface HomeCase {
 export const homeCasesData: HomeCase[] = [
   {
     id: 'zumen-connect',
-    image: 'https://www.figma.com/api/mcp/asset/a4f37e6a-2130-4808-9dc3-92b33fb7ce6f',
+    image: '/cases/zumen-connect-home.png',
     category: 'プロダクト',
     title: '図面コネクト',
     description: 'OCRで自動整理、AI類似検索で過去実績に即アクセス。図面を起点に一気通貫で管理。',
@@ -26,15 +26,15 @@ export const homeCasesData: HomeCase[] = [
     lpHref: '/lp/zumen-connect',
   },
   {
-    id: 'homepage-lp',
-    image: '/cases/homepage.png',
+    id: 'eyelash-salon-lp',
+    image: 'https://www.figma.com/api/mcp/asset/5a2485c4-a1e9-48b0-983a-1111d3da2430',
     category: 'ホームページ',
     title: 'ホームページの事例',
-    description: '体験型Webサイトの制作。触れる・動く・伝わる印象に残るWebサイトを実現。',
-    outcome: 'ユーザーエンゲージメント向上、コンバージョン率改善',
-    serviceTags: ['ホームページ', '体験型', '3D'],
+    description: 'まつげサロン向けの予約管理アプリ・システム開発。顧客管理、予約管理、スタッフ管理、売上管理まで一元化。',
+    outcome: '予約管理の効率化、顧客満足度向上',
+    serviceTags: ['ホームページ', '予約管理', 'サロン'],
     hasLP: true,
-    lpHref: '/lp/interactive-web-3d',
+    lpHref: '/lp/eyelash-salon',
   },
   {
     id: 'full-order-app',

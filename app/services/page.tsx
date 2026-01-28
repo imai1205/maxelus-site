@@ -175,7 +175,7 @@ function ServiceCard({
   const cardClassName = `service-card rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 h-full group hover:shadow-2xl transition-shadow duration-300 relative overflow-hidden border-2 ${
     isSpecial
       ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 dark:from-[#1e293b]/90 dark:to-[#0b1220]/90 dark:border-[#fff100]/40 shadow-[#fff100]/20"
-      : "border-white/40 dark:border-[#374151]/60 bg-white/75 dark:bg-[#1e293b]/90"
+      : "border-white/40 dark:border-[#374151]/60 bg-white/90 dark:bg-[#1e293b]/95 bg-gradient-to-br from-white/90 via-white/85 to-[#0b1220]/5 dark:from-[#1e293b]/95 dark:via-[#1e293b]/90 dark:to-[#0b1220]/10"
   } ${service.ctaType === "lp" && service.lpHref ? "hover:border-[#fff100]/80 cursor-pointer" : ""}`;
 
   const cardContent = (
@@ -273,7 +273,7 @@ function ServiceCard({
                     e.stopPropagation();
                   }}
                 >
-                  {service.id === 'full-order-app-development' ? 'デモ画面を見る' : 'LPを見る'}
+                  {service.id === 'full-order-app-development' ? 'デモ画面を見る' : '詳しく見る'}
                   <svg
                     className="w-3 h-3"
                     fill="none"
@@ -462,7 +462,7 @@ export default function ServicesPage() {
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>SERVICES</span>
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>SERVICES</span>
                 <div className="relative">
                   <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
                     SERVICES
@@ -604,7 +604,7 @@ export default function ServicesPage() {
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-[#0b1220]/18 dark:text-white/18 absolute" style={{ opacity: 0.18 }}>FAQ</span>
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FAQ</span>
                 <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
                   よくある質問
                 </h2>
@@ -662,7 +662,7 @@ export default function ServicesPage() {
           <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up" className="relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>CONTACT</span>
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>CONTACT</span>
                 <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 relative">
                   まずは無料相談から
                 </h2>

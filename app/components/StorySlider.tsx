@@ -251,7 +251,7 @@ export default function StorySlider() {
         <div className="max-w-6xl mx-auto">
           <div className="relative flex justify-center">
             <div className="relative inline-block">
-              <span className="section-bg-text left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[150px] text-white/18 absolute" style={{ opacity: 0.18 }}>PROCESS</span>
+              <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>PROCESS</span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-2 relative">
                 成果から逆算する設計プロセス
               </h2>
