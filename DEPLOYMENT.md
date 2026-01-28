@@ -64,6 +64,26 @@ npm run dev
 
 ### 変更をGitHubにプッシュ
 
+#### 方法1: スクリプトを使用（推奨）
+
+**Windows (PowerShell):**
+```powershell
+.\scripts\deploy.ps1 "コミットメッセージ"
+```
+
+**Mac/Linux:**
+```bash
+chmod +x scripts/deploy.sh
+./scripts/deploy.sh "コミットメッセージ"
+```
+
+**npmスクリプト:**
+```bash
+npm run deploy
+```
+
+#### 方法2: 手動で実行
+
 ```bash
 git add .
 git commit -m "Update: 変更内容の説明"

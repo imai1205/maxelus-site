@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "migrate": "node scripts/run-migration-api.js"
+    "migrate": "node scripts/run-migration-api.js",
+    "deploy": "npm run build && git add . && git commit -m \"Update: 変更内容の説明\" && git push origin main"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

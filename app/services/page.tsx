@@ -24,20 +24,44 @@ const categoryBackgrounds: Record<ServiceCategory, string> = {
 function BackgroundImageSection({ activeCategory }: { activeCategory: ServiceCategory | null }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = useState(0);
+  const rafIdRef = useRef<number | null>(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const scrollProgress = Math.max(0, Math.min(1, (windowHeight - rect.top) / windowHeight));
-        setScrollY(scrollProgress);
+      if (!ticking) {
+        ticking = true;
+        rafIdRef.current = requestAnimationFrame(() => {
+          if (sectionRef.current) {
+            const rect = sectionRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const scrollProgress = Math.max(0, Math.min(1, (windowHeight - rect.top) / windowHeight));
+            
+            // 変化が小さい場合は更新をスキップ（パフォーマンス向上）
+            if (Math.abs(scrollProgress - lastScrollY.current) > 0.02) {
+              setScrollY(scrollProgress);
+              lastScrollY.current = scrollProgress;
+            }
+          }
+          ticking = false;
+        });
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // 初期値設定
-    return () => window.removeEventListener('scroll', handleScroll);
+    // 初期値設定
+    handleScroll();
+    
+    // スクロールイベントをthrottle（16ms = 60fps）
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
   }, []);
 
   if (!activeCategory) return null;
@@ -66,18 +90,19 @@ function BackgroundImageSection({ activeCategory }: { activeCategory: ServiceCat
   return (
     <div 
       ref={sectionRef}
-      className="absolute inset-0 transition-opacity duration-700 ease-out rounded-3xl overflow-hidden pointer-events-none"
+      className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none will-change-transform"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: style.backgroundSize,
         backgroundPosition: style.backgroundPosition,
         backgroundRepeat: 'no-repeat',
-        opacity: Math.max(0.7, opacity * 0.95), // 背景画像をもっと見えるように
-        transform: `translateY(${scrollY * 40}px)`, // パララックス効果（scaleを削除）
+        opacity: Math.max(0.7, opacity * 0.95),
+        // transform3dを使用してGPU加速を確実に
+        transform: `translate3d(0, ${scrollY * 40}px, 0)`,
         zIndex: 0,
       }}
     >
-      {/* グラデーションオーバーレイ - ほぼぼかさず */}
+      {/* グラデーションオーバーレイ */}
       <div 
         className="absolute inset-0"
         style={{
@@ -85,12 +110,12 @@ function BackgroundImageSection({ activeCategory }: { activeCategory: ServiceCat
         }}
       />
       
-      {/* ガラスモーフィズムオーバーレイ - ほぼぼかさず */}
+      {/* ガラスモーフィズムオーバーレイ - backdrop-blurを削除（パフォーマンス向上） */}
       <div 
         className="absolute inset-0"
         style={{
           background: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(2px)', // ほぼぼかさず
+          // backdropFilter: 'blur(2px)', // パフォーマンスのために削除
         }}
       />
     </div>
@@ -109,14 +134,15 @@ function CategoryNav({
   const categories: ServiceCategory[] = ["app-dx", "website", "product"];
 
   return (
-    <div className="sticky top-14 md:top-16 z-40 bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg border-b border-[#e5e7eb] dark:border-[#374151] shadow-sm">
+    <div className="sticky top-14 md:top-16 z-40 bg-white/95 dark:bg-[#0b1220]/95 border-b border-[#e5e7eb] dark:border-[#374151] shadow-sm">
+      {/* backdrop-blur-lgを削除（パフォーマンス向上） */}
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="flex items-center gap-2 md:gap-4 overflow-x-auto py-4 scrollbar-hide">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => onCategoryClick(category)}
-              className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium whitespace-nowrap transition-all ${
+              className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium whitespace-nowrap transition-colors duration-200 ${
                 activeCategory === category
                   ? "bg-[#fff100] text-[#1a1a1a] shadow-md"
                   : "bg-[#f3f4f6] dark:bg-[#1e293b] text-[#6b7280] dark:text-[#9ca3af] hover:bg-[#e5e7eb] dark:hover:bg-[#374151]"
@@ -145,7 +171,8 @@ function ServiceCard({
 }) {
   const isSpecial = service.special;
 
-  const cardClassName = `service-card rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden border-2 backdrop-blur-xl ${
+  // backdrop-blur-xlを削除（パフォーマンス向上）、transition-allを具体的なプロパティに変更
+  const cardClassName = `service-card rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 h-full group hover:shadow-2xl transition-shadow duration-300 relative overflow-hidden border-2 ${
     isSpecial
       ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 dark:from-[#1e293b]/90 dark:to-[#0b1220]/90 dark:border-[#fff100]/40 shadow-[#fff100]/20"
       : "border-white/40 dark:border-[#374151]/60 bg-white/75 dark:bg-[#1e293b]/90"
@@ -217,7 +244,7 @@ function ServiceCard({
             <div className="flex flex-col gap-2">
               <Link
                 href="/contact"
-                className="w-full inline-flex items-center justify-center gap-1.5 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full transition-all hover:scale-105 group/btn"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full transition-colors duration-200 hover:scale-105 group/btn"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -240,7 +267,7 @@ function ServiceCard({
               {service.ctaType === "lp" && service.lpHref ? (
                 <Link
                   href={service.id === 'full-order-app-development' ? `${service.lpHref}#demo` : service.lpHref}
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all hover:scale-105"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-colors duration-200 hover:scale-105"
                   prefetch={true}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -267,7 +294,7 @@ function ServiceCard({
                     e.stopPropagation();
                     onToggle();
                   }}
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all hover:scale-105"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-colors duration-200 hover:scale-105"
                 >
                   {isOpen ? "閉じる" : "詳細を開く"}
                   <svg
@@ -337,15 +364,15 @@ function CategorySection({
 }) {
   return (
     <div 
-      className={`relative transition-all duration-500 overflow-hidden rounded-2xl ${
+      className={`relative transition-transform duration-300 overflow-hidden rounded-2xl will-change-transform ${
         isActive 
           ? 'scale-105 z-20' 
           : 'scale-95 opacity-70 z-10 hover:opacity-90 hover:scale-100'
       }`}
     >
-      {/* ガラスモーフィズムオーバーレイ */}
+      {/* ガラスモーフィズムオーバーレイ - backdrop-blurを削除（パフォーマンス向上） */}
       <div 
-        className="absolute inset-0 -z-10 backdrop-blur-sm dark:backdrop-blur-md bg-white/50 dark:bg-[#1e293b]/80 rounded-2xl border border-white/30 dark:border-[#374151]/50"
+        className="absolute inset-0 -z-10 bg-white/50 dark:bg-[#1e293b]/80 rounded-2xl border border-white/30 dark:border-[#374151]/50"
       />
 
       <div className="relative z-0 p-4 md:p-6">
@@ -353,13 +380,13 @@ function CategorySection({
       <AnimatedSection animation="fade-up" className="mb-6">
         <button
           onClick={onCategoryClick}
-          className={`text-left w-full transition-all duration-300 ${
+          className={`text-left w-full transition-colors duration-200 ${
             isActive 
               ? 'text-[#1a1a1a] dark:text-[#f9fafb]' 
               : 'text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]'
           }`}
         >
-          <h2 className={`text-xl md:text-2xl font-bold mb-2 transition-all ${
+          <h2 className={`text-xl md:text-2xl font-bold mb-2 transition-colors duration-200 ${
             isActive ? 'text-[#1a1a1a] dark:text-[#f9fafb]' : 'text-[#6b7280] dark:text-[#9ca3af]'
           }`}>
             {categoryNames[category]}

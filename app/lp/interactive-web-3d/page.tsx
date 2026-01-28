@@ -5,6 +5,7 @@ import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
 import dynamic from "next/dynamic";
+import PuzzleDragDrop from "@/app/components/PuzzleDragDrop";
 
 // iPhoneデモを動的インポート（軽量化）
 const IPhoneDemo = dynamic(() => import("@/app/components/InteractiveDemo").then(mod => ({ default: mod.IPhoneDemo })), {
@@ -21,6 +22,17 @@ const IPhone3DViewer = dynamic(() => import("@/app/components/IPhone3DViewer"), 
 // 体験デモタブコンポーネント
 function DemoTabs() {
   const [activeTab, setActiveTab] = useState<"3d" | "interactive" | "iphone">("3d");
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  // 3D表示を更新する関数（タブ切り替えと同じ効果）
+  const handle3DRefresh = () => {
+    // 一時的にタブを切り替えてから戻すことで、コンポーネントを再マウント
+    setActiveTab("interactive");
+    setTimeout(() => {
+      setActiveTab("3d");
+      setRefreshKey(prev => prev + 1);
+    }, 50);
+  };
 
   return (
     <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-lg overflow-hidden">
@@ -49,7 +61,7 @@ function DemoTabs() {
       <div className="p-6 md:p-12 min-h-[500px] flex items-center justify-center">
         {activeTab === "3d" && (
           <div className="w-full max-w-4xl">
-            <IPhone3DViewer />
+            <IPhone3DViewer key={refreshKey} onRefresh={handle3DRefresh} />
             <p className="text-[#6b7280] dark:text-[#9ca3af] text-sm md:text-base mt-4 text-center">
               マウスでドラッグ、またはタッチでスワイプしてiPhoneを回転させることができます
             </p>
@@ -58,25 +70,7 @@ function DemoTabs() {
 
         {activeTab === "interactive" && (
           <div className="w-full max-w-4xl">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <button
-                  key={i}
-                  className="aspect-square bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-xl flex items-center justify-center text-[#1a1a1a] font-bold text-lg md:text-xl hover:scale-110 active:scale-95 transition-transform duration-200 shadow-lg hover:shadow-2xl"
-                  onClick={(e) => {
-                    e.currentTarget.style.transform = "scale(0.9)";
-                    setTimeout(() => {
-                      e.currentTarget.style.transform = "";
-                    }, 150);
-                  }}
-                >
-                  {i}
-                </button>
-              ))}
-            </div>
-            <p className="text-[#6b7280] dark:text-[#9ca3af] text-sm md:text-base mt-6 text-center">
-              クリックすると反応します（インタラクティブUIの例）
-            </p>
+            <PuzzleDragDrop />
           </div>
         )}
 
