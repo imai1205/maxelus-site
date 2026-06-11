@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Footer from "../components/Footer";
-import { AnimatedSection } from "../components/AnimationProvider";
+import PageHero from "../components/PageHero";
 
 // Contact Form Component
 function ContactForm() {
@@ -238,43 +238,18 @@ export default function ContactPage() {
     <div className="min-h-screen bg-[#fafafa] font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-                backgroundSize: "40px 40px",
-              }}
-            />
-          </div>
-
-          {/* Gradient Orbs */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" />
-          <div
-            className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse"
-            style={{ animationDelay: "1s" }}
-          />
-
-          <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
-            <AnimatedSection animation="fade-up" className="relative">
-              <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>CONTACT</span>
-                <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
-                  CONTACT
-                </p>
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
-                  無料相談・お問い合わせ
-                </h1>
-                <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
-                  あなたの課題をお聞かせください。<br className="hidden md:block" />
-                  最適なソリューションをご提案します。
-                </p>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
+        <PageHero
+          bgText="CONTACT"
+          kicker="CONTACT"
+          title="無料相談・お問い合わせ"
+          description={
+            <>
+              あなたの課題をお聞かせください。
+              <br className="hidden md:block" />
+              最適なソリューションをご提案します。
+            </>
+          }
+        />
 
         {/* Form Section */}
         <section className="py-12 md:py-20 px-4 md:px-8">

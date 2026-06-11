@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Footer from "../components/Footer";
+import PageHero from "../components/PageHero";
 import { AnimatedSection } from "../components/AnimationProvider";
 import { GlassCard, BubbleBadge } from "@/components/ui";
 
@@ -10,44 +11,16 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-                backgroundSize: "40px 40px",
-              }}
-            />
-          </div>
-
-          {/* Gradient Orbs */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" />
-          <div
-            className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse"
-            style={{ animationDelay: "1s" }}
-          />
-
-          <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
-            <AnimatedSection animation="fade-up" className="relative">
-              <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>ABOUT</span>
-                <div className="relative">
-                  <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
-                    ABOUT US
-                  </p>
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
-                    会社情報
-                  </h1>
-                </div>
-              </div>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed relative">
-                AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです
-              </p>
-            </AnimatedSection>
-          </div>
-        </section>
+        <PageHero
+          bgText="ABOUT"
+          kicker="ABOUT US"
+          title="会社情報"
+          description={
+            <>
+              AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです
+            </>
+          }
+        />
 
         {/* 会社概要 */}
         <section className="py-16 md:py-24 px-4 md:px-8">
@@ -70,7 +43,7 @@ export default function AboutPage() {
                     会社名
                   </dt>
                   <dd className="text-base md:text-lg text-[#1a1a1a] font-medium">
-                    株式会社MAXELUS
+                    株式会社MAXELUS（Maxelus Inc.）
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
@@ -290,6 +263,94 @@ export default function AboutPage() {
                       ))}
                     </ul>
                   </GlassCard>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 私たちの開発スタイル (旧 /strengths から吸収・静的ハードコード) */}
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
+          <div className="max-w-4xl mx-auto">
+            <AnimatedSection animation="fade-up">
+              <p className="text-sm tracking-widest text-[#6b7280] mb-4">
+                Style
+              </p>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-3">
+                私たちの開発スタイル
+              </h2>
+              <p className="text-sm md:text-base text-[#6b7280] mb-10 md:mb-14 max-w-2xl">
+                &quot;作るだけ&quot;では終わらない。現場で使える・更新できる・拡張できるシステムを、最短で形にします。
+              </p>
+            </AnimatedSection>
+
+            {/* 実績統計 */}
+            <AnimatedSection animation="fade-up">
+              <div className="grid grid-cols-3 gap-6 md:gap-10 mb-12 md:mb-16 border-y border-[#e5e7eb] py-8">
+                {[
+                  { label: "満足度", value: "98", suffix: "%" },
+                  { label: "平均開発期間", value: "1", suffix: "ヶ月" },
+                  { label: "累計顧客数", value: "50", suffix: "以上" },
+                ].map((stat) => (
+                  <div key={stat.label}>
+                    <p className="text-xs md:text-sm text-[#6b7280] mb-1">
+                      {stat.label}
+                    </p>
+                    <p className="text-2xl md:text-4xl font-bold text-[#1a1a1a]">
+                      {stat.value}
+                      <span className="text-base md:text-xl">{stat.suffix}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            <div className="space-y-8">
+              {[
+                {
+                  title: 'WordPressでは出せない"体験"を作れる',
+                  description:
+                    "iPhoneデモがサイト内で動く。3D表現・アニメーション・インタラクション。「かっこいい」だけでなく、理解しやすい導線に落とし込みます。",
+                },
+                {
+                  title: '打ち合わせ後すぐに"デモ"が出る開発スタイル',
+                  description:
+                    "先にデザインで全体像を固める。次回打ち合わせで触れる画面がある。「失敗ゼロへ」＝ 仕様のズレを最初に潰します。",
+                },
+                {
+                  title: '業務DXは"運用まで"作る',
+                  description:
+                    "Excel置き換えだけで終わらない。検索・権限・履歴・進捗・データ蓄積まで設計。製造業の現場フロー前提で開発します。",
+                },
+                {
+                  title: "あとから自分で更新できる（microCMS対応）",
+                  description:
+                    "新着・実績・サービス内容を管理画面で編集。エンジニアがいなくても更新できる状態にします。「作って終わり」じゃなく、運用コストを下げます。",
+                },
+                {
+                  title: "拡張できる設計（最小→スケール）",
+                  description:
+                    "最初は小さく作る（MVP）。データが貯まるほどAI/OCR/検索が強くなる設計。Webアプリ・業務システムへ段階的に広げられます。",
+                },
+              ].map((strength, index) => (
+                <AnimatedSection
+                  key={strength.title}
+                  animation="fade-up"
+                  delay={Math.min(index * 50, 300)}
+                >
+                  <div className="border-l-2 border-l-[#e5e7eb] pl-6">
+                    <div className="flex items-baseline gap-4 mb-2">
+                      <span className="text-sm font-bold text-[#fdc700] tabular-nums">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a]">
+                        {strength.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm md:text-base text-[#6b7280] leading-relaxed">
+                      {strength.description}
+                    </p>
+                  </div>
                 </AnimatedSection>
               ))}
             </div>
