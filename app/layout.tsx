@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import localFont from "next/font/local";
 import { Suspense } from "react";
 import "./globals.css";
 import { PageLoader, PageTransition } from "./components/PageTransition";
@@ -14,6 +15,14 @@ const notoSansJP = Noto_Sans_JP({
   weight: ["400", "500", "700"],
   display: "swap",
   preload: true,
+});
+
+// maxelus-web から移植 (kicker 等の英字装飾用)
+const serverMono = localFont({
+  src: "../public/fonts/ServerMono/ServerMono-Regular.woff2",
+  variable: "--next-font-mono",
+  display: "swap",
+  preload: false,
 });
 
 const siteName = "マクセラス";
@@ -69,7 +78,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.figma.com" />
         <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
-      <body className={`${notoSansJP.variable} font-sans antialiased`}>
+      <body
+        className={`${notoSansJP.variable} ${serverMono.variable} font-sans antialiased`}
+      >
         {/* CMS機能をコメントアウト（将来の復旧用） */}
         {/* <Suspense fallback={null}>
           <PreviewClickHandler />

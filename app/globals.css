@@ -19,6 +19,26 @@
   --accent-gold: #fdc700;
   /* ハニーゴールド (プレミアム路線)。下層ヒーローのキッカーとトップのアクセント */
   --accent-honey: #e6bd71;
+  /* maxelus-web から移植したエフェクト (module.css) が参照する変数 */
+  --color-secondary: #fafafa;
+  --safe: clamp(16px, 4vw, 48px);
+}
+
+/* Lenis (トップ専用スムーズスクロール) 推奨スタイル。
+   lenis マウント中は native の scroll-behavior: smooth を無効化して競合を防ぐ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* トップ専用: transform を持たないトランジションラッパー
+   (fixed canvas の containing block 化を防ぐ。will-change は opacity のみ) */
+.page-transition-wrapper-home {
+  min-height: 100vh;
+  will-change: opacity;
 }
 
 @theme inline {
