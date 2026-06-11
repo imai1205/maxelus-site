@@ -1,6 +1,25 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/services/web-app-development",
+        destination: "/services/full-order-app-development",
+        permanent: true,
+      },
+      {
+        source: "/services/iphone-app",
+        destination: "/services/full-order-app-development",
+        permanent: true,
+      },
+      {
+        source: "/services/website-development",
+        destination: "/services/website",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // サービス詳細ページ（動的）
   const servicePages: MetadataRoute.Sitemap = servicesData.map((service) => ({
-    url: `${baseUrl}/services/${service.id}`,
+    url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
     priority: 0.8,
