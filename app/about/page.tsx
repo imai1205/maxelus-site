@@ -70,7 +70,7 @@ export default function AboutPage() {
                     会社名
                   </dt>
                   <dd className="text-base md:text-lg text-[#1a1a1a] font-medium">
-                    株式会社MAXELUS
+                    株式会社MAXELUS（Maxelus Inc.）
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
