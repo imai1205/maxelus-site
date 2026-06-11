@@ -4,6 +4,17 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // exact match のみ。/cases/:path* にすると public/cases/ の画像が 404 になる
+        source: "/cases",
+        destination: "/works",
+        permanent: true,
+      },
+      {
+        source: "/strengths",
+        destination: "/about",
+        permanent: true,
+      },
+      {
         source: "/services/web-app-development",
         destination: "/services/full-order-app-development",
         permanent: true,

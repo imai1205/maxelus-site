@@ -31,4 +31,20 @@ describe("旧データ参照の残存検知", () => {
     );
     expect(offenders).toEqual([]);
   });
+
+  it("/strengths・/cases へのルートリンクが残存しない (lp/admin は除外)", () => {
+    const files = [
+      ...collectSourceFiles(join(ROOT, "app")),
+      ...collectSourceFiles(join(ROOT, "components")),
+    ].filter(
+      (file) => !file.includes("/app/lp/") && !file.includes("/app/admin/")
+    );
+    // href="/strengths" / href="/cases" のルートリンクのみ対象。
+    // /cases/... で始まる画像アセットパス (例: /cases/logo.png) は対象外
+    const pattern = /href=["'](?:\/strengths|\/cases)["']/;
+    const offenders = files.filter((file) =>
+      pattern.test(readFileSync(file, "utf8"))
+    );
+    expect(offenders).toEqual([]);
+  });
 });
