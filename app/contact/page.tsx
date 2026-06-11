@@ -54,26 +54,19 @@ function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl p-8 md:p-12 text-center animate-fade-in">
-        <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+      <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center animate-fade-in">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
           お問い合わせありがとうございます
         </h2>
-        <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8">
+        <div className="mx-auto mb-6 h-px w-12 bg-[#fff100]" />
+        <p className="text-[#6b7280] mb-8">
           担当者より2営業日以内にご連絡いたします。<br />
           しばらくお待ちください。
         </p>
-        <Link 
+        <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[#fdc700] hover:text-[#e5b400] font-medium transition-colors"
+          className="inline-flex items-center text-[#fdc700] hover:text-[#e5b400] font-medium transition-colors"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
           トップページに戻る
         </Link>
       </div>
@@ -81,11 +74,11 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl p-6 md:p-10">
+    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-6 md:p-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
             お名前 <span className="text-[#dc2626]">*</span>
           </label>
           <input
@@ -101,7 +94,7 @@ function ContactForm() {
 
         {/* Company */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
             会社名
           </label>
           <input
@@ -116,7 +109,7 @@ function ContactForm() {
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
             メールアドレス <span className="text-[#dc2626]">*</span>
           </label>
           <input
@@ -133,7 +126,7 @@ function ContactForm() {
 
         {/* Inquiry Type */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
             ご相談内容 <span className="text-[#dc2626]">*</span>
           </label>
           <select
@@ -141,7 +134,7 @@ function ContactForm() {
             value={formData.inquiryType}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white text-[#1a1a1a]"
           >
             <option value="">選択してください</option>
             <option value="hp">ホームページ制作</option>
@@ -155,14 +148,14 @@ function ContactForm() {
 
         {/* Budget */}
         <div>
-          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
             ご予算
           </label>
           <select
             name="budget"
             value={formData.budget}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white text-[#1a1a1a]"
           >
             <option value="">選択してください</option>
             <option value="~30">〜30万円</option>
@@ -176,14 +169,14 @@ function ContactForm() {
 
         {/* Timeline */}
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
             希望納期
           </label>
           <select
             name="timeline"
             value={formData.timeline}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white dark:bg-[#0b1220] text-[#1a1a1a] dark:text-[#f9fafb]"
+            className="w-full px-4 py-3 border border-[#e5e7eb] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fff100] focus:border-transparent transition-all bg-white text-[#1a1a1a]"
           >
             <option value="">選択してください</option>
             <option value="asap">できるだけ早く</option>
@@ -196,7 +189,7 @@ function ContactForm() {
 
         {/* Message */}
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+          <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
             ご相談内容の詳細 <span className="text-[#dc2626]">*</span>
           </label>
           <textarea
@@ -227,12 +220,7 @@ function ContactForm() {
               送信中...
             </>
           ) : (
-            <>
-              無料相談を申し込む
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </>
+            "無料相談を申し込む"
           )}
         </button>
       </div>
@@ -290,120 +278,14 @@ export default function ContactPage() {
 
         {/* Form Section */}
         <section className="py-12 md:py-20 px-4 md:px-8">
-          <div className="max-w-[900px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-              {/* Benefits */}
-              <div className="lg:col-span-1 order-2 lg:order-1">
-                <div className="sticky top-24 space-y-6">
-                  <div className="relative inline-block mb-6">
-                    <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[80px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>BENEFITS</span>
-                    <h2 className="text-xl font-bold text-[#1a1a1a] mb-6 relative">無料相談のメリット</h2>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">
-                      <span className="text-lg">💬</span>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-[#1a1a1a] mb-1">課題の整理</h3>
-                      <p className="text-sm text-[#6b7280]">漠然とした課題でもOK。一緒に整理します。</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">
-                      <span className="text-lg">🎯</span>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-[#1a1a1a] mb-1">デモ提示</h3>
-                      <p className="text-sm text-[#6b7280]">打合せ後、実際に触れるデモをお見せします。</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">
-                      <span className="text-lg">📋</span>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-[#1a1a1a] mb-1">明確な見積り</h3>
-                      <p className="text-sm text-[#6b7280]">概算費用とスケジュールを提示します。</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#fff100] rounded-xl flex items-center justify-center flex-shrink-0">
-                      <span className="text-lg">🤝</span>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-[#1a1a1a] mb-1">相談だけでもOK</h3>
-                      <p className="text-sm text-[#6b7280]">契約の強要は一切ありません。</p>
-                    </div>
-                  </div>
+          <div className="max-w-[720px] mx-auto">
+            <ContactForm />
 
-                  {/* Contact Info */}
-                  <div className="border-t border-[#e5e7eb] pt-6 mt-8">
-                    <h3 className="font-medium text-[#1a1a1a] mb-4">その他のお問い合わせ方法</h3>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 text-sm text-[#6b7280]">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        info@maxelustech.com
-                      </div>
-                      <div className="flex items-center gap-3 text-sm text-[#6b7280]">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        平日 10:00 - 18:00
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Form */}
-              <div className="lg:col-span-2 order-1 lg:order-2">
-                <ContactForm />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="bg-white py-12 md:py-20 px-4 md:px-8">
-          <div className="max-w-[800px] mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] text-center mb-8 md:mb-12">
-              よくあるご質問
-            </h2>
-            <div className="space-y-4">
-              {[
-                {
-                  q: "相談は本当に無料ですか？",
-                  a: "はい、初回相談は完全無料です。課題のヒアリングから、概算のお見積り提示まで、費用は一切かかりません。"
-                },
-                {
-                  q: "相談後、必ず契約しなければなりませんか？",
-                  a: "いいえ、そのようなことはありません。相談の結果、「今は見送る」という判断をされても全く問題ありません。"
-                },
-                {
-                  q: "どのような準備が必要ですか？",
-                  a: "特別な準備は不要です。現在お困りのことや実現したいことを、ざっくばらんにお話しいただければ大丈夫です。"
-                },
-                {
-                  q: "オンラインでの相談は可能ですか？",
-                  a: "はい、Zoom等を使ったオンライン相談が可能です。全国どこからでもご相談いただけます。"
-                }
-              ].map((faq, i) => (
-                <div key={i} className="bg-[#fafafa] rounded-xl p-5 md:p-6">
-                  <h3 className="font-medium text-[#1a1a1a] mb-2 flex items-start gap-3">
-                    <span className="w-6 h-6 bg-[#fff100] rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">
-                      Q
-                    </span>
-                    {faq.q}
-                  </h3>
-                  <p className="text-sm text-[#6b7280] pl-9">{faq.a}</p>
-                </div>
-              ))}
+            {/* Contact Info */}
+            <div className="mt-10 pt-8 border-t border-[#e5e7eb] text-center space-y-2">
+              <p className="text-sm font-medium text-[#1a1a1a]">その他のお問い合わせ方法</p>
+              <p className="text-sm text-[#6b7280]">info@maxelustech.com</p>
+              <p className="text-sm text-[#6b7280]">受付時間：平日 10:00 - 18:00</p>
             </div>
           </div>
         </section>

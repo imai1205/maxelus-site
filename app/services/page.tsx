@@ -134,7 +134,7 @@ function CategoryNav({
   const categories: ServiceCategory[] = ["app-dx", "website", "product"];
 
   return (
-    <div className="sticky top-14 md:top-16 z-40 bg-white/95 dark:bg-[#0b1220]/95 border-b border-[#e5e7eb] dark:border-[#374151] shadow-sm">
+    <div className="sticky top-14 md:top-16 z-40 bg-white/95 border-b border-[#e5e7eb] shadow-sm">
       {/* backdrop-blur-lgを削除（パフォーマンス向上） */}
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="flex items-center gap-2 md:gap-4 overflow-x-auto py-4 scrollbar-hide">
@@ -145,7 +145,7 @@ function CategoryNav({
               className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium whitespace-nowrap transition-colors duration-200 ${
                 activeCategory === category
                   ? "bg-[#fff100] text-[#1a1a1a] shadow-md"
-                  : "bg-[#f3f4f6] dark:bg-[#1e293b] text-[#6b7280] dark:text-[#9ca3af] hover:bg-[#e5e7eb] dark:hover:bg-[#374151]"
+                  : "bg-[#f3f4f6] text-[#6b7280] hover:bg-[#e5e7eb]"
               }`}
             >
               {categoryNames[category]}
@@ -174,8 +174,8 @@ function ServiceCard({
   // backdrop-blur-xlを削除（パフォーマンス向上）、transition-allを具体的なプロパティに変更
   const cardClassName = `service-card rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 h-full group hover:shadow-2xl transition-shadow duration-300 relative overflow-hidden border-2 ${
     isSpecial
-      ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 dark:from-[#1e293b]/90 dark:to-[#0b1220]/90 dark:border-[#fff100]/40 shadow-[#fff100]/20"
-      : "border-white/40 dark:border-[#374151]/60 bg-white/90 dark:bg-[#1e293b]/95 bg-gradient-to-br from-white/90 via-white/85 to-[#0b1220]/5 dark:from-[#1e293b]/95 dark:via-[#1e293b]/90 dark:to-[#0b1220]/10"
+      ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 shadow-[#fff100]/20"
+      : "border-white/40 bg-white/90 bg-gradient-to-br from-white/90 via-white/85 to-[#0b1220]/5"
   } ${service.ctaType === "lp" && service.lpHref ? "hover:border-[#fff100]/80 cursor-pointer" : ""}`;
 
   const cardContent = (
@@ -192,14 +192,14 @@ function ServiceCard({
 
             {/* Metric（成果イメージ） */}
             {service.metric && (
-              <div className="mb-3 p-2 bg-[#fafafa] dark:bg-[#0b1220]/50 rounded-lg border border-[#e5e7eb] dark:border-[#374151]">
-                <div className="text-[10px] text-[#6b7280] dark:text-[#9ca3af] mb-0.5">
+              <div className="mb-3 p-2 bg-[#fafafa] rounded-lg border border-[#e5e7eb]">
+                <div className="text-[10px] text-[#6b7280] mb-0.5">
                   {service.metric.label}
                 </div>
-                <div className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
+                <div className="text-lg md:text-xl font-bold text-[#1a1a1a]">
                   {service.metric.value}
                   {service.metric.suffix && (
-                    <span className="text-sm text-[#6b7280] dark:text-[#9ca3af]">
+                    <span className="text-sm text-[#6b7280]">
                       {service.metric.suffix}
                     </span>
                   )}
@@ -208,17 +208,17 @@ function ServiceCard({
             )}
 
             {/* Title */}
-            <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-1 group-hover:text-[#fdc700] transition-colors">
+            <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-1 group-hover:text-[#fdc700] transition-colors">
               {service.title}
             </h3>
 
             {/* Catch */}
-            <p className="text-sm md:text-base text-[#1a1a1a] dark:text-[#f9fafb] font-medium mb-2">
+            <p className="text-sm md:text-base text-[#1a1a1a] font-medium mb-2">
               {service.catch}
             </p>
 
             {/* Short Description */}
-            <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] mb-4 leading-relaxed" style={{
+            <p className="text-xs md:text-sm text-[#6b7280] mb-4 leading-relaxed" style={{
               display: '-webkit-box',
               WebkitLineClamp: 3,
               WebkitBoxOrient: 'vertical',
@@ -232,7 +232,7 @@ function ServiceCard({
               {service.tags.slice(0, 3).map((tag, j) => (
                 <span
                   key={j}
-                  className="text-[10px] md:text-xs px-2 py-0.5 bg-[#f3f4f6] dark:bg-[#0b1220]/50 dark:border dark:border-[#374151] text-[#6b7280] dark:text-[#9ca3af] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] dark:group-hover:bg-[#fff100] dark:group-hover:text-[#1a1a1a] transition-colors duration-300"
+                  className="text-[10px] md:text-xs px-2 py-0.5 bg-[#f3f4f6] text-[#6b7280] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
                   style={{ transitionDelay: `${j * 50}ms` }}
                 >
                   {tag}
@@ -267,7 +267,7 @@ function ServiceCard({
               {service.ctaType === "lp" && service.lpHref ? (
                 <Link
                   href={service.id === 'full-order-app-development' ? `${service.lpHref}#demo` : service.lpHref}
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-colors duration-200 hover:scale-105"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] transition-colors duration-200 hover:scale-105"
                   prefetch={true}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -294,7 +294,7 @@ function ServiceCard({
                     e.stopPropagation();
                     onToggle();
                   }}
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-colors duration-200 hover:scale-105"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] transition-colors duration-200 hover:scale-105"
                 >
                   {isOpen ? "閉じる" : "詳細を開く"}
                   <svg
@@ -372,7 +372,7 @@ function CategorySection({
     >
       {/* ガラスモーフィズムオーバーレイ - backdrop-blurを削除（パフォーマンス向上） */}
       <div 
-        className="absolute inset-0 -z-10 bg-white/50 dark:bg-[#1e293b]/80 rounded-2xl border border-white/30 dark:border-[#374151]/50"
+        className="absolute inset-0 -z-10 bg-white/50 rounded-2xl border border-white/30"
       />
 
       <div className="relative z-0 p-4 md:p-6">
@@ -382,12 +382,12 @@ function CategorySection({
           onClick={onCategoryClick}
           className={`text-left w-full transition-colors duration-200 ${
             isActive 
-              ? 'text-[#1a1a1a] dark:text-[#f9fafb]' 
-              : 'text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]'
+              ? 'text-[#1a1a1a]' 
+              : 'text-[#6b7280] hover:text-[#1a1a1a]'
           }`}
         >
           <h2 className={`text-xl md:text-2xl font-bold mb-2 transition-colors duration-200 ${
-            isActive ? 'text-[#1a1a1a] dark:text-[#f9fafb]' : 'text-[#6b7280] dark:text-[#9ca3af]'
+            isActive ? 'text-[#1a1a1a]' : 'text-[#6b7280]'
           }`}>
             {categoryNames[category]}
           </h2>
@@ -437,7 +437,7 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -503,7 +503,7 @@ export default function ServicesPage() {
         />
 
         {/* 3カテゴリセクション（3列グリッド方式） */}
-        <section className="py-16 md:py-24 px-4 md:px-8 relative overflow-hidden bg-white dark:bg-[#0b1220]">
+        <section className="py-16 md:py-24 px-4 md:px-8 relative overflow-hidden bg-white">
           {/* Desktop: 3列グリッド */}
           <div className="hidden md:block max-w-7xl mx-auto relative" style={{ minHeight: '600px' }}>
             {/* 全体の背景画像（選択されているカテゴリの背景） */}
@@ -552,7 +552,7 @@ export default function ServicesPage() {
                 return (
                   <div
                     key={category}
-                    className="bg-white dark:bg-[#1e293b] rounded-2xl border border-[#e5e7eb] dark:border-[#374151] overflow-hidden"
+                    className="bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden"
                   >
                     <button
                       onClick={() =>
@@ -560,7 +560,7 @@ export default function ServicesPage() {
                       }
                       className="w-full px-6 py-4 flex items-center justify-between text-left"
                     >
-                      <h3 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
+                      <h3 className="text-lg font-bold text-[#1a1a1a]">
                         {categoryNames[category]}
                       </h3>
                       <svg
@@ -596,59 +596,6 @@ export default function ServicesPage() {
                 );
               }
             )}
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#0b1220]">
-          <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
-              <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FAQ</span>
-                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
-                  よくある質問
-                </h2>
-              </div>
-              <div className="w-20 h-1 bg-[#fff100] rounded-full mx-auto relative" />
-            </AnimatedSection>
-
-            <div className="space-y-4">
-              {[
-                {
-                  question: "開発期間はどの程度かかりますか？",
-                  answer:
-                    "プロジェクト規模により異なりますが、シンプルなLPなら2週間〜、Webアプリなら1〜3ヶ月が目安です。デモ提示後に正確なスケジュールをご提示します。",
-                },
-                {
-                  question: "料金はどれくらいかかりますか？",
-                  answer:
-                    "30万円〜対応可能です。内容や規模により異なりますので、まずは無料相談でご要望をお聞かせください。お見積りを提示いたします。",
-                },
-                {
-                  question: "途中で仕様変更できますか？",
-                  answer:
-                    "デモ提示の段階で認識を合わせるため、大きな手戻りは発生しにくい仕組みです。軽微な修正は柔軟に対応しますが、大幅な変更は追加費用が発生する場合があります。",
-                },
-                {
-                  question: "運用・保守もお願いできますか？",
-                  answer:
-                    "はい、運用・保守も対応可能です。月額での保守契約や、都度対応など、ご要望に合わせてプランをご提案します。",
-                },
-              ].map((faq, i) => (
-                <AnimatedSection
-                  key={i}
-                  animation="fade-up"
-                  delay={i * 100}
-                >
-                  <div className="bg-white dark:bg-[#1e293b] rounded-xl p-6 shadow-sm border border-[#e5e7eb] dark:border-[#374151]">
-                    <h3 className="font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
-                      Q. {faq.question}
-                    </h3>
-                    <p className="text-[#6b7280] dark:text-[#9ca3af]">{faq.answer}</p>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
           </div>
         </section>
 

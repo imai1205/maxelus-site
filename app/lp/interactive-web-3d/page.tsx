@@ -35,7 +35,7 @@ function DemoTabs() {
   };
 
   return (
-    <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-lg overflow-hidden">
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
       {/* タブナビゲーション */}
       <div className="flex border-b border-[#e5e7eb]">
         {[
@@ -49,7 +49,7 @@ function DemoTabs() {
             className={`flex-1 px-6 py-4 text-sm md:text-base font-medium transition-all ${
               activeTab === tab.id
                 ? "bg-[#fff100] text-[#1a1a1a] border-b-2 border-[#1a1a1a]"
-                : "text-[#6b7280] dark:text-[#9ca3af] hover:bg-[#fafafa] dark:hover:bg-[#374151]"
+                : "text-[#6b7280] hover:bg-[#fafafa]"
             }`}
           >
             {tab.label}
@@ -62,7 +62,7 @@ function DemoTabs() {
         {activeTab === "3d" && (
           <div className="w-full max-w-4xl">
             <IPhone3DViewer key={refreshKey} onRefresh={handle3DRefresh} />
-            <p className="text-[#6b7280] dark:text-[#9ca3af] text-sm md:text-base mt-4 text-center">
+            <p className="text-[#6b7280] text-sm md:text-base mt-4 text-center">
               マウスでドラッグ、またはタッチでスワイプしてiPhoneを回転させることができます
             </p>
           </div>
@@ -86,7 +86,7 @@ function DemoTabs() {
 
 export default function InteractiveWeb3DLP() {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -147,18 +147,18 @@ export default function InteractiveWeb3DLP() {
         </section>
 
         {/* 体験デモセクション */}
-        <section id="demo" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b] scroll-mt-20">
+        <section id="demo" className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] scroll-mt-20">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>DEMO</span>
-                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>DEMO</span>
+                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                     体験デモ
                   </h2>
                 </div>
               </div>
-              <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8 relative">
+              <p className="text-[#6b7280] mb-8 relative">
                 3つの体験をタブで切り替えてご覧ください
               </p>
             </AnimatedSection>
@@ -173,8 +173,8 @@ export default function InteractiveWeb3DLP() {
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FEATURES</span>
-                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>FEATURES</span>
+                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                     できること
                   </h2>
                 </div>
@@ -220,7 +220,7 @@ export default function InteractiveWeb3DLP() {
                   animation="fade-up"
                   delay={i * 100}
                 >
-                  <div className="bg-white dark:bg-[#1e293b] rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow h-full">
+                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow h-full">
                     <h3 className="text-xl font-bold text-[#1a1a1a] mb-3">
                       {value.title}
                     </h3>
@@ -238,8 +238,8 @@ export default function InteractiveWeb3DLP() {
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FLOW</span>
-                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>FLOW</span>
+                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                     進め方
                   </h2>
                 </div>
@@ -313,8 +313,8 @@ export default function InteractiveWeb3DLP() {
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FAQ</span>
-                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>FAQ</span>
+                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                     よくある質問
                   </h2>
                 </div>

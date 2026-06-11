@@ -7,7 +7,7 @@ import { GlassCard, BubbleBadge } from "@/components/ui";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -55,8 +55,8 @@ export default function AboutPage() {
             <AnimatedSection animation="fade-up" className="mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>OVERVIEW</span>
-                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-8 text-center relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>OVERVIEW</span>
+                  <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-8 text-center relative">
                     会社概要
                   </h2>
                 </div>
@@ -66,42 +66,42 @@ export default function AboutPage() {
             <GlassCard variant="light" padding="lg">
               <dl className="space-y-6">
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     会社名
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] font-medium">
+                  <dd className="text-base md:text-lg text-[#1a1a1a] font-medium">
                     株式会社MAXELUS
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     法人番号
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb]">
+                  <dd className="text-base md:text-lg text-[#1a1a1a]">
                     1130001080399
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     代表取締役社長
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb]">
+                  <dd className="text-base md:text-lg text-[#1a1a1a]">
                     今井 俊喜
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4 pb-6 border-b border-[#e5e7eb]/50">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     取締役副社長
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb]">
+                  <dd className="text-base md:text-lg text-[#1a1a1a]">
                     榎本 青波
                   </dd>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-start gap-4">
-                  <dt className="text-sm md:text-base font-bold text-[#6b7280] dark:text-[#9ca3af] md:w-32 flex-shrink-0">
+                  <dt className="text-sm md:text-base font-bold text-[#6b7280] md:w-32 flex-shrink-0">
                     所在地
                   </dt>
-                  <dd className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb]">
+                  <dd className="text-base md:text-lg text-[#1a1a1a]">
                     〒614-8121 京都府八幡市下奈良小宮1
                   </dd>
                 </div>
@@ -111,12 +111,12 @@ export default function AboutPage() {
         </section>
 
         {/* 事業内容 */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>BUSINESS</span>
-                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>BUSINESS</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                   事業内容
                 </h2>
               </div>
@@ -160,10 +160,10 @@ export default function AboutPage() {
                   delay={i * 50}
                 >
                   <GlassCard variant="light" padding="md" className="h-full group">
-                    <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">
+                    <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af]">{item.description}</p>
+                    <p className="text-xs md:text-sm text-[#6b7280]">{item.description}</p>
                   </GlassCard>
                 </AnimatedSection>
               ))}
@@ -172,12 +172,12 @@ export default function AboutPage() {
         </section>
 
         {/* 私たちについて */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>ABOUT</span>
-                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 relative">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>ABOUT</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-6 relative">
                   私たちについて
                 </h2>
               </div>
@@ -185,11 +185,11 @@ export default function AboutPage() {
 
             <AnimatedSection animation="fade-up" delay={200}>
               <GlassCard variant="light" padding="lg">
-                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
                   MAXELUSは、AIと最新の開発手法を活用し、最短で&quot;使われるプロダクト&quot;を形にするチームです。
                   要件定義や設計だけで終わらず、実際に現場・組織の中で動くところまで落とし込み、改善まで伴走します。
                 </p>
-                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed">
+                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed">
                   「何を作るべきか」から一緒に整理し、
                   <br />
                   発見 → 判断 → 実行 が止まらない状態をつくることが私たちの役割です。
@@ -200,12 +200,12 @@ export default function AboutPage() {
         </section>
 
         {/* できること（提供価値） */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>VALUE</span>
-                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>VALUE</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                   できること（提供価値）
                 </h2>
               </div>
@@ -274,15 +274,15 @@ export default function AboutPage() {
                     <div className="mb-3">
                       <BubbleBadge variant="small">{value.number}</BubbleBadge>
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-1 group-hover:text-[#fdc700] transition-colors">
+                    <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-1 group-hover:text-[#fdc700] transition-colors">
                       {value.title}
                     </h3>
-                    <p className="text-xs text-[#6b7280] dark:text-[#9ca3af] mb-4">{value.subtitle}</p>
+                    <p className="text-xs text-[#6b7280] mb-4">{value.subtitle}</p>
                     <ul className="space-y-2">
                       {value.items.map((item, j) => (
                         <li
                           key={j}
-                          className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af] flex items-start gap-2"
+                          className="text-xs md:text-sm text-[#6b7280] flex items-start gap-2"
                         >
                           <span className="text-[#fdc700] mt-1">•</span>
                           <span>{item}</span>
@@ -297,12 +297,12 @@ export default function AboutPage() {
         </section>
 
         {/* Mission / Vision / Value */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220] relative">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-white relative">
           <div className="max-w-6xl mx-auto relative">
             {/* MISSION Background Text - セクション全体の上部に配置、中央揃え */}
             <div className="absolute -top-24 md:-top-32 left-0 right-0 pointer-events-none z-0">
               <div className="relative flex justify-center">
-                <span className="section-bg-text text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 inline-block whitespace-nowrap" style={{ opacity: 0.25 }}>MISSION</span>
+                <span className="section-bg-text text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 inline-block whitespace-nowrap" style={{ opacity: 0.25 }}>MISSION</span>
               </div>
             </div>
             
@@ -332,18 +332,18 @@ export default function AboutPage() {
             {/* Vision */}
             <AnimatedSection animation="fade-up" delay={100} className="mb-8 relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>VISION</span>
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>VISION</span>
                 <GlassCard variant="light" padding="lg" className="border-2 border-[#fff100]/50 relative">
                   <div className="mb-4">
                     <BubbleBadge variant="small">Vision</BubbleBadge>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4 relative">
                     未来像
                   </h2>
-                  <p className="text-lg md:text-xl text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-4">
+                  <p className="text-lg md:text-xl text-[#1a1a1a] leading-relaxed mb-4">
                     データとAIで、意思決定と実行が加速する社会をつくる。
                   </p>
-                  <p className="text-base md:text-lg text-[#6b7280] dark:text-[#9ca3af] leading-relaxed">
+                  <p className="text-base md:text-lg text-[#6b7280] leading-relaxed">
                     紙・勘・経験だけに依存せず、
                     必要な情報が必要なときに届き、次の一手が最短で打てる。
                     そんな「進化し続ける業務と組織」を増やしていきます。
@@ -355,12 +355,12 @@ export default function AboutPage() {
             {/* Value */}
             <AnimatedSection animation="fade-up" delay={200} className="relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>VALUE</span>
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>VALUE</span>
                 <GlassCard variant="light" padding="lg" className="relative">
                   <div className="mb-6">
                     <BubbleBadge variant="small">Value</BubbleBadge>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 relative">
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-6 relative">
                     価値観・行動指針
                   </h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -395,10 +395,10 @@ export default function AboutPage() {
                     },
                   ].map((value, i) => (
                     <GlassCard key={i} variant="light" padding="sm" className="h-full group">
-                      <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">
+                      <h3 className="text-base md:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">
                         {value.title}
                       </h3>
-                      <p className="text-xs md:text-sm text-[#6b7280] dark:text-[#9ca3af]">{value.description}</p>
+                      <p className="text-xs md:text-sm text-[#6b7280]">{value.description}</p>
                     </GlassCard>
                   ))}
                   </div>
@@ -409,12 +409,12 @@ export default function AboutPage() {
         </section>
 
         {/* 代表挨拶 */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>MESSAGE</span>
-                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>MESSAGE</span>
+                <h2 className="text-2xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                   代表挨拶
                 </h2>
               </div>
@@ -423,26 +423,26 @@ export default function AboutPage() {
 
             <AnimatedSection animation="fade-up" delay={200}>
               <GlassCard variant="light" padding="lg">
-                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
                   私は大学卒業後、メーカーの営業として多様な現場を訪れ、課題解決に携わってきました。
                   その中で強く感じたのは、「本当の課題は、技術や努力ではなく&quot;仕組み&quot;の方にあることが多い」という事実です。
                 </p>
-                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
                   情報が散らばり、手作業や転記が増え、判断が遅れ、改善が続かない。
                   こうした状況は、業界や規模を問わず多くの組織で起こり得ます。
                 </p>
-                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed mb-6">
                   MAXELUSは、そうした&quot;止まりがちな流れ&quot;を、
                   AIとデータ、そしてモダンな開発手法でつなぎ直し、
                   最短で現場に届くプロダクトとして提供します。
                 </p>
-                <p className="text-base md:text-lg text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed">
+                <p className="text-base md:text-lg text-[#1a1a1a] leading-relaxed">
                   「速さ」だけではなく、「使われ続けること」「成果につながること」にこだわり、
                   構想から実装、運用改善まで一貫して伴走していきます。
                 </p>
-                <div className="mt-8 pt-6 border-t border-[#e5e7eb] dark:border-[#374151]/50 text-right">
-                  <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] mb-1">代表取締役／CEO</p>
-                  <p className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb]">今井 俊喜</p>
+                <div className="mt-8 pt-6 border-t border-[#e5e7eb] text-right">
+                  <p className="text-sm text-[#6b7280] mb-1">代表取締役／CEO</p>
+                  <p className="text-lg font-bold text-[#1a1a1a]">今井 俊喜</p>
                 </div>
               </GlassCard>
             </AnimatedSection>

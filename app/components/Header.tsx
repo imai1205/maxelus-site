@@ -8,28 +8,8 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [imgLogo, setImgLogo] = useState('/cases/logo(W).png');
+  const imgLogo = '/cases/logo(W).png';
   const pathname = usePathname();
-  
-  // テーマを取得（クライアントサイドのみ）
-  useEffect(() => {
-    const updateLogo = () => {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const logo = isDark ? '/cases/logo(D).png' : '/cases/logo(W).png';
-      setImgLogo(logo);
-    };
-
-    // 初期設定
-    updateLogo();
-
-    // システム設定の変更を監視
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", updateLogo);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateLogo);
-    };
-  }, []);
 
   const isActive = (path: string) => pathname === path;
 
@@ -46,8 +26,8 @@ export default function Header() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? "bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg shadow-lg shadow-black/5 border-b border-[#e5e7eb] dark:border-[#374151]" 
-        : "bg-white/80 dark:bg-[#0b1220]/80 backdrop-blur-md border-b border-transparent"
+        ? "bg-white/95 backdrop-blur-lg shadow-lg shadow-black/5 border-b border-[#e5e7eb]" 
+        : "bg-white/80 backdrop-blur-md border-b border-transparent"
     }`}>
       <div className="flex items-center justify-between h-14 md:h-16 px-4 md:px-8 max-w-[1200px] mx-auto">
         <Link href="/" className="flex items-center" prefetch={true}>
@@ -60,7 +40,7 @@ export default function Header() {
             href="/" 
             prefetch={true}
             className={`text-sm nav-link relative group transition-all duration-200 ${
-              isActive("/") ? "text-[#0b1220] dark:text-[#f9fafb] font-medium" : "text-[#666] dark:text-[#9ca3af] hover:text-[#0b1220] dark:hover:text-[#f9fafb]"
+              isActive("/") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
             ホーム
@@ -72,7 +52,7 @@ export default function Header() {
             href="/services" 
             prefetch={true}
             className={`text-sm nav-link relative group transition-all duration-200 ${
-              pathname.startsWith("/services") ? "text-[#0b1220] dark:text-[#f9fafb] font-medium" : "text-[#666] dark:text-[#9ca3af] hover:text-[#0b1220] dark:hover:text-[#f9fafb]"
+              pathname.startsWith("/services") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
             サービス
@@ -90,18 +70,6 @@ export default function Header() {
             強み
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
               isActive("/strengths") ? "w-full" : "w-0 group-hover:w-full"
-            }`} />
-          </Link>
-          <Link 
-            href="/cases" 
-            prefetch={true}
-            className={`text-sm nav-link relative group transition-all duration-200 ${
-              isActive("/cases") || isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
-            }`}
-          >
-            事例
-            <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
-              isActive("/cases") || isActive("/works") ? "w-full" : "w-0 group-hover:w-full"
             }`} />
           </Link>
           <Link 
@@ -139,7 +107,7 @@ export default function Header() {
         
         {/* Mobile Menu Button */}
         <button 
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1e293b] transition-colors text-[#1a1a1a] dark:text-[#f9fafb]"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors text-[#1a1a1a]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="メニュー"
           >
@@ -155,7 +123,7 @@ export default function Header() {
       
       {/* Mobile Menu */}
       <div 
-        className={`md:hidden bg-white dark:bg-[#0b1220] border-t border-[#e5e7eb] dark:border-[#374151] overflow-hidden transition-all duration-300 ${
+        className={`md:hidden bg-white border-t border-[#e5e7eb] overflow-hidden transition-all duration-300 ${
           mobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -163,7 +131,7 @@ export default function Header() {
           <Link 
             href="/" 
             prefetch={true}
-            className={`text-base py-2 transition-colors ${isActive("/") ? "text-[#0b1220] dark:text-[#f9fafb] font-medium" : "text-[#666] dark:text-[#9ca3af]"}`}
+            className={`text-base py-2 transition-colors ${isActive("/") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
             ホーム
@@ -171,7 +139,7 @@ export default function Header() {
           <Link 
             href="/services" 
             prefetch={true}
-            className={`text-base py-2 transition-colors ${pathname.startsWith("/services") ? "text-[#0b1220] dark:text-[#f9fafb] font-medium" : "text-[#666] dark:text-[#9ca3af]"}`}
+            className={`text-base py-2 transition-colors ${pathname.startsWith("/services") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
             サービス
@@ -183,14 +151,6 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(false)}
           >
             強み
-          </Link>
-          <Link 
-            href="/cases" 
-            prefetch={true}
-            className={`text-base py-2 transition-colors ${isActive("/cases") || isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            事例
           </Link>
           <Link 
             href="/about" 

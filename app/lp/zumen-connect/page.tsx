@@ -54,21 +54,21 @@ export default function ZumenConnectLP() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
+    <div className="min-h-screen bg-white font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-lg border-b border-[#e5e7eb] dark:border-[#374151]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb]">
+          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
             図面コネクト
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#features" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
+            <a href="#features" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               機能
             </a>
-            <a href="#outcomes" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
+            <a href="#outcomes" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               効果
             </a>
-            <a href="#pricing" className="text-sm text-[#6b7280] dark:text-[#9ca3af] hover:text-[#1a1a1a] dark:hover:text-[#f9fafb]">
+            <a href="#pricing" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               料金
             </a>
             <Link
@@ -83,7 +83,7 @@ export default function ZumenConnectLP() {
 
       <main className="pt-14">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-[#fffef0] via-white to-white dark:from-[#0b1220] dark:via-[#1e293b] dark:to-[#0b1220] py-20 md:py-32 overflow-hidden">
+        <section className="relative bg-gradient-to-b from-[#fffef0] via-white to-white py-20 md:py-32 overflow-hidden">
           {/* Background decorative elements */}
           <div className="absolute top-20 left-10 w-96 h-96 bg-[#fff100]/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px]" />
@@ -95,14 +95,14 @@ export default function ZumenConnectLP() {
               <div>
                 <AnimatedSection animation="fade-up" className="relative">
                   <div className="relative inline-block">
-                    <span className="section-bg-text left-0 -top-8 md:-top-12 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>PRODUCT</span>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-6 leading-tight relative">
+                    <span className="section-bg-text left-0 -top-8 md:-top-12 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>PRODUCT</span>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-6 leading-tight relative">
                       図面・関連資料・見積を、
                       <br />
                       <span className="text-[#fff100]">探す時間ゼロへ。</span>
                     </h1>
                   </div>
-                  <p className="text-lg md:text-xl text-[#6b7280] dark:text-[#9ca3af] mb-6 leading-relaxed">
+                  <p className="text-lg md:text-xl text-[#6b7280] mb-6 leading-relaxed">
                     OCRで自動整理。AI類似検索で過去実績に即アクセス。
                     <br />
                     見積〜進捗〜原価まで、図面を起点に一気通貫。
@@ -122,8 +122,8 @@ export default function ZumenConnectLP() {
                           </svg>
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb]">{item.label}</div>
-                          <div className="text-xs text-[#6b7280] dark:text-[#9ca3af]">{item.desc}</div>
+                          <div className="text-sm font-medium text-[#1a1a1a]">{item.label}</div>
+                          <div className="text-xs text-[#6b7280]">{item.desc}</div>
                         </div>
                       </div>
                     ))}
@@ -142,14 +142,14 @@ export default function ZumenConnectLP() {
                     </Link>
                     <Link
                       href="#contact"
-                      className="inline-flex items-center justify-center gap-2 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all"
+                      className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all"
                     >
                       資料をダウンロード
                     </Link>
                   </div>
 
                   {/* Additional info */}
-                  <div className="flex flex-wrap gap-6 text-sm text-[#6b7280] dark:text-[#9ca3af]">
+                  <div className="flex flex-wrap gap-6 text-sm text-[#6b7280]">
                     <div className="flex items-center gap-2">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -183,18 +183,18 @@ export default function ZumenConnectLP() {
         </section>
 
         {/* Problem/Solution Section */}
-        <Section padding="lg" className="bg-gradient-to-b from-white via-[#fafafa] to-white dark:from-[#0b1220] dark:via-[#1e293b] dark:to-[#0b1220]">
+        <Section padding="lg" className="bg-gradient-to-b from-white via-[#fafafa] to-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>PROBLEM</span>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>PROBLEM</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                     現場の3つの課題を、一気に解決
                   </h2>
                 </div>
               </div>
-              <p className="text-lg text-[#6b7280] dark:text-[#9ca3af] relative">
+              <p className="text-lg text-[#6b7280] relative">
                 図面管理の煩雑さを、シンプルな仕組みで効率化します
               </p>
             </AnimatedSection>
@@ -225,13 +225,13 @@ export default function ZumenConnectLP() {
                     <div className="w-12 h-12 bg-[#fff100] rounded-full flex items-center justify-center text-2xl mb-6">
                       {item.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-3">{item.title}</h3>
-                    <p className="text-[#6b7280] dark:text-[#9ca3af] mb-6">{item.description}</p>
+                    <h3 className="text-xl font-bold text-[#1a1a1a] mb-3">{item.title}</h3>
+                    <p className="text-[#6b7280] mb-6">{item.description}</p>
                     <ul className="space-y-2">
                       {item.items.map((listItem, j) => (
                         <li key={j} className="flex items-start gap-2">
                           <div className="w-1.5 h-1.5 bg-[#fff100] rounded-full mt-2 flex-shrink-0" />
-                          <span className="text-sm text-[#1a1a1a] dark:text-[#f9fafb]">{listItem}</span>
+                          <span className="text-sm text-[#1a1a1a]">{listItem}</span>
                         </li>
                       ))}
                     </ul>
@@ -243,18 +243,18 @@ export default function ZumenConnectLP() {
         </Section>
 
         {/* Features Section */}
-        <section id="features" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[#fafafa] via-white to-[#fafafa] dark:from-[#1e293b] dark:via-[#0b1220] dark:to-[#1e293b]">
+        <section id="features" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[#fafafa] via-white to-[#fafafa]">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>FEATURES</span>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>FEATURES</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                     必要な機能を、すべて統合
                   </h2>
                 </div>
               </div>
-              <p className="text-lg text-[#6b7280] dark:text-[#9ca3af]">
+              <p className="text-lg text-[#6b7280]">
                 図面管理から見積作成、進捗・原価管理まで一気通貫で対応
               </p>
             </AnimatedSection>
@@ -290,8 +290,8 @@ export default function ZumenConnectLP() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2">{feature.title}</h3>
-                    <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] mb-3">{feature.desc}</p>
+                    <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">{feature.title}</h3>
+                    <p className="text-sm text-[#6b7280] mb-3">{feature.desc}</p>
                     <BubbleBadge variant="small">{feature.benefit}</BubbleBadge>
                   </GlassCard>
                 </AnimatedSection>
@@ -301,18 +301,18 @@ export default function ZumenConnectLP() {
         </section>
 
         {/* Outcomes Section */}
-        <section id="outcomes" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
+        <section id="outcomes" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>OUTCOMES</span>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>OUTCOMES</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                     導入企業が実感する効果
                   </h2>
                 </div>
               </div>
-              <p className="text-lg text-[#6b7280] dark:text-[#9ca3af]">
+              <p className="text-lg text-[#6b7280]">
                 時間・コスト・精度、すべてが改善します
               </p>
             </AnimatedSection>
@@ -353,37 +353,37 @@ export default function ZumenConnectLP() {
                     <div className="w-10 h-10 bg-[#fff100] rounded-full flex items-center justify-center text-xl mx-auto mb-4">
                       {outcome.icon}
                     </div>
-                    <div className="text-sm font-medium text-[#6b7280] dark:text-[#9ca3af] mb-3">{outcome.label}</div>
+                    <div className="text-sm font-medium text-[#6b7280] mb-3">{outcome.label}</div>
                     <div className="flex items-center justify-center gap-2 mb-3">
-                      <span className="text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb]">{outcome.before}</span>
-                      <span className="text-xl text-[#6b7280] dark:text-[#9ca3af]">→</span>
+                      <span className="text-lg font-bold text-[#1a1a1a]">{outcome.before}</span>
+                      <span className="text-xl text-[#6b7280]">→</span>
                       <BubbleBadge variant="small">{outcome.after}</BubbleBadge>
                     </div>
-                    <p className="text-xs text-[#6b7280] dark:text-[#9ca3af]">{outcome.desc}</p>
+                    <p className="text-xs text-[#6b7280]">{outcome.desc}</p>
                   </GlassCard>
                 </AnimatedSection>
               ))}
             </div>
 
-            <p className="text-center text-sm text-[#6b7280] dark:text-[#9ca3af] mt-8">
+            <p className="text-center text-sm text-[#6b7280] mt-8">
               ※効果は導入環境により異なります。まずはデモで体験してください。
             </p>
           </div>
         </section>
 
         {/* Pricing Section */}
-        <section id="pricing" className="py-16 md:py-24 px-4 md:px-8 bg-white dark:bg-[#0b1220]">
+        <section id="pricing" className="py-16 md:py-24 px-4 md:px-8 bg-white">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection animation="fade-up" className="text-center mb-12 relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>PRICING</span>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>PRICING</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4 relative">
                     シンプルな料金体系
                   </h2>
                 </div>
               </div>
-              <p className="text-lg text-[#6b7280] dark:text-[#9ca3af]">
+              <p className="text-lg text-[#6b7280]">
                 必要な機能をすべて含んだワンプライス
               </p>
             </AnimatedSection>
@@ -419,7 +419,7 @@ export default function ZumenConnectLP() {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                        <span className="text-sm text-[#1a1a1a] dark:text-[#f9fafb]">{feature}</span>
+                        <span className="text-sm text-[#1a1a1a]">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -430,7 +430,7 @@ export default function ZumenConnectLP() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </MotionPress>
-                  <p className="text-xs text-[#6b7280] dark:text-[#9ca3af] mt-4">
+                  <p className="text-xs text-[#6b7280] mt-4">
                     まずはデモで運用イメージを確認 → その後お見積り
                   </p>
                 </div>
@@ -470,10 +470,10 @@ export default function ZumenConnectLP() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-4">
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
                       お問い合わせありがとうございます
                     </h3>
-                    <p className="text-[#6b7280] dark:text-[#9ca3af] mb-8">
+                    <p className="text-[#6b7280] mb-8">
                       担当者より2営業日以内にご連絡いたします。<br />
                       しばらくお待ちください。
                     </p>
@@ -491,7 +491,7 @@ export default function ZumenConnectLP() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+                    <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                       会社名 <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -499,11 +499,11 @@ export default function ZumenConnectLP() {
                       required
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
+                      className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white text-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+                    <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                       お名前 <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -511,30 +511,30 @@ export default function ZumenConnectLP() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
+                      className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white text-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">部署</label>
+                    <label className="block text-sm font-medium text-[#1a1a1a] mb-2">部署</label>
                     <input
                       type="text"
                       value={formData.department}
                       onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                      className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
+                      className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white text-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">役職</label>
+                    <label className="block text-sm font-medium text-[#1a1a1a] mb-2">役職</label>
                     <input
                       type="text"
                       value={formData.position}
                       onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-                      className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
+                      className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white text-[#1a1a1a]"
                     />
                   </div>
                 </div>
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                     メールアドレス <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -542,11 +542,11 @@ export default function ZumenConnectLP() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white text-[#1a1a1a]"
                   />
                 </div>
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-[#1a1a1a] dark:text-[#f9fafb] mb-2">
+                  <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                     お問い合わせ内容（任意）
                   </label>
                   <textarea
@@ -554,7 +554,7 @@ export default function ZumenConnectLP() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="ご質問やご要望がありましたらご記入ください"
-                    className="w-full px-4 py-3 border border-[#e5e7eb] dark:border-[#374151] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white dark:bg-[#1e293b] text-[#1a1a1a] dark:text-[#f9fafb]"
+                    className="w-full px-4 py-3 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fff100] bg-white text-[#1a1a1a]"
                   />
                 </div>
                 <div className="mb-6">
@@ -564,9 +564,9 @@ export default function ZumenConnectLP() {
                       required
                       checked={formData.privacy}
                       onChange={(e) => setFormData({ ...formData, privacy: e.target.checked })}
-                      className="mt-1 w-4 h-4 text-[#fff100] border-[#e5e7eb] dark:border-[#374151] rounded focus:ring-[#fff100]"
+                      className="mt-1 w-4 h-4 text-[#fff100] border-[#e5e7eb] rounded focus:ring-[#fff100]"
                     />
-                    <span className="text-sm text-[#1a1a1a] dark:text-[#f9fafb]">
+                    <span className="text-sm text-[#1a1a1a]">
                       <span className="text-red-500">*</span> 個人情報の取り扱いについて同意します。お預かりした情報は、お問い合わせ対応および製品のご案内のみに使用いたします。
                     </span>
                   </label>
@@ -594,10 +594,10 @@ export default function ZumenConnectLP() {
                   )}
                 </button>
                 <div className="text-center mt-6">
-                  <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] mb-4">または</p>
+                  <p className="text-sm text-[#6b7280] mb-4">または</p>
                   <Link
                     href="#contact"
-                    className="inline-flex items-center justify-center gap-2 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#374151] text-[#1a1a1a] dark:text-[#f9fafb] font-medium px-6 py-2 rounded-full border border-[#e5e7eb] dark:border-[#374151] transition-all"
+                    className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-2 rounded-full border border-[#e5e7eb] transition-all"
                   >
                     資料をダウンロード
                   </Link>

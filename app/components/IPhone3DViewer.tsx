@@ -4,7 +4,6 @@ import { useState, useMemo, useEffect, useCallback, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
-import { useTheme } from "./ThemeProvider";
 
 // 角の丸いボックスジオメトリを作成する関数
 function createRoundedBox(width: number, height: number, depth: number, radius: number) {
@@ -131,20 +130,13 @@ export default function IPhone3DViewer({ onRefresh }: { onRefresh?: () => void }
   const [loadError, setLoadError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
-  const { resolvedTheme } = useTheme();
 
   // コンポーネントがマウントされたことを確認
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // ロゴパスをテーマに応じて切り替え（mounted後に確定）
-  const logoPath = useMemo(() => {
-    if (!isMounted) return '/cases/logo(W).png'; // デフォルトはライト
-    return resolvedTheme === 'dark' 
-      ? '/cases/logo(D).png' 
-      : '/cases/logo(W).png';
-  }, [resolvedTheme, isMounted]);
+  const logoPath = '/cases/logo(W).png';
 
   // テクスチャを読み込む関数（依存配列を最適化）
   const loadTexture = useCallback(() => {
@@ -226,11 +218,7 @@ export default function IPhone3DViewer({ onRefresh }: { onRefresh?: () => void }
 
 
   return (
-    <div className={`w-full h-[500px] relative rounded-xl overflow-hidden ${
-      resolvedTheme === 'dark' 
-        ? 'bg-gradient-to-br from-[#0b1220] via-[#1e293b] to-[#0b1220]' 
-        : 'bg-gradient-to-br from-[#f8f9fa] via-[#ffffff] to-[#f0f2f5]'
-    }`}>
+    <div className="w-full h-[500px] relative rounded-xl overflow-hidden bg-gradient-to-br from-[#f8f9fa] via-[#ffffff] to-[#f0f2f5]">
       {/* ローディングオーバーレイ */}
       {(isLoading || (!textures.logo && !loadError)) && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-10">

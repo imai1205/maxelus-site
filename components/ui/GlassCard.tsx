@@ -32,8 +32,8 @@ export function GlassCard({
   const baseClasses = `
     rounded-2xl md:rounded-3xl
     ${variant === "light" 
-      ? "bg-white/70 dark:bg-[#1e293b]/70" 
-      : "bg-[#1e293b]/70 dark:bg-white/10"
+      ? "bg-white/70" 
+      : "bg-[#1e293b]/70"
     }
     backdrop-blur-xl
     border border-white/25

@@ -160,7 +160,7 @@ export default function PuzzleDragDrop() {
     <div className="w-full max-w-2xl mx-auto">
       <div
         ref={gridRef}
-        className="relative aspect-square bg-gradient-to-br from-[#f8f9fa] to-[#e9ecef] dark:from-[#1e293b] dark:to-[#0b1220] rounded-2xl p-4 shadow-xl"
+        className="relative aspect-square bg-gradient-to-br from-[#f8f9fa] to-[#e9ecef] rounded-2xl p-4 shadow-xl"
         style={{
           display: "grid",
           gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
@@ -175,8 +175,7 @@ export default function PuzzleDragDrop() {
           return (
             <div
               key={tile.id}
-              className={`
-                relative aspect-square rounded-lg flex items-center justify-center
+              className={`relative aspect-square rounded-lg flex items-center justify-center
                 bg-gradient-to-br ${tile.color}
                 text-[#1a1a1a] font-bold text-lg md:text-xl
                 cursor-grab active:cursor-grabbing
@@ -200,7 +199,7 @@ export default function PuzzleDragDrop() {
           );
         })}
       </div>
-      <p className="text-[#6b7280] dark:text-[#9ca3af] text-sm md:text-base mt-6 text-center">
+      <p className="text-[#6b7280] text-sm md:text-base mt-6 text-center">
         ドラッグ&ドロップでタイルを動かせます（パズドラ風インタラクション）
       </p>
     </div>

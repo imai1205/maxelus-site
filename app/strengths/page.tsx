@@ -19,38 +19,8 @@ interface Strength {
   title: string;
   description: string;
   features: string[];
-  icon: string;
   order_number: number;
 }
-
-// アイコンマップ
-const iconMap: Record<string, React.ReactNode> = {
-  sparkles: (
-    <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-    </svg>
-  ),
-  demo: (
-    <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672h-6.75a2.25 2.25 0 01-2.25-2.25V4.5a2.25 2.25 0 012.25-2.25h6.75a2.25 2.25 0 012.25 2.25v15.222a2.25 2.25 0 01-2.25 2.25zM9.75 4.5v15.222M12 9.75h.008v.008H12V9.75z" />
-    </svg>
-  ),
-  operation: (
-    <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-    </svg>
-  ),
-  cms: (
-    <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-    </svg>
-  ),
-  scale: (
-    <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-    </svg>
-  ),
-};
 
 // フォールバック用のデータ
 const fallbackStrengths = [
@@ -63,11 +33,6 @@ const fallbackStrengths = [
       "3D表現・アニメーション・インタラクション（離脱を減らす）",
       "「かっこいい」だけじゃなく、理解しやすい導線に落とし込む"
     ],
-    icon: (
-      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-      </svg>
-    )
   },
   {
     id: "demo",
@@ -78,11 +43,6 @@ const fallbackStrengths = [
       "次回打ち合わせで触れる画面がある → 判断が早い",
       "「失敗ゼロへ」＝ 仕様のズレを最初に潰す"
     ],
-    icon: (
-      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672h-6.75a2.25 2.25 0 01-2.25-2.25V4.5a2.25 2.25 0 012.25-2.25h6.75a2.25 2.25 0 012.25 2.25v15.222a2.25 2.25 0 01-2.25 2.25zM9.75 4.5v15.222M12 9.75h.008v.008H12V9.75z" />
-      </svg>
-    )
   },
   {
     id: "operation",
@@ -93,11 +53,6 @@ const fallbackStrengths = [
       "検索・権限・履歴・進捗・データ蓄積まで設計",
       "製造業の現場フロー前提（図面・見積・発注・工程…）"
     ],
-    icon: (
-      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-      </svg>
-    )
   },
   {
     id: "cms",
@@ -108,11 +63,6 @@ const fallbackStrengths = [
       "エンジニアがいなくても更新できる状態にする",
       "「作って終わり」じゃなく、運用コストを下げる"
     ],
-    icon: (
-      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-      </svg>
-    )
   },
   {
     id: "scale",
@@ -123,11 +73,6 @@ const fallbackStrengths = [
       "データが貯まるほどAI/OCR/検索が強くなる設計",
       "Webアプリ・業務システムへ段階的に広げられる"
     ],
-    icon: (
-      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-      </svg>
-    )
   }
 ];
 
@@ -147,7 +92,6 @@ export default function StrengthsPage() {
       title: s.title,
       description: s.description,
       features: s.features,
-      icon: typeof s.icon === 'string' ? s.icon : 'sparkles',
       order_number: i + 1,
     }))
   );
@@ -216,7 +160,7 @@ export default function StrengthsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0b1220] font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
@@ -261,11 +205,11 @@ export default function StrengthsPage() {
                 {stats.map((stat, index) => (
                   <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
                     <div className="text-center">
-                      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-1 md:mb-2">
+                      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a1a1a] mb-1 md:mb-2">
                         <AnimatedCounter end={stat.value} duration={2000} />
                         <span className="text-sm sm:text-lg md:text-xl lg:text-2xl text-[#fdc700]">{stat.suffix}</span>
                       </div>
-                      <p className="text-xs sm:text-sm md:text-base text-[#6b7280] dark:text-[#9ca3af] break-words">{stat.label}</p>
+                      <p className="text-xs sm:text-sm md:text-base text-[#6b7280] break-words">{stat.label}</p>
                     </div>
                   </AnimatedSection>
                 ))}
@@ -274,13 +218,13 @@ export default function StrengthsPage() {
             <AnimatedSection animation="fade-up" className="relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>STRENGTHS</span>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-3 md:mb-4 px-2 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>STRENGTHS</span>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] text-center mb-3 md:mb-4 px-2 relative">
                     5つの強み
                   </h2>
                 </div>
               </div>
-              <p className="text-sm sm:text-base text-[#6b7280] dark:text-[#9ca3af] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2 relative">
+              <p className="text-sm sm:text-base text-[#6b7280] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2 relative">
                 抽象的な「強み」ではなく、具体的な特徴でお伝えします。
               </p>
             </AnimatedSection>
@@ -290,25 +234,23 @@ export default function StrengthsPage() {
               {strengths.map((strength, index) => (
                 <AnimatedSection key={strength.id} animation="fade-up" delay={Math.min(index * 50, 300)}>
                   <TiltCard maxTilt={3} className="h-full">
-                    <div className="bg-white dark:bg-[#1e293b] rounded-xl md:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#e5e7eb] dark:border-[#374151] h-full flex flex-col">
+                    <div className="bg-white rounded-xl md:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#e5e7eb] h-full flex flex-col">
                       <div className="p-4 md:p-6 flex-1">
-                        {/* Icon & Number */}
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-lg md:rounded-xl flex items-center justify-center text-[#1a1a1a] flex-shrink-0 shadow-md">
-                            {iconMap[strength.icon] || iconMap.sparkles}
-                          </div>
-                          <span className="text-xs md:text-sm text-[#fdc700] font-bold tracking-wider">
+                        {/* Number */}
+                        <div className="mb-4">
+                          <span className="text-2xl md:text-3xl text-[#fdc700] font-bold tracking-[0.2em] tabular-nums">
                             0{index + 1}
                           </span>
+                          <div className="mt-2 h-px w-10 bg-[#e5e7eb]" />
                         </div>
-                        
+
                         {/* Title */}
-                        <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 md:mb-3 leading-tight">
+                        <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#1a1a1a] mb-2 md:mb-3 leading-tight">
                           {strength.title}
                         </h3>
                         
                         {/* Description */}
-                        <p className="text-xs sm:text-sm md:text-base text-[#6b7280] dark:text-[#9ca3af] mb-3 md:mb-4 leading-relaxed line-clamp-3">
+                        <p className="text-xs sm:text-sm md:text-base text-[#6b7280] mb-3 md:mb-4 leading-relaxed line-clamp-3">
                           {strength.description}
                         </p>
                         
@@ -316,13 +258,8 @@ export default function StrengthsPage() {
                         {strength.features && strength.features.length > 0 && (
                           <ul className="space-y-1.5 md:space-y-2">
                             {strength.features.slice(0, 2).map((feature, i) => (
-                              <li key={i} className="flex items-start gap-2">
-                                <div className="w-3 h-3 md:w-4 md:h-4 bg-[#fff100] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                  <svg className="w-2 h-2 md:w-2.5 md:h-2.5 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                  </svg>
-                                </div>
-                                <span className="text-xs sm:text-sm text-[#1a1a1a] dark:text-[#f9fafb] leading-relaxed break-words line-clamp-2">{feature}</span>
+                              <li key={i} className="border-l-2 border-[#fff100] pl-3">
+                                <span className="text-xs sm:text-sm text-[#1a1a1a] leading-relaxed break-words line-clamp-2">{feature}</span>
                               </li>
                             ))}
                           </ul>
@@ -337,18 +274,18 @@ export default function StrengthsPage() {
         </section>
 
         {/* 対応可能なサービスデモセクション */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa] dark:bg-[#1e293b]">
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fafafa]">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade-up" className="relative">
               <div className="relative flex justify-center">
                 <div className="relative inline-block">
-                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 dark:text-white/25 absolute" style={{ opacity: 0.25 }}>SHOWCASE</span>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] dark:text-[#f9fafb] text-center mb-3 md:mb-4 px-2 relative">
+                  <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>SHOWCASE</span>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] text-center mb-3 md:mb-4 px-2 relative">
                     ホームページ・Webアプリ・iOSアプリ、全部できます
                   </h2>
                 </div>
               </div>
-              <p className="text-sm sm:text-base text-[#6b7280] dark:text-[#9ca3af] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2 relative">
+              <p className="text-sm sm:text-base text-[#6b7280] text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto px-2 relative">
                 実際のデモ画面で、完成イメージを体験してください。
               </p>
             </AnimatedSection>
@@ -359,9 +296,9 @@ export default function StrengthsPage() {
                 <TiltCard maxTilt={5} className="h-full w-full">
                   <Link
                     href="/services"
-                    className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group flex flex-col"
+                    className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group flex flex-col"
                   >
-                    <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
+                    <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center flex-shrink-0">
                       <Image 
                         src="/cases/homepage.png" 
                         alt="ホームページ"
@@ -372,13 +309,10 @@ export default function StrengthsPage() {
                       />
                     </div>
                     <div className="p-4 md:p-6 flex-1 flex flex-col">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">ホームページ</h3>
-                      <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">WordPressではできない体験型Web</p>
-                      <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">ホームページ</h3>
+                      <p className="text-xs sm:text-sm text-[#6b7280] flex-1">WordPressではできない体験型Web</p>
+                      <div className="mt-3 text-xs text-[#fff100] font-medium group-hover:translate-x-1 transition-transform">
                         詳しく見る
-                        <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
                       </div>
                     </div>
                   </Link>
@@ -390,9 +324,9 @@ export default function StrengthsPage() {
                 <TiltCard maxTilt={5} className="h-full w-full">
                   <button
                     onClick={() => setShowDemoModal(true)}
-                    className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group text-left flex flex-col"
+                    className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group text-left flex flex-col"
                   >
-                    <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
+                    <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center flex-shrink-0">
                       <Image 
                         src="/cases/nail.png" 
                         alt="Webアプリ"
@@ -403,13 +337,10 @@ export default function StrengthsPage() {
                       />
                     </div>
                     <div className="p-4 md:p-6 flex-1 flex flex-col">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">Webアプリ</h3>
-                      <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">業務効率化・DXアプリ</p>
-                      <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">Webアプリ</h3>
+                      <p className="text-xs sm:text-sm text-[#6b7280] flex-1">業務効率化・DXアプリ</p>
+                      <div className="mt-3 text-xs text-[#fff100] font-medium group-hover:translate-x-1 transition-transform">
                         デモを表示
-                        <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
                       </div>
                     </div>
                   </button>
@@ -421,9 +352,9 @@ export default function StrengthsPage() {
                 <TiltCard maxTilt={5} className="h-full w-full">
                   <Link
                     href="/lp/full-order-app-development"
-                    className="bg-white dark:bg-[#0b1220] rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group flex flex-col"
+                    className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full w-full block group flex flex-col"
                   >
-                    <div className="aspect-video bg-[#fafafa] dark:bg-[#1e293b] overflow-hidden relative flex items-center justify-center flex-shrink-0">
+                    <div className="aspect-video bg-[#fafafa] overflow-hidden relative flex items-center justify-center flex-shrink-0">
                       <Image 
                         src="/cases/IPhoneFrame-car.png" 
                         alt="iOSアプリ"
@@ -434,13 +365,10 @@ export default function StrengthsPage() {
                       />
                     </div>
                     <div className="p-4 md:p-6 flex-1 flex flex-col">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] dark:text-[#f9fafb] mb-2 group-hover:text-[#fdc700] transition-colors">iOSアプリ</h3>
-                      <p className="text-xs sm:text-sm text-[#6b7280] dark:text-[#9ca3af] flex-1">ネイティブアプリ開発</p>
-                      <div className="mt-3 text-xs text-[#fff100] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1a1a1a] mb-2 group-hover:text-[#fdc700] transition-colors">iOSアプリ</h3>
+                      <p className="text-xs sm:text-sm text-[#6b7280] flex-1">ネイティブアプリ開発</p>
+                      <div className="mt-3 text-xs text-[#fff100] font-medium group-hover:translate-x-1 transition-transform">
                         詳しく見る
-                        <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
                       </div>
                     </div>
                   </Link>
@@ -460,15 +388,14 @@ export default function StrengthsPage() {
               className="relative bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={() => setShowDemoModal(false)}
-                className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all hover:scale-110"
-                aria-label="閉じる"
-              >
-                <svg className="w-6 h-6 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+              <div className="absolute top-4 right-4 z-10">
+                <button
+                  onClick={() => setShowDemoModal(false)}
+                  className="bg-white/90 hover:bg-white rounded-full px-4 py-2 text-sm font-medium text-[#1a1a1a] shadow-lg transition-all hover:scale-105"
+                >
+                  閉じる
+                </button>
+              </div>
               <div className="p-8">
                 <h3 className="text-2xl font-bold text-[#1a1a1a] mb-4 text-center">サロン予約アプリデモ</h3>
                 <SalonReservationAppMockup />
@@ -494,14 +421,11 @@ export default function StrengthsPage() {
                 課題を整理するところから、一緒にスタートしましょう。
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link 
+                <Link
                   href={pageSettings?.cta_primary_href || '/contact'}
-                  className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-4 rounded-full transition-all hover:scale-105"
+                  className="inline-flex items-center justify-center bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-4 rounded-full transition-all hover:scale-105"
                 >
                   {pageSettings?.cta_primary_text || '無料相談する'}
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
                 </Link>
                 <Link 
                   href={pageSettings?.cta_secondary_href || '/services'}
