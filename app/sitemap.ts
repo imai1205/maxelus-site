@@ -25,9 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/strengths`,
+      url: `${baseUrl}/works`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // サービス詳細ページ（動的）
   const servicePages: MetadataRoute.Sitemap = servicesData.map((service) => ({
-    url: `${baseUrl}/services/${service.id}`,
+    url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
     priority: 0.8,

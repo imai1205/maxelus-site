@@ -25,14 +25,14 @@ export const metadata: Metadata = {
     default: `${siteName} | DX・ホームページ作成・Webアプリ開発`,
     template: `%s | ${siteName}`,
   },
-  description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
+  description: "MAXELUSは、Webサイト制作・業務アプリ開発・AI活用支援を通じて、現場で使われる仕組みを設計・開発する会社です。業務を整え、大切なことに時間を使える世界へ。",
   keywords: ["DX", "ホームページ作成", "Webアプリ開発", "業務システム", "システム開発", "マクセラス"],
   openGraph: {
     title: {
       default: `${siteName} | DX・ホームページ作成・Webアプリ開発`,
       template: `%s | ${siteName}`,
     },
-    description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
+    description: "MAXELUSは、Webサイト制作・業務アプリ開発・AI活用支援を通じて、現場で使われる仕組みを設計・開発する会社です。業務を整え、大切なことに時間を使える世界へ。",
     type: "website",
     siteName: siteName,
     images: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
       default: `${siteName} | DX・ホームページ作成・Webアプリ開発`,
       template: `%s | ${siteName}`,
     },
-    description: "完全オーダーメイドで課題を解決するWEB・アプリ制作。ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします。",
+    description: "MAXELUSは、Webサイト制作・業務アプリ開発・AI活用支援を通じて、現場で使われる仕組みを設計・開発する会社です。業務を整え、大切なことに時間を使える世界へ。",
   },
   icons: {
     icon: '/favicon.ico',
