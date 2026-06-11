@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Footer from "../../components/Footer";
+import PageHero from "../../components/PageHero";
 import { Reveal, StaggerGroup } from "@/components/ui";
 import {
   servicesData,
@@ -39,53 +40,48 @@ export default async function ServiceDetailPage({
     <div className="min-h-screen bg-white font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero */}
-        <section className="py-16 md:py-24 px-4 md:px-8 border-b border-[#e5e7eb]">
+        <PageHero
+          bgText="SERVICE"
+          kicker={categoryNames[service.category]}
+          title={service.title}
+          description={service.catch}
+        >
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-4 rounded-full transition-all hover:scale-105"
+            >
+              無料相談する
+            </Link>
+            {service.lpHref && (
+              <Link
+                href={service.lpHref}
+                className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-medium px-8 py-4 rounded-full border border-white/30 transition-all hover:scale-105"
+              >
+                紹介ページを見る
+              </Link>
+            )}
+          </div>
+          <nav className="flex items-center justify-center gap-2 text-sm text-white/50">
+            <Link href="/" className="hover:text-white transition-colors">
+              ホーム
+            </Link>
+            <span>/</span>
+            <Link href="/services" className="hover:text-white transition-colors">
+              サービス
+            </Link>
+            <span>/</span>
+            <span className="text-white">{service.title}</span>
+          </nav>
+        </PageHero>
+
+        {/* リード文 */}
+        <section className="py-12 md:py-16 px-4 md:px-8 border-b border-[#e5e7eb]">
           <div className="max-w-4xl mx-auto">
             <Reveal>
-              <nav className="flex items-center gap-2 text-sm text-[#6b7280] mb-8">
-                <Link href="/" className="hover:text-[#1a1a1a] transition-colors">
-                  ホーム
-                </Link>
-                <span>/</span>
-                <Link
-                  href="/services"
-                  className="hover:text-[#1a1a1a] transition-colors"
-                >
-                  サービス
-                </Link>
-                <span>/</span>
-                <span className="text-[#1a1a1a]">{service.title}</span>
-              </nav>
-
-              <p className="text-sm tracking-widest text-[#6b7280] mb-4">
-                {categoryNames[service.category]}
-              </p>
-              <h1 className="text-3xl md:text-5xl font-bold text-[#1a1a1a] mb-4 leading-tight">
-                {service.title}
-              </h1>
-              <p className="text-lg md:text-2xl text-[#1a1a1a] font-medium border-l-2 border-l-[#fdc700] pl-4 mb-6">
-                {service.catch}
-              </p>
-              <p className="text-base md:text-lg text-[#6b7280] leading-relaxed mb-8 max-w-3xl">
+              <p className="text-base md:text-lg text-[#6b7280] leading-relaxed">
                 {page.lead}
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-4 rounded-full transition-all hover:scale-105"
-                >
-                  無料相談する
-                </Link>
-                {service.lpHref && (
-                  <Link
-                    href={service.lpHref}
-                    className="inline-flex items-center justify-center bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-8 py-4 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
-                  >
-                    紹介ページを見る
-                  </Link>
-                )}
-              </div>
             </Reveal>
           </div>
         </section>

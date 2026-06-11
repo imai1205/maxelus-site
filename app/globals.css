@@ -17,6 +17,8 @@
   --bg-navy: #0b1220;
   /* ホバー等のゴールドアクセント。--primary-dark と同系で新色を増やさない */
   --accent-gold: #fdc700;
+  /* ハニーゴールド (プレミアム路線)。下層ヒーローのキッカーとトップのアクセント */
+  --accent-honey: #e6bd71;
 }
 
 @theme inline {

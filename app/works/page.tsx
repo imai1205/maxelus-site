@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import PageHero from "../components/PageHero";
 import { Reveal, StaggerGroup } from "@/components/ui";
 import { industries, cases, type Case } from "../data/casesData";
 
@@ -80,22 +81,12 @@ export default function WorksPage() {
     <div className="min-h-screen bg-white font-sans">
       <main className="pt-14 md:pt-16">
         {/* Hero */}
-        <section className="py-16 md:py-24 px-4 md:px-8 border-b border-[#e5e7eb]">
-          <div className="max-w-5xl mx-auto">
-            <Reveal>
-              <p className="text-sm tracking-widest text-[#6b7280] mb-4">
-                Works
-              </p>
-              <h1 className="text-3xl md:text-5xl font-bold text-[#1a1a1a] mb-6 leading-tight">
-                実績
-              </h1>
-              <p className="text-base md:text-lg text-[#6b7280] max-w-3xl leading-relaxed">
-                製造業の図面管理・販売管理から、店舗・医療・SaaSまで。
-                業種ごとの課題と、その解決の形を紹介します。
-              </p>
-            </Reveal>
-          </div>
-        </section>
+        <PageHero
+          bgText="WORKS"
+          kicker="WORKS"
+          title="実績"
+          description="製造業の図面管理・販売管理から、店舗・医療・SaaSまで。業種ごとの課題と、その解決の形を紹介します。"
+        />
 
         {/* 業種フィルタ */}
         <div className="sticky top-14 md:top-16 z-40 bg-white/95 border-b border-[#e5e7eb]">
