@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { getServiceBySlug } from "../../data/services";
+import { getServiceBySlug } from "../../data/servicesData";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const service = getServiceBySlug(params.slug);
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
 
   if (!service) {
     return {
@@ -17,10 +18,10 @@ export async function generateMetadata({
 
   return {
     title: `${service.title} | マクセラス`,
-    description: service.summary || `${service.title}の詳細情報。${service.catch}`,
+    description: service.shortDesc,
     openGraph: {
       title: `${service.title} | マクセラス`,
-      description: service.summary || `${service.title}の詳細情報。${service.catch}`,
+      description: service.shortDesc,
       type: "website",
     },
   };
