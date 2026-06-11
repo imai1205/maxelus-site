@@ -43,7 +43,7 @@ export default function Header() {
               isActive("/") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
-            ホーム
+            Top
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
               isActive("/") ? "w-full" : "w-0 group-hover:w-full"
             }`} />
@@ -55,21 +55,21 @@ export default function Header() {
               pathname.startsWith("/services") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
-            サービス
+            Services
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
               pathname.startsWith("/services") ? "w-full" : "w-0 group-hover:w-full"
             }`} />
           </Link>
           <Link 
-            href="/strengths" 
+            href="/works" 
             prefetch={true}
             className={`text-sm nav-link relative group transition-all duration-200 ${
-              isActive("/strengths") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
+              isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
-            強み
+            Works
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
-              isActive("/strengths") ? "w-full" : "w-0 group-hover:w-full"
+              isActive("/works") ? "w-full" : "w-0 group-hover:w-full"
             }`} />
           </Link>
           <Link 
@@ -79,7 +79,7 @@ export default function Header() {
               isActive("/about") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
-            会社情報
+            About
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
               isActive("/about") ? "w-full" : "w-0 group-hover:w-full"
             }`} />
@@ -91,7 +91,7 @@ export default function Header() {
               isActive("/contact") ? "text-[#0b1220] font-medium" : "text-[#666] hover:text-[#0b1220]"
             }`}
           >
-            お問い合わせ
+            Contact
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fff100] transition-all duration-300 ${
               isActive("/contact") ? "w-full" : "w-0 group-hover:w-full"
             }`} />
@@ -134,7 +134,7 @@ export default function Header() {
             className={`text-base py-2 transition-colors ${isActive("/") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
-            ホーム
+            Top
           </Link>
           <Link 
             href="/services" 
@@ -142,15 +142,15 @@ export default function Header() {
             className={`text-base py-2 transition-colors ${pathname.startsWith("/services") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
-            サービス
+            Services
           </Link>
           <Link 
-            href="/strengths" 
+            href="/works" 
             prefetch={true}
-            className={`text-base py-2 transition-colors ${isActive("/strengths") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
+            className={`text-base py-2 transition-colors ${isActive("/works") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
-            強み
+            Works
           </Link>
           <Link 
             href="/about" 
@@ -158,7 +158,7 @@ export default function Header() {
             className={`text-base py-2 transition-colors ${isActive("/about") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
-            会社情報
+            About
           </Link>
           <Link 
             href="/contact" 
@@ -166,7 +166,7 @@ export default function Header() {
             className={`text-base py-2 transition-colors ${isActive("/contact") ? "text-[#0b1220] font-medium" : "text-[#666]"}`}
             onClick={() => setMobileMenuOpen(false)}
           >
-            お問い合わせ
+            Contact
           </Link>
           <Link 
             href="/contact" 

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import type { Service } from "@/app/data/servicesData";
 import AppScreensGallery from "./AppScreensGallery";
@@ -45,7 +44,7 @@ export default function ServiceDetailPanel({
         </div>
 
         {/* デモ画面（完全オーダーメイドアプリ開発のみ） */}
-        {service.id === 'full-order-app-development' && (
+        {service.slug === 'full-order-app-development' && (
           <section className="mb-8">
             <AppScreensGallery />
           </section>
@@ -156,43 +155,23 @@ export default function ServiceDetailPanel({
         <section className="pt-6 border-t border-[#e5e7eb]">
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
+              href={`/services/${service.slug}`}
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#1a1a1a] hover:bg-[#333333] text-white font-medium px-6 py-3 rounded-full transition-all hover:scale-105"
+            >
+              詳細ページを見る
+            </Link>
+            <Link
               href="/contact"
               className="flex-1 inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 py-3 rounded-full transition-all hover:scale-105"
             >
               無料相談する
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
             </Link>
-            {service.ctaType === "lp" && service.lpHref && (
+            {service.lpHref && (
               <Link
                 href={service.lpHref}
                 className="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium px-6 py-3 rounded-full border border-[#e5e7eb] transition-all hover:scale-105"
               >
-                詳しく見る
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
+                紹介ページを見る
               </Link>
             )}
           </div>
