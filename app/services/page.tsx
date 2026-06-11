@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import ServiceDetailPanel from "../components/ServiceDetailPanel";
@@ -70,9 +71,18 @@ function ServiceCard({
   );
 }
 
-export default function ServicesPage() {
+function ServicesPageContent() {
+  // トップの Business カードから ?category= で初期タブを指定できる
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const initialCategory = categoryOrder.includes(
+    categoryParam as ServiceCategory
+  )
+    ? (categoryParam as ServiceCategory)
+    : "web-creation";
+
   const [activeCategory, setActiveCategory] =
-    useState<ServiceCategory>("web-creation");
+    useState<ServiceCategory>(initialCategory);
   const [openServiceSlug, setOpenServiceSlug] = useState<string | null>(null);
 
   const handleCategoryClick = (category: ServiceCategory) => {
@@ -172,5 +182,13 @@ export default function ServicesPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function ServicesPage() {
+  return (
+    <Suspense>
+      <ServicesPageContent />
+    </Suspense>
   );
 }
