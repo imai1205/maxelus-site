@@ -13,6 +13,10 @@
   --bg-cream: #fffef0;
   --success: #00c950;
   --danger: #fb2c36;
+  /* 濃紺セクション (Mission 等) 用。既存のダーク背景色を流用 */
+  --bg-navy: #0b1220;
+  /* ホバー等のゴールドアクセント。--primary-dark と同系で新色を増やさない */
+  --accent-gold: #fdc700;
 }
 
 @theme inline {
