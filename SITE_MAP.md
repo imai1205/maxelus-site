@@ -16,9 +16,11 @@
 ├─ /strengths          強み (5つの強み + 対応領域)
 ├─ /about              会社情報 (MVV / 会社概要 / 社名の由来 / 代表挨拶)
 ├─ /contact            お問い合わせ (フォーム + 連絡先)
-└─ /lp/<name>          独立LP 7本 (各独自ヘッダー・メインナビ非表示)
+└─ /lp/<name>          独立LP 9本 (各独自ヘッダー・メインナビ非表示)
     ├─ /lp/full-order-app-development   完全オーダーメイドアプリ開発 (ヒーローに HeroAppSlider 流用)
-    ├─ /lp/business-dx-design           業務DX設計 (As Is / To Be)
+    ├─ /lp/website-lp-production         ホームページ・LP制作 (計測・改善訴求)
+    ├─ /lp/business-dx-design           業務効率化支援 (業務データ連携・As Is/To Be)
+    ├─ /lp/products                      弊社プロダクト紹介 (8カード)
     ├─ /lp/zumen-connect                図面コネクト
     ├─ /lp/ai-ocr-automation            AI機能組込み・自動化
     ├─ /lp/interactive-web-3d           体験型Web・3D
@@ -113,8 +115,10 @@ zumen-connect / sales-management / web-app-development / website-development / i
 
 | LP | 内容 |
 |---|---|
-| full-order-app-development | 完全オーダーメイドアプリ開発。ヒーローは HeroAppSlider 流用。フォーム送信(inquiryType: 完全オーダーメイドアプリ開発) |
-| business-dx-design | 業務DX設計。「その業務、システム化する前に整理できていますか？」よくある課題→進め方(As Is/To Be)→支援内容→初期トライアル→フォーム |
+| full-order-app-development | 完全オーダーメイドアプリ開発(サービス01の飛び先)。ヒーローは HeroAppSlider 流用。inquiryType: 完全オーダーメイドアプリ開発 |
+| website-lp-production | ホームページ・LP制作(サービス02の飛び先)。計測・改善(GA4/タグ/クリック計測)+ SEO・MEO 管理を訴求。Hero に管理画面風モック。inquiryType: ホームページ・LP制作 |
+| business-dx-design | 業務効率化支援(サービス03の飛び先)。「バラバラの業務データをつなぎ〜」よくある課題→As Is/To Be→連携ツール→AI・OCR→代表事例→進め方→初期トライアル→フォーム。inquiryType: 業務DX設計 |
+| products | 弊社プロダクト紹介(サービス04の飛び先)。products.ts 8件をカード表示。個別LPあり4件はリンク、なし4件は相談導線。inquiryType: 弊社プロダクト |
 | zumen-connect | 図面コネクト(図面・関連資料・見積を、探す時間ゼロへ) |
 | ai-ocr-automation | AI機能組込み・自動化(要約/分類/検索/生成/動画分析) |
 | interactive-web-3d | 体験型Web・3D(WordPressではできない体験型Web) |

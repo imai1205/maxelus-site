@@ -200,7 +200,7 @@ export default function Home() {
   const reduceMotion = usePrefersReducedMotion();
 
   const content = (
-    <div className="min-h-screen font-sans overflow-x-hidden">
+    <div className="min-h-screen font-sans overflow-x-clip">
       <main className="pt-14 md:pt-16">
         <HeroSection />
         {/* スクロール同期のブランドロゴ演出（白背景） */}

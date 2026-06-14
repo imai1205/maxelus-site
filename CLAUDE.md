@@ -21,7 +21,7 @@
 │   │   └── [slug]/            # サービス詳細 (services.ts の 5 件)。layout.tsx でメタdata
 │   ├── strengths/page.tsx     # 強み (5 つの強み + 対応領域。ハードコード)
 │   ├── contact/page.tsx       # お問い合わせ。フォーム + 連絡先の 1 カラム
-│   ├── lp/<name>/             # 独立ランディングページ 7 本 (各独自ヘッダー。共通ヘッダーは非表示)
+│   ├── lp/<name>/             # 独立ランディングページ 9 本 (各独自ヘッダー。共通ヘッダーは非表示)。サービスカードの飛び先含む
 │   ├── admin/                 # CMS 管理画面 (Supabase Auth・休止中)
 │   ├── api/                   # API Routes (route.ts は計 14 本)
 │   │   ├── contact/route.ts   # 問い合わせ受付 (POST)。contacts 保存 + Resend
