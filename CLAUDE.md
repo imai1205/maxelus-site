@@ -1,153 +1,147 @@
-# CLAUDE.md
+# マクセラス コーポレートサイト (maxelus-site)
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは Claude Code (claude.ai/code) および開発者向けのプロジェクト説明書。実装時の判断はこのファイルを根拠にすること。各ページの実表示テキストは [SITE_MAP.md](./SITE_MAP.md)、プロジェクトの入口は [README.md](./README.md) を参照。
 
 ## プロジェクト概要
 
-マクセラス (maxelustech.com) のコーポレートサイト。Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS 4 + Framer Motion。3D 表現に react-three-fiber / drei を使用。サイト全体が日本語。
+株式会社マクセラス (maxelustech.com) のコーポレートサイト。Next.js (App Router) で構築した日本語の静的中心サイトで、訪問者の問い合わせを Supabase (`contacts` テーブル) に保存し Resend でメール通知する。CMS 機能 (Supabase + 管理画面) も実装済みだが**現在は休止中**で、公開ページの文言は `app/data/*.ts` と各 `page.tsx` のハードコードを表示している。
 
-## コマンド
+## ディレクトリ構成
+
+```
+.
+├── app/                       # Next.js App Router (ルーティング = フォルダ構成)
+│   ├── page.tsx               # ホーム (8 セクションの営業 LP。単一巨大 client component)
+│   ├── layout.tsx             # ルートレイアウト。共通 SEO メタデータ・ヘッダー・フッター
+│   ├── globals.css            # テーマの CSS 変数 (:root) と keyframes。ライトテーマ固定
+│   ├── sitemap.ts             # /sitemap.xml を生成 (servicesData を動的展開)
+│   ├── about/page.tsx         # 会社情報 (会社概要・MVV・代表挨拶。ハードコード)
+│   ├── services/
+│   │   ├── page.tsx           # サービス一覧 (8 件)。ServiceDetailPanel をアコーディオン表示
+│   │   └── [slug]/            # サービス詳細 (5 件)。layout.tsx でメタdata
+│   ├── strengths/page.tsx     # 強み (5 つの強み + 実績統計。ハードコード)
+│   ├── contact/page.tsx       # 無料相談・お問い合わせ。フォームのみの 1 カラム
+│   ├── lp/<name>/             # 独立ランディングページ 7 本 (ヘッダーナビ非表示)
+│   ├── admin/                 # CMS 管理画面 (Supabase Auth・休止中)
+│   ├── api/                   # API Routes (route.ts は計 14 本)
+│   │   ├── contact/route.ts   # 問い合わせ受付 (POST)。contacts 保存 + Resend
+│   │   ├── debug-env/route.ts # 環境変数確認用デバッグ (GET。本番不可)
+│   │   └── cms/               # CMS の CRUD API (12 本。site/services/strengths/works/assets)
+│   ├── components/            # ページ固有コンポーネント (Header, Footer, StorySlider 等)
+│   └── data/                  # 公開ページの静的表示データ
+│       ├── servicesData.ts    # /services 一覧 (8 件) + sitemap が参照
+│       ├── services.ts        # /services/[slug] 詳細 (5 件)
+│       └── casesData.ts       # ※事例ページ削除後は本文未使用 (LP のデモ画像パス用に残存)
+├── components/
+│   ├── ui/                    # 共有 UI プリミティブ (GlassCard, Section, MotionPress, BubbleBadge)
+│   ├── admin/                 # 管理画面 UI (Sidebar, FormField 等)
+│   └── cms/                   # CMS プレビュー連携 (PreviewClickHandler)
+├── lib/
+│   ├── supabase/              # Supabase クライアント (client=ブラウザ / server=SSR+admin)
+│   └── cms/                   # CMS フェッチ (publicFetch.ts) + zod バリデータ (validators.ts)
+├── public/                    # 静的ファイル。public/cases/ にロゴ・デモ画像 (約 33 点)
+├── supabase/                  # スキーマ・ストレージ・マイグレーション SQL (手動実行)
+│   └── migrations/001_create_contacts_table.sql  # contacts テーブル (migrate が適用する唯一の SQL)
+├── scripts/                   # マイグレーション (run-migration-api.js) / デプロイスクリプト
+├── next.config.ts             # 外部画像ドメイン (Figma / Unsplash) を許可
+├── SITE_MAP.md                # 全ページの実表示テキスト一覧
+└── README.md                  # プロジェクトの入口ドキュメント
+```
+
+## 命名規則
+
+- **ルートセグメント (app/ 配下のフォルダ)**: 小文字または kebab-case。例 `services/`, `lp/zumen-connect/`, 動的は `[slug]`。新規ページもこれに合わせること。
+- **Next.js 規約ファイル**: `page.tsx` / `layout.tsx` / `route.ts` / `sitemap.ts`。役割が固定なのでリネーム禁止。
+- **React コンポーネントファイル**: PascalCase + `.tsx`。例 `Header.tsx`, `GlassCard.tsx`, `ServiceDetailPanel.tsx`。
+- **データ・ユーティリティファイル**: camelCase + `.ts`。例 `servicesData.ts`, `publicFetch.ts`, `validators.ts`。
+- **関数**: React コンポーネントは PascalCase (`export default function Home`)、通常の関数・カスタムフックは camelCase (`createSupabaseServerClient`, `getSiteSettings`, `isSupabaseConfigured`)。
+- **DB カラム / CMS フィールド**: snake_case。例 `inquiry_type`, `created_at`, `hero_title`, `cta_primary_href`。
+- **CMS 識別用 `data-cms-key` 属性**: ドット区切り。例 `site.challenge_title`, `site.faq_0_q`。**復旧用なので削除しないこと**。
+- **適用しない対象 (固有名・そのまま使う)**: ブランド名 `MAXELUS` / `マクセラス`、CSS 変数 `--font-noto-sans-jp` 等の kebab-case、`public/cases/` 配下の既存画像ファイル名 (`logo(W).png` 等、括弧を含むものもそのまま)。
+
+## 技術スタック
+
+- **言語**: TypeScript 5 / React 19.2.3 (パスエイリアス `@/*` → リポジトリ root)
+- **フレームワーク**: Next.js 16.1.4 (App Router)
+- **スタイル**: Tailwind CSS 4 (`@tailwindcss/postcss`)。**tailwind.config は存在しない**。テーマは `app/globals.css` の CSS 変数で管理
+- **アニメーション**: Framer Motion 12.29.0
+- **3D 表現**: three 0.182.0 / @react-three/fiber 9.5.0 / @react-three/drei 10.7.7
+- **バックエンド**: Supabase (@supabase/ssr 0.8.0 / @supabase/supabase-js 2.91.0)
+- **メール送信**: Resend 6.8.0
+- **入力バリデーション**: zod 4.3.5
+- **マイグレーション用 DB ドライバ**: pg 8.17.2
+- **Lint**: ESLint 9 + eslint-config-next 16.1.4
+- **実行基盤**: Node.js。**Docker は使用しない** (Dockerfile / compose なし)。Vercel デプロイを想定
+- **テスト**: テストランナー未導入 (テスト基盤なし)
+
+## 開発コマンド
 
 ```bash
-npm run dev      # 開発サーバー (localhost:3000)
-npm run build    # 本番ビルド
-npm run lint     # ESLint (eslint-config-next の core-web-vitals + typescript)
-npm run migrate  # scripts/run-migration-api.js で contacts テーブルのマイグレーション実行
+# 一括実行（おすすめ）: 初回セットアップして開発サーバーを起動
+npm install && npm run dev          # 依存インストール → http://localhost:3000 で起動
+
+# コミット前の一括チェック（テスト基盤がないため lint + 型 + ビルドで担保）
+npm run lint && npx tsc --noEmit && npm run build
 ```
 
-- テスト基盤は存在しない (テストランナー未導入)。
-- 型チェック単体は `npx tsc --noEmit`。パスエイリアスは `@/*` → リポジトリ root。
-- `npm run deploy` は build + git commit + push を一括実行するスクリプトなので、通常の開発では使わないこと (`scripts/deploy.sh` / `deploy.ps1` も同様)。
-- `npm run migrate` が適用するのは `supabase/migrations/001_create_contacts_table.sql` のみ。Supabase の URL と Service Role Key が必須 (未設定なら exit 1)。`DATABASE_URL` (または `SUPABASE_DB_URL`) 未設定時は SQL を出力して手動実行を案内する。`scripts/run-migration.js` / `run-migration-direct.js` は同機能の別実装 (migrate からは未使用)
-
-## 環境変数 (.env.local)
-
-`supabase/env-example.txt` に記載:
-
-- `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY`
-- `NEXT_PUBLIC_CMS_ASSETS_BUCKET` (cms-assets)
-
-env-example.txt には載っていないが使用されるもの:
-
-- `RESEND_API_KEY` (問い合わせメール送信。未設定時はコンソール出力にフォールバック)
-- `DATABASE_URL` / `SUPABASE_DB_URL` (マイグレーション実行時のみ)
-
-Supabase 未設定でも公開ページは動く。admin はセットアップガイド画面を表示する。
-
-## アーキテクチャ
-
-### 二重データソース: 静的データと CMS
-
-**重要**: CMS 機能は現在公開ページ側でコメントアウトされている (`app/layout.tsx` や `app/page.tsx` の「CMS機能をコメントアウト（将来の復旧用）」を参照)。`app/page.tsx` 内の `data-cms-key` 属性は復旧時の識別用なので残すこと。
-
-- **公開ページの実データソース**: `app/data/*.ts`。表示文言を変えるときはここを編集する。**サービスデータは 2 ファイルに分裂している**: `/services` 一覧と sitemap は `servicesData.ts`、`/services/[slug]` 詳細は `services.ts` を参照。両方の更新が必要な場合がある。事例は `casesData.ts` (/cases)。`homeCasesData.ts` はどこからも import されていない未使用ファイル
-- **CMS 側 (実装済みだが休止中)**: Supabase テーブル (`site_settings` / `services` / `strengths` / `works` / `assets` + history テーブル) → `lib/cms/publicFetch.ts` で取得。`CMSDataProvider` / `CMSLiveUpdater` / `PreviewClickHandler` がライブ更新・プレビュー用
-
-### CMS 管理画面と API
-
-- `/admin/*` — Supabase Auth (email/password) でログインする管理 UI (`app/admin/`、共通 UI は `components/admin/`)。認証チェックは各ページの `useEffect` で `auth.getUser()` → 未認証なら `/admin/login` へリダイレクトするクライアントサイド方式
-- `/api/cms/*` — CRUD API。**全ての mutation は冒頭で `supabase.auth.getUser()` による認証チェックを行う**。新規 CMS ルートを追加する場合もこのパターンに従う。GET は混在: 一覧系は認証チェックあり、`/api/cms/site` `/api/cms/works/public` `/api/cms/services/[id]` `/api/cms/strengths/[id]` は認証チェックなし (RLS の published フィルタに依存)
-- 入力バリデーションは `lib/cms/validators.ts` の zod スキーマに集約
-- `app/api/cms/site/route.ts` はテーブル未作成時のフォールバックとしてデフォルトのサイト設定オブジェクトを持つ。PUT は実テーブルのカラム一覧を取得して存在するカラムのみ更新する仕組みのため、スキーマ変更時は要注意
-- サイト設定には履歴・復元機能あり (`site_settings_history` テーブル + `/api/cms/site/history` / `history/restore`)
-
-### Supabase クライアントの使い分け (`lib/supabase/`)
-
-- `client.ts` — ブラウザ用 (`createBrowserClient`)
-- `server.ts` — Server Component / Route Handler 用 (`createServerClient`、cookie 連携)。`createSupabaseAdminClient()` は Service Role Key で RLS をバイパスする — サーバー側専用、認証チェック後のみ使用 (例外: `/api/contact` の contacts INSERT)
-- スキーマは Supabase SQL Editor で `supabase/schema.sql` → `supabase/storage.sql` を手動実行する (`SUPABASE_SETUP.md` 参照)
-- RLS は `published` フラグで公開制御 (匿名 SELECT は published=true のみ、書き込みは認証必須)。コンテンツテーブルにはデフォルトデータが INSERT 済み
-
-### ページ構成
-
-- 公開ページ: `/` `/about` `/services` `/services/[slug]` `/strengths` `/contact`。多くは大きな単一の client component。事例ページ (`/cases` `/works`) は作り直し前提で削除済み (`public/cases/` の画像はロゴ等が参照するため残存)
-- LP: `app/lp/<name>/` 配下に独立したランディングページ群 (7 本: zumen-connect, ai-ocr-automation など)。各 LP は layout.tsx でメタデータだけ定義し、本文・問い合わせフォーム (`/api/contact` へ POST) は page.tsx にハードコード
-- 各ルートの layout.tsx が SEO メタデータを定義 (`METADATA_OPTIMIZATION.md` に方針)
-- `app/api/contact/route.ts` は contacts テーブル保存 (失敗許容) + Resend でメール送信の二段構え
-- 外部画像ドメインは `next.config.ts` の `images.remotePatterns` (Figma / Unsplash) に追加が必要
-
-### UI とテーマ
-
-- 共有 UI プリミティブは `components/ui/` (GlassCard, Section, MotionPress, BubbleBadge。`index.ts` から re-export)。ページ固有コンポーネントは `app/components/`
-- Tailwind CSS 4 のため tailwind.config は存在しない。テーマは `app/globals.css` の CSS 変数 (`:root`) と `@theme inline` ブロックで管理。keyframes アニメーションも globals.css に集約
-- **ダークモードは廃止済み** (ライトテーマ固定)。OS 設定に関わらず常にライト配色で表示する。新規 UI に `dark:` バリアントや `prefers-color-scheme` 分岐を追加しないこと
-- デザイン方針: アイコン (SVG / 絵文字) は使わない。番号タイポグラフィ「01/02/03」+ 細罫線 + 左ボーダーアクセントで構成する (脱 AI 感のための編集デザイン路線)
-- ブランドカラー: イエロー `#fff100` (hover は `#fdc700`)。公開ページの配色は globals.css の CSS 変数が正 (テキスト `#1a1a1a`、ダーク背景 `#0b1220` 等)。admin UI はネイビー `#1a1f2e` × イエローの配色をクラスにハードコード
-- 重量級コンポーネント (SalonReservationAppMockup, StorySlider 等) は `dynamic(..., { ssr: false })` で読み込む
-
-## サイト構成と主要文言 (訪問者視点)
-
-文言変更タスクの起点となる、ページツリーと各ページの実表示文言の整理。詳細な本文は各ページ/データファイルを参照。
-
-```
-/                  ホーム (課題解決型の営業 LP 構成)
-├─ /services       サービス一覧 (3 カテゴリ × 8 サービス)
-│   └─ /services/[slug]  サービス詳細 (5 件、一覧とは別データ)
-├─ /strengths      強み (5 つの強み + 実績統計)
-├─ /about          会社情報 (概要 / Mission・Vision・Value / 代表挨拶)
-├─ /contact        無料相談・お問い合わせ (フォームのみ)
-└─ /lp/<name>      独立 LP 7 本 (ヘッダーナビには出ない)
+```bash
+# 個別実行
+npm run dev        # 開発サーバー (localhost:3000)
+npm run build      # 本番ビルド
+npm run start      # 本番サーバー (build 後)
+npm run lint       # ESLint
+npx tsc --noEmit   # 型チェック単体
+npm run migrate    # contacts テーブルのマイグレーション (要 Supabase 環境変数)
 ```
 
-- ヘッダーナビ: ホーム / サービス / 強み / 会社情報 / お問い合わせ + CTA「無料相談する」
-- フッターナビ: ホーム / お問い合わせ / 無料相談 + Instagram / Threads (テキストリンク)。コピーライトは「© 2024 MAXELUS」固定。プライバシーポリシー / 利用規約はリンク先未実装 (`href="#"`)
-- サイト全体の頻出 CTA ペア: 「無料相談する」(→/contact) +「サービスを見る」(→/services)
+- `npm run deploy` は build + git commit + push を一括実行するスクリプト。**通常の開発では使用禁止** (`scripts/deploy.sh` / `deploy.ps1` も同様)。
+- `npm run migrate` が適用するのは `supabase/migrations/001_create_contacts_table.sql` のみ。`DATABASE_URL` (または `SUPABASE_DB_URL`) 未設定時は SQL を出力して手動実行を案内する。
 
-### / (ホーム) — セクション順と見出し
+## 環境変数
 
-1. Hero — キッカー「AI × 最新手法」、見出し「完全オーダーメイドで課題解決」「WEB・アプリ制作」
-2. Solution (OUR APPROACH) — 「MAXELUSはオーダーメイド × 伴走で成果から逆算します」(完全オーダーメイド / 企画から運用まで伴走 / 成果から逆算)
-3. Services — 「対応できる内容」5 カード (完全オーダーメイドアプリ開発 / 業務DX設計・開発 / AI機能組込み・自動化 / ホームページ制作 / プロダクト開発)
-4. Challenge (PROBLEM) — 「課題は"ズレ"から起きる」Before/After 各 3 枚
-5. Demo (DEMO、インライン section) — 「触れるデモで合意」+ SalonReservationAppMockup
-6. StorySlider (PROCESS) — 「成果から逆算する設計プロセス」6 ステップ (課題→無料相談→デモ提示→発注→開発→納品・運用)
-7. ServiceTypes — 「ホームページ・Webアプリ・iOSアプリ、全部できます」
-8. CTA — 「社内業務の効率化と売上拡大を加速させませんか？」
+`.env.local` に設定する (雛形: `supabase/env-example.txt`)。**★実際の値・秘密情報はこのファイルやコードに絶対に書かないこと。**
 
-事例 (Works) セクションと FAQ セクションはホームには存在しない。
+| キー | 説明 |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase プロジェクト URL (公開可) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase 匿名キー (公開可・RLS で保護) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Service Role キー (RLS バイパス。**サーバー専用・秘匿**) |
+| `NEXT_PUBLIC_CMS_ASSETS_BUCKET` | CMS アセット用ストレージバケット名 (`cms-assets`) |
+| `RESEND_API_KEY` | 問い合わせメール送信用 (**秘匿**。未設定時はコンソール出力にフォールバック) |
+| `NEXT_PUBLIC_SITE_URL` | サイトの絶対 URL (メタデータ・sitemap 用。既定 `https://maxelustech.com`) |
+| `DATABASE_URL` または `SUPABASE_DB_URL` | マイグレーション実行時のみ必要 (**秘匿**) |
 
-### /services — 「アプリ開発とWeb制作で、ビジネスを最短で形にします。」
+Supabase 未設定でも公開ページは動作する。admin はセットアップガイド画面を表示する。
 
-カテゴリタブ × サービスカード (`servicesData.ts`)。カードクリックで ServiceDetailPanel (固定ラベル: できること / こんな人におすすめ / 進め方 / 料金目安) が開く。FAQ は廃止済み (servicesData の `faq` フィールドは未表示のまま残存):
+## データ（処理）フロー
 
-- **アプリ開発・DX支援**: 完全オーダーメイドアプリ開発 / 業務DX設計 / AIコーディング教育
-- **ホームページ制作（普通→特殊）**: ベーシック (WordPress/Wix) / スペシャル「WordPressではできない体験型Web」
-- **プロダクト**: 図面コネクト / 販売管理 / シミュレーション
+### お問い合わせ送信
+- ユーザー入力 (`/contact` のフォーム / 各 LP のフォーム) → POST `app/api/contact/route.ts` → ① `createSupabaseAdminClient()` で `contacts` テーブルへ INSERT (**失敗してもエラーを返さず続行**) → ② `RESEND_API_KEY` があれば Resend で `info@maxelustech.com` 宛にメール送信、無ければコンソール出力 → `{ success: true }` を返す
 
-### /services/[slug] — 詳細ページは 5 件 (`services.ts`)
+### 公開ページ表示 (現行)
+- 静的データ `app/data/servicesData.ts` (8 件) / `services.ts` (5 件) → 各 `page.tsx` がインポートしてレンダリング (サーバー経由なし)
+- ハードコード文言 → `app/{about,strengths,contact}/page.tsx` と `app/page.tsx` が直接描画
 
-zumen-connect (図面コネクト) / sales-management (製造業向け 販売管理ソフト) / web-app-development (業務Webアプリ開発) / website-development (ホームページ制作) / iphone-app (iPhoneアプリ開発)。一覧 (8 件) と詳細 (5 件) でサービスの切り方・キャッチコピーが一致していない点に注意。
+### サイトマップ / SEO
+- `app/data/servicesData.ts` → `app/sitemap.ts` が動的展開 → `/sitemap.xml`
+- 各ルートの `layout.tsx` の `metadata` → `<head>` (方針は `METADATA_OPTIMIZATION.md`)
 
-### /strengths — 「MAXELUSが選ばれる理由」
+### CMS 経由 (実装済みだが休止中)
+- 管理操作: `app/admin/*` (Supabase Auth) → `app/api/cms/*` (mutation は `auth.getUser()` で認証チェック) → Supabase テーブル (`site_settings` / `services` / `strengths` / `works` / `assets` + history)
+- 公開取得: `lib/cms/publicFetch.ts` → ただし公開ページ側の呼び出しは**現在コメントアウト**
 
-実績統計 (満足度 98% / 平均開発期間 1ヶ月 / 累計顧客数 50 以上) + 5 つの強み: 01 WordPressでは出せない"体験"を作れる / 02 打ち合わせ後すぐに"デモ"が出る開発スタイル / 03 業務DXは"運用まで"作る / 04 あとから自分で更新できる（microCMS対応） / 05 拡張できる設計（最小→スケール）。文言はページ内ハードコード (CMS 復旧時は /api/cms/strengths で上書きされる設計)。
+## 設計上の注意点
 
-### /about — 「会社情報」
-
-会社概要 (株式会社MAXELUS、京都府八幡市、代表取締役社長 今井 俊喜) → 事業内容 7 項目 → 私たちについて → できること（提供価値）5 分類 → Mission・Vision・Value → 代表挨拶 → CTA。
-
-- Mission: 「業務を効率化し、本当に大切なことに時間を使える世界をつくる。」
-- Vision: 「データとAIで、意思決定と実行が加速する社会をつくる。」
-- Value: Evolve / Connect / Accelerate / Collaborate / Simplify / Cutting-Edge の 6 つ
-
-### /contact — 「無料相談・お問い合わせ」
-
-フォーム中心の 1 カラム構成 (お名前・会社名・メール・ご相談内容・ご予算・希望納期・詳細)。フォーム下に連絡先テキスト: info@maxelustech.com、受付時間 平日 10:00-18:00。メリット訴求・FAQ は廃止済み。
-
-### /lp/* — 独立 LP 7 本 (それぞれヒーローのキャッチコピー)
-
-| LP | 商材 | ヒーロー見出し |
-|---|---|---|
-| zumen-connect | 図面管理 SaaS | 図面・関連資料・見積を、探す時間ゼロへ。 |
-| full-order-app-development | 受託アプリ開発 | 完全オーダーメイドで課題を解決する |
-| business-dx-design | 業務 DX 設計 | そのソフト、現場に合わせて"我慢して"使っていませんか？ |
-| ai-ocr-automation | AI 組込み・自動化 | AI機能組込み。業務を自動化する |
-| interactive-web-3d | 体験型 Web 制作 | WordPressではできない体験型Webサイト |
-| ai-coding-education | AI プログラミング講座 | 知識0から始める。かんたんすぎる！プログラミング×AI (CTA は LINE 友だち追加) |
-| eyelash-salon | サロンサイトの実例デモ | ま い に ち が / き ら き ら な / あ な た へ |
-
-## 注意点
-
-- `http://127.0.0.1:7243/ingest/...` へ送信するデバッグ計装コードが 3 ファイルに残っている: `app/api/contact/route.ts` / `app/api/cms/site/route.ts` / `app/admin/site/page.tsx`。該当箇所を触る際は除去対象として扱う
-- `app/api/debug-env/route.ts` は環境変数確認用のデバッグルート (本番に残すべきでない)
-- `README.md` は create-next-app のテンプレートのままでプロジェクト情報なし
+- **公開ページの文言は `app/data/*.ts` と各 `page.tsx` を編集する**。CMS 側 (`app/admin`, `app/api/cms`, `lib/cms`) を触っても公開ページには反映されない (休止中)。`data-cms-key` 属性は復旧用なので削除しないこと。
+- **サービスデータは 2 系統に分裂している**。`/services` 一覧と sitemap は `servicesData.ts` (8 件)、`/services/[slug]` 詳細は `services.ts` (5 件)。一覧と詳細でサービスの切り方・キャッチコピーが一致しないため、文言修正時は両方の確認が必要。
+- **CMS API の mutation (POST/PUT/PATCH/DELETE) は必ず冒頭で `supabase.auth.getUser()` の認証チェックを行うこと**。新規 CMS ルートも同パターンに従う。認証不要の GET は `/api/cms/site`・`/api/cms/works/public`・一部 `[id]` 系のみ (RLS の published フィルタに依存)。
+- **`createSupabaseAdminClient()` は Service Role キーで RLS をバイパスする**。サーバー側専用かつ認証チェック後にのみ使用すること。例外は `/api/contact` の `contacts` INSERT (匿名投稿を許可するため、RLS でも anon INSERT を許可済み)。
+- **ダークモードは廃止済み (ライトテーマ固定)**。`dark:` バリアントや `prefers-color-scheme` 分岐を新規追加しないこと。
+- **アイコン (SVG / 絵文字) は使わない**。番号タイポグラフィ「01/02/03」+ 細罫線 + 左ボーダーアクセントで構成する (脱 AI 感のための編集デザイン路線)。
+- **デバッグ計装コードを除去対象として扱うこと**。`http://127.0.0.1:7243/ingest/...` へ送信するコードが `app/api/contact/route.ts` / `app/api/cms/site/route.ts` / `app/admin/site/page.tsx` の 3 ファイルに残存している。該当箇所を触る際は削除する。
+- **`app/api/debug-env/route.ts` は本番に残してはいけない**デバッグルート (環境変数を返す)。
+- **事例ページ (`/cases`・`/works`) は削除済み**。`app/data/casesData.ts` は LP のデモ画像パス参照のため残存しているが、事例本文としては未表示。復活させる場合は別途設計する。
+- **外部画像を使う場合は `next.config.ts` の `images.remotePatterns` にドメインを追加すること** (現在は Figma / Unsplash を許可)。
+- **Supabase のスキーマ変更時は `app/api/cms/site/route.ts` のフォールバックに注意**。PUT は実テーブルのカラム一覧を取得して存在カラムのみ更新する仕組みのため、列の追加・改名が挙動に影響する。スキーマは `supabase/schema.sql` → `supabase/storage.sql` を SQL Editor で手動実行する (`SUPABASE_SETUP.md` 参照)。
+- **テスト基盤は未導入**。コミット前は `npm run lint` + `npx tsc --noEmit` + `npm run build` で品質を担保する。
+- **default ブランチへ直接 push しない**運用が望ましいが、本リポジトリは過去に main 直結運用の履歴あり。破壊的 git 操作 (force push / reset --hard 等) はユーザー明示指示がある場合のみ。
