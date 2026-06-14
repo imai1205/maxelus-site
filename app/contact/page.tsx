@@ -144,7 +144,15 @@ export default function ContactPage() {
         <PageHero
           kicker="Contact"
           title="お問い合わせ"
-          lead="Web制作・LP制作、Webアプリ開発、業務効率化、自社プロダクトに関するご相談は、以下のフォームよりご連絡ください。内容がまだ具体的に決まっていない段階でも、お気軽にお問い合わせください。"
+          lead={
+            <>
+              Web制作・LP制作、Webアプリ開発、<br className="md:hidden" />
+              業務効率化、自社プロダクトに関するご相談は、<br />
+              以下のフォームよりご連絡ください。<br className="md:hidden" />
+              内容がまだ具体的に決まっていない段階でも、<br className="hidden md:block" />
+              お気軽にお問い合わせください。
+            </>
+          }
         />
 
         <section className="py-16 md:py-24 px-4 md:px-8">

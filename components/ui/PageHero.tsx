@@ -39,11 +39,11 @@ export function PageHero({ kicker, title, lead, bgText }: PageHeroProps) {
       <div className="relative max-w-4xl mx-auto text-center">
         <AnimatedSection animation="fade-up">
           <p className="mb-5 text-xs md:text-sm font-medium tracking-[0.25em] text-[#fdc700]">{kicker}</p>
-          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">{title}</h1>
+          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight break-keep">{title}</h1>
         </AnimatedSection>
         {lead && (
           <AnimatedSection animation="fade-up" delay={150}>
-            <p className="mx-auto mt-6 max-w-2xl text-sm md:text-base text-white/70 leading-relaxed">{lead}</p>
+            <p className="mx-auto mt-6 max-w-2xl text-sm md:text-base text-white/70 leading-relaxed break-keep">{lead}</p>
           </AnimatedSection>
         )}
       </div>

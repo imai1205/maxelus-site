@@ -174,18 +174,20 @@ export default function BusinessDXDesignLP() {
         <section className="relative overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] pt-28 pb-20 md:pt-36 md:pb-28 px-4 md:px-8">
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
           <div className="relative max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="min-w-0">
               <AnimatedSection animation="fade-up">
                 <p className="mb-5 text-xs md:text-sm font-medium tracking-[0.25em] text-[#fdc700]">BUSINESS DX / WORKFLOW DESIGN</p>
-                <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
-                  バラバラの業務データをつなぎ、
+                <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight break-keep">
+                  バラバラの業務データを
                   <br />
-                  現場も管理者も見やすい状態へ。
+                  つなぎ、現場も管理者も
+                  <br />
+                  見やすい状態へ。
                 </h1>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={150}>
-                <p className="mt-6 max-w-xl text-sm md:text-base text-white/70 leading-relaxed">
-                  LINE、Slack、スプレッドシート、会計ソフト、CSV、既存システムなどに分散した情報を整理し、必要なデータをつなげます。入力・確認・転記・集計のムダを減らし、業務全体が自然に回る仕組みをつくります。
+                <p className="mt-6 max-w-xl text-sm md:text-base text-white/70 leading-relaxed break-keep">
+                  LINE、Slack、スプレッドシート、会計ソフト、CSV、既存システムなどに分散した情報を整理し、<br className="hidden md:block" />必要なデータをつなげます。入力・確認・転記・集計のムダを減らし、<br className="hidden md:block" />業務全体が自然に回る仕組みをつくります。
                 </p>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={300}>

@@ -96,16 +96,22 @@ export default function ZumenConnectLP() {
                 <AnimatedSection animation="fade-up" className="relative">
                   <div className="relative inline-block">
                     <span className="section-bg-text left-0 -top-8 md:-top-12 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-[#0b1220]/25 absolute" style={{ opacity: 0.25 }}>PRODUCT</span>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-6 leading-tight relative">
-                      図面・関連資料・見積を、
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-6 leading-tight relative break-keep">
+                      図面・関連資料・
+                      <br className="md:hidden" />
+                      見積を、
                       <br />
                       <span className="text-[#fff100]">探す時間ゼロへ。</span>
                     </h1>
                   </div>
-                  <p className="text-lg md:text-xl text-[#6b7280] mb-6 leading-relaxed">
-                    OCRで自動整理。AI類似検索で過去実績に即アクセス。
+                  <p className="text-lg md:text-xl text-[#6b7280] mb-6 leading-relaxed break-keep">
+                    OCRで自動整理。
+                    <br className="md:hidden" />
+                    AI類似検索で過去実績に即アクセス。
                     <br />
-                    見積〜進捗〜原価まで、図面を起点に一気通貫。
+                    見積〜進捗〜原価まで、
+                    <br className="md:hidden" />
+                    図面を起点に一気通貫。
                   </p>
 
                   {/* Feature highlights */}

@@ -42,16 +42,16 @@ function HeroSection() {
           <p className="mb-6 text-xs md:text-sm font-medium tracking-[0.3em] text-[#fdc700]">MAXELUS INC.</p>
         </AnimatedSection>
         <AnimatedSection animation="fade-up" delay={150} duration={800}>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.25] mb-8">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.25] mb-8 break-keep">
             大切なことに、
             <br />
             時間を使える世界へ。
           </h1>
         </AnimatedSection>
         <AnimatedSection animation="fade-up" delay={300} duration={800}>
-          <p className="mx-auto mb-10 max-w-2xl text-sm md:text-lg text-white/70 leading-relaxed">
+          <p className="mx-auto mb-10 max-w-2xl text-sm md:text-lg text-white/70 leading-relaxed break-keep">
             マクセラスは、Web制作・アプリ開発・業務効率化支援を通じて、日々の仕事に余白を生み出す会社です。
-            <br className="hidden md:block" />
+            <br />
             ただシステムを作るのではなく、業務の流れを整え、使われ続ける仕組みを設計します。
           </p>
         </AnimatedSection>
@@ -81,7 +81,7 @@ function HeroSection() {
 // ② 事業内容プレビュー
 function BusinessPreview() {
   return (
-    <section className="bg-white py-20 md:py-32 px-4 md:px-8">
+    <section className="py-20 md:py-32 px-4 md:px-8">
       <div className="max-w-[1100px] mx-auto">
         <SectionHeader
           kicker="Business"
@@ -126,7 +126,7 @@ function BusinessPreview() {
 // ③ 代表事例プレビュー
 function CasesPreview() {
   return (
-    <section className="bg-[#fafafa] py-20 md:py-32 px-4 md:px-8">
+    <section className="py-20 md:py-32 px-4 md:px-8">
       <div className="max-w-[1100px] mx-auto">
         <SectionHeader
           kicker="Cases"
@@ -164,7 +164,7 @@ function CasesPreview() {
 // ④ マクセラスの進め方
 function ApproachSection() {
   return (
-    <section className="bg-white py-20 md:py-32 px-4 md:px-8">
+    <section className="py-20 md:py-32 px-4 md:px-8">
       <div className="max-w-[900px] mx-auto">
         <SectionHeader
           kicker="Approach"
@@ -203,11 +203,19 @@ export default function Home() {
     <div className="min-h-screen font-sans overflow-x-clip">
       <main className="pt-14 md:pt-16">
         <HeroSection />
-        {/* スクロール同期のブランドロゴ演出（白背景） */}
-        <ScrollFrameSequence frameCount={96} />
         <BusinessPreview />
-        <CasesPreview />
-        <ApproachSection />
+        {/* Cases の手前から背景でブランドロゴが組み上がり、Approach 末で完成する */}
+        <ScrollFrameSequence
+          frameCount={96}
+          fit="contain"
+          blendMode="multiply"
+          canvasOpacity={0.2}
+          startRatio={0.6}
+          className="bg-white"
+        >
+          <CasesPreview />
+          <ApproachSection />
+        </ScrollFrameSequence>
         <ContactCTA />
       </main>
       <Footer />

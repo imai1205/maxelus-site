@@ -50,8 +50,20 @@ export default function StrengthsPage() {
       <main>
         <PageHero
           kicker="Strengths"
-          title="MAXELUSが選ばれる理由"
-          lead="作るだけでは終わらない。現場で使える・続けられる・改善できる仕組みをつくります。"
+          title={
+            <>
+              MAXELUSが
+              <br className="md:hidden" />
+              選ばれる理由
+            </>
+          }
+          lead={
+            <>
+              作るだけでは終わらない。
+              <br className="hidden md:block" />
+              現場で使える・続けられる・改善できる仕組みをつくります。
+            </>
+          }
         />
 
         {/* 5つの強み */}

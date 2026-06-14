@@ -78,7 +78,7 @@ export default function EyelashSalonLP() {
               <AnimatedSection animation="fade-up" className="relative">
                 <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#ffa1ad]/10">HERO</span>
                 <div className="space-y-6">
-                  <h1 className="text-5xl md:text-6xl font-normal text-[#ffa1ad] tracking-[18px] leading-tight">
+                  <h1 className="text-5xl md:text-6xl font-normal text-[#ffa1ad] tracking-[18px] leading-tight break-keep">
                     ま い に ち が
                     <br />
                     き ら き ら な

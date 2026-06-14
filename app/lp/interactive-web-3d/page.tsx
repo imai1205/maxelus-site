@@ -98,15 +98,19 @@ export default function InteractiveWeb3DLP() {
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                WordPressではできない
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight break-keep">
+                WordPressでは
+                <br className="md:hidden" />
+                できない
                 <br />
                 体験型Webサイト
               </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8">
+              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8 break-keep">
                 触れる・動く・伝わる
                 <br />
-                印象に残る「体験型」のWebサイトを制作します。
+                印象に残る「体験型」の
+                <br className="md:hidden" />
+                Webサイトを制作します。
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link

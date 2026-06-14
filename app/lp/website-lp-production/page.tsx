@@ -66,12 +66,19 @@ const flow = [
   { no: "08", title: "計測・改善" },
 ];
 
-const mockCards = [
+const sourceBreakdown = [
+  { label: "Instagram", value: "48" },
+  { label: "X (Twitter)", value: "32" },
+  { label: "TikTok", value: "21" },
+];
+
+const actionCards = [
+  { label: "クリック数", value: "1,540" },
+  { label: "お問い合わせクリック", value: "86" },
+  { label: "LINEクリック数", value: "112" },
+  { label: "電話発信数 (Google)", value: "37" },
+  { label: "Googleマップ表示", value: "1,204" },
   { label: "今月の問い合わせ数", value: "128" },
-  { label: "ボタンクリック数", value: "1,540" },
-  { label: "流入元", value: "広告 / 検索 / SNS" },
-  { label: "LP別成果", value: "A 62 / B 41" },
-  { label: "SEO / MEO管理", value: "対応中 12件" },
 ];
 
 export default function WebsiteLpProductionLP() {
@@ -126,18 +133,24 @@ export default function WebsiteLpProductionLP() {
         <section className="relative overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] pt-28 pb-20 md:pt-36 md:pb-28 px-4 md:px-8">
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
           <div className="relative max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="min-w-0">
               <AnimatedSection animation="fade-up">
                 <p className="mb-5 text-xs md:text-sm font-medium tracking-[0.25em] text-[#fdc700]">WEBSITE / LP PRODUCTION</p>
-                <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+                <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight break-keep">
                   作って終わりではなく、
                   <br />
-                  成果を見ながら改善できるWebサイトへ。
+                  成果を見ながら改善できる
+                  <br />
+                  Webサイトへ。
                 </h1>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={150}>
-                <p className="mt-6 max-w-xl text-sm md:text-base text-white/70 leading-relaxed">
-                  ホームページ・LP制作に加えて、GA4設定、タグ設置、ボタンクリック計測、問い合わせ数管理まで対応。公開後の改善やSEO・MEO対策につながるWebサイトを制作します。
+                <p className="mt-6 max-w-xl text-sm md:text-base text-white/70 leading-relaxed break-keep">
+                  ホームページ・LP制作に加えて、
+                  <br className="md:hidden" />
+                  GA4設定、タグ設置、ボタンクリック計測、問い合わせ数管理まで対応。
+                  <br className="hidden md:block" />
+                  公開後の改善やSEO・MEO対策につながるWebサイトを制作します。
                 </p>
               </AnimatedSection>
               <AnimatedSection animation="fade-up" delay={300}>
@@ -154,17 +167,26 @@ export default function WebsiteLpProductionLP() {
                   <p className="text-sm font-bold text-[#1a1a1a]">改善ダッシュボード</p>
                   <span className="text-[10px] text-[#9ca3af]">※画面はイメージです</span>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {mockCards.slice(0, 4).map((c) => (
-                    <div key={c.label} className="bg-[#fafafa] border border-[#e5e7eb] rounded-xl p-4">
-                      <p className="text-[11px] text-[#6b7280]">{c.label}</p>
-                      <p className="mt-1 text-lg md:text-xl font-bold text-[#1a1a1a] tabular-nums">{c.value}</p>
+                {/* 流入元の内訳 */}
+                <div className="mb-3 bg-[#fafafa] border border-[#e5e7eb] rounded-xl p-4">
+                  <p className="text-[11px] text-[#6b7280] mb-2">流入元（今月）</p>
+                  <div className="space-y-1.5">
+                    {sourceBreakdown.map((s) => (
+                      <div key={s.label} className="flex items-center justify-between text-xs">
+                        <span className="text-[#6b7280]">{s.label}</span>
+                        <span className="font-bold text-[#1a1a1a] tabular-nums">{s.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {/* 各種アクション数 */}
+                <div className="grid grid-cols-2 gap-2.5">
+                  {actionCards.map((c) => (
+                    <div key={c.label} className="bg-[#fafafa] border border-[#e5e7eb] rounded-xl p-3">
+                      <p className="text-[10px] text-[#6b7280] leading-tight">{c.label}</p>
+                      <p className="mt-1 text-base md:text-lg font-bold text-[#1a1a1a] tabular-nums">{c.value}</p>
                     </div>
                   ))}
-                </div>
-                <div className="mt-3 bg-[#fafafa] border border-[#e5e7eb] rounded-xl p-4 flex items-center justify-between">
-                  <p className="text-[11px] text-[#6b7280]">{mockCards[4].label}</p>
-                  <p className="text-sm font-bold text-[#1a1a1a]">{mockCards[4].value}</p>
                 </div>
               </div>
             </AnimatedSection>

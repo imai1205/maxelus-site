@@ -18,14 +18,16 @@ export default function AIOCRAutomationLP() {
         <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
           <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
             <AnimatedSection animation="fade-up">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight break-keep">
                 AI機能組込み
                 <br />
                 業務を自動化する
               </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8">
-                要約/分類/検索/生成/動画分析。AI技術を活用して、
-                <br />
+              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8 break-keep">
+                要約/分類/検索/生成/動画分析。
+                <br className="md:hidden" />
+                AI技術を活用して、
+                <br className="hidden md:block" />
                 業務効率を大幅に向上させます。
               </p>
               <Link

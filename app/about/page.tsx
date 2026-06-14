@@ -1,8 +1,12 @@
 "use client";
 
+import { ReactLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
 import Footer from "../components/Footer";
 import { AnimatedSection } from "../components/AnimationProvider";
 import { PageHero, SectionHeader, ContactCTA } from "../../components/ui";
+import ScrollFrameSequence from "../components/ScrollFrameSequence";
+import { usePrefersReducedMotion } from "../components/usePrefersReducedMotion";
 
 const values = [
   { title: "整える", body: "複雑な業務や情報を整理し、迷いを減らす。" },
@@ -46,13 +50,24 @@ const ceoMessage = `大学卒業後、メーカー営業として現場を回る
 構想から整理、開発、運用改善まで。お客様の事業に合わせて、現実的で使われ続ける仕組みづくりを伴走します。`;
 
 export default function AboutPage() {
-  return (
+  // reduced-motion のユーザーには Lenis（慣性スクロール）を適用しない
+  const reduceMotion = usePrefersReducedMotion();
+
+  const content = (
     <div className="min-h-screen bg-white font-sans">
       <main>
         <PageHero
           kicker="About"
-          title="仕組みを整え、時間を生み出す。"
-          lead="マクセラスは、業務効率化を通じて、人や会社が本当に大切なことに時間を使える状態をつくる会社です。目の前の作業をこなすだけでなく、将来の効率につながる方法を選び、業務の無駄を減らし、事業が自然に前へ進む仕組みを整えることを大切にしています。"
+          title={
+            <>
+              仕組みを整え、<br className="md:hidden" />時間を生み出す。
+            </>
+          }
+          lead={
+            <>
+              マクセラスは、業務効率化を通じて、人や会社が本当に大切なことに<br className="hidden md:block" />時間を使える状態をつくる会社です。目の前の作業をこなすだけでなく、<br className="hidden md:block" />将来の効率につながる方法を選び、業務の無駄を減らし、<br className="hidden md:block" />事業が自然に前へ進む仕組みを整えることを大切にしています。
+            </>
+          }
         />
 
         {/* Mission / Vision / Value */}
@@ -90,8 +105,17 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* 会社概要〜代表挨拶: 背景でブランドロゴが組み上がり、末尾で完成する */}
+        <ScrollFrameSequence
+          frameCount={96}
+          fit="contain"
+          blendMode="multiply"
+          canvasOpacity={0.2}
+          startRatio={0.6}
+          className="bg-white"
+        >
         {/* 会社概要 */}
-        <section className="bg-[#fafafa] py-20 md:py-32 px-4 md:px-8">
+        <section className="py-20 md:py-32 px-4 md:px-8">
           <div className="max-w-[900px] mx-auto">
             <SectionHeader kicker="Company" title="会社概要" bgText="COMPANY" align="left" className="mb-10 md:mb-14" />
             <AnimatedSection animation="fade-up">
@@ -116,7 +140,7 @@ export default function AboutPage() {
         </section>
 
         {/* 社名の由来 */}
-        <section className="bg-white py-20 md:py-32 px-4 md:px-8">
+        <section className="py-20 md:py-32 px-4 md:px-8">
           <div className="max-w-[760px] mx-auto">
             <SectionHeader kicker="Name" title="Maxelusに込めた想い" bgText="NAME" align="left" className="mb-10 md:mb-14" />
             <AnimatedSection animation="fade-up">
@@ -126,7 +150,7 @@ export default function AboutPage() {
         </section>
 
         {/* 代表挨拶 */}
-        <section className="bg-[#fafafa] py-20 md:py-32 px-4 md:px-8">
+        <section className="py-20 md:py-32 px-4 md:px-8">
           <div className="max-w-[760px] mx-auto">
             <SectionHeader kicker="Message" title="代表挨拶" bgText="MESSAGE" align="left" className="mb-10 md:mb-14" />
             <AnimatedSection animation="fade-up">
@@ -138,10 +162,20 @@ export default function AboutPage() {
             </AnimatedSection>
           </div>
         </section>
+        </ScrollFrameSequence>
 
         <ContactCTA />
       </main>
       <Footer />
     </div>
+  );
+
+  // Lenis は About ページにいる間だけマウント（他ページは現状のネイティブスクロールを維持）
+  return reduceMotion ? (
+    content
+  ) : (
+    <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
+      {content}
+    </ReactLenis>
   );
 }

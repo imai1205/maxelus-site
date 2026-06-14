@@ -140,8 +140,24 @@ export default function ServicesPage() {
       <main>
         <PageHero
           kicker="Services"
-          title="業務を整え、事業を前へ。"
-          lead="Web制作・アプリ開発・業務効率化・AI活用・外部サービス連携まで、企業や現場の課題を実用的な形で解決します。技術を導入すること自体を目的にせず、業務の流れを整え、日々の仕事が少しずつ軽くなる仕組みをつくります。"
+          title={
+            <>
+              業務を整え、
+              <br className="md:hidden" />
+              事業を前へ。
+            </>
+          }
+          lead={
+            <>
+              Web制作・アプリ開発・業務効率化・AI活用・外部サービス連携まで、
+              <br className="hidden md:block" />
+              企業や現場の課題を実用的な形で解決します。
+              <br className="hidden md:block" />
+              技術を導入すること自体を目的にせず、業務の流れを整え、
+              <br className="hidden md:block" />
+              日々の仕事が少しずつ軽くなる仕組みをつくります。
+            </>
+          }
         />
 
         {/* ② サービス分類 */}

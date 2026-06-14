@@ -75,15 +75,17 @@ export default function ProductsLP() {
           <div className="relative max-w-[900px] mx-auto text-center">
             <AnimatedSection animation="fade-up">
               <p className="mb-5 text-xs md:text-sm font-medium tracking-[0.25em] text-[#fdc700]">PRODUCTS</p>
-              <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+              <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight break-keep">
                 業務課題から生まれた、
                 <br />
                 マクセラスのプロダクト。
               </h1>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={150}>
-              <p className="mt-6 mx-auto max-w-2xl text-sm md:text-base text-white/70 leading-relaxed">
-                業務の中で発生する「探す」「入力する」「確認する」「集計する」といった負担を減らすため、マクセラスでは自社プロダクト・業務支援ツールの開発にも取り組んでいます。すぐに導入できるものから、業務内容に合わせてカスタマイズできるものまで、現場の課題に合わせてご提案します。
+              <p className="mt-6 mx-auto max-w-2xl text-sm md:text-base text-white/70 leading-relaxed break-keep">
+                業務の中で発生する「探す」「入力する」「確認する」「集計する」といった負担を減らすため、
+                <br className="hidden md:block" />
+                マクセラスでは自社プロダクト・業務支援ツールの開発にも取り組んでいます。すぐに導入できるものから、業務内容に合わせてカスタマイズできるものまで、現場の課題に合わせてご提案します。
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={300}>

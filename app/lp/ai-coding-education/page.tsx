@@ -82,7 +82,7 @@ export default function AICodingEducationLP() {
                     <p className="text-white font-bold text-lg md:text-xl">から始める</p>
                     <span className="text-[#ffdf20] font-bold text-sm md:text-base">//</span>
                   </div>
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight break-keep">
                     かんたんすぎる！
                     <br />
                     プログラミング×AI

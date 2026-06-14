@@ -171,16 +171,18 @@ export default function FullOrderAppDevelopmentLP() {
                       <div className="mb-3 md:mb-4 relative" style={{ zIndex: 100 }}>
                         <span className="inline-block bg-[#fff100] text-[#1a1a1a] px-4 py-1.5 rounded-full text-sm font-bold">完全オーダーメイドアプリ開発</span>
                       </div>
-                      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-3 leading-tight relative z-50">
+                      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-3 leading-tight relative z-50 break-keep">
                         完全オーダーメイドで
                         <br />
                         課題を解決する
                       </h1>
-                      <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white/90 mb-3 md:mb-4 relative z-50">WEB・アプリ制作</h2>
+                      <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white/90 mb-3 md:mb-4 relative z-50 break-keep">WEB・アプリ制作</h2>
                     </AnimatedSection>
                     <AnimatedSection animation="fade-up" delay={300} duration={800}>
-                      <p className="text-sm md:text-base text-white/80 mb-4 md:mb-5 relative z-50 leading-relaxed">
-                        ユーザーに使われる、成果につながるプロダクトを企画から運用まで伴走してお届けします
+                      <p className="text-sm md:text-base text-white/80 mb-4 md:mb-5 relative z-50 leading-relaxed break-keep">
+                        ユーザーに使われる、成果につながるプロダクトを
+                        <br className="md:hidden" />
+                        企画から運用まで伴走してお届けします
                       </p>
                       <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                         <a href="#contact" className="inline-flex items-center justify-center bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base transition-all hover:scale-105 shadow-lg">

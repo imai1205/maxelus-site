@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
@@ -9,21 +9,25 @@ type Fit = "cover" | "contain";
 interface ScrollFrameSequenceProps {
   /** フレーム総数（build-scroll-frames.mjs の出力 frameCount を渡す） */
   frameCount: number;
+  /** 背景の前面に重ねるコンテンツ。このコンテンツのスクロール範囲で 0→1 を消化し、末尾でロゴが完成する */
+  children: ReactNode;
   /** 画像ディレクトリ（/public からのパス） */
   basePath?: string;
   /** 初期表示用ポスター画像名 */
   poster?: string;
-  /** 再生しきるのに使うスクロール量（vh）。大きいほどゆっくり再生 */
-  scrollSpanVh?: number;
-  /** 描画フィット。ロゴは contain 推奨 */
+  /** 描画フィット。背景ロゴは contain 推奨 */
   fit?: Fit;
-  /** ステージ背景色（動画の地色に合わせる） */
-  background?: string;
   /** 隣接フレームをブレンドして少ない枚数でも滑らかに見せる */
   crossfade?: boolean;
-  /** 描画アンカー（0..1）。cover で寄せたい位置 */
+  /** 描画アンカー（0..1） */
   focusX?: number;
   focusY?: number;
+  /** 白地を抜いてロゴだけ背景に乗せるなら "multiply" */
+  blendMode?: "normal" | "multiply";
+  /** 背景キャンバスの不透明度（前面コンテンツの可読性に合わせて下げる） */
+  canvasOpacity?: number;
+  /** 進捗の開始位置。ゾーン上端が画面の何割の高さに来たら 0 を始めるか（0=上端で開始 / 大きいほど早く＝下に見えた時点から開始） */
+  startRatio?: number;
   className?: string;
 }
 
@@ -45,21 +49,22 @@ function supportsAvif(): Promise<boolean> {
 
 export default function ScrollFrameSequence({
   frameCount,
+  children,
   basePath = "/scroll-frames-logo",
   poster = "frame-001.jpg",
-  scrollSpanVh = 300,
   fit = "contain",
-  background = "#ffffff",
   crossfade = true,
   focusX = 0.5,
   focusY = 0.5,
+  blendMode = "multiply",
+  canvasOpacity = 1,
+  startRatio = 0,
   className = "",
 }: ScrollFrameSequenceProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const paintRef = useRef<(() => void) | null>(null);
   const [ready, setReady] = useState(false);
-  // reduced-motion 時はスクロール量を切り詰める（静止1枚に長距離スクロールさせない）
   const reduceMotion = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -91,19 +96,22 @@ export default function ScrollFrameSequence({
       ctx.globalAlpha = 1;
     };
 
-    // 指定 index 以下で最も近いデコード済みフレームを返す（プリロード途中の歯抜け対策）
+    // 指定 index 以下で最も近いデコード済みフレーム（プリロード途中の歯抜け対策）
     const nearestLoaded = (idx: number) => {
       let i = Math.min(idx, frameCount - 1);
       while (i > 0 && !(images[i] && images[i].naturalWidth > 0)) i--;
       return images[i] && images[i].naturalWidth > 0 ? i : -1;
     };
 
-    // セクション内でのスクロール進捗 0→1（sticky 子が貼り付いている間に 0→1 を消化）
+    // 前面コンテンツのスクロール進捗 0→1
+    // （ゾーン上端が画面の startRatio の高さに来たら開始 → ゾーン下端が画面下端で完成）
     const getProgress = () => {
       const rect = section.getBoundingClientRect();
-      const travel = rect.height - window.innerHeight;
+      const vh = window.innerHeight;
+      const startTop = vh * startRatio; // この rect.top で progress 0 を開始
+      const travel = startTop + rect.height - vh;
       if (travel <= 0) return 0;
-      return Math.min(1, Math.max(0, -rect.top / travel));
+      return Math.min(1, Math.max(0, (startTop - rect.top) / travel));
     };
 
     const paint = () => {
@@ -119,7 +127,8 @@ export default function ScrollFrameSequence({
       const baseIdx = nearestLoaded(base);
       if (baseIdx < 0) return; // まだ1枚も読めていない → poster のまま
 
-      ctx.fillStyle = background;
+      // 白地で塗りつぶし → mix-blend-mode:multiply 側で白が抜け、ロゴだけが背景に乗る
+      ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, cssW, cssH);
       drawImageFit(images[baseIdx], 1);
 
@@ -133,7 +142,7 @@ export default function ScrollFrameSequence({
     paintRef.current = paint;
 
     const resize = () => {
-      const dpr = Math.min(2, window.devicePixelRatio || 1); // DPR 上限2で高解像度端末の負荷を抑える
+      const dpr = Math.min(2, window.devicePixelRatio || 1); // DPR 上限2
       const rect = canvas.getBoundingClientRect();
       cssW = rect.width;
       cssH = rect.height;
@@ -145,7 +154,7 @@ export default function ScrollFrameSequence({
     };
     window.addEventListener("resize", resize, { passive: true });
 
-    // reduced-motion: 最終フレーム1枚だけ読み込み静止表示（シーケンス再生しない）
+    // reduced-motion: 最終フレーム1枚だけ読み込み、完成形を静止背景として表示
     if (reduce) {
       (async () => {
         const ext = (await supportsAvif()) ? "avif" : "webp";
@@ -167,7 +176,7 @@ export default function ScrollFrameSequence({
       };
     }
 
-    // 通常: 全フレームをプリロード（先頭 high / 残り low、各 decode 完了を待つ）
+    // 通常: 全フレームをプリロード（先頭 high / 残り low、各 decode を待つ）
     let decoded = 0;
     const revealAt = Math.max(1, Math.floor(frameCount * 0.1)); // 約10%で表示開始
     (async () => {
@@ -198,24 +207,23 @@ export default function ScrollFrameSequence({
       window.removeEventListener("resize", resize);
       paintRef.current = null;
     };
-  }, [frameCount, basePath, fit, background, crossfade, focusX, focusY, reduceMotion]);
+  }, [frameCount, basePath, fit, crossfade, focusX, focusY, startRatio, reduceMotion]);
 
-  // Lenis のスクロール（rAF）に同期して再描画。Provider が無ければ発火しないだけで安全
+  // Lenis のスクロール(rAF)に同期して再描画。Provider が無ければ発火しないだけで安全
   useLenis(() => {
     paintRef.current?.();
   });
 
-  const spanVh = reduceMotion ? 100 : scrollSpanVh;
   const objectFit = fit === "cover" ? "object-cover" : "object-contain";
 
   return (
-    <section
-      ref={sectionRef}
-      className={`relative ${className}`}
-      style={{ height: `${spanVh}vh`, background }}
-      aria-hidden="true"
-    >
-      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background }}>
+    <section ref={sectionRef} className={`relative ${className}`}>
+      {/* 背景: 画面に貼り付くロゴキャンバス（前面コンテンツの後ろで組み上がる） */}
+      <div
+        className="pointer-events-none sticky top-0 h-screen w-full overflow-hidden"
+        style={{ mixBlendMode: blendMode, opacity: canvasOpacity }}
+        aria-hidden="true"
+      >
         <canvas ref={canvasRef} className="block h-full w-full" />
         {/* canvas が描けるまでの初期表示（poster） */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -223,10 +231,12 @@ export default function ScrollFrameSequence({
           src={`${basePath}/${poster}`}
           alt=""
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-0 h-full w-full ${objectFit} transition-opacity duration-500`}
-          style={{ opacity: ready ? 0 : 1, background }}
+          className={`absolute inset-0 h-full w-full ${objectFit} transition-opacity duration-500`}
+          style={{ opacity: ready ? 0 : 1 }}
         />
       </div>
+      {/* 前面コンテンツ（背景キャンバスの上に重ねる） */}
+      <div className="relative z-10 -mt-[100vh]">{children}</div>
     </section>
   );
 }
