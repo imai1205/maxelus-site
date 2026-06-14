@@ -46,7 +46,7 @@ const domains = [
 
 export default function StrengthsPage() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white font-sans overflow-x-clip">
       <main>
         <PageHero
           kicker="Strengths"
