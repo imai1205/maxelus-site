@@ -47,9 +47,10 @@ export default function EyelashSalonLP() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
-            eyelash salon
-          </Link>
+          <div className="flex items-baseline gap-3">
+            <span className="text-xl font-bold text-[#1a1a1a]">eyelash salon</span>
+            <Link href="/" className="text-xs text-[#6b7280] hover:text-[#ff637e] transition-colors">トップに戻る</Link>
+          </div>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#about" className="text-sm text-[#6b7280] hover:text-[#ff637e]">
               選ばれる理由

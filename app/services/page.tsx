@@ -173,7 +173,7 @@ export default function ServicesPage() {
             />
             <div className="space-y-5 md:space-y-6">
               {serviceCategories.map((cat, i) => (
-                <AnimatedSection key={cat.id} animation="fade-up" delay={i * 60}>
+                <AnimatedSection key={cat.id} animation="fade-right" distance={80} delay={i * 100}>
                   <div className="border border-[#e5e7eb] rounded-2xl p-6 md:p-10">
                     <div className="flex items-baseline gap-4 mb-5">
                       <span className="text-2xl md:text-3xl font-bold text-[#fdc700] tabular-nums">{cat.no}</span>
@@ -240,7 +240,7 @@ export default function ServicesPage() {
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
               {products.map((p, i) => (
-                <AnimatedSection key={p.no} animation="fade-up" delay={(i % 2) * 80}>
+                <AnimatedSection key={p.no} animation={i % 2 === 0 ? "fade-right" : "fade-left"} distance={70} delay={(i % 2) * 100}>
                   <div className="h-full flex flex-col border border-[#e5e7eb] rounded-2xl p-6 md:p-8">
                     <div className="flex items-baseline gap-3 mb-3">
                       <span className="text-sm font-bold text-[#fdc700] tabular-nums">{p.no}</span>
@@ -316,7 +316,7 @@ export default function ServicesPage() {
             />
             <div className="space-y-5 md:space-y-6">
               {transformations.map((t, i) => (
-                <AnimatedSection key={t.title} animation="fade-up" delay={i * 50}>
+                <AnimatedSection key={t.title} animation="pop" delay={i * 80}>
                   <div className="border border-[#e5e7eb] rounded-2xl p-6 md:p-8 bg-white">
                     <h3 className="text-lg font-bold text-[#1a1a1a] mb-5">{t.title}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
@@ -353,7 +353,7 @@ export default function ServicesPage() {
             />
             <div>
               {approachSteps.map((step, i) => (
-                <AnimatedSection key={step.no} animation="fade-right" delay={i * 80}>
+                <AnimatedSection key={step.no} animation="fade-right" distance={70} delay={i * 80}>
                   <div className="group flex gap-5 md:gap-8 border-t border-[#e5e7eb] py-6 md:py-8 hover:bg-[#fafafa] transition-colors">
                     <span className="shrink-0 text-2xl md:text-3xl font-bold text-[#fdc700] tabular-nums tracking-wider">{step.no}</span>
                     <div>
@@ -384,7 +384,7 @@ export default function ServicesPage() {
                 { month: "1ヶ月目", label: "整理・調査", items: trialMonth1 },
                 { month: "2ヶ月目", label: "MVP作成", items: trialMonth2 },
               ].map((m, i) => (
-                <AnimatedSection key={m.month} animation="fade-up" delay={i * 100}>
+                <AnimatedSection key={m.month} animation={i % 2 === 0 ? "fade-right" : "fade-left"} distance={70} delay={i * 100}>
                   <div className="h-full border border-[#e5e7eb] rounded-2xl p-6 md:p-8 bg-white">
                     <p className="text-sm font-bold text-[#fdc700]">{m.month}</p>
                     <h3 className="text-lg font-bold text-[#1a1a1a] mt-1 mb-5">{m.label}</h3>

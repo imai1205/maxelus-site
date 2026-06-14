@@ -72,7 +72,7 @@ export default function StrengthsPage() {
             <SectionHeader kicker="Strengths" title="5つの強み" bgText="STRENGTHS" align="left" className="mb-12 md:mb-16" />
             <div>
               {strengths.map((s, i) => (
-                <AnimatedSection key={s.no} animation="fade-right" delay={i * 80}>
+                <AnimatedSection key={s.no} animation={i % 2 === 0 ? "fade-right" : "fade-left"} distance={80} delay={i * 100}>
                   <div className="group flex gap-5 md:gap-8 border-t border-[#e5e7eb] py-6 md:py-8 hover:bg-[#fafafa] transition-colors">
                     <span className="shrink-0 text-2xl md:text-3xl font-bold text-[#fdc700] tabular-nums tracking-wider">
                       {s.no}
@@ -93,18 +93,15 @@ export default function StrengthsPage() {
         <section className="bg-[#fafafa] py-20 md:py-32 px-4 md:px-8">
           <div className="max-w-[900px] mx-auto">
             <SectionHeader kicker="Capabilities" title="対応領域" bgText="DOMAINS" align="left" className="mb-10 md:mb-14" />
-            <AnimatedSection animation="fade-up">
-              <div className="flex flex-wrap gap-3">
-                {domains.map((d) => (
-                  <span
-                    key={d}
-                    className="px-4 py-2.5 bg-white border border-[#e5e7eb] rounded-full text-sm text-[#1a1a1a]"
-                  >
+            <div className="flex flex-wrap gap-3">
+              {domains.map((d, i) => (
+                <AnimatedSection key={d} animation="pop" delay={i * 60}>
+                  <span className="inline-block px-4 py-2.5 bg-white border border-[#e5e7eb] rounded-full text-sm text-[#1a1a1a]">
                     {d}
                   </span>
-                ))}
-              </div>
-            </AnimatedSection>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
         </section>
 

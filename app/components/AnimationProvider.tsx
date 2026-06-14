@@ -92,44 +92,51 @@ export function useParallax() {
 interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
-  animation?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "zoom-in" | "zoom-out" | "flip" | "rotate";
+  animation?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "zoom-in" | "zoom-out" | "flip" | "rotate" | "pop";
   delay?: number;
   duration?: number;
+  /** スライド距離(px)。fade-up/down/left/right の移動量。大きいほど動きが大きい */
+  distance?: number;
 }
 
-export const AnimatedSection = memo(function AnimatedSection({ 
-  children, 
-  className = "", 
+export const AnimatedSection = memo(function AnimatedSection({
+  children,
+  className = "",
   animation = "fade-up",
   delay = 0,
   duration = 600,
+  distance = 24,
 }: AnimatedSectionProps) {
   const { ref, isVisible } = useScrollAnimation();
 
   const getTransform = useCallback(() => {
     if (!isVisible) {
       switch (animation) {
-        case "fade-up": return "translateY(24px)";
-        case "fade-down": return "translateY(-24px)";
-        case "fade-left": return "translateX(24px)";
-        case "fade-right": return "translateX(-24px)";
+        case "fade-up": return `translateY(${distance}px)`;
+        case "fade-down": return `translateY(-${distance}px)`;
+        case "fade-left": return `translateX(${distance}px)`;
+        case "fade-right": return `translateX(-${distance}px)`;
         case "zoom-in": return "scale(0.9)";
         case "zoom-out": return "scale(1.1)";
+        case "pop": return "scale(0.8)";
         case "rotate": return "rotate(6deg)";
         default: return "none";
       }
     }
     return "none";
-  }, [animation, isVisible]);
+  }, [animation, isVisible, distance]);
+
+  // pop は overshoot するイージングで「ポン」と弾ませる
+  const easing = animation === "pop" ? "cubic-bezier(0.34, 1.56, 0.64, 1)" : "cubic-bezier(0.22, 1, 0.36, 1)";
 
   return (
     <div
       ref={ref}
       className={`gpu-accelerate ${className}`}
-      style={{ 
+      style={{
         opacity: isVisible ? 1 : 0,
         transform: getTransform(),
-        transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
+        transition: `opacity ${duration}ms ${easing} ${delay}ms, transform ${duration}ms ${easing} ${delay}ms`,
       }}
     >
       {children}

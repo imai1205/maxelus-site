@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
-import { GlassCard, BubbleBadge, MotionPress, Section } from "@/components/ui";
+import { GlassCard, BubbleBadge, MotionPress, Section, LpLogo } from "@/components/ui";
 
 export default function ZumenConnectLP() {
   const [formData, setFormData] = useState({
@@ -58,9 +58,7 @@ export default function ZumenConnectLP() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
-            図面コネクト
-          </Link>
+          <LpLogo />
           <nav className="hidden md:flex items-center gap-6">
             <a href="#features" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               機能

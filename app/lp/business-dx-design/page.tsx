@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
-import { SectionHeader } from "@/components/ui";
+import { SectionHeader, LpLogo } from "@/components/ui";
 import { caseStudies } from "@/app/data/caseStudies";
 
 // ② よくある課題 (7項目)
@@ -158,7 +157,7 @@ export default function BusinessDXDesignLP() {
       {/* LP 独自ヘッダー */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">MAXELUS</Link>
+          <LpLogo />
           <nav className="hidden md:flex items-center gap-6">
             <a href="#problems" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">課題</a>
             <a href="#asistobe" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">As Is / To Be</a>

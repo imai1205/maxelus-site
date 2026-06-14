@@ -161,7 +161,7 @@ export default function ContactPage() {
 
             <div className="mt-12 pt-8 border-t border-[#e5e7eb] text-center space-y-2">
               <p className="text-sm font-medium text-[#1a1a1a]">連絡先</p>
-              <p className="text-sm text-[#6b7280]">contact@maxelustech.com</p>
+              <p className="text-sm text-[#1a1a1a]">info@maxelastec.com</p>
               <p className="text-sm text-[#6b7280]">営業時間：平日 10:00 — 18:00</p>
               <p className="text-sm text-[#6b7280]">〒614-8121 京都府八幡市下奈良小宮1</p>
             </div>

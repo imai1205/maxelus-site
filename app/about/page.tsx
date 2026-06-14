@@ -95,7 +95,7 @@ export default function AboutPage() {
                       <div>
                         <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-2">{v.title}</h3>
                         <div className="mb-3 h-px w-8 bg-[#fdc700]" />
-                        <p className="text-sm text-[#6b7280] leading-relaxed">{v.body}</p>
+                        <p className="text-sm text-[#1a1a1a] leading-relaxed">{v.body}</p>
                       </div>
                     </AnimatedSection>
                   ))}
@@ -123,7 +123,7 @@ export default function AboutPage() {
                 {companyRows.map((row) => (
                   <div key={row.label} className="flex flex-col sm:flex-row gap-1 sm:gap-6 border-b border-[#e5e7eb] py-4 md:py-5">
                     <dt className="sm:w-44 shrink-0 text-sm font-medium text-[#1a1a1a]">{row.label}</dt>
-                    <dd className="text-sm text-[#6b7280] leading-relaxed">
+                    <dd className="text-sm text-[#1a1a1a] leading-relaxed">
                       {row.href ? (
                         <a href={row.href} target="_blank" rel="noopener noreferrer" className="text-[#1a1a1a] underline underline-offset-2 hover:text-[#fdc700] transition-colors">
                           {row.value}
@@ -144,7 +144,7 @@ export default function AboutPage() {
           <div className="max-w-[760px] mx-auto">
             <SectionHeader kicker="Name" title="Maxelusに込めた想い" bgText="NAME" align="left" className="mb-10 md:mb-14" />
             <AnimatedSection animation="fade-up">
-              <p className="text-sm md:text-base text-[#6b7280] leading-loose whitespace-pre-line">{nameStory}</p>
+              <p className="text-sm md:text-base text-[#1a1a1a] leading-loose whitespace-pre-line">{nameStory}</p>
             </AnimatedSection>
           </div>
         </section>
@@ -154,7 +154,7 @@ export default function AboutPage() {
           <div className="max-w-[760px] mx-auto">
             <SectionHeader kicker="Message" title="代表挨拶" bgText="MESSAGE" align="left" className="mb-10 md:mb-14" />
             <AnimatedSection animation="fade-up">
-              <p className="text-sm md:text-base text-[#6b7280] leading-loose whitespace-pre-line">{ceoMessage}</p>
+              <p className="text-sm md:text-base text-[#1a1a1a] leading-loose whitespace-pre-line">{ceoMessage}</p>
               <p className="mt-8 text-sm text-[#1a1a1a]">
                 代表取締役 CEO
                 <span className="ml-3 text-base font-bold">今井 俊喜</span>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
+import { LpLogo } from "@/components/ui";
 
 // Figmaから取得した画像URL
 const imgImageWithFallback = "https://www.figma.com/api/mcp/asset/0f1b84c5-eff2-4f99-9883-8f2fcbf08767";
@@ -19,9 +20,7 @@ export default function AICodingEducationLP() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
-            AIコーディング教育
-          </Link>
+          <LpLogo />
           <nav className="hidden md:flex items-center gap-6">
             <a href="#curriculum" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               カリキュラム

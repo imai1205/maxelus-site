@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { LpLogo } from "@/components/ui";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
 
@@ -9,7 +10,7 @@ export default function AIOCRAutomationLP() {
     <div className="min-h-screen bg-white font-sans">
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">MAXELUS</Link>
+          <LpLogo />
           <Link href="/contact" className="bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-5 py-2 rounded-full text-sm transition-all">無料相談</Link>
         </div>
       </header>
