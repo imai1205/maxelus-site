@@ -32,13 +32,9 @@ export function useScrollAnimation() {
     const currentRef = ref.current;
     
     if (currentRef && observer) {
+      // 双方向: 画面に入れば表示、出れば元の状態へ戻す（下スクロールで出現／上スクロールで消える）
       observerCallbacks.set(currentRef, (visible) => {
-        if (visible) {
-          setIsVisible(true);
-          // Cleanup after becoming visible (once)
-          observer.unobserve(currentRef);
-          observerCallbacks.delete(currentRef);
-        }
+        setIsVisible(visible);
       });
       observer.observe(currentRef);
     }

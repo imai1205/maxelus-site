@@ -54,7 +54,7 @@ export default function AboutPage() {
   const reduceMotion = usePrefersReducedMotion();
 
   const content = (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white font-sans overflow-x-clip">
       <main>
         <PageHero
           kicker="About"

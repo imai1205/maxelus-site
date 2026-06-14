@@ -136,7 +136,7 @@ function CaseAccordion() {
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white font-sans overflow-x-clip">
       <main>
         <PageHero
           kicker="Services"
