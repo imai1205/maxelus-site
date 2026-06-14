@@ -11,7 +11,6 @@ const imgImageWithFallback1 = "https://www.figma.com/api/mcp/asset/3bdb530f-700b
 const imgImageWithFallback2 = "https://www.figma.com/api/mcp/asset/b604262a-1767-414c-a59c-131d15c9f107";
 const imgImageWithFallback3 = "https://www.figma.com/api/mcp/asset/8ae110d0-1494-4f2f-b3fd-795da2cd7b96";
 const imgImageWithFallback4 = "https://www.figma.com/api/mcp/asset/cd5dd24c-4106-4a18-9879-3785365403ed";
-const imgIcon = "https://www.figma.com/api/mcp/asset/dcc8a372-b2f1-4493-8930-ba0ca363fe71";
 
 export default function EyelashSalonLP() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -48,9 +47,10 @@ export default function EyelashSalonLP() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
-            eyelash salon
-          </Link>
+          <div className="flex items-baseline gap-3">
+            <span className="text-xl font-bold text-[#1a1a1a]">eyelash salon</span>
+            <Link href="/" className="text-xs text-[#6b7280] hover:text-[#ff637e] transition-colors">トップに戻る</Link>
+          </div>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#about" className="text-sm text-[#6b7280] hover:text-[#ff637e]">
               選ばれる理由
@@ -79,7 +79,7 @@ export default function EyelashSalonLP() {
               <AnimatedSection animation="fade-up" className="relative">
                 <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] text-[#ffa1ad]/10">HERO</span>
                 <div className="space-y-6">
-                  <h1 className="text-5xl md:text-6xl font-normal text-[#ffa1ad] tracking-[18px] leading-tight">
+                  <h1 className="text-5xl md:text-6xl font-normal text-[#ffa1ad] tracking-[18px] leading-tight break-keep">
                     ま い に ち が
                     <br />
                     き ら き ら な
@@ -288,14 +288,9 @@ export default function EyelashSalonLP() {
                         className="w-full flex items-center justify-between text-left"
                       >
                         <p className="text-sm text-[#0a0a0a]">{faq.question}</p>
-                        <svg
-                          className={`w-5 h-5 text-[#0a0a0a] transition-transform ${openFaq === i ? "rotate-180" : ""}`}
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <span className="text-sm text-[#0a0a0a] flex-shrink-0 ml-4">
+                          {openFaq === i ? "閉じる" : "開く"}
+                        </span>
                       </button>
                       {openFaq === i && (
                         <p className="text-sm text-[#4a5565] mt-2">{faq.answer}</p>

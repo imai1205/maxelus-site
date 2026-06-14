@@ -6,8 +6,8 @@ import Header from './Header'
 export default function ConditionalHeader() {
   const pathname = usePathname()
   
-  // 管理画面ではヘッダーを表示しない
-  if (pathname?.startsWith('/admin')) {
+  // 管理画面と LP では共通ヘッダー(メインナビ)を表示しない
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/lp/')) {
     return null
   }
   

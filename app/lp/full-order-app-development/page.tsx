@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { LpLogo } from "@/components/ui";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
-import { cases, type Case } from "@/app/data/casesData";
-import SalonReservationAppMockup from "@/app/components/SalonReservationAppMockup";
 import IPhoneFrameSlider from "@/app/components/IPhoneFrameSlider";
+import HeroAppSlider from "@/app/components/hero/HeroAppSlider";
 
 // デモ画面画像データ（public/cases/フォルダの画像を使用）
 const caseImages = [
@@ -113,20 +113,12 @@ export default function FullOrderAppDevelopmentLP() {
     }
   };
 
-  // 関連事例を取得（アプリ開発に関連する事例を優先的に表示）
-  const relatedCases: Case[] = [
-    ...cases.filter(c => c.tags.some(tag => ['アプリ', 'Web', 'UI/UX', 'SaaS'].includes(tag))),
-    ...cases.filter(c => !c.tags.some(tag => ['アプリ', 'Web', 'UI/UX', 'SaaS'].includes(tag))),
-  ].slice(0, 3);
-
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
-            MAXELUS
-          </Link>
+          <LpLogo />
           <nav className="hidden md:flex items-center gap-6">
             <a href="#merits" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               メリット
@@ -135,7 +127,7 @@ export default function FullOrderAppDevelopmentLP() {
               事例
             </a>
             <a href="#demo" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
-              事例
+              デモ
             </a>
             <a href="#flow" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               制作フロー
@@ -151,92 +143,58 @@ export default function FullOrderAppDevelopmentLP() {
       </header>
 
       <main className="pt-14">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute top-20 left-10 w-96 h-96 bg-[#fff100]/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px]" />
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-                backgroundSize: "40px 40px",
-              }}
-            />
-          </div>
+        {/* Hero Section — ホームのヒーロー(HeroAppSlider)を流用 */}
+        <section className="relative min-h-[90vh] md:min-h-screen overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220]">
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+              backgroundSize: "40px 40px",
+            }}
+          />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" />
+          <div className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "1s" }} />
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <AnimatedSection animation="fade-up" className="relative">
-                <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10">FULL ORDER</span>
-                <div className="mb-4">
-                  <span className="bg-[#fff100]/20 text-[#fff100] px-3 py-1 rounded-full text-sm font-medium">
-                    完全オーダーメイドで課題を解決する WEB・アプリ制作
-                  </span>
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-                  完全オーダーメイド
-                  <br />
-                  で
-                  <br />
-                  課題を解決する
-                </h1>
-                <p className="text-lg md:text-xl text-white/90 mb-2">WEB・アプリ制作</p>
-                <p className="text-base md:text-lg text-white/80 mb-8">
-                  ユーザーに使われる、成果につながるプロダクトを
-                  <br />
-                  企画から運用まで伴走してお届けします
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <Link
-                    href="#contact"
-                    className="inline-flex items-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 py-3 rounded-full transition-all hover:scale-105"
-                  >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                    無料相談する
-                  </Link>
-                  <Link
-                    href="#demo"
-                    className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-full transition-all hover:scale-105"
-                  >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                    デモ画面を見る
-                  </Link>
-                </div>
-                <div className="flex gap-6 text-white">
-                  <div className="text-center">
-                    <p className="text-2xl font-bold">4.7</p>
-                    <p className="text-xs">評価</p>
-                    <p className="text-xs text-white/60">2.3から</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold">1位</p>
-                    <p className="text-xs">獲得</p>
-                    <p className="text-xs text-white/60">検索順位</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold">8倍</p>
-                    <p className="text-xs">以上</p>
-                    <p className="text-xs text-white/60">CV率改善</p>
+          <HeroAppSlider />
+
+          <div className="absolute top-0 left-0 right-0 max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32 flex flex-col pointer-events-none" style={{ zIndex: 200 }}>
+            <div className="flex-1 flex flex-col justify-center">
+              <div className="flex flex-col lg:flex-row items-center gap-12">
+                <div
+                  className="w-full lg:w-[85%] lg:max-w-[520px] space-y-5 md:space-y-6 text-center lg:text-left relative px-5 py-5 md:px-6 md:py-6 rounded-2xl border border-white/12 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]"
+                  style={{ zIndex: 500, background: "rgba(45, 58, 79, 0.6)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
+                >
+                  <div className="pointer-events-auto relative z-10">
+                    <AnimatedSection animation="fade-up" duration={800}>
+                      <span className="section-bg-text left-0 -top-6 md:-top-12 text-[30px] sm:text-[40px] md:text-[60px] lg:text-[80px] xl:text-[100px] text-white/10 absolute" style={{ zIndex: 0 }}>APP</span>
+                      <div className="mb-3 md:mb-4 relative" style={{ zIndex: 100 }}>
+                        <span className="inline-block bg-[#fff100] text-[#1a1a1a] px-4 py-1.5 rounded-full text-sm font-bold">完全オーダーメイドアプリ開発</span>
+                      </div>
+                      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-3 leading-tight relative z-50 break-keep">
+                        完全オーダーメイドで
+                        <br />
+                        課題を解決する
+                      </h1>
+                      <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white/90 mb-3 md:mb-4 relative z-50 break-keep">WEB・アプリ制作</h2>
+                    </AnimatedSection>
+                    <AnimatedSection animation="fade-up" delay={300} duration={800}>
+                      <p className="text-sm md:text-base text-white/80 mb-4 md:mb-5 relative z-50 leading-relaxed break-keep">
+                        ユーザーに使われる、成果につながるプロダクトを
+                        <br className="md:hidden" />
+                        企画から運用まで伴走してお届けします
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                        <a href="#contact" className="inline-flex items-center justify-center bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base transition-all hover:scale-105 shadow-lg">
+                          無料相談する
+                        </a>
+                        <a href="#demo" className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-medium px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base transition-all hover:scale-105 backdrop-blur-sm border border-white/20">
+                          デモ画面を見る
+                        </a>
+                      </div>
+                    </AnimatedSection>
                   </div>
                 </div>
-              </AnimatedSection>
-              <AnimatedSection animation="fade-up" delay={200}>
-                <div className="relative w-full max-w-6xl mx-auto">
-                  {/* Figmaデザインをそのまま表示 */}
-                  <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
-                    <div className="relative w-full h-[610px] lg:w-[984px] lg:h-[610px] flex items-center justify-center">
-                      <SalonReservationAppMockup />
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
+              </div>
             </div>
           </div>
         </section>
@@ -261,38 +219,25 @@ export default function FullOrderAppDevelopmentLP() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
-                  icon: (
-                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  ),
+                  number: "01",
                   title: "完全オーダーメイド",
                   description: "テンプレートではなく、お客様のビジネス課題に合わせた完全カスタム設計",
                 },
                 {
-                  icon: (
-                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  ),
+                  number: "02",
                   title: "企画から運用まで伴走",
                   description: "リリースして終わりではなく、運用・改善まで継続的にサポート",
                 },
                 {
-                  icon: (
-                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  ),
+                  number: "03",
                   title: "成果から逆算",
                   description: "KPIを明確にし、ビジネス成果につながる機能を優先して開発",
                 },
               ].map((item, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#fff100] to-[#fdc700] rounded-full flex items-center justify-center text-[#1a1a1a] mx-auto mb-4">
-                      {item.icon}
-                    </div>
+                    <p className="text-2xl font-bold text-[#1a1a1a]">{item.number}</p>
+                    <div className="mt-3 mb-4 mx-auto h-px w-10 bg-[#e5e7eb]" />
                     <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{item.title}</h3>
                     <p className="text-[#6b7280]">{item.description}</p>
                   </div>
@@ -333,11 +278,8 @@ export default function FullOrderAppDevelopmentLP() {
               ].map((problem, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
                   <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-[#e5e7eb]">
-                    <div className="w-16 h-16 bg-[#f3f4f6] rounded-lg flex items-center justify-center mb-4">
-                      <svg className="w-8 h-8 text-[#6b7280]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
+                    <p className="text-2xl font-bold text-[#1a1a1a]">{String(i + 1).padStart(2, "0")}</p>
+                    <div className="mt-3 mb-4 h-px w-10 bg-[#e5e7eb]" />
                     <h3 className="text-lg font-bold text-[#1a1a1a] mb-1">
                       {problem.title}
                       <br />
@@ -495,12 +437,10 @@ export default function FullOrderAppDevelopmentLP() {
                   {/* 左矢印ボタン */}
                   <button
                     onClick={() => setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : caseImages.length - 1))}
-                    className="bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all hover:scale-110 border border-[#e5e7eb]"
+                    className="bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all hover:scale-110 border border-[#e5e7eb] text-[#1a1a1a] leading-none w-10 h-10 flex items-center justify-center"
                     aria-label="前の画像"
                   >
-                    <svg className="w-5 h-5 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
+                    前へ
                   </button>
 
                   {/* ページ番号表示 */}
@@ -526,12 +466,10 @@ export default function FullOrderAppDevelopmentLP() {
                   {/* 右矢印ボタン */}
                   <button
                     onClick={() => setCurrentImageIndex((prev) => (prev < caseImages.length - 1 ? prev + 1 : 0))}
-                    className="bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all hover:scale-110 border border-[#e5e7eb]"
+                    className="bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all hover:scale-110 border border-[#e5e7eb] text-[#1a1a1a] leading-none w-10 h-10 flex items-center justify-center"
                     aria-label="次の画像"
                   >
-                    <svg className="w-5 h-5 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    次へ
                   </button>
                 </div>
               </div>
@@ -602,10 +540,7 @@ export default function FullOrderAppDevelopmentLP() {
                 </div>
               </div>
               <div className="mt-8 bg-[#f3f4f6] rounded-xl p-6 border border-[#e5e7eb]">
-                <div className="flex items-start gap-4">
-                  <svg className="w-5 h-5 text-[#fff100] flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                <div>
                   <div>
                     <h3 className="font-bold text-[#1a1a1a] mb-2">標準的な開発期間</h3>
                     <p className="text-sm text-[#6b7280] mb-1">
@@ -652,9 +587,6 @@ export default function FullOrderAppDevelopmentLP() {
                 href="#contact"
                 className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-[#1a1a1a] font-bold px-8 py-4 rounded-full text-lg transition-all hover:scale-105 shadow-lg mb-4"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
                 今すぐ無料相談する
               </Link>
               <p className="text-white/80 text-sm">※ 相談したからといって必ず契約する必要はありません</p>
@@ -670,9 +602,6 @@ export default function FullOrderAppDevelopmentLP() {
                     "次のアクションプラン",
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
                       <span>{item}</span>
                     </div>
                   ))}
@@ -696,11 +625,6 @@ export default function FullOrderAppDevelopmentLP() {
             </AnimatedSection>
             {isSubmitted ? (
               <div className="bg-white border-2 border-[#e5e7eb] rounded-xl p-8 text-center">
-                <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
                   お問い合わせありがとうございます
                 </h3>
@@ -708,13 +632,10 @@ export default function FullOrderAppDevelopmentLP() {
                   担当者より2営業日以内にご連絡いたします。<br />
                   しばらくお待ちください。
                 </p>
-                <Link 
+                <Link
                   href="/"
                   className="inline-flex items-center gap-2 text-[#fdc700] hover:text-[#e5b400] font-medium transition-colors"
                 >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                  </svg>
                   トップページに戻る
                 </Link>
               </div>
@@ -775,22 +696,7 @@ export default function FullOrderAppDevelopmentLP() {
                   disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-[#fff100] to-[#fdc700] hover:from-[#fdc700] hover:to-[#fff100] disabled:bg-[#e5e7eb] disabled:cursor-not-allowed text-[#1a1a1a] font-bold px-6 py-4 rounded-lg transition-all hover:scale-105 disabled:hover:scale-100 flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      送信中...
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                      </svg>
-                      送信する
-                    </>
-                  )}
+                  {isSubmitting ? "送信中..." : "送信する"}
                 </button>
                 <p className="text-xs text-[#6b7280] text-center">
                   送信いただいた情報は、弊社の

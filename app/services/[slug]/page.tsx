@@ -115,13 +115,13 @@ export default function ServiceDetailPage() {
                 ))}
               </div>
 
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight break-keep">
                 {service.title}
               </h1>
-              <p className="text-xl md:text-2xl text-[#fff100] font-medium mb-6">
+              <p className="text-xl md:text-2xl text-[#fff100] font-medium mb-6 break-keep">
                 {service.catch}
               </p>
-              <p className="text-base md:text-lg text-white/70 max-w-3xl leading-relaxed mb-8">
+              <p className="text-base md:text-lg text-white/70 max-w-3xl leading-relaxed mb-8 break-keep">
                 {service.summary}
               </p>
 

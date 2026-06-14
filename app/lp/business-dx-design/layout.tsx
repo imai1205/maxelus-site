@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
+const title = "業務効率化支援 | バラバラの業務データをつなぐ | マクセラス";
+const description =
+  "LINE、Slack、スプレッドシート、会計ソフト、CSV、既存システムなどに分散した業務データを整理し、必要な情報をつなげます。As Is / To Be の整理から、入力・確認・転記・集計のムダを減らす仕組みづくりまで伴走します。";
+
 export const metadata: Metadata = {
-  title: "業務DX設計 | 業務の「型」を見つけて、システム化の道筋を | マクセラス",
-  description: "現状の業務を分析し、システム化できる部分を特定。AI機能組込み、API連携、クラウド運用設計まで含めた最適なシステム設計を提案します。業務の「型」を見つけて、システム化の道筋を。",
-  openGraph: {
-    title: "業務DX設計 | 業務の「型」を見つけて、システム化の道筋を | マクセラス",
-    description: "現状の業務を分析し、システム化できる部分を特定。AI機能組込み、API連携、クラウド運用設計まで含めた最適なシステム設計を提案します。業務の「型」を見つけて、システム化の道筋を。",
-    type: "website",
-  },
+  title,
+  description,
+  openGraph: { title, description, type: "website" },
 };
 
 export default function BusinessDXDesignLayout({

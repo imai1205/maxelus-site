@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import { AnimatedSection } from "@/app/components/AnimationProvider";
+import { LpLogo } from "@/components/ui";
 
 // Figmaから取得した画像URL
 const imgImageWithFallback = "https://www.figma.com/api/mcp/asset/0f1b84c5-eff2-4f99-9883-8f2fcbf08767";
@@ -12,10 +13,6 @@ const imgImageWithFallback2 = "https://www.figma.com/api/mcp/asset/d3cb16d4-eca5
 const imgImageWithFallback3 = "https://www.figma.com/api/mcp/asset/06ada03b-db4a-451a-88f1-bcf066d78883";
 const imgImageWithFallback4 = "https://www.figma.com/api/mcp/asset/7312061d-c5b1-4043-9185-e8c4fbfb9c60";
 const imgImageWithFallback5 = "https://www.figma.com/api/mcp/asset/bbf49972-a72c-4ab4-8214-760437bffa66";
-const imgIcon = "https://www.figma.com/api/mcp/asset/560048cf-efab-446b-95b5-3f71bd0ae66d";
-const imgIcon1 = "https://www.figma.com/api/mcp/asset/6639bb2c-1132-42c8-8384-f852882e9351";
-const imgIcon2 = "https://www.figma.com/api/mcp/asset/e14c2910-9481-4d02-802d-c91ed158dad8";
-const imgIcon3 = "https://www.figma.com/api/mcp/asset/bfb7285b-65f8-4fa0-8f47-668eb6beb505";
 
 export default function AICodingEducationLP() {
   return (
@@ -23,9 +20,7 @@ export default function AICodingEducationLP() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#1a1a1a]">
-            AIコーディング教育
-          </Link>
+          <LpLogo />
           <nav className="hidden md:flex items-center gap-6">
             <a href="#curriculum" className="text-sm text-[#6b7280] hover:text-[#1a1a1a]">
               カリキュラム
@@ -86,7 +81,7 @@ export default function AICodingEducationLP() {
                     <p className="text-white font-bold text-lg md:text-xl">から始める</p>
                     <span className="text-[#ffdf20] font-bold text-sm md:text-base">//</span>
                   </div>
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight break-keep">
                     かんたんすぎる！
                     <br />
                     プログラミング×AI
@@ -107,11 +102,7 @@ export default function AICodingEducationLP() {
                       { text: "毎日必要な面倒な作業" },
                       { text: "誰でもできるような単純作業" },
                     ].map((item, i) => (
-                      <div key={i} className="bg-white border border-[#e5e7eb] rounded-lg p-4 shadow-md flex items-start gap-3">
-                        <div className="bg-[#ff6900] rounded p-1 flex-shrink-0">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={imgIcon3} alt="" className="w-4 h-4" />
-                        </div>
+                      <div key={i} className="bg-white border border-[#e5e7eb] border-l-2 border-l-[#ff6900] rounded-lg p-4 shadow-md flex items-start gap-3">
                         <p className="text-sm font-bold text-[#1a1a1a]">{item.text}</p>
                       </div>
                     ))}
@@ -123,8 +114,6 @@ export default function AICodingEducationLP() {
                     className="bg-[#ffdf20] hover:bg-[#fdc700] border-2 border-black text-[#101828] font-bold px-8 py-4 rounded-xl text-base md:text-lg transition-all hover:scale-105 shadow-lg"
                   >
                     公式LINEを友だち追加して 無料講座を見る
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imgIcon2} alt="" className="inline-block w-5 h-5 ml-2" />
                   </Link>
                 </div>
                 <p className="text-white/80 text-sm">多数の方が参加しています</p>
@@ -150,9 +139,7 @@ export default function AICodingEducationLP() {
               <div className="bg-white rounded-xl p-4 mb-6">
                 <ul className="space-y-2">
                   {['エンジニア転職', 'IT企業', '副業・独立'].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={imgIcon} alt="" className="w-5 h-5" />
+                    <li key={i} className="border-l-2 border-l-[#ff6900] pl-3">
                       <span className="text-[#0a0a0a]">{item}</span>
                     </li>
                   ))}
@@ -208,7 +195,6 @@ export default function AICodingEducationLP() {
                 <p className="text-2xl md:text-3xl font-bold text-[#0a0a0a] mb-4">その常識は</p>
                 <p className="text-6xl md:text-7xl font-bold text-[#ff6900] mb-4">180度</p>
                 <p className="text-2xl md:text-3xl font-bold text-[#0a0a0a]">変わりました！</p>
-                <div className="text-6xl mt-6">💻</div>
               </div>
             </AnimatedSection>
           </div>
@@ -252,7 +238,6 @@ export default function AICodingEducationLP() {
                     </p>
                   </div>
                 </div>
-                <div className="text-6xl text-center">📱</div>
               </div>
               <p className="text-center text-[#0a0a0a] mt-6">
                 AIも同じで、
@@ -402,14 +387,9 @@ export default function AICodingEducationLP() {
               ].map((item, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
                   <div className="bg-[#f9fafb] rounded-xl p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-[#d1d5dc] rounded-full flex items-center justify-center">
-                        <span className="text-2xl">👤</span>
-                      </div>
-                      <div>
-                        <p className="font-bold text-[#0a0a0a]">{item.name}</p>
-                        <p className="text-xs text-[#4a5565]">{item.role}</p>
-                      </div>
+                    <div className="mb-4">
+                      <p className="font-bold text-[#0a0a0a]">{item.name}</p>
+                      <p className="text-xs text-[#4a5565]">{item.role}</p>
                     </div>
                     <p className="text-sm text-[#0a0a0a] leading-relaxed">{item.comment}</p>
                   </div>
@@ -471,10 +451,7 @@ export default function AICodingEducationLP() {
               <div className="aspect-video bg-gradient-to-br from-[#ff8904] to-[#f54900] rounded-lg mb-4 relative overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={imgImageWithFallback4} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={imgIcon1} alt="" className="w-16 h-16" />
-                </div>
+                <div className="absolute inset-0 bg-black/50" />
               </div>
               <button className="w-full bg-[#ff6900] text-white font-bold py-3 rounded-lg mb-2">
                 見る
@@ -592,25 +569,19 @@ export default function AICodingEducationLP() {
               </p>
               <div className="bg-white rounded-xl p-4 mb-6">
                 <ul className="space-y-2 text-left">
-                  <li className="flex items-center gap-3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imgIcon} alt="" className="w-5 h-5" />
+                  <li className="border-l-2 border-l-[#ff6900] pl-3">
                     <span className="text-[#0a0a0a]">友だち追加だけで視聴できる</span>
                   </li>
-                  <li className="flex items-center gap-3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imgIcon} alt="" className="w-5 h-5" />
+                  <li className="border-l-2 border-l-[#ff6900] pl-3">
                     <span className="text-[#0a0a0a]">後回しにせず、今すぐ！</span>
                   </li>
                 </ul>
               </div>
               <Link
                 href="#"
-                className="bg-[#ffdf20] border-2 border-black text-[#101828] font-bold px-8 py-4 rounded-xl text-base md:text-lg inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-all"
+                className="bg-[#ffdf20] border-2 border-black text-[#101828] font-bold px-8 py-4 rounded-xl text-base md:text-lg inline-flex items-center shadow-lg hover:scale-105 transition-all"
               >
                 無料講座を見る（LINEで受け取る）
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={imgIcon2} alt="" className="w-5 h-5" />
               </Link>
               <p className="text-white/80 text-sm mt-4">多数の方が参加しています</p>
             </AnimatedSection>
