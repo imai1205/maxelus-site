@@ -49,10 +49,14 @@ function HeroSection() {
           </h1>
         </AnimatedSection>
         <AnimatedSection animation="fade-up" delay={300} duration={800}>
-          <p className="mx-auto mb-10 max-w-2xl text-sm md:text-lg text-white/70 leading-relaxed break-keep">
-            マクセラスは、Web制作・アプリ開発・業務効率化支援を通じて、日々の仕事に余白を生み出す会社です。
+          <p className="mx-auto mb-10 max-w-2xl text-sm md:text-lg text-white/70 leading-relaxed">
+            マクセラスは、Web制作・アプリ開発・業務効率化支援を通じて、
+            <br className="hidden md:block" />
+            日々の仕事に余白を生み出す会社です。
             <br />
-            ただシステムを作るのではなく、業務の流れを整え、使われ続ける仕組みを設計します。
+            ただシステムを作るのではなく、業務の流れを整え、
+            <br className="hidden md:block" />
+            使われ続ける仕組みを設計します。
           </p>
         </AnimatedSection>
         <AnimatedSection animation="fade-up" delay={450} duration={800}>
