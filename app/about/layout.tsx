@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "会社情報 | マクセラス",
-  description: "AIと最新の開発手法を活用し、最短で「使われるプロダクト」を形にするマクセラス。完全オーダーメイドで課題を解決するWEB・アプリ制作を提供しています。",
+  description: "株式会社MAXELUS（Maxelus Inc.）の会社情報。業務を効率化し、本当に大切なことに時間を使える世界をつくる。Mission・Vision・Value、私たちの開発スタイルを紹介します。",
   openGraph: {
     title: "会社情報 | マクセラス",
-    description: "AIと最新の開発手法を活用し、最短で「使われるプロダクト」を形にするマクセラス。完全オーダーメイドで課題を解決するWEB・アプリ制作を提供しています。",
+    description: "株式会社MAXELUS（Maxelus Inc.）の会社情報。業務を効率化し、本当に大切なことに時間を使える世界をつくる。Mission・Vision・Value、私たちの開発スタイルを紹介します。",
     type: "website",
   },
 };

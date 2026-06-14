@@ -1,0 +1,41 @@
+.reveal {
+  --reveal-delay: 0ms;
+  --reveal-distance: 24px;
+  --reveal-blur: 8px;
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition:
+    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
+    filter 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay);
+  will-change: opacity, transform, filter;
+}
+
+.blur {
+  filter: blur(var(--reveal-blur));
+}
+
+.slideLeft {
+  transform: translateX(calc(var(--reveal-distance) * -1.4));
+  filter: blur(var(--reveal-blur));
+}
+
+.slideRight {
+  transform: translateX(calc(var(--reveal-distance) * 1.4));
+  filter: blur(var(--reveal-blur));
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

@@ -31,13 +31,17 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     }
   }, [pathname, children]);
 
+  // トップは HeroScrollScene の fixed canvas を使うため、containing block を
+  // 作る transform / will-change: transform のラッパーを適用しない
+  const isHome = pathname === "/";
+
   return (
     <div
-      className={`page-transition-wrapper gpu-accelerate ${
-        isTransitioning 
-          ? "page-exit-active" 
-          : "page-enter-active"
-      }`}
+      className={`${
+        isHome
+          ? "page-transition-wrapper-home"
+          : "page-transition-wrapper gpu-accelerate"
+      } ${isTransitioning ? "page-exit-active" : "page-enter-active"}`}
     >
       {displayChildren}
     </div>
