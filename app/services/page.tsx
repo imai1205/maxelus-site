@@ -1,656 +1,396 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Footer from "../components/Footer";
-import { AnimatedSection, TiltCard } from "../components/AnimationProvider";
-import ServiceDetailPanel from "../components/ServiceDetailPanel";
-import {
-  servicesData,
-  getServicesByCategory,
-  categoryNames,
-  type Service,
-  type ServiceCategory,
-} from "../data/servicesData";
+import { AnimatedSection } from "../components/AnimationProvider";
+import { PageHero, SectionHeader, ContactCTA } from "../../components/ui";
+import { serviceCategories } from "../data/serviceCategories";
+import { products } from "../data/products";
+import { caseStudies } from "../data/caseStudies";
+import { approachSteps } from "../data/approach";
 
-// カテゴリごとの背景画像
-const categoryBackgrounds: Record<ServiceCategory, string> = {
-  'app-dx': '/cases/shop.png',
-  'website': '/cases/homepage.png',
-  'product': '/cases/zumen-connect-home.png',
-};
+const webValueItems = [
+  "GA4設定",
+  "Googleタグマネージャー設定",
+  "ボタンクリック計測",
+  "フォーム送信数の計測",
+  "電話ボタン・LINEボタンなどのクリック計測",
+  "流入元の確認",
+  "広告流入・自然検索流入の確認",
+  "LPごとの問い合わせ数管理",
+  "SEOを見据えたページ構成",
+  "MEOを見据えた店舗情報整理",
+  "改善用ダッシュボード・管理ページの構築",
+];
 
-// 全体背景画像セクション（選択されているカテゴリの背景を表示）
-function BackgroundImageSection({ activeCategory }: { activeCategory: ServiceCategory | null }) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [scrollY, setScrollY] = useState(0);
-  const rafIdRef = useRef<number | null>(null);
-  const lastScrollY = useRef(0);
+const commonProblems = [
+  "無駄な入力・確認・転記作業が多い",
+  "Excelやスプレッドシートが複雑化している",
+  "会計ソフト、LINE、決済、管理表などがバラバラに存在している",
+  "社内で、どのツールを使えばいいか分かりにくい",
+  "同じ情報を複数の場所に入力している",
+  "必要な情報を探すのに時間がかかる",
+  "担当者に聞かないと分からない業務がある",
+  "既存ソフトを入れているのに、現場では使いにくい",
+  "原価・粗利・進捗など、経営判断に必要な数字が見えにくい",
+  "過去データを活用できていない",
+];
 
-  useEffect(() => {
-    let ticking = false;
-    
-    const handleScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        rafIdRef.current = requestAnimationFrame(() => {
-          if (sectionRef.current) {
-            const rect = sectionRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            const scrollProgress = Math.max(0, Math.min(1, (windowHeight - rect.top) / windowHeight));
-            
-            // 変化が小さい場合は更新をスキップ（パフォーマンス向上）
-            if (Math.abs(scrollProgress - lastScrollY.current) > 0.02) {
-              setScrollY(scrollProgress);
-              lastScrollY.current = scrollProgress;
-            }
-          }
-          ticking = false;
-        });
-      }
-    };
+const transformations = [
+  {
+    title: "無駄な工程が多い",
+    current: "入力、確認、転記、集計、報告が別々の作業になっている。",
+    change: "一度入力した情報を、必要な場所で再利用できるようにする。",
+    result: "同じ情報を何度も扱う必要がなくなり、作業時間とミスを減らせる。",
+  },
+  {
+    title: "使いにくいソフトになっている",
+    current: "機能はあるが、画面が複雑だったり、現場の流れに合っていなかったりして、結局使われにくい。",
+    change: "現場の業務フローに合わせて、必要な入力・確認だけを分かりやすく設計する。",
+    result: "現場で使いやすくなり、データが自然に集まる状態になる。",
+  },
+  {
+    title: "ツールが乱立している",
+    current: "会計ソフト、LINE、スプレッドシート、決済サービス、管理表などがバラバラに存在している。",
+    change: "必要なツールは活かしながら、データの流れを整理し、連携できる部分はつなげる。",
+    result: "社内で「どこを見ればいいか」が分かりやすくなり、確認作業が減る。",
+  },
+  {
+    title: "情報を探すのに時間がかかる",
+    current: "資料、案件情報、顧客情報、過去履歴が複数の場所に分散している。",
+    change: "情報を一元管理し、検索・絞り込み・AI検索などで探しやすくする。",
+    result: "探す時間を減らし、営業・顧客対応・判断業務に時間を使える。",
+  },
+  {
+    title: "原価・粗利・進捗が見えにくい",
+    current: "売上、原価、外注費、進捗、写真、報告書が別々に管理されている。",
+    change: "案件単位で原価・粗利・進捗・関連資料をまとめて管理する。",
+    result: "利益が出ている案件、原価が高い案件、対応が遅れている案件を早く把握できる。",
+  },
+];
 
-    // 初期値設定
-    handleScroll();
-    
-    // スクロールイベントをthrottle（16ms = 60fps）
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafIdRef.current !== null) {
-        cancelAnimationFrame(rafIdRef.current);
-      }
-    };
-  }, []);
+const trialMonth1 = [
+  "業務フロー確認",
+  "既存ツール確認",
+  "データ構成確認",
+  "必要機能の整理",
+  "外部サービス連携調査",
+  "技術構成案の作成",
+  "MVP範囲の決定",
+  "開発ロードマップ作成",
+];
 
-  if (!activeCategory) return null;
+const trialMonth2 = [
+  "基本画面作成",
+  "データ登録画面",
+  "一覧表示",
+  "簡易検索",
+  "簡易集計",
+  "動作確認",
+  "フィードバック反映",
+  "次フェーズ提案",
+];
 
-  const backgroundImage = categoryBackgrounds[activeCategory];
-  const opacity = Math.max(0.3, 1 - scrollY * 1.2); // スクロールで消えていく
-
-  // カテゴリごとの背景サイズと位置の設定
-  const backgroundStyles: Record<ServiceCategory, { backgroundSize: string; backgroundPosition: string }> = {
-    'app-dx': {
-      backgroundSize: 'contain', // iPhoneとMacBookが全部見えるサイズ
-      backgroundPosition: 'center center',
-    },
-    'website': {
-      backgroundSize: 'contain', // ホームページ全体が見えるサイズ
-      backgroundPosition: 'center center',
-    },
-    'product': {
-      backgroundSize: 'contain', // プロダクト全体が見えるサイズ
-      backgroundPosition: 'center top', // 位置をもう少し上に
-    },
-  };
-
-  const style = backgroundStyles[activeCategory];
-
-  return (
-    <div 
-      ref={sectionRef}
-      className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none will-change-transform"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: style.backgroundSize,
-        backgroundPosition: style.backgroundPosition,
-        backgroundRepeat: 'no-repeat',
-        opacity: Math.max(0.7, opacity * 0.95),
-        // transform3dを使用してGPU加速を確実に
-        transform: `translate3d(0, ${scrollY * 40}px, 0)`,
-        zIndex: 0,
-      }}
-    >
-      {/* グラデーションオーバーレイ */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.05))',
-        }}
-      />
-      
-      {/* ガラスモーフィズムオーバーレイ - backdrop-blurを削除（パフォーマンス向上） */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          // backdropFilter: 'blur(2px)', // パフォーマンスのために削除
-        }}
-      />
-    </div>
-  );
-}
-
-// カテゴリナビゲーション（Sticky + タブ方式）
-function CategoryNav({
-  activeCategory,
-  onCategoryClick,
-}: {
-  activeCategory: ServiceCategory | null;
-  onCategoryClick: (category: ServiceCategory) => void;
-}) {
-  // カテゴリ順番：アプリ開発 → ホームページ → プロダクト
-  const categories: ServiceCategory[] = ["app-dx", "website", "product"];
+// ⑤ 代表事例 — アコーディオン
+function CaseAccordion() {
+  const [openId, setOpenId] = useState<string | null>(caseStudies[0]?.id ?? null);
 
   return (
-    <div className="sticky top-14 md:top-16 z-40 bg-white/95 border-b border-[#e5e7eb] shadow-sm">
-      {/* backdrop-blur-lgを削除（パフォーマンス向上） */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
-        <div className="flex items-center gap-2 md:gap-4 overflow-x-auto py-4 scrollbar-hide">
-          {categories.map((category) => (
+    <div className="border-t border-[#e5e7eb]">
+      {caseStudies.map((c) => {
+        const isOpen = openId === c.id;
+        const detail: [string, string][] = [
+          ["背景", c.background],
+          ["課題", c.problem],
+          ["解決策", c.solution],
+          ["結果", c.result],
+        ];
+        return (
+          <div key={c.id} className="border-b border-[#e5e7eb]">
             <button
-              key={category}
-              onClick={() => onCategoryClick(category)}
-              className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium whitespace-nowrap transition-colors duration-200 ${
-                activeCategory === category
-                  ? "bg-[#fff100] text-[#1a1a1a] shadow-md"
-                  : "bg-[#f3f4f6] text-[#6b7280] hover:bg-[#e5e7eb]"
-              }`}
+              onClick={() => setOpenId(isOpen ? null : c.id)}
+              className="w-full flex items-center gap-4 md:gap-6 py-5 md:py-6 text-left"
+              aria-expanded={isOpen}
             >
-              {categoryNames[category]}
+              <span className="text-xl md:text-2xl font-bold text-[#fdc700] tabular-nums shrink-0">{c.no}</span>
+              <span className="flex-1 text-base md:text-lg font-bold text-[#1a1a1a]">{c.title}</span>
+              <span className="shrink-0 text-sm text-[#6b7280]">{isOpen ? "閉じる" : "詳しく"}</span>
             </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// サービスカードコンポーネント
-function ServiceCard({
-  service,
-  index,
-  isOpen,
-  onToggle,
-}: {
-  service: Service;
-  index: number;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  const isSpecial = service.special;
-
-  // backdrop-blur-xlを削除（パフォーマンス向上）、transition-allを具体的なプロパティに変更
-  const cardClassName = `service-card rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 h-full group hover:shadow-2xl transition-shadow duration-300 relative overflow-hidden border-2 ${
-    isSpecial
-      ? "border-[#fff100]/60 bg-gradient-to-br from-[#fffef0]/85 to-white/85 shadow-[#fff100]/20"
-      : "border-white/40 bg-white/90 bg-gradient-to-br from-white/90 via-white/85 to-[#0b1220]/5"
-  } ${service.ctaType === "lp" && service.lpHref ? "hover:border-[#fff100]/80 cursor-pointer" : ""}`;
-
-  const cardContent = (
-    <>
-            {/* 特別枠バッジ */}
-            {isSpecial && (
-              <div className="absolute top-4 right-4 bg-[#fff100] text-[#1a1a1a] text-xs font-bold px-3 py-1 rounded-full">
-                スペシャル
+            {isOpen && (
+              <div className="pb-6 md:pb-8 md:pl-14 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 animate-fade-in">
+                {detail.map(([label, text]) => (
+                  <div key={label}>
+                    <p className="mb-1 text-xs font-medium tracking-wider text-[#fdc700]">{label}</p>
+                    <p className="text-sm text-[#6b7280] leading-relaxed">{text}</p>
+                  </div>
+                ))}
               </div>
             )}
-
-            {/* Shimmer effect */}
-            <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" />
-
-            {/* Metric（成果イメージ） */}
-            {service.metric && (
-              <div className="mb-3 p-2 bg-[#fafafa] rounded-lg border border-[#e5e7eb]">
-                <div className="text-[10px] text-[#6b7280] mb-0.5">
-                  {service.metric.label}
-                </div>
-                <div className="text-lg md:text-xl font-bold text-[#1a1a1a]">
-                  {service.metric.value}
-                  {service.metric.suffix && (
-                    <span className="text-sm text-[#6b7280]">
-                      {service.metric.suffix}
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Title */}
-            <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-1 group-hover:text-[#fdc700] transition-colors">
-              {service.title}
-            </h3>
-
-            {/* Catch */}
-            <p className="text-sm md:text-base text-[#1a1a1a] font-medium mb-2">
-              {service.catch}
-            </p>
-
-            {/* Short Description */}
-            <p className="text-xs md:text-sm text-[#6b7280] mb-4 leading-relaxed" style={{
-              display: '-webkit-box',
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-            }}>
-              {service.shortDesc}
-            </p>
-
-            {/* Tags */}
-            <div className="flex gap-1.5 flex-wrap mb-4">
-              {service.tags.slice(0, 3).map((tag, j) => (
-                <span
-                  key={j}
-                  className="text-[10px] md:text-xs px-2 py-0.5 bg-[#f3f4f6] text-[#6b7280] rounded-full group-hover:bg-[#fff100] group-hover:text-[#1a1a1a] transition-colors duration-300"
-                  style={{ transitionDelay: `${j * 50}ms` }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col gap-2">
-              <Link
-                href="/contact"
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full transition-colors duration-200 hover:scale-105 group/btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              >
-                無料相談
-                <svg
-                  className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </Link>
-              {service.ctaType === "lp" && service.lpHref ? (
-                <Link
-                  href={service.id === 'full-order-app-development' ? `${service.lpHref}#demo` : service.lpHref}
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] transition-colors duration-200 hover:scale-105"
-                  prefetch={true}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                >
-                  {service.id === 'full-order-app-development' ? 'デモ画面を見る' : '詳しく見る'}
-                  <svg
-                    className="w-3 h-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </Link>
-              ) : (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onToggle();
-                  }}
-                  className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#fafafa] text-[#1a1a1a] font-medium text-xs md:text-sm px-4 py-2 rounded-full border border-[#e5e7eb] transition-colors duration-200 hover:scale-105"
-                >
-                  {isOpen ? "閉じる" : "詳細を開く"}
-                  <svg
-                    className={`w-3 h-3 transition-transform ${isOpen ? "rotate-180" : ""}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-              )}
-            </div>
-    </>
-  );
-
-  return (
-    <div className="w-full">
-      <AnimatedSection animation="fade-up" delay={index * 100}>
-        {service.ctaType === "lp" && service.lpHref ? (
-          <Link
-            href={service.id === 'full-order-app-development' ? `${service.lpHref}#demo` : service.lpHref}
-            className="block h-full"
-            prefetch={true}
-          >
-            <TiltCard maxTilt={5} className="h-full">
-              <div className={cardClassName}>
-                {cardContent}
-              </div>
-            </TiltCard>
-          </Link>
-        ) : (
-          <TiltCard maxTilt={5} className="h-full">
-            <div className={cardClassName}>{cardContent}</div>
-          </TiltCard>
-        )}
-      </AnimatedSection>
-
-      {/* Detail Panel（Accordion方式：同時に1つだけ開く） */}
-      {isOpen && (
-        <ServiceDetailPanel service={service} isOpen={isOpen} onClose={onToggle} />
-      )}
-    </div>
-  );
-}
-
-// カテゴリセクション（3列グリッド方式用）
-function CategorySection({
-  category,
-  services,
-  openServiceId,
-  onServiceToggle,
-  isActive,
-  onCategoryClick,
-}: {
-  category: ServiceCategory;
-  services: Service[];
-  openServiceId: string | null;
-  onServiceToggle: (id: string) => void;
-  isActive: boolean;
-  onCategoryClick: () => void;
-}) {
-  return (
-    <div 
-      className={`relative transition-transform duration-300 overflow-hidden rounded-2xl will-change-transform ${
-        isActive 
-          ? 'scale-105 z-20' 
-          : 'scale-95 opacity-70 z-10 hover:opacity-90 hover:scale-100'
-      }`}
-    >
-      {/* ガラスモーフィズムオーバーレイ - backdrop-blurを削除（パフォーマンス向上） */}
-      <div 
-        className="absolute inset-0 -z-10 bg-white/50 rounded-2xl border border-white/30"
-      />
-
-      <div className="relative z-0 p-4 md:p-6">
-      {/* Section Heading */}
-      <AnimatedSection animation="fade-up" className="mb-6">
-        <button
-          onClick={onCategoryClick}
-          className={`text-left w-full transition-colors duration-200 ${
-            isActive 
-              ? 'text-[#1a1a1a]' 
-              : 'text-[#6b7280] hover:text-[#1a1a1a]'
-          }`}
-        >
-          <h2 className={`text-xl md:text-2xl font-bold mb-2 transition-colors duration-200 ${
-            isActive ? 'text-[#1a1a1a]' : 'text-[#6b7280]'
-          }`}>
-            {categoryNames[category]}
-          </h2>
-          <div className={`h-1 bg-[#fff100] rounded-full transition-all ${
-            isActive ? 'w-20' : 'w-0'
-          }`} />
-        </button>
-      </AnimatedSection>
-
-        {/* Services Grid - コンパクト表示 */}
-        <div className="space-y-3">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={service.id}
-              service={service}
-              index={index}
-              isOpen={openServiceId === service.id}
-              onToggle={() => onServiceToggle(service.id)}
-            />
-          ))}
-        </div>
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 export default function ServicesPage() {
-  // タブ方式：最初はアプリ開発を選択
-  const [activeCategory, setActiveCategory] = useState<ServiceCategory | null>("app-dx");
-  const [openServiceId, setOpenServiceId] = useState<string | null>(null);
-
-  // カテゴリごとのサービスを取得（順番：アプリ開発 → ホームページ → プロダクト）
-  const appDxServices = getServicesByCategory("app-dx");
-  const websiteServices = getServicesByCategory("website");
-  const productServices = getServicesByCategory("product");
-
-  // カテゴリクリック時の処理（タブ切替）
-  const handleCategoryClick = (category: ServiceCategory) => {
-    setActiveCategory(category);
-    // モバイルではアコーディオン方式のため、スクロールは不要
-    // Desktopではタブ切替のみ
-  };
-
-  // サービス詳細の開閉（Accordion方式：同時に1つだけ）
-  const handleServiceToggle = (id: string) => {
-    setOpenServiceId(openServiceId === id ? null : id);
-  };
-
   return (
     <div className="min-h-screen bg-white font-sans">
-      <main className="pt-14 md:pt-16">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220] py-20 md:py-32 overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-                backgroundSize: "40px 40px",
-              }}
-            />
-          </div>
-
-          {/* Gradient Orbs */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#fff100]/10 rounded-full blur-[100px] animate-pulse" />
-          <div
-            className="absolute bottom-10 right-20 w-96 h-96 bg-[#fdc700]/10 rounded-full blur-[120px] animate-pulse"
-            style={{ animationDelay: "1s" }}
-          />
-
-          <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
-            <AnimatedSection animation="fade-up" className="relative">
-              <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>SERVICES</span>
-                <div className="relative">
-                  <p className="text-[#fff100] text-sm md:text-base font-medium mb-4 tracking-wider relative">
-                    SERVICES
-                  </p>
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight relative">
-                    アプリ開発とWeb制作で、
-                    <br />
-                    ビジネスを最短で形にします。
-                  </h1>
-                </div>
-              </div>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8">
-                アイデアを&quot;動くプロダクト&quot;に。アプリもWebも一気通貫で対応します。
-              </p>
-
-              {/* 3カテゴリチップ */}
-              <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                {(["app-dx", "website", "product"] as ServiceCategory[]).map(
-                  (category) => (
-                    <button
-                      key={category}
-                      onClick={() => handleCategoryClick(category)}
-                      className="px-4 md:px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm md:text-base font-medium transition-all hover:scale-105 backdrop-blur-sm border border-white/20"
-                    >
-                      {categoryNames[category]}
-                    </button>
-                  )
-                )}
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-
-        {/* Sticky Category Nav */}
-        <CategoryNav
-          activeCategory={activeCategory}
-          onCategoryClick={handleCategoryClick}
+      <main>
+        <PageHero
+          kicker="Services"
+          title="業務を整え、事業を前へ。"
+          lead="Web制作・アプリ開発・業務効率化・AI活用・外部サービス連携まで、企業や現場の課題を実用的な形で解決します。技術を導入すること自体を目的にせず、業務の流れを整え、日々の仕事が少しずつ軽くなる仕組みをつくります。"
         />
 
-        {/* 3カテゴリセクション（3列グリッド方式） */}
-        <section className="py-16 md:py-24 px-4 md:px-8 relative overflow-hidden bg-white">
-          {/* Desktop: 3列グリッド */}
-          <div className="hidden md:block max-w-7xl mx-auto relative" style={{ minHeight: '600px' }}>
-            {/* 全体の背景画像（選択されているカテゴリの背景） */}
-            <BackgroundImageSection activeCategory={activeCategory} />
-            
-            <div className="grid grid-cols-3 gap-6 md:gap-8 relative z-10">
-              <CategorySection
-                category="app-dx"
-                services={appDxServices}
-                openServiceId={openServiceId}
-                onServiceToggle={handleServiceToggle}
-                isActive={activeCategory === "app-dx"}
-                onCategoryClick={() => handleCategoryClick("app-dx")}
-              />
-              <CategorySection
-                category="website"
-                services={websiteServices}
-                openServiceId={openServiceId}
-                onServiceToggle={handleServiceToggle}
-                isActive={activeCategory === "website"}
-                onCategoryClick={() => handleCategoryClick("website")}
-              />
-              <CategorySection
-                category="product"
-                services={productServices}
-                openServiceId={openServiceId}
-                onServiceToggle={handleServiceToggle}
-                isActive={activeCategory === "product"}
-                onCategoryClick={() => handleCategoryClick("product")}
-              />
-            </div>
-          </div>
-
-          {/* Mobile: アコーディオン方式 */}
-          <div className="md:hidden max-w-6xl mx-auto space-y-6">
-            {(["app-dx", "website", "product"] as ServiceCategory[]).map(
-              (category) => {
-                const services =
-                  category === "app-dx"
-                    ? appDxServices
-                    : category === "website"
-                    ? websiteServices
-                    : productServices;
-                const isOpen = activeCategory === category;
-
-                return (
-                  <div
-                    key={category}
-                    className="bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden"
-                  >
-                    <button
-                      onClick={() =>
-                        setActiveCategory(isOpen ? null : category)
-                      }
-                      className="w-full px-6 py-4 flex items-center justify-between text-left"
-                    >
-                      <h3 className="text-lg font-bold text-[#1a1a1a]">
-                        {categoryNames[category]}
-                      </h3>
-                      <svg
-                        className={`w-5 h-5 text-[#6b7280] transition-transform ${
-                          isOpen ? "rotate-180" : ""
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                    {isOpen && (
-                      <div className="px-6 pb-6 space-y-6">
-                        {services.map((service, index) => (
-                          <ServiceCard
-                            key={service.id}
-                            service={service}
-                            index={index}
-                            isOpen={openServiceId === service.id}
-                            onToggle={() => handleServiceToggle(service.id)}
-                          />
+        {/* ② サービス分類 */}
+        <section className="bg-white py-20 md:py-32 px-4 md:px-8">
+          <div className="max-w-[1000px] mx-auto">
+            <SectionHeader
+              kicker="Services"
+              title="支援できること"
+              body="社内向けの小さな業務改善から、外部向けサービス化、Webサイト・LP制作、自社プロダクトの導入相談まで、目的に応じて支援します。"
+              bgText="SERVICES"
+              align="left"
+              className="mb-12 md:mb-16"
+            />
+            <div className="space-y-5 md:space-y-6">
+              {serviceCategories.map((cat, i) => (
+                <AnimatedSection key={cat.id} animation="fade-up" delay={i * 60}>
+                  <div className="border border-[#e5e7eb] rounded-2xl p-6 md:p-10">
+                    <div className="flex items-baseline gap-4 mb-5">
+                      <span className="text-2xl md:text-3xl font-bold text-[#fdc700] tabular-nums">{cat.no}</span>
+                      <h3 className="text-xl md:text-2xl font-bold text-[#1a1a1a]">{cat.title}</h3>
+                    </div>
+                    <p className="text-sm md:text-base text-[#6b7280] leading-relaxed whitespace-pre-line mb-6">{cat.body}</p>
+                    {cat.capabilities && (
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {cat.capabilities.map((c) => (
+                          <span key={c} className="px-3 py-1.5 bg-[#fafafa] border border-[#e5e7eb] rounded-full text-xs text-[#6b7280]">
+                            {c}
+                          </span>
                         ))}
                       </div>
                     )}
+                    {cat.href && (
+                      <Link href={cat.href} prefetch={true} className="inline-block text-sm font-medium text-[#1a1a1a] border-b border-[#fdc700] pb-0.5 hover:text-[#fdc700] transition-colors">
+                        詳しく見る
+                      </Link>
+                    )}
                   </div>
-                );
-              }
-            )}
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="bg-[#0b1220] py-16 md:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#fff100] rounded-full blur-[100px]" />
-            <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#fdc700] rounded-full blur-[120px]" />
-          </div>
-
-          <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 text-center">
-            <AnimatedSection animation="fade-up" className="relative">
-              <div className="relative inline-block">
-                <span className="section-bg-text left-1/2 -translate-x-1/2 top-0 -translate-y-1/2 text-[32px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[120px] text-white/25 absolute" style={{ opacity: 0.25 }}>CONTACT</span>
-                <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 relative">
-                  まずは無料相談から
-                </h2>
+        {/* ③ ホームページ・LP制作の付加価値 */}
+        <section className="bg-[#fafafa] py-20 md:py-32 px-4 md:px-8">
+          <div className="max-w-[900px] mx-auto">
+            <SectionHeader
+              kicker="Web Value"
+              title="作って終わりではなく、改善できるWebへ。"
+              body="ホームページやLPは、公開するだけでは成果が見えにくいものです。見た目の制作だけでなく、公開後に「どこから流入したのか」「どのボタンが押されたのか」「どれだけ問い合わせにつながったのか」を確認できる状態を整えます。"
+              bgText="WEB"
+              align="left"
+              className="mb-10 md:mb-14"
+            />
+            <AnimatedSection animation="fade-up">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+                {webValueItems.map((item) => (
+                  <p key={item} className="text-sm text-[#6b7280] border-l-2 border-[#fdc700] pl-3">{item}</p>
+                ))}
               </div>
-              <p className="text-base md:text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-                「こんなこと実現できる？」という段階からOK。
-                <br />
-                課題を整理するところから、一緒にスタートしましょう。
+            </AnimatedSection>
+            <AnimatedSection animation="fade-up" delay={120}>
+              <p className="mt-10 text-sm text-[#6b7280] leading-relaxed">
+                例えば、LPを複数展開している場合でも、どのページから問い合わせが発生したのか、どのボタンが押されているのか、どの流入経路が成果につながっているのかを確認できるように設計できます。感覚だけで改善するのではなく、数字を見ながら次の改善につなげられる状態を目指します。
               </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-4 rounded-full transition-all hover:scale-105"
-                >
-                  無料相談する
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </Link>
-                <Link
-                  href="/strengths"
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-8 py-4 rounded-full border border-white/30 transition-all hover:scale-105"
-                >
-                  MAXELUSの強みを見る
-                </Link>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {/* ④ 弊社プロダクトのご紹介 */}
+        <section className="bg-white py-20 md:py-32 px-4 md:px-8">
+          <div className="max-w-[1100px] mx-auto">
+            <SectionHeader
+              kicker="Products"
+              title="弊社プロダクトのご紹介"
+              body="業務の中で発生する「探す」「入力する」「確認する」「集計する」といった負担を減らすため、自社プロダクト・業務支援ツールの開発にも取り組んでいます。個別LPがあるものは詳細ページへ、まだ準備中のものは概要として相談導線につなげます。"
+              bgText="PRODUCTS"
+              align="left"
+              className="mb-12 md:mb-16"
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+              {products.map((p, i) => (
+                <AnimatedSection key={p.no} animation="fade-up" delay={(i % 2) * 80}>
+                  <div className="h-full flex flex-col border border-[#e5e7eb] rounded-2xl p-6 md:p-8">
+                    <div className="flex items-baseline gap-3 mb-3">
+                      <span className="text-sm font-bold text-[#fdc700] tabular-nums">{p.no}</span>
+                      <h3 className="text-base md:text-lg font-bold text-[#1a1a1a]">{p.title}</h3>
+                    </div>
+                    <p className="text-sm text-[#6b7280] leading-relaxed mb-5 flex-1">{p.overview}</p>
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {p.features.map((f) => (
+                        <span key={f} className="px-2.5 py-1 bg-[#fafafa] border border-[#e5e7eb] rounded-full text-xs text-[#6b7280]">{f}</span>
+                      ))}
+                    </div>
+                    <p className="text-xs text-[#9ca3af] mb-4">対象：{p.target}</p>
+                    {p.href ? (
+                      <Link href={p.href} prefetch={true} className="inline-block w-fit text-sm font-medium text-[#1a1a1a] border-b border-[#fdc700] pb-0.5 hover:text-[#fdc700] transition-colors">
+                        詳しく見る
+                      </Link>
+                    ) : (
+                      <span className="inline-block text-xs text-[#9ca3af]">{p.status}</span>
+                    )}
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ⑤ 代表事例 */}
+        <section className="bg-[#fafafa] py-20 md:py-32 px-4 md:px-8">
+          <div className="max-w-[900px] mx-auto">
+            <SectionHeader
+              kicker="Cases"
+              title="代表事例"
+              body="公開できる情報は一部に限られますが、Web制作・アプリ開発・業務効率化・AI活用・OCR・外部サービス連携など、実際の業務課題に合わせた仕組みづくりに取り組んでいます。"
+              bgText="CASES"
+              align="left"
+              className="mb-10 md:mb-14"
+            />
+            <CaseAccordion />
+          </div>
+        </section>
+
+        {/* ⑥ よくある課題 */}
+        <section className="bg-white py-20 md:py-32 px-4 md:px-8">
+          <div className="max-w-[900px] mx-auto">
+            <SectionHeader
+              kicker="Problems"
+              title="こんな状態になっていませんか？"
+              body="業務が増えるほど、ツールや工程が増え、結果として「使いにくい業務環境」になってしまうことがあります。業務量や関係者が増えてくると、ツールが増えすぎて管理が複雑になります。"
+              bgText="PROBLEMS"
+              align="left"
+              className="mb-10 md:mb-14"
+            />
+            <AnimatedSection animation="fade-up">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+                {commonProblems.map((p) => (
+                  <p key={p} className="text-sm text-[#6b7280] border-l-2 border-[#e5e7eb] pl-3">{p}</p>
+                ))}
               </div>
             </AnimatedSection>
           </div>
         </section>
-      </main>
 
+        {/* ⑦ 改善後の姿 */}
+        <section className="bg-[#fafafa] py-20 md:py-32 px-4 md:px-8">
+          <div className="max-w-[1000px] mx-auto">
+            <SectionHeader
+              kicker="After"
+              title="バラバラの業務をつなげると、仕事はもっと楽になる。"
+              body="すべてを一つの巨大なシステムに置き換える必要はありません。既存ツールを活かしながら、必要な部分だけをつなげることで、現場が使いやすい形に整えていきます。"
+              bgText="AFTER"
+              align="left"
+              className="mb-12 md:mb-16"
+            />
+            <div className="space-y-5 md:space-y-6">
+              {transformations.map((t, i) => (
+                <AnimatedSection key={t.title} animation="fade-up" delay={i * 50}>
+                  <div className="border border-[#e5e7eb] rounded-2xl p-6 md:p-8 bg-white">
+                    <h3 className="text-lg font-bold text-[#1a1a1a] mb-5">{t.title}</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                      <div>
+                        <p className="mb-2 text-xs font-medium tracking-wider text-[#9ca3af]">現状</p>
+                        <p className="text-sm text-[#6b7280] leading-relaxed">{t.current}</p>
+                      </div>
+                      <div>
+                        <p className="mb-2 text-xs font-medium tracking-wider text-[#fdc700]">変えること</p>
+                        <p className="text-sm text-[#6b7280] leading-relaxed">{t.change}</p>
+                      </div>
+                      <div>
+                        <p className="mb-2 text-xs font-medium tracking-wider text-[#1a1a1a]">結果</p>
+                        <p className="text-sm text-[#1a1a1a] leading-relaxed">{t.result}</p>
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ⑧ 進め方 */}
+        <section className="bg-white py-20 md:py-32 px-4 md:px-8">
+          <div className="max-w-[900px] mx-auto">
+            <SectionHeader
+              kicker="Approach"
+              title="いきなり開発せず、現状整理から始めます。"
+              body="現在の業務がどのように回っていて、どこに時間・手間・ミス・属人化が発生しているのかを整理することが重要です。As Is（現状）と To Be（理想の姿）を整理しながら、必要な開発範囲と優先順位を決めていきます。"
+              bgText="APPROACH"
+              align="left"
+              className="mb-12 md:mb-16"
+            />
+            <div>
+              {approachSteps.map((step, i) => (
+                <AnimatedSection key={step.no} animation="fade-right" delay={i * 80}>
+                  <div className="group flex gap-5 md:gap-8 border-t border-[#e5e7eb] py-6 md:py-8 hover:bg-[#fafafa] transition-colors">
+                    <span className="shrink-0 text-2xl md:text-3xl font-bold text-[#fdc700] tabular-nums tracking-wider">{step.no}</span>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-2">{step.title}</h3>
+                      <p className="text-sm md:text-base text-[#6b7280] leading-relaxed">{step.body}</p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+              <div className="border-t border-[#e5e7eb]" />
+            </div>
+          </div>
+        </section>
+
+        {/* ⑨ 初期トライアル案 */}
+        <section className="bg-[#fafafa] py-20 md:py-32 px-4 md:px-8">
+          <div className="max-w-[900px] mx-auto">
+            <SectionHeader
+              kicker="Trial"
+              title="小さく始めて、方向性を見極めることもできます。"
+              body="初回から大きな開発に進むのではなく、まずは業務整理・技術調査・デモ作成などを小さく始めることも可能です。実現可能性や投資対効果を確認しながら、本格開発に進むかどうかを判断できます。"
+              bgText="TRIAL"
+              align="left"
+              className="mb-12 md:mb-16"
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+              {[
+                { month: "1ヶ月目", label: "整理・調査", items: trialMonth1 },
+                { month: "2ヶ月目", label: "MVP作成", items: trialMonth2 },
+              ].map((m, i) => (
+                <AnimatedSection key={m.month} animation="fade-up" delay={i * 100}>
+                  <div className="h-full border border-[#e5e7eb] rounded-2xl p-6 md:p-8 bg-white">
+                    <p className="text-sm font-bold text-[#fdc700]">{m.month}</p>
+                    <h3 className="text-lg font-bold text-[#1a1a1a] mt-1 mb-5">{m.label}</h3>
+                    <ul className="space-y-2">
+                      {m.items.map((item) => (
+                        <li key={item} className="text-sm text-[#6b7280] border-l-2 border-[#e5e7eb] pl-3">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+            <AnimatedSection animation="fade-up" delay={150}>
+              <p className="mt-10 text-sm text-[#6b7280] leading-relaxed">
+                初期トライアルの内容や金額は、対象業務や開発範囲によって変わります。まずは現在の課題や進めたい内容をお聞きしたうえで、最適な進め方をご提案します。
+              </p>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        <ContactCTA />
+      </main>
       <Footer />
     </div>
   );
