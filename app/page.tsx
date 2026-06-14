@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { ReactLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
 import Footer from "./components/Footer";
 import { AnimatedSection } from "./components/AnimationProvider";
 import { SectionHeader, ContactCTA } from "../components/ui";
+import ScrollFrameSequence from "./components/ScrollFrameSequence";
+import { usePrefersReducedMotion } from "./components/usePrefersReducedMotion";
 import { serviceCategories } from "./data/serviceCategories";
 import { homeCases } from "./data/caseStudies";
 import { approachSteps } from "./data/approach";
@@ -11,7 +15,7 @@ import { approachSteps } from "./data/approach";
 // ① ヒーロー — 現フォーマット(ネイビーグラデ + 余白 + アニメーション)を踏襲した新規ヒーロー
 function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220]">
+    <section className="relative min-h-[78vh] md:min-h-[84vh] flex items-center overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#1e293b] to-[#0b1220]">
       {/* ドットパターン */}
       <div
         className="absolute inset-0 opacity-10"
@@ -191,66 +195,31 @@ function ApproachSection() {
   );
 }
 
-// ⑤ ミッション
-function MissionSection() {
-  const words = [
-    { title: "整える", body: "見えにくい業務の流れを整理し、迷いを減らす。" },
-    { title: "つくる", body: "必要な仕組みを、使われ続ける形で実装する。" },
-    { title: "改善する", body: "運用しながら見直し、事業の速度を上げていく。" },
-  ];
-
-  return (
-    <section className="relative overflow-hidden bg-[#0b1220] py-20 md:py-32 px-4 md:px-8">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <span className="text-[80px] sm:text-[140px] md:text-[220px] font-bold text-white/[0.03] tracking-wider whitespace-nowrap select-none">
-          MISSION
-        </span>
-      </div>
-      <div className="relative max-w-3xl mx-auto text-center">
-        <AnimatedSection animation="fade-up">
-          <p className="mb-5 text-xs md:text-sm font-medium tracking-[0.25em] text-[#fdc700]">Mission</p>
-          <h2 className="text-[24px] md:text-[38px] font-bold text-white leading-tight">
-            業務を効率化し、
-            <br />
-            本当に大切なことに時間を使える世界をつくる。
-          </h2>
-        </AnimatedSection>
-        <AnimatedSection animation="fade-up" delay={150}>
-          <p className="mt-6 text-sm md:text-base text-white/70 leading-relaxed">
-            目の前の作業をただ置き換えるのではなく、業務の流れそのものを見直し、事業が自然に前へ進む状態を設計する。
-            <br className="hidden md:block" />
-            マクセラスは、Web・システム・自動化・AIなどを必要な形で組み合わせ、人と会社に余白を生む仕組みをつくります。
-          </p>
-        </AnimatedSection>
-      </div>
-
-      <div className="relative max-w-4xl mx-auto mt-14 md:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-        {words.map((w, i) => (
-          <AnimatedSection key={w.title} animation="fade-up" delay={i * 120}>
-            <div className="text-center sm:text-left">
-              <h3 className="text-lg md:text-xl font-bold text-white mb-2">{w.title}</h3>
-              <div className="mx-auto sm:mx-0 mb-3 h-px w-8 bg-[#fdc700]" />
-              <p className="text-sm text-white/60 leading-relaxed">{w.body}</p>
-            </div>
-          </AnimatedSection>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export default function Home() {
-  return (
+  // reduced-motion のユーザーには Lenis（慣性スクロール）を適用しない
+  const reduceMotion = usePrefersReducedMotion();
+
+  const content = (
     <div className="min-h-screen font-sans overflow-x-hidden">
       <main className="pt-14 md:pt-16">
         <HeroSection />
+        {/* スクロール同期のブランドロゴ演出（白背景） */}
+        <ScrollFrameSequence frameCount={96} />
         <BusinessPreview />
         <CasesPreview />
         <ApproachSection />
-        <MissionSection />
         <ContactCTA />
       </main>
       <Footer />
     </div>
+  );
+
+  // Lenis はトップページにいる間だけマウント（他ページは現状のネイティブスクロールを維持）
+  return reduceMotion ? (
+    content
+  ) : (
+    <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
+      {content}
+    </ReactLenis>
   );
 }

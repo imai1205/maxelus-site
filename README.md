@@ -42,22 +42,22 @@ npx tsc --noEmit # 型チェック単体
 ```
 .
 ├── app/                       # Next.js App Router
-│   ├── page.tsx               # ホーム (8 セクションの営業 LP 構成)
-│   ├── layout.tsx             # ルートレイアウト (共通 SEO・ヘッダー)
+│   ├── page.tsx               # ホーム (ヒーロー + 事業内容/代表事例/進め方/ミッション/CTA)
+│   ├── layout.tsx             # ルートレイアウト (共通 SEO・ConditionalHeader)
 │   ├── globals.css            # CSS 変数によるテーマ・keyframes (ライト固定)
-│   ├── sitemap.ts             # サイトマップ生成
-│   ├── about/                 # 会社情報
-│   ├── services/              # サービス一覧
+│   ├── sitemap.ts             # サイトマップ生成 (services.ts を展開)
+│   ├── about/                 # 会社情報 (MVV/会社概要/社名の由来/代表挨拶)
+│   ├── services/              # 事業内容 (4分類/プロダクト/代表事例/進め方ほか)
 │   │   └── [slug]/            # サービス詳細 (5 件)
-│   ├── strengths/             # 強み
-│   ├── contact/               # 無料相談・お問い合わせ
-│   ├── lp/                    # 独立ランディングページ 7 本
+│   ├── strengths/             # 強み (5つの強み + 対応領域)
+│   ├── contact/               # お問い合わせ (フォーム + 連絡先)
+│   ├── lp/                    # 独立ランディングページ 7 本 (各独自ヘッダー)
 │   ├── admin/                 # CMS 管理画面 (Supabase Auth・休止中)
 │   ├── api/                   # API Routes (contact / cms / debug)
-│   ├── components/            # ページ固有コンポーネント
-│   └── data/                  # 静的表示データ (servicesData / services / casesData)
+│   ├── components/            # ページ固有 (Header, Footer, AnimationProvider 等)
+│   └── data/                  # 静的表示データ (serviceCategories / products / caseStudies / approach / services)
 ├── components/
-│   ├── ui/                    # 共有 UI プリミティブ (GlassCard, Section ほか)
+│   ├── ui/                    # 共有 UI (SectionHeader / ContactCTA / PageHero / GlassCard ほか)
 │   ├── admin/                 # 管理画面 UI
 │   └── cms/                   # CMS プレビュー連携
 ├── lib/
@@ -85,4 +85,5 @@ npx tsc --noEmit # 型チェック単体
 
 - **ライトテーマ固定** (ダークモードは廃止済み)。OS 設定に関わらず常にライト配色。
 - アイコン (SVG / 絵文字) は使わず、番号タイポグラフィ「01/02/03」+ 細罫線 + 左ボーダーアクセントで構成する編集デザイン路線。
-- ブランドカラー: イエロー `#fff100` (hover は `#fdc700`)。
+- 配色は最小限。ブランドカラーのイエロー `#fff100` (hover `#fdc700`) はボタン中心に使い、見出しキッカー以外では多用しない。
+- スクロール連動アニメーション (`AnimatedSection` のフェード / スライドイン + ホームの Lenis スムーススクロール) を全ページで使用。

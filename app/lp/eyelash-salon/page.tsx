@@ -11,7 +11,6 @@ const imgImageWithFallback1 = "https://www.figma.com/api/mcp/asset/3bdb530f-700b
 const imgImageWithFallback2 = "https://www.figma.com/api/mcp/asset/b604262a-1767-414c-a59c-131d15c9f107";
 const imgImageWithFallback3 = "https://www.figma.com/api/mcp/asset/8ae110d0-1494-4f2f-b3fd-795da2cd7b96";
 const imgImageWithFallback4 = "https://www.figma.com/api/mcp/asset/cd5dd24c-4106-4a18-9879-3785365403ed";
-const imgIcon = "https://www.figma.com/api/mcp/asset/dcc8a372-b2f1-4493-8930-ba0ca363fe71";
 
 export default function EyelashSalonLP() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -288,14 +287,9 @@ export default function EyelashSalonLP() {
                         className="w-full flex items-center justify-between text-left"
                       >
                         <p className="text-sm text-[#0a0a0a]">{faq.question}</p>
-                        <svg
-                          className={`w-5 h-5 text-[#0a0a0a] transition-transform ${openFaq === i ? "rotate-180" : ""}`}
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <span className="text-sm text-[#0a0a0a] flex-shrink-0 ml-4">
+                          {openFaq === i ? "閉じる" : "開く"}
+                        </span>
                       </button>
                       {openFaq === i && (
                         <p className="text-sm text-[#4a5565] mt-2">{faq.answer}</p>

@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { servicesData } from './data/servicesData';
+import { services } from './data/services';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://maxelustech.com';
@@ -39,8 +39,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // サービス詳細ページ（動的）
-  const servicePages: MetadataRoute.Sitemap = servicesData.map((service) => ({
-    url: `${baseUrl}/services/${service.id}`,
+  const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
+    url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
     priority: 0.8,

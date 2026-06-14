@@ -115,12 +115,7 @@ export default function ZumenConnectLP() {
                       { label: "検索精度", desc: "OCR自動抽出" },
                       { label: "原価管理", desc: "実績比較で精度改善" },
                     ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <div className="w-5 h-5 bg-[#fff100] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <svg className="w-3 h-3 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
+                      <div key={i} className="flex items-start gap-2 border-l-2 border-[#fff100] pl-3">
                         <div>
                           <div className="text-sm font-medium text-[#1a1a1a]">{item.label}</div>
                           <div className="text-xs text-[#6b7280]">{item.desc}</div>
@@ -136,9 +131,6 @@ export default function ZumenConnectLP() {
                       className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-6 py-3 rounded-full transition-all hover:scale-105"
                     >
                       無料デモを見る
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
                     </Link>
                     <Link
                       href="#contact"
@@ -151,15 +143,9 @@ export default function ZumenConnectLP() {
                   {/* Additional info */}
                   <div className="flex flex-wrap gap-6 text-sm text-[#6b7280]">
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
                       最短即日で運用開始
                     </div>
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
                       移行支援あり
                     </div>
                   </div>
@@ -202,19 +188,19 @@ export default function ZumenConnectLP() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  icon: "⏱️",
+                  number: "01",
                   title: "見積が遅い",
                   description: "類似図面から「根拠ある見積」を最短で",
                   items: ["過去実績参照", "見積項目自動生成", "対応スピードUP"],
                 },
                 {
-                  icon: "📁",
+                  number: "02",
                   title: "資料が散らばる",
                   description: "図面に、見積・工程・3D・指示書を全部紐づけ",
                   items: ["探す時間削減", "引き継ぎが楽", "ミス防止"],
                 },
                 {
-                  icon: "🔍",
+                  number: "03",
                   title: "検索できない",
                   description: "図面から自動で「検索タグ」を作る",
                   items: ["図番・品名・材質等を抽出", "AND/OR検索", "再利用が増える"],
@@ -222,15 +208,13 @@ export default function ZumenConnectLP() {
               ].map((item, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
                   <GlassCard variant="light" padding="lg">
-                    <div className="w-12 h-12 bg-[#fff100] rounded-full flex items-center justify-center text-2xl mb-6">
-                      {item.icon}
-                    </div>
+                    <div className="text-3xl font-bold text-[#1a1a1a]">{item.number}</div>
+                    <div className="mt-3 mb-6 h-px w-10 bg-[#e5e7eb]" />
                     <h3 className="text-xl font-bold text-[#1a1a1a] mb-3">{item.title}</h3>
                     <p className="text-[#6b7280] mb-6">{item.description}</p>
                     <ul className="space-y-2">
                       {item.items.map((listItem, j) => (
-                        <li key={j} className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 bg-[#fff100] rounded-full mt-2 flex-shrink-0" />
+                        <li key={j} className="border-l-2 border-[#e5e7eb] pl-3">
                           <span className="text-sm text-[#1a1a1a]">{listItem}</span>
                         </li>
                       ))}
@@ -286,9 +270,6 @@ export default function ZumenConnectLP() {
                     )}
                     <div className="flex items-center justify-between mb-4">
                       <BubbleBadge variant="small">{feature.number}</BubbleBadge>
-                      <svg className="w-5 h-5 text-[#6b7280]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
                     </div>
                     <h3 className="text-lg font-bold text-[#1a1a1a] mb-2">{feature.title}</h3>
                     <p className="text-sm text-[#6b7280] mb-3">{feature.desc}</p>
@@ -320,28 +301,24 @@ export default function ZumenConnectLP() {
             <div className="grid md:grid-cols-4 gap-6">
               {[
                 {
-                  icon: "⏱️",
                   label: "見積作成時間",
                   before: "数時間",
                   after: "数分",
                   desc: "類似検索で過去実績を即参照",
                 },
                 {
-                  icon: "🔍",
                   label: "検索時間",
                   before: "30分/日",
                   after: "5分/日",
                   desc: "OCR自動抽出で瞬時にヒット",
                 },
                 {
-                  icon: "❌",
                   label: "図面ミス",
                   before: "月数件",
                   after: "ほぼゼロ",
                   desc: "最新版を自動管理・紐付け",
                 },
                 {
-                  icon: "📊",
                   label: "原価精度",
                   before: "感覚頼み",
                   after: "データ根拠",
@@ -350,9 +327,7 @@ export default function ZumenConnectLP() {
               ].map((outcome, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 100}>
                   <GlassCard variant="light" padding="md" className="text-center">
-                    <div className="w-10 h-10 bg-[#fff100] rounded-full flex items-center justify-center text-xl mx-auto mb-4">
-                      {outcome.icon}
-                    </div>
+                    <div className="mx-auto mb-4 h-px w-10 bg-[#e5e7eb]" />
                     <div className="text-sm font-medium text-[#6b7280] mb-3">{outcome.label}</div>
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <span className="text-lg font-bold text-[#1a1a1a]">{outcome.before}</span>
@@ -413,12 +388,7 @@ export default function ZumenConnectLP() {
                       "チャット・メール・電話サポート",
                       "定期ミーティング",
                     ].map((feature, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="w-5 h-5 bg-[#fff100] rounded-full flex items-center justify-center flex-shrink-0">
-                          <svg className="w-3 h-3 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
+                      <div key={i} className="flex items-center gap-3 border-l-2 border-[#fff100] pl-3">
                         <span className="text-sm text-[#1a1a1a]">{feature}</span>
                       </div>
                     ))}
@@ -426,9 +396,6 @@ export default function ZumenConnectLP() {
 
                   <MotionPress as="a" href="#contact" className="inline-flex items-center justify-center gap-2 bg-[#fff100] hover:bg-[#fdc700] text-[#1a1a1a] font-medium px-8 py-3 rounded-full w-full">
                     無料デモを申し込む
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
                   </MotionPress>
                   <p className="text-xs text-[#6b7280] mt-4">
                     まずはデモで運用イメージを確認 → その後お見積り
@@ -465,11 +432,6 @@ export default function ZumenConnectLP() {
               <GlassCard variant="light" padding="lg">
                 {isSubmitted ? (
                   <div className="text-center">
-                    <div className="w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center mx-auto mb-6">
-                      <svg className="w-10 h-10 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
                     <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4">
                       お問い合わせありがとうございます
                     </h3>
@@ -477,13 +439,10 @@ export default function ZumenConnectLP() {
                       担当者より2営業日以内にご連絡いたします。<br />
                       しばらくお待ちください。
                     </p>
-                    <Link 
+                    <Link
                       href="/"
                       className="inline-flex items-center gap-2 text-[#fdc700] hover:text-[#e5b400] font-medium transition-colors"
                     >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                      </svg>
                       トップページに戻る
                     </Link>
                   </div>
@@ -576,22 +535,7 @@ export default function ZumenConnectLP() {
                   disabled={isSubmitting}
                   className="w-full bg-[#fff100] hover:bg-[#fdc700] disabled:bg-[#e5e7eb] disabled:cursor-not-allowed text-[#1a1a1a] font-medium px-8 py-3 rounded-full transition-all hover:scale-105 disabled:hover:scale-100 flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      送信中...
-                    </>
-                  ) : (
-                    <>
-                      無料デモを申し込む
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </>
-                  )}
+                  {isSubmitting ? "送信中..." : "無料デモを申し込む"}
                 </button>
                 <div className="text-center mt-6">
                   <p className="text-sm text-[#6b7280] mb-4">または</p>
